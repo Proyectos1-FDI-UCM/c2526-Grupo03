@@ -1,10 +1,11 @@
-//---------------------------------------------------------
-// Breve descripción del contenido del archivo
-// Responsable de la creación de este archivo
-// Nombre del juego
+﻿//---------------------------------------------------------
+// Script encargado del manejo del movimiento del personaje jugable
+// Alejandro Garcia
+// Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
 
+using System;
 using UnityEngine;
 // Añadir aquí el resto de directivas using
 
@@ -23,8 +24,11 @@ public class Movement_Player : MonoBehaviour
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
 
+    [SerializeField] private float MaxVelocity = 5.0f;
+    [SerializeField] private float Acceleration = 1.0f;
+
     #endregion
-    
+
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
     // Documentar cada atributo que aparece aquí.
@@ -34,6 +38,9 @@ public class Movement_Player : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
+    private float _velocity = .0f;
+
+    SpriteRenderer _spriteRenderer;
     #endregion
     
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -47,17 +54,52 @@ public class Movement_Player : MonoBehaviour
     /// Start is called on the frame when a script is enabled just before 
     /// any of the Update methods are called the first time.
     /// </summary>
-    void Start()
+    void Awake()
     {
-        
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     /// <summary>
     /// Update is called every frame, if the MonoBehaviour is enabled.
     /// </summary>
-    void Update()
+    void FixedUpdate()
     {
-        
+        //  ---- Movimiento del Personaje ----
+
+        // direccion de movimiento
+        Vector2 dir = InputManager.Instance.MovementVector;
+
+        // en caso de moverse a la derecha
+        if (dir.x > 0)
+        {
+            // mueve al personaje en base a la velocidad (_velocity) en el eje x
+            this.transform.position += new Vector3(_velocity, 0.0f) * Time.deltaTime;
+            _spriteRenderer.flipX = false;
+
+            // Acelera al personaje o fija su velocidad si ha llegado al maximo de velocidad
+            _velocity += Acceleration;
+            if (_velocity <= MaxVelocity)
+            {
+                _velocity += Acceleration;
+            }
+            else _velocity = MaxVelocity;
+
+        }
+        // en caso de moverse a la izquierda
+        else if (dir.x < 0)
+        {
+            // mueve al personaje en base a la velocidad (_velocity) en el eje x
+            this.transform.position += new Vector3(_velocity, 0.0f) * Time.deltaTime;
+            _spriteRenderer.flipX = true;
+
+            // Acelera al personaje o fija su velocidad si ha llegado al maximo de velocidad
+            if (_velocity >= -MaxVelocity)
+            {
+                _velocity -= Acceleration;
+            }
+            else _velocity = -MaxVelocity;
+        }
+        else _velocity = .0f;
     }
     #endregion
 
@@ -68,6 +110,7 @@ public class Movement_Player : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
+
 
     #endregion
     
