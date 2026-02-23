@@ -27,6 +27,8 @@ public class Movement_Player : MonoBehaviour
     [SerializeField] private float MaxVelocity = 5.0f;
     [SerializeField] private float Acceleration = 1.0f;
 
+    [SerializeField] private GameObject Exclamation;
+
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -38,7 +40,12 @@ public class Movement_Player : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
-    private float _velocity = .0f;
+    private float _velocity = .0f; // Velocidad del personaje
+    private bool _rotation = false; // Rotacion/direccion en la que mira el personaje (basicamente si mira a la derecha = false o a la izquierda = true)
+
+    private float _cooldown = .8f; // Tiempo de espera entre disparo y disparo
+    private float _timeToWait = .0f; // Tiempo en el que se podra volver a disparar
+    private Vector3 _bulletPositionOffset = new Vector3(2.0f, 0); // Posicion de la bala en relacion al personaje
 
     SpriteRenderer _spriteRenderer;
     #endregion
@@ -62,6 +69,20 @@ public class Movement_Player : MonoBehaviour
     /// <summary>
     /// Update is called every frame, if the MonoBehaviour is enabled.
     /// </summary>
+    void Update()
+    {
+        if(InputManager.Instance.FireWasPressedThisFrame() && Time.time >= _timeToWait)
+        {
+            int direction = _rotation ? -1 : 1;
+            // Crea una exclamacion un poco alejado del personaje (_bulletPositionOffset) sin rotacion
+            GameObject obj = Instantiate(Exclamation, this.transform.position + (_bulletPositionOffset * direction), new Quaternion());
+            // Dependiendo de la direccion se dibuja en modo espejo o no
+            SpriteRenderer sr = obj.GetComponent<SpriteRenderer>();
+            sr.flipX = _rotation;
+            // Reestablece el tiempo de espera al siguiente disparo
+            _timeToWait = Time.time + _cooldown;
+        }
+    }
     void FixedUpdate()
     {
         //  ---- Movimiento del Personaje ----
@@ -72,6 +93,8 @@ public class Movement_Player : MonoBehaviour
         // en caso de moverse a la derecha
         if (dir.x > 0)
         {
+            // Guarda la direccion en la que mira el personaje
+            _rotation = false;
             // mueve al personaje en base a la velocidad (_velocity) en el eje x
             this.transform.position += new Vector3(_velocity, 0.0f) * Time.deltaTime;
             _spriteRenderer.flipX = false;
@@ -88,6 +111,8 @@ public class Movement_Player : MonoBehaviour
         // en caso de moverse a la izquierda
         else if (dir.x < 0)
         {
+            // Guarda la direccion en la que mira el personaje
+            _rotation = true;
             // mueve al personaje en base a la velocidad (_velocity) en el eje x
             this.transform.position += new Vector3(_velocity, 0.0f) * Time.deltaTime;
             _spriteRenderer.flipX = true;
