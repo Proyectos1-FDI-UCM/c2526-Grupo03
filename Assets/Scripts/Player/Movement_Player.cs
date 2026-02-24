@@ -40,7 +40,7 @@ public class Movement_Player : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
-    private float _velocity = .0f; // Velocidad del personaje
+    private float _speed = .0f; // Velocidad del personaje
     private bool _rotation = false; // Rotacion/direccion en la que mira el personaje (basicamente si mira a la derecha = false o a la izquierda = true)
 
     private float _cooldown = .8f; // Tiempo de espera entre disparo y disparo
@@ -96,16 +96,16 @@ public class Movement_Player : MonoBehaviour
             // Guarda la direccion en la que mira el personaje
             _rotation = false;
             // mueve al personaje en base a la velocidad (_velocity) en el eje x
-            this.transform.position += new Vector3(_velocity, 0.0f) * Time.deltaTime;
+            this.transform.position += new Vector3(_speed, 0.0f) * Time.deltaTime;
             _spriteRenderer.flipX = false;
 
             // Acelera al personaje o fija su velocidad si ha llegado al maximo de velocidad
-            _velocity += Acceleration;
-            if (_velocity <= MaxVelocity)
+            _speed += Acceleration;
+            if (_speed <= MaxVelocity)
             {
-                _velocity += Acceleration;
+                _speed += Acceleration;
             }
-            else _velocity = MaxVelocity;
+            else _speed = MaxVelocity;
 
         }
         // en caso de moverse a la izquierda
@@ -114,17 +114,17 @@ public class Movement_Player : MonoBehaviour
             // Guarda la direccion en la que mira el personaje
             _rotation = true;
             // mueve al personaje en base a la velocidad (_velocity) en el eje x
-            this.transform.position += new Vector3(_velocity, 0.0f) * Time.deltaTime;
+            this.transform.position += new Vector3(_speed, 0.0f) * Time.deltaTime;
             _spriteRenderer.flipX = true;
 
             // Acelera al personaje o fija su velocidad si ha llegado al maximo de velocidad
-            if (_velocity >= -MaxVelocity)
+            if (_speed >= -MaxVelocity)
             {
-                _velocity -= Acceleration;
+                _speed -= Acceleration;
             }
-            else _velocity = -MaxVelocity;
+            else _speed = -MaxVelocity;
         }
-        else _velocity = .0f;
+        else _speed = .0f;
     }
     #endregion
 

@@ -1,7 +1,7 @@
 ﻿//---------------------------------------------------------
-// Script encargado del comportamiento de la bala/exclamacion
-// Alejandro Garcia
-// Rodaje Rodante
+// Breve descripción del contenido del archivo
+// Responsable de la creación de este archivo
+// Nombre del juego
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
 
@@ -13,7 +13,7 @@ using UnityEngine;
 /// Antes de cada class, descripción de qué es y para qué sirve,
 /// usando todas las líneas que sean necesarias.
 /// </summary>
-public class Bullet_Exclamation : MonoBehaviour
+public class Dessert_Ball_Movement : MonoBehaviour
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -23,8 +23,9 @@ public class Bullet_Exclamation : MonoBehaviour
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
 
-    [SerializeField] private float Speed = 7.0f;
-    [SerializeField] private int Damage = 2;
+    [SerializeField] private float Speed = 0.7f; // Velocidad de la bola
+    [SerializeField] private float Amplitude = 1f; // Altura que alcanza el rebote de la bola
+    [SerializeField] private float Separation = 1.5f; // Distancia de salto
 
     #endregion
 
@@ -37,7 +38,7 @@ public class Bullet_Exclamation : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
-    private SpriteRenderer _spriteRenderer;
+    private Vector3 iniPos; // Posicion inicial de la bola
 
     #endregion
     
@@ -52,9 +53,10 @@ public class Bullet_Exclamation : MonoBehaviour
     /// Start is called on the frame when a script is enabled just before 
     /// any of the Update methods are called the first time.
     /// </summary>
-    void Awake()
+    void Start()
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
+        // Carga la posicion inicial nada mas carga el script
+        iniPos = transform.position; 
     }
 
     /// <summary>
@@ -62,8 +64,18 @@ public class Bullet_Exclamation : MonoBehaviour
     /// </summary>
     void FixedUpdate()
     {
-        int direction = _spriteRenderer.flipX ? -1 : 1;
-        transform.position += new Vector3(Speed * direction, .0f) * Time.deltaTime;
+        float t = Time.time;
+
+        // Basicamente recrea la ecuacion y = |sin(k*x)|
+        float y = Mathf.Abs(Mathf.Sin(Speed * t)) * Amplitude;
+        float x = 0f; 
+        x += Speed * t;
+
+        transform.position = new Vector3(
+            (iniPos.x + x) * Separation,
+            iniPos.y + y,
+            iniPos.z
+        );
     }
     #endregion
 
@@ -76,7 +88,7 @@ public class Bullet_Exclamation : MonoBehaviour
     // Ejemplo: GetPlayerController
 
     #endregion
-
+    
     // ---- MÉTODOS PRIVADOS ----
     #region Métodos Privados
     // Documentar cada método que aparece aquí
@@ -84,19 +96,7 @@ public class Bullet_Exclamation : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
 
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        this.gameObject.SetActive(false);
-        Destroy(this.gameObject);
-    }
-
-    private void OnBecameInvisible()
-    {
-        this.gameObject.SetActive(false);
-        Destroy(this.gameObject);
-    }
-
     #endregion   
 
-} // class Bullet_Exclamation 
+} // class Dessert_Ball_Movement 
 // namespace
