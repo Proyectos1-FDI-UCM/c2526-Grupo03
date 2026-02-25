@@ -13,7 +13,7 @@ using UnityEngine;
 /// Antes de cada class, descripción de qué es y para qué sirve,
 /// usando todas las líneas que sean necesarias.
 /// </summary>
-public class Jump : MonoBehaviour
+public class JumpAndGravity : MonoBehaviour
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -23,10 +23,8 @@ public class Jump : MonoBehaviour
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
 
-    [SerializeField] private float Height = 2.0f; // Altura que alcanza el salto
-    [SerializeField] private float MaxVelocity = 5.0f; // Velocidad del salto del personaje
-    [SerializeField] private float Acceleration = 1.0f; // Aceleración del personaje en el salto
-    [SerializeField] private float PlayerHeight = 3; // Altura del jugador (Necesaria para Raycast)
+    [SerializeField] private float JumpHeight = 2.0f; // Altura que alcanza el salto
+    [SerializeField] private float JumpDuration = 1.0f; // Velocidad del salto del personaje
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -37,10 +35,13 @@ public class Jump : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
+    private float _initialSpeed = 0.0f;
+    private float _gravity = 0.0f; // Aceleración del personaje en el salto
+    private float _playerHeight = 0.0f;
+    private float _playerWidth = 0.0f;
     private float _speed = 0.0f; // Velocidad con aceleración caída
     private bool _hasJumped = false; // Booleano que comprueba si quiere saltar
     private bool _hasReachedMaxHeight = false; // Booleano que comprueba si se ha alcanzado la altura máxima
-    private bool _hasEndedJump = false; // Booleano que comprueba si se ha terminado el salto
     private Vector3 _maxPosJumped; // Posicion más alta que alcanza el salto
     #endregion
 
@@ -57,27 +58,29 @@ public class Jump : MonoBehaviour
     /// </summary>
     void Start()
     {
-        
+        _playerHeight = GetComponent<BoxCollider2D>().bounds.size.y;
+        _playerWidth = GetComponent<BoxCollider2D>().bounds.size.x;
+        _initialSpeed = (2 * JumpHeight) / JumpDuration;
+        _gravity = _initialSpeed / JumpDuration;
     }
 
     /// <summary>
     /// Update is called every frame, if the MonoBehaviour is enabled.
     /// </summary>
-    void FixedUpdate()
+    void Update()
     {
         Vector2 dir = InputManager.Instance.MovementVector;
         // De momento hacemos el salto con el movimiento en el eje y para no tocar el input action
-        if (dir.y > 0.0f)
+        if (dir.y > 0.5f)
         {
-            // Comprobamos si tiene suelo justo debajo
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector3(0.0f, -1), PlayerHeight/2 + 0.05f);
-            if (hit.collider != null)
+            // Comprobamos si estás encima de algo sólido (algo con collider que no es trigger)
+            if (IsGrounded())
             {
                 // Iniciamos las variables necesarias
-                _maxPosJumped = transform.position + new Vector3(0.0f, Height);
+                _maxPosJumped = transform.position + new Vector3(0.0f, JumpHeight);
                 _hasJumped = true;
-                _hasEndedJump = false;
                 _hasReachedMaxHeight = false;
+                _speed = _initialSpeed;
             }
         }
         // Si ha saltado
@@ -91,30 +94,9 @@ public class Jump : MonoBehaviour
             // Mientras no ha llegado a la altura máxima
             if (!_hasReachedMaxHeight)
             {
-                // mueve al personaje en base a la velocidad en el eje y (sin aceleración al subir)
-                this.transform.position += new Vector3(0.0f, 1.0f) * MaxVelocity * Time.deltaTime;
-            }
-            // Cuando ha llegado a la altura máxima y aún no ha terminado el salto
-            else if (_hasReachedMaxHeight && !_hasEndedJump)
-            {
-                // Comprobamos si ha tocado algo con collider
-                RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector3(0.0f, -1), PlayerHeight / 2 + 0.05f);
-                if (hit.collider != null)
-                {
-                    // Terminamos salto
-                    _hasEndedJump = true;
-                }
-                // mueve al personaje en base a la velocidad (_speed) en el eje y
-                this.transform.position -= new Vector3(0.0f, 1.0f) * _speed * Time.deltaTime;
-
-                // subimos la velocidad hasta que llega a la velocidad máxima
-                _speed += Acceleration;
-                if (_speed <= MaxVelocity)
-                {
-                    _speed += Acceleration;
-                }
-                else _speed = MaxVelocity;
-                // mueve al personaje en base a la velocidad (_velocity) en el eje y
+                // mueve al personaje hacia arriba en base a la velocidad en el eje y (sin aceleración al subir)
+                this.transform.position += new Vector3(0.0f, 1.0f) * _speed * Time.deltaTime;
+                _speed -= _gravity * Time.deltaTime;
             }
             // Cuando se ha terminado el salto
             else
@@ -122,6 +104,32 @@ public class Jump : MonoBehaviour
                 _hasJumped = false;
             }
         }
+        // Parte de gravedad
+    }
+    private bool IsGrounded()
+    {
+        bool grounded = false;
+        // Puntos de lanzamiento de los rayos
+        Vector3 BottomCenter = transform.position - new Vector3(0.0f, _playerHeight / 2);
+        Vector3 BottomLeft = transform.position - new Vector3(_playerWidth / 2, _playerHeight / 2);
+        Vector3 BottomRight = transform.position - new Vector3(-1*(_playerWidth / 2), _playerHeight / 2);
+
+        float RaycastMagnitude = 0.1f;
+        // Comprobamos si tiene suelo justo debajo en el centro
+        RaycastHit2D hit2 = Physics2D.Raycast(BottomCenter, new Vector3(0.0f, -1), RaycastMagnitude);
+
+        // Comprobamos si tiene suelo justo debajo de la esquina inferior izquierda
+        RaycastHit2D hit = Physics2D.Raycast(BottomLeft, new Vector3(0.0f, -1), RaycastMagnitude);
+
+        // Comprobamos si tiene suelo justo debajo de la esquina inferior derecha
+        RaycastHit2D hit3 = Physics2D.Raycast(BottomRight, new Vector3(0.0f, -1), RaycastMagnitude);
+
+        // Comprobamos si hay algo debajo
+        if ((hit.collider != null && !hit.collider.isTrigger) || (hit2.collider != null && !hit2.collider.isTrigger) || (hit3.collider != null && !hit3.collider.isTrigger))
+        {
+            grounded = true;
+        }
+        return grounded;
     }
 
     #endregion
