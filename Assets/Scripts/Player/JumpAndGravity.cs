@@ -24,7 +24,7 @@ public class JumpAndGravity : MonoBehaviour
     // Ejemplo: MaxHealthPoints
 
     [SerializeField] private float JumpHeight = 2.0f; // Altura que alcanza el salto
-    [SerializeField] private float JumpDuration = 1.0f; // Velocidad del salto del personaje
+    [SerializeField] private float TimeToReachMaxHeight = 1.0f; // Velocidad del salto del personaje
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -60,8 +60,8 @@ public class JumpAndGravity : MonoBehaviour
     {
         _playerHeight = GetComponent<BoxCollider2D>().bounds.size.y;
         _playerWidth = GetComponent<BoxCollider2D>().bounds.size.x;
-        _initialSpeed = (2 * JumpHeight) / JumpDuration;
-        _gravity = _initialSpeed / JumpDuration;
+        _initialSpeed = (2 * JumpHeight) / TimeToReachMaxHeight;
+        _gravity = _initialSpeed / TimeToReachMaxHeight;
     }
 
     /// <summary>
@@ -94,7 +94,7 @@ public class JumpAndGravity : MonoBehaviour
             // Mientras no ha llegado a la altura máxima
             if (!_hasReachedMaxHeight)
             {
-                // mueve al personaje hacia arriba en base a la velocidad en el eje y (sin aceleración al subir)
+                // mueve al personaje hacia arriba en base a la velocidad en el eje y
                 this.transform.position += new Vector3(0.0f, 1.0f) * _speed * Time.deltaTime;
                 _speed -= _gravity * Time.deltaTime;
             }
@@ -105,6 +105,15 @@ public class JumpAndGravity : MonoBehaviour
             }
         }
         // Parte de gravedad
+        else // Se ejecuta cuando ha terminado el salto para no añadir dos veces la gravedad
+        {
+            if (!IsGrounded())
+            {
+                // mueve al personaje hacia abajo en base a la velocidad en el eje y
+                this.transform.position -= new Vector3(0.0f, 1.0f) * _speed * Time.deltaTime;
+                _speed += _gravity * Time.deltaTime;
+            }
+        }
     }
     private bool IsGrounded()
     {
@@ -114,7 +123,7 @@ public class JumpAndGravity : MonoBehaviour
         Vector3 BottomLeft = transform.position - new Vector3(_playerWidth / 2, _playerHeight / 2);
         Vector3 BottomRight = transform.position - new Vector3(-1*(_playerWidth / 2), _playerHeight / 2);
 
-        float RaycastMagnitude = 0.1f;
+        float RaycastMagnitude = 0.01f;
         // Comprobamos si tiene suelo justo debajo en el centro
         RaycastHit2D hit2 = Physics2D.Raycast(BottomCenter, new Vector3(0.0f, -1), RaycastMagnitude);
 

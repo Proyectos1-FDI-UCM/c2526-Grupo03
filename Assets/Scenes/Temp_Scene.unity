@@ -470,6 +470,10 @@ PrefabInstance:
       propertyPath: Initial_Speed
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 3245588583768437126, guid: 8e518f3f91021964490aa4c6a5d8d0d8, type: 3}
+      propertyPath: TimeToReachMaxHeight
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7674669691530021310, guid: 8e518f3f91021964490aa4c6a5d8d0d8, type: 3}
       propertyPath: m_Name
       value: Player
