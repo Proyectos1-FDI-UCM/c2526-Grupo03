@@ -13,7 +13,7 @@ using UnityEngine;
 /// Antes de cada class, descripción de qué es y para qué sirve,
 /// usando todas las líneas que sean necesarias.
 /// </summary>
-public class Dolly_Detection_System1 : MonoBehaviour
+public class Dolly_Detection_System : MonoBehaviour
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -22,7 +22,7 @@ public class Dolly_Detection_System1 : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
-
+    [SerializeField] GameObject Player;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -71,14 +71,23 @@ public class Dolly_Detection_System1 : MonoBehaviour
     // Ejemplo: GetPlayerController
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.TryGetComponent<Movement_Player>(out _))
+        if (collision.gameObject.GetComponent<Movement_Player>() != null)
+        {
+            Debug.Log("Jugador detectado, has perdido");
+        }
+        else if (collision.gameObject.TryGetComponent<Repairable_Element>(out var repairable_Element) && !repairable_Element.Repaired)
         {
 
         }
-        else if (collision.gameObject.TryGetComponent<Movement_Player>(out _))
+        else if (collision.gameObject.GetComponent<Extra_Regular>() != null)
         {
 
         }
+        else if (collision.gameObject.GetComponent<Extra_Army>() != null)
+        {
+
+        }
+        
     }
     #endregion
 
