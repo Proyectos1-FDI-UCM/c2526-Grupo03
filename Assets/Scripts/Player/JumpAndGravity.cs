@@ -24,7 +24,7 @@ public class JumpAndGravity : MonoBehaviour
     // Ejemplo: MaxHealthPoints
 
     [SerializeField] private float JumpHeight = 2.0f; // Altura que alcanza el salto
-    [SerializeField] private float TimeToReachMaxHeight = 1.0f; // Velocidad del salto del personaje
+    [SerializeField] private float TimeToReachMaxHeight = 0.5f; // Velocidad del salto del personaje
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
