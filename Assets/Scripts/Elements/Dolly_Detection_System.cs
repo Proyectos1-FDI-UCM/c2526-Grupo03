@@ -6,6 +6,7 @@
 //---------------------------------------------------------
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 // Añadir aquí el resto de directivas using
 
 
@@ -73,7 +74,7 @@ public class Dolly_Detection_System : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<Movement_Player>() != null)
         {
-            Debug.Log("Jugador detectado, has perdido");
+            SceneManager.LoadScene("You_lose");
         }
         else if (collision.gameObject.TryGetComponent<Repairable_Element>(out var repairable_Element) && !repairable_Element.Repaired)
         {
