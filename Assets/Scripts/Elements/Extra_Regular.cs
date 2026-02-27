@@ -1,4 +1,4 @@
-﻿//---------------------------------------------------------
+//---------------------------------------------------------
 // Breve descripción del contenido del archivo
 // Responsable de la creación de este archivo
 // Nombre del juego
@@ -13,7 +13,7 @@ using UnityEngine;
 /// Antes de cada class, descripción de qué es y para qué sirve,
 /// usando todas las líneas que sean necesarias.
 /// </summary>
-public class Repairable_Element : MonoBehaviour
+public class Extra_Regular : MonoBehaviour
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -23,12 +23,8 @@ public class Repairable_Element : MonoBehaviour
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
 
-    [SerializeField] private Sprite SpriteBroken;
-    [SerializeField] private Sprite SpriteRepaired;
-    [SerializeField] public bool Repaired;
-
     #endregion
-
+    
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
     // Documentar cada atributo que aparece aquí.
@@ -38,25 +34,22 @@ public class Repairable_Element : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
-    private SpriteRenderer _spriteRenderer;
-
     #endregion
-
+    
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-
+    
     // Por defecto están los típicos (Update y Start) pero:
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
-
+    
     /// <summary>
     /// Start is called on the frame when a script is enabled just before 
     /// any of the Update methods are called the first time.
     /// </summary>
     void Start()
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _spriteRenderer.sprite = SpriteBroken;
+        
     }
 
     /// <summary>
@@ -77,7 +70,7 @@ public class Repairable_Element : MonoBehaviour
     // Ejemplo: GetPlayerController
 
     #endregion
-
+    
     // ---- MÉTODOS PRIVADOS ----
     #region Métodos Privados
     // Documentar cada método que aparece aquí
@@ -85,24 +78,7 @@ public class Repairable_Element : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
 
-
-    // Actualmente solo sirve para demostrar la funcionalidad que tendra a futuro
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.gameObject.GetComponent<Movement_Player>() != null)
-        {
-            _spriteRenderer.sprite = SpriteRepaired;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.GetComponent<Movement_Player>() != null)
-        {
-            _spriteRenderer.sprite = SpriteBroken;
-        }
-    }
     #endregion   
 
-} // class Repairable_Element 
+} // class Extra_Regular 
 // namespace

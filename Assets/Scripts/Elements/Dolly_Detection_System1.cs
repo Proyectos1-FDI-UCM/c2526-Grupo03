@@ -1,4 +1,4 @@
-﻿//---------------------------------------------------------
+//---------------------------------------------------------
 // Breve descripción del contenido del archivo
 // Responsable de la creación de este archivo
 // Nombre del juego
@@ -13,7 +13,7 @@ using UnityEngine;
 /// Antes de cada class, descripción de qué es y para qué sirve,
 /// usando todas las líneas que sean necesarias.
 /// </summary>
-public class Repairable_Element : MonoBehaviour
+public class Dolly_Detection_System1 : MonoBehaviour
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -22,10 +22,6 @@ public class Repairable_Element : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
-
-    [SerializeField] private Sprite SpriteBroken;
-    [SerializeField] private Sprite SpriteRepaired;
-    [SerializeField] public bool Repaired;
 
     #endregion
 
@@ -37,8 +33,7 @@ public class Repairable_Element : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-
-    private SpriteRenderer _spriteRenderer;
+    
 
     #endregion
 
@@ -55,8 +50,7 @@ public class Repairable_Element : MonoBehaviour
     /// </summary>
     void Start()
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _spriteRenderer.sprite = SpriteBroken;
+        
     }
 
     /// <summary>
@@ -75,7 +69,17 @@ public class Repairable_Element : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.TryGetComponent<Movement_Player>(out _))
+        {
 
+        }
+        else if (collision.gameObject.TryGetComponent<Movement_Player>(out _))
+        {
+
+        }
+    }
     #endregion
 
     // ---- MÉTODOS PRIVADOS ----
@@ -85,24 +89,7 @@ public class Repairable_Element : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
 
+    #endregion
 
-    // Actualmente solo sirve para demostrar la funcionalidad que tendra a futuro
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.gameObject.GetComponent<Movement_Player>() != null)
-        {
-            _spriteRenderer.sprite = SpriteRepaired;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.GetComponent<Movement_Player>() != null)
-        {
-            _spriteRenderer.sprite = SpriteBroken;
-        }
-    }
-    #endregion   
-
-} // class Repairable_Element 
+} // class Dolly_Detection_System1 
 // namespace
