@@ -23,7 +23,7 @@ public class Dolly_Detection_System : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
-    [SerializeField] GameObject Player;
+    [SerializeField] private GameObject LoseScreen;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -49,17 +49,9 @@ public class Dolly_Detection_System : MonoBehaviour
     /// Start is called on the frame when a script is enabled just before 
     /// any of the Update methods are called the first time.
     /// </summary>
-    void Start()
+    void Awake()
     {
-        
-    }
-
-    /// <summary>
-    /// Update is called every frame, if the MonoBehaviour is enabled.
-    /// </summary>
-    void Update()
-    {
-        
+        LoseScreen.SetActive(false);
     }
     #endregion
 
@@ -74,7 +66,7 @@ public class Dolly_Detection_System : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<Movement_Player>() != null)
         {
-            SceneManager.LoadScene("You_lose");
+            LoseScreen.SetActive(true);
         }
         else if (collision.gameObject.TryGetComponent<Repairable_Element>(out var repairable_Element) && !repairable_Element.Repaired)
         {

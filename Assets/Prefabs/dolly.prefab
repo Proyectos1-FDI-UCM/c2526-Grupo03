@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4836459426543934732}
   - component: {fileID: -6238678687177223467}
   m_Layer: 0
-  m_Name: dolly
+  m_Name: Dolly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,3 +147,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba508fa9b3abfbd4ca4e55ea0f83a4e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LoseScreen: {fileID: 0}
