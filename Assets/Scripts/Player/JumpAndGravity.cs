@@ -35,14 +35,39 @@ public class JumpAndGravity : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
+    
+    /// <summary>
+    /// Velocidad con la que impulsamos al iniciar un salt0
+    /// </summary>
     private float _initialSpeed = 0.0f;
-    private float _gravity = 0.0f; // Aceleración del personaje en el salto
+    /// <summary>
+    /// Aceleración negativa con la que simulamos gravedad
+    /// </summary>
+    private float _gravity = 0.0f;
+    /// <summary>
+    /// Altura del collider del jugador
+    /// </summary>
     private float _playerHeight = 0.0f;
+    /// <summary>
+    /// Anchura del collider del jugador
+    /// </summary>
     private float _playerWidth = 0.0f;
-    private float _speed = 0.0f; // Velocidad con aceleración caída
-    private bool _hasJumped = false; // Booleano que comprueba si quiere saltar
-    private bool _hasReachedMaxHeight = false; // Booleano que comprueba si se ha alcanzado la altura máxima
-    private Vector3 _maxPosJumped; // Posicion más alta que alcanza el salto
+    /// <summary>
+    /// Simula la velocidad afectada por la gravedad
+    /// </summary>
+    private float _speed = 0.0f;
+    /// <summary>
+    /// Comprueba si está en un salto
+    /// </summary>
+    private bool _hasJumped = false;
+    /// <summary>
+    /// Comprueba si ha terminado de subir
+    /// </summary>
+    private bool _hasReachedMaxHeight = false;
+    /// <summary>
+    /// Altura a la que debe llegar el salto
+    /// </summary>
+    private Vector3 _maxPosJumped; 
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----

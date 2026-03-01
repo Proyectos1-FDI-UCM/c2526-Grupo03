@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8984456958109636562}
   - component: {fileID: 8407154709903920801}
   - component: {fileID: 6114695312325146849}
-  - component: {fileID: 3245588583768437126}
+  - component: {fileID: 3555808029603455080}
   m_Layer: 2
   m_Name: Player
   m_TagString: Untagged
@@ -179,7 +179,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.4, y: 2.925}
   m_EdgeRadius: 0
---- !u!114 &3245588583768437126
+--- !u!114 &3555808029603455080
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -188,10 +188,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 7674669691530021310}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98aa921310a903d4db9370a2354b9491, type: 3}
+  m_Script: {fileID: 11500000, guid: e159917149a655b47a75adca6002d8ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Height: 2
-  MaxVelocity: 5
-  Acceleration: 1
-  PlayerHeight: 2.925
+  JumpHeight: 2
+  TimeToReachMaxHeight: 0.5
