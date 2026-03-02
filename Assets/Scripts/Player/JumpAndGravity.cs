@@ -148,11 +148,23 @@ public class JumpAndGravity : MonoBehaviour
         // Parte de gravedad
         else // Se ejecuta cuando ha terminado el salto para no añadir dos veces la gravedad
         {
+            // Mientras no toca suelo
             if (!FloorDetector.GetComponent<FloorDetector>().IsGrounded)
             {
                 // mueve al personaje hacia abajo en base a la velocidad en el eje y
                 this.transform.position -= new Vector3(0.0f, 1.0f) * _speed * Time.deltaTime;
-                _speed += _gravity * Time.deltaTime;
+                // Limitamos la velocidad de caída hasta la velocidad de impulso
+                if (_speed < _initialSpeed * 1.5f)
+                {
+                    _speed += _gravity * Time.deltaTime;
+                }
+                else _speed = _initialSpeed * 1.5f;
+            }
+            // Cuando toco suelo
+            else
+            {
+                // Cambio la velocidad actual a 0 para que no siga aumentando
+                _speed = 0.0f;
             }
         }
     }
