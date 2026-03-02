@@ -23,8 +23,22 @@ public class JumpAndGravity : MonoBehaviour
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
 
-    [SerializeField] private float JumpHeight = 2.0f; // Altura que alcanza el salto
-    [SerializeField] private float TimeToReachMaxHeight = 0.5f; // Velocidad del salto del personaje
+    /// <summary>
+    /// Trigger que detecta si estás en el suelo
+    /// </summary>
+    [SerializeField] private GameObject FloorDetector;
+    /// <summary>
+    /// Trigger que detecta si has tocado el techo
+    /// </summary>
+    [SerializeField] private GameObject RoofDetector;
+    /// <summary>
+    /// Distancia vertical del salto
+    /// </summary>
+    [SerializeField] private float JumpHeight = 2.0f;
+    /// <summary>
+    /// Tiempo necesario para alcanzar la altura máxima
+    /// </summary>
+    [SerializeField] private float TimeToReachMaxHeight = 0.5f;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -56,6 +70,7 @@ public class JumpAndGravity : MonoBehaviour
     /// Simula la velocidad afectada por la gravedad
     /// </summary>
     private float _speed = 0.0f;
+    
     /// <summary>
     /// Comprueba si está en un salto
     /// </summary>
@@ -98,8 +113,8 @@ public class JumpAndGravity : MonoBehaviour
         // De momento hacemos el salto con el movimiento en el eje y para no tocar el input action
         if (dir.y > 0.5f)
         {
-            // Comprobamos si estás encima de algo sólido (algo con collider que no es trigger)
-            if (IsGrounded())
+            // Comprobamos si el detector de suelo dice que estás en el suelo
+            if (FloorDetector.GetComponent<FloorDetector>().IsGrounded)
             {
                 // Iniciamos las variables necesarias
                 _maxPosJumped = transform.position + new Vector3(0.0f, JumpHeight);
@@ -112,7 +127,7 @@ public class JumpAndGravity : MonoBehaviour
         if (_hasJumped)
         {
             // Comprobamos si ha llegado a la altura máxima o choca con el techo
-            if (transform.position.y >= _maxPosJumped.y || CollidesWithRoof())
+            if (transform.position.y >= _maxPosJumped.y || RoofDetector.GetComponent<RoofDetector>().TouchesRoof)
             {
                 _hasReachedMaxHeight = true;
                 _speed = 0.0f;
@@ -133,7 +148,7 @@ public class JumpAndGravity : MonoBehaviour
         // Parte de gravedad
         else // Se ejecuta cuando ha terminado el salto para no añadir dos veces la gravedad
         {
-            if (!IsGrounded())
+            if (!FloorDetector.GetComponent<FloorDetector>().IsGrounded)
             {
                 // mueve al personaje hacia abajo en base a la velocidad en el eje y
                 this.transform.position -= new Vector3(0.0f, 1.0f) * _speed * Time.deltaTime;
@@ -161,65 +176,6 @@ public class JumpAndGravity : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
 
-    /// <summary>
-    /// Comprueba si tienes suelo debajo
-    /// </summary>
-    /// <returns>True si está en el suelo</returns>
-    private bool IsGrounded()
-    {
-        bool grounded = false;
-        // Puntos de lanzamiento de los rayos
-        Vector3 BottomCenter = transform.position - new Vector3(0.0f, _playerHeight / 2);
-        Vector3 BottomLeft = transform.position - new Vector3(_playerWidth / 2, _playerHeight / 2);
-        Vector3 BottomRight = transform.position - new Vector3(-1 * (_playerWidth / 2), _playerHeight / 2);
-
-        float RaycastMagnitude = 0.01f;
-        // Comprobamos si tiene suelo justo debajo en el centro
-        RaycastHit2D hit2 = Physics2D.Raycast(BottomCenter, new Vector3(0.0f, -1), RaycastMagnitude);
-
-        // Comprobamos si tiene suelo justo debajo de la esquina inferior izquierda
-        RaycastHit2D hit = Physics2D.Raycast(BottomLeft, new Vector3(0.0f, -1), RaycastMagnitude);
-
-        // Comprobamos si tiene suelo justo debajo de la esquina inferior derecha
-        RaycastHit2D hit3 = Physics2D.Raycast(BottomRight, new Vector3(0.0f, -1), RaycastMagnitude);
-
-        // Comprobamos si hay algo debajo
-        if ((hit.collider != null && !hit.collider.isTrigger) || (hit2.collider != null && !hit2.collider.isTrigger) || (hit3.collider != null && !hit3.collider.isTrigger))
-        {
-            grounded = true;
-        }
-        return grounded;
-    }
-
-    /// <summary>
-    /// Comprueba si tienes techo encima
-    /// </summary>
-    /// <returns>True si tiene techo encima</returns>
-    private bool CollidesWithRoof()
-    {
-        bool grounded = false;
-        // Puntos de lanzamiento de los rayos
-        Vector3 BottomCenter = transform.position + new Vector3(0.0f, _playerHeight / 2);
-        Vector3 BottomLeft = transform.position + new Vector3(_playerWidth / 2, _playerHeight / 2);
-        Vector3 BottomRight = transform.position + new Vector3(-1 * (_playerWidth / 2), _playerHeight / 2);
-
-        float RaycastMagnitude = 0.01f;
-        // Comprobamos si tiene suelo justo debajo en el centro
-        RaycastHit2D hit2 = Physics2D.Raycast(BottomCenter, new Vector3(0.0f, 1), RaycastMagnitude);
-
-        // Comprobamos si tiene suelo justo debajo de la esquina inferior izquierda
-        RaycastHit2D hit = Physics2D.Raycast(BottomLeft, new Vector3(0.0f, 1), RaycastMagnitude);
-
-        // Comprobamos si tiene suelo justo debajo de la esquina inferior derecha
-        RaycastHit2D hit3 = Physics2D.Raycast(BottomRight, new Vector3(0.0f, 1), RaycastMagnitude);
-
-        // Comprobamos si hay algo debajo
-        if ((hit.collider != null && !hit.collider.isTrigger) || (hit2.collider != null && !hit2.collider.isTrigger) || (hit3.collider != null && !hit3.collider.isTrigger))
-        {
-            grounded = true;
-        }
-        return grounded;
-    }
     #endregion
 
 } // class Jump 
