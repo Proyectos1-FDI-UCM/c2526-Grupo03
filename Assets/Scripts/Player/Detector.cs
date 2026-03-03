@@ -5,6 +5,7 @@
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
 
+using System;
 using UnityEngine;
 // Añadir aquí el resto de directivas using
 
@@ -13,7 +14,7 @@ using UnityEngine;
 /// Antes de cada class, descripción de qué es y para qué sirve,
 /// usando todas las líneas que sean necesarias.
 /// </summary>
-public class RoofDetector : MonoBehaviour
+public class Detector : MonoBehaviour
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -23,12 +24,10 @@ public class RoofDetector : MonoBehaviour
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
 
-    /// <summary>
-    /// True si choca con el techo
-    /// </summary>
-    public bool TouchesRoof = false;
+    public bool Detected = false;
+
     #endregion
-    
+
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
     // Documentar cada atributo que aparece aquí.
@@ -39,14 +38,14 @@ public class RoofDetector : MonoBehaviour
     // Ejemplo: _maxHealthPoints
 
     #endregion
-    
+
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-    
+
     // Por defecto están los típicos (Update y Start) pero:
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
-    
+
     /// <summary>
     /// Start is called on the frame when a script is enabled just before 
     /// any of the Update methods are called the first time.
@@ -82,29 +81,24 @@ public class RoofDetector : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
 
-    /// <summary>
-    /// Guarda la información de si choca con el techo en el bool público
-    /// </summary>
-    /// <param name="collision">Guarda la informacion del objeto con el que colisiona</param>
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.layer == 6)
         {
-            TouchesRoof = true;
+            Debug.Log("chocado");
+            Detected = true;
         }
     }
-    /// <summary>
-    /// Guarda la información de si choca con el techo en el bool público
-    /// </summary>
-    /// <param name="collision">Guarda la informacion del objeto con el que colisiona</param>
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.layer == 6)
         {
-            TouchesRoof = false;
+            Detected = false;
         }
     }
+
     #endregion   
 
-} // class RoofDetector 
+} // class Detector 
 // namespace

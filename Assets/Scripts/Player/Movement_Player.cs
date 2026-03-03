@@ -29,6 +29,9 @@ public class Movement_Player : MonoBehaviour
 
     [SerializeField] private GameObject Exclamation;
 
+    [SerializeField] private GameObject RightDetector;
+    [SerializeField] private GameObject LeftDetector;
+
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -91,7 +94,7 @@ public class Movement_Player : MonoBehaviour
         Vector2 dir = InputManager.Instance.MovementVector;
 
         // en caso de moverse a la derecha
-        if (dir.x > 0)
+        if (dir.x > 0 && !RightDetector.GetComponent<Detector>().Detected)
         {
             // Guarda la direccion en la que mira el personaje
             _rotation = false;
@@ -109,7 +112,7 @@ public class Movement_Player : MonoBehaviour
 
         }
         // en caso de moverse a la izquierda
-        else if (dir.x < 0)
+        else if (dir.x < 0 && !LeftDetector.GetComponent<Detector>().Detected)
         {
             // Guarda la direccion en la que mira el personaje
             _rotation = true;

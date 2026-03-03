@@ -1,4 +1,4 @@
-//---------------------------------------------------------
+﻿//---------------------------------------------------------
 // Breve descripción del contenido del archivo
 // Responsable de la creación de este archivo
 // Nombre del juego
@@ -88,7 +88,7 @@ public class FloorDetector : MonoBehaviour
     /// <param name="collision">Guarda la informacion del objeto con el que colisiona</param>
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (!collision.isTrigger)
+        if (collision.gameObject.layer == 6)
         {
             IsGrounded = true;
         }
@@ -99,7 +99,7 @@ public class FloorDetector : MonoBehaviour
     /// <param name="collision">Guarda la informacion del objeto con el que colisiona</param>
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (!collision.isTrigger)
+        if (collision.gameObject.layer == 6)
         {
             IsGrounded = false;
         }
