@@ -1,7 +1,7 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
-// Responsable de la creación de este archivo
-// Nombre del juego
+// Script que hace a la cámara Dolly seguir la bola.
+// Víctor Román
+// Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
 
@@ -24,6 +24,8 @@ public class Dolly_Movement : MonoBehaviour
     // Ejemplo: MaxHealthPoints
     [SerializeField]
     private GameObject ObjetoASeguir;
+    [SerializeField]
+    private float offset = 0f;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -59,7 +61,7 @@ public class Dolly_Movement : MonoBehaviour
     void Update()
     {
         PosicionObjetoASeguir = ObjetoASeguir.transform.position;
-        transform.position = new Vector3(PosicionObjetoASeguir.x + 5, 0, 0);
+        transform.position = new Vector3(PosicionObjetoASeguir.x + offset, 0, 0);
     }
     #endregion
 
