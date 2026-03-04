@@ -194,7 +194,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7702250423182331872}
   - component: {fileID: 299496412898801103}
-  - component: {fileID: 7029477693659868269}
+  - component: {fileID: 8573243851924744564}
   m_Layer: 2
   m_Name: FloorDetector
   m_TagString: Untagged
@@ -263,7 +263,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.5751505, y: 0.26999998}
   m_EdgeRadius: 0
---- !u!114 &7029477693659868269
+--- !u!114 &8573243851924744564
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -272,10 +272,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1780064950487419383}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e5d17ace5a539348a9f92cbbf0c5da6, type: 3}
+  m_Script: {fileID: 11500000, guid: a21b2cac9e0e3184797b4a958e0c4f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsGrounded: 0
+  Detected: 0
 --- !u!1 &3017378370926611458
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,7 +286,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5704618241663190442}
   - component: {fileID: 6307386929999984401}
-  - component: {fileID: 2656669097835902137}
+  - component: {fileID: 9190692938893535945}
   m_Layer: 2
   m_Name: RoofDetector
   m_TagString: Untagged
@@ -355,7 +355,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 0.1}
   m_EdgeRadius: 0
---- !u!114 &2656669097835902137
+--- !u!114 &9190692938893535945
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -364,10 +364,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3017378370926611458}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e41b07b8f2c763348b17df9af3f10d34, type: 3}
+  m_Script: {fileID: 11500000, guid: a21b2cac9e0e3184797b4a958e0c4f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TouchesRoof: 0
+  Detected: 0
 --- !u!1 &7674669691530021310
 GameObject:
   m_ObjectHideFlags: 0

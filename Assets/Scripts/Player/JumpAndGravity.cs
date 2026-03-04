@@ -115,7 +115,7 @@ public class JumpAndGravity : MonoBehaviour
         if (InputManager.Instance.JumpWasPressedThisFrame())
         {
             // Comprobamos si el detector de suelo dice que estás en el suelo
-            if (FloorDetector.GetComponent<FloorDetector>().IsGrounded)
+            if (FloorDetector.GetComponent<Detector>().Detected)
             {
                 // Iniciamos las variables necesarias
                 _maxPosJumped = transform.position + new Vector3(0.0f, JumpHeight);
@@ -128,10 +128,10 @@ public class JumpAndGravity : MonoBehaviour
         if (_hasJumped)
         {
             // Comprobamos si ha llegado a la altura máxima o choca con el techo
-            if (transform.position.y >= _maxPosJumped.y || RoofDetector.GetComponent<RoofDetector>().TouchesRoof)
+            if (transform.position.y >= _maxPosJumped.y || RoofDetector.GetComponent<Detector>().Detected)
             {
                 _hasReachedMaxHeight = true;
-                _speed = 0.0f;
+                if (_speed > 0.0f) _speed = 0.0f;
             }
             // Mientras no ha llegado a la altura máxima
             if (!_hasReachedMaxHeight)
@@ -150,7 +150,7 @@ public class JumpAndGravity : MonoBehaviour
         else // Se ejecuta cuando ha terminado el salto para no añadir dos veces la gravedad
         {
             // Mientras no toca suelo
-            if (!FloorDetector.GetComponent<FloorDetector>().IsGrounded)
+            if (!FloorDetector.GetComponent<Detector>().Detected)
             {
                 // mueve al personaje hacia abajo en base a la velocidad en el eje y
                 this.transform.position -= new Vector3(0.0f, 1.0f) * _speed * Time.deltaTime;
