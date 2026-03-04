@@ -1,4 +1,4 @@
-//---------------------------------------------------------
+﻿//---------------------------------------------------------
 // Breve descripción del contenido del archivo
 // Responsable de la creación de este archivo
 // Nombre del juego
@@ -110,8 +110,9 @@ public class JumpAndGravity : MonoBehaviour
     void Update()
     {
         Vector2 dir = InputManager.Instance.MovementVector;
+
         // De momento hacemos el salto con el movimiento en el eje y para no tocar el input action
-        if (dir.y > 0.5f)
+        if (InputManager.Instance.JumpWasPressedThisFrame())
         {
             // Comprobamos si el detector de suelo dice que estás en el suelo
             if (FloorDetector.GetComponent<FloorDetector>().IsGrounded)

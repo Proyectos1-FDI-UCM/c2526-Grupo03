@@ -1,4 +1,4 @@
-//---------------------------------------------------------
+﻿//---------------------------------------------------------
 // Contiene el componente de InputManager
 // Guillermo Jiménez Díaz, Pedro Pablo Gómez Martín
 // Template-P1
@@ -66,6 +66,16 @@ public class InputManager : MonoBehaviour
     /// conocer el estado del botón)
     /// </summary>
     private InputAction _fire;
+
+    /// <summary>
+    /// Accion para el salto
+    /// </summary>
+    private InputAction _jump;
+
+    /// <summary>
+    /// Accion para reparar
+    /// </summary>
+    private InputAction _repair;
 
     #endregion
 
@@ -186,6 +196,16 @@ public class InputManager : MonoBehaviour
         return _fire.WasReleasedThisFrame();
     }
 
+    public bool JumpWasPressedThisFrame()
+    {
+        return _jump.WasPressedThisFrame();
+    }
+
+    public bool RepairWasPressedThisFrame()
+    {
+        return _repair.WasPressedThisFrame();
+    }
+
     #endregion
 
     // ---- MÉTODOS PRIVADOS ----
@@ -213,6 +233,8 @@ public class InputManager : MonoBehaviour
         // tenemos (FireIsPressed, FireWasPressedThisFrame 
         // y FireWasReleasedThisFrame)
         _fire = _theController.Player.Fire;
+        _jump = _theController.Player.Jump;
+        _repair = _theController.Player.Repair;
     }
 
     /// <summary>
