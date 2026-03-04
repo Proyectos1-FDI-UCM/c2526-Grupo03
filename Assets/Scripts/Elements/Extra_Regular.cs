@@ -130,7 +130,7 @@ public class Extra_Regular : MonoBehaviour
         Vector3 Left = transform.position - new Vector3(_extraWidth / 2, _extraHeight / 2);
         Vector3 Right = transform.position - new Vector3(-1 *(_extraWidth / 2+_extraWidth/4), _extraHeight / 2);
 
-        float RaycastMagnitude = 0.01f;
+        float RaycastMagnitude = 0.1f;
         // Comprobamos si tiene suelo justo debajo en el centro
         RaycastHit2D CenterRay = Physics2D.Raycast(Center, new Vector3(0.0f, -1), RaycastMagnitude);
 
