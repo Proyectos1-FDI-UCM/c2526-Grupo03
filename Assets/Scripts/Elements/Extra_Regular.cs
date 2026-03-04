@@ -1,7 +1,7 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
-// Responsable de la creación de este archivo
-// Nombre del juego
+// Se encarga del movimiento del extra que se puede configurar su distancia de recorrido
+// Tristan Sanchez Lopez
+// Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
 
@@ -22,8 +22,11 @@ public class Extra_Regular : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
+    // Resistencia o numero de disparos para que se vaya
     [SerializeField] private int Resistance = 2;
+    // Distancia que recorre hacia cada lado desde el punto inicial
     [SerializeField] private int Distance = 5;
+    [SerializeField] private float _speed = 1f; // Velocidad del extra
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -34,12 +37,13 @@ public class Extra_Regular : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-    private float _speed = 1f; // Velocidad del extra
     private Vector3 iniPos; // Posicion inicial del extra 
     private Vector3 maxPosL;
     private Vector3 maxPosR;
+    //Ancho y alto del extra para poder detectar cuando se va  a salir de una plataforma
     private float _extraHeight = 0.0f;
     private float _extraWidth = 0.0f;
+    // direccion del movimiento -1 para que vaya a izquierda, 1 para ir a derecha
     private int dir = -1;
     SpriteRenderer _spriteRenderer; // sprite del extra
     #endregion
@@ -81,29 +85,34 @@ public class Extra_Regular : MonoBehaviour
     {
         if (!Dectection())
         {// cambia la direccion si no detecta suelo
-            if (dir == 1) dir = -1;
-            else if (dir == -1) dir = 1;
-        }
-    }
-    void FixedUpdate()
-    {  //Mira si se ha pasado de su maximo hacia cada lado para cambiar de direcion
+            if (dir == 1)
+            {
+                dir = -1;
+            }
+            else if (dir == -1)
+            {
+                dir = 1;
+            }
+        }//Mira si se pasa de la distancia que recorre para volver 
         if (transform.position.x <= maxPosL.x)
         {
             dir = 1;
         }
         if (transform.position.x >= maxPosR.x)
         {
-            dir = -1;
+            dir = -1; 
         }
         if (dir == 1)//mueve el extra hacia la derecha
         {
-            this.transform.position += new Vector3(_speed, 0, 0) * Time.deltaTime;
-        }if(dir == -1)//mueve el extra hacia la izquierda
+            transform.position += new Vector3(_speed, 0, 0) * Time.deltaTime;
+            _spriteRenderer.flipX = false;
+        }
+        if (dir == -1)//mueve el extra hacia la izquierda
         {
-            this.transform.position -= new Vector3(_speed, 0, 0) * Time.deltaTime;
+            transform.position -= new Vector3(_speed, 0, 0) * Time.deltaTime;
+            _spriteRenderer.flipX = true;
         }
     }
-
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
