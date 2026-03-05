@@ -24,7 +24,6 @@ public class Bullet_Exclamation : MonoBehaviour
     // Ejemplo: MaxHealthPoints
 
     [SerializeField] private float Speed = 7.0f;
-    [SerializeField] private int Damage = 2;
 
     #endregion
 

@@ -23,7 +23,6 @@ public class Extra_Army : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
-    [SerializeField] private int Resistance = 5;
     [SerializeField] private float _speedextra = 1f;
     /// <summary>
     /// Trigger que detecta si estás en el suelo

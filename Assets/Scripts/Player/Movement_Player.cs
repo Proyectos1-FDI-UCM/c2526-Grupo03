@@ -48,7 +48,7 @@ public class Movement_Player : MonoBehaviour
 
     private float _cooldown = .8f; // Tiempo de espera entre disparo y disparo
     private float _timeToWait = .0f; // Tiempo en el que se podra volver a disparar
-    private Vector3 _bulletPositionOffset = new Vector3(2.0f, 0); // Posicion de la bala en relacion al personaje
+    private Vector3 _bulletPositionOffset = new Vector3(0.8f, 0); // Posicion de la bala en relacion al personaje
 
     SpriteRenderer _spriteRenderer;
     #endregion

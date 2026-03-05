@@ -93,10 +93,11 @@ public class Enemies_Health : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Bullet_Exclamation a = collision.GetComponent<Bullet_Exclamation>();
         // Comprobamos que lo que ha chocado es una exclamación o grito
-        if (collision.gameObject.GetComponent<Bullet_Exclamation>() != null)
+        if (a != null)
         {
-            Health -= DamagePerHit;
+            Health = Health - DamagePerHit;
         }
     }
     #endregion

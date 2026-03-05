@@ -927,6 +927,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2146154208 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4321033572725947068, guid: c07129f316da99a42a01b5facbaddf53, type: 3}
+  m_PrefabInstance: {fileID: 3405149512474020722}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e67665ea226d403ab8b32a4b067d8f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2561700637643929032
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1088,6 +1099,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4321033572725947068, guid: c07129f316da99a42a01b5facbaddf53, type: 3}
+      propertyPath: nextScene
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6547406078629569876, guid: c07129f316da99a42a01b5facbaddf53, type: 3}
       propertyPath: m_Name
       value: Lose_Screen
@@ -1095,6 +1110,14 @@ PrefabInstance:
     - target: {fileID: 6547406078629569876, guid: c07129f316da99a42a01b5facbaddf53, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9189442771007117737, guid: c07129f316da99a42a01b5facbaddf53, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2146154208}
+    - target: {fileID: 9189442771007117737, guid: c07129f316da99a42a01b5facbaddf53, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeToNextScene
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
