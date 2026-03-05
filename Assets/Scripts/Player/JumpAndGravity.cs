@@ -180,6 +180,11 @@ public class JumpAndGravity : MonoBehaviour
             // Cuando toco suelo
             else
             {
+                // Calculamos la posicion del Jugador justo encima del suelo
+                float posY = FloorDetector.GetComponent<Detector>().FloorTopPosition.y + 0.2f; // 0.2f es la mitad del tamaño del floor detector
+                float posX = transform.position.x;
+                // Movemos al personaje justo encima del suelo si no lo estaba
+                if (transform.position != new Vector3(posX, posY)) transform.position = new Vector3(posX, posY);
                 // Cambio la velocidad actual a 0 para que no siga aumentando
                 _speed = 0.0f;
             }

@@ -24,8 +24,14 @@ public class Detector : MonoBehaviour
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
 
+    /// <summary>
+    /// True si se detecta un collider
+    /// </summary>
     public bool Detected = false;
-
+    /// <summary>
+    /// Cuando detecta el suelo nos dirá la posición justo encima de éste
+    /// </summary>
+    public Vector3 FloorTopPosition;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -37,6 +43,10 @@ public class Detector : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
+    /// <summary>
+    /// Guarda el tamaño del suelo en el eje Y
+    /// </summary>
+    private float _floorYAxisSize;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -83,9 +93,11 @@ public class Detector : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 6)
+        if (collision.gameObject.layer == 6 && !Detected)
         {
             Detected = true;
+            _floorYAxisSize = collision.bounds.size.y;
+            FloorTopPosition = collision.gameObject.transform.position + new Vector3(0f, _floorYAxisSize);
         }
     }
 
