@@ -1,11 +1,10 @@
-﻿//---------------------------------------------------------
-// Un trigger que devuelve true cuando algo le atraviesa
+//---------------------------------------------------------
+// Un entero de vida que va restando cuando lo golpea la exclamación o grito
 // Gabriel Adrian Oltean
 // Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
 
-using System;
 using UnityEngine;
 // Añadir aquí el resto de directivas using
 
@@ -14,7 +13,7 @@ using UnityEngine;
 /// Antes de cada class, descripción de qué es y para qué sirve,
 /// usando todas las líneas que sean necesarias.
 /// </summary>
-public class Detector : MonoBehaviour
+public class Enemies_Health : MonoBehaviour
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -24,10 +23,17 @@ public class Detector : MonoBehaviour
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
 
-    public bool Detected = false;
+    /// <summary>
+    /// Cantidad de vida que le queda al enemigo
+    /// </summary>
+    [SerializeField] private int Health = 1;
+    /// <summary>
+    /// Cantidad de vida que le quita al enemigo cada golpe
+    /// </summary>
+    [SerializeField] private int DamagePerHit = 1;
 
     #endregion
-
+    
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
     // Documentar cada atributo que aparece aquí.
@@ -38,14 +44,14 @@ public class Detector : MonoBehaviour
     // Ejemplo: _maxHealthPoints
 
     #endregion
-
+    
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-
+    
     // Por defecto están los típicos (Update y Start) pero:
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
-
+    
     /// <summary>
     /// Start is called on the frame when a script is enabled just before 
     /// any of the Update methods are called the first time.
@@ -81,24 +87,14 @@ public class Detector : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == 6)
-        {
-            Debug.Log("chocado");
-            Detected = true;
-        }
+        // Comprobamos que lo que ha chocado es una exclamación o grito
+        if (collision.gameObject.GetComponent<Bullet_Exclamation>() != null) Health -= DamagePerHit;
+        // Destruimos el enemigo si ya no le queda vida
+        if (Health <= 0) Destroy(this.gameObject);
     }
+    #endregion
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.layer == 6)
-        {
-            Detected = false;
-        }
-    }
-
-    #endregion   
-
-} // class Detector 
+} // class Enemies_Health 
 // namespace
