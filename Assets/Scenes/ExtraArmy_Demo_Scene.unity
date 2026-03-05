@@ -302,7 +302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Resistance: 5
-  _speedextra: 6
+  _speedextra: 4
   FloorDetector: {fileID: 836637702}
   RoofDetector: {fileID: 130730261}
   FrontDetector: {fileID: 721197898}
