@@ -6,7 +6,7 @@
 //---------------------------------------------------------
 
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 // Añadir aquí el resto de directivas using
 
 
@@ -28,13 +28,10 @@ public class QTE1 : MonoBehaviour
     /// Cantidad que aumenta la barra por click del botón asignado.
     /// </summary>
     [SerializeField]
-    private float AumentoPorCLick = 5.0f;
-    /// <summary>
-    /// Componente de la barra
-    /// </summary>
-    [SerializeField]
-    private Slider ComponenteBarra;
+    private float AumentoPorClick = 5.0f;
 
+    [SerializeField]
+    private float Disminucion = 0.5f;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -45,6 +42,20 @@ public class QTE1 : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
+
+    /// <summary>
+    /// Componente de la barra
+    /// </summary>
+    private Slider _componenteBarra;
+
+    /// <summary>
+    /// Valor máximo de la barra
+    /// </summary>
+    float _minValue;
+    /// <summary>
+    /// Valor de la barra
+    /// </summary>
+    float _value;
 
     #endregion
 
@@ -61,7 +72,22 @@ public class QTE1 : MonoBehaviour
     /// </summary>
     void Start()
     {
-        ComponenteBarra.value = 50;
+        if (_componenteBarra == null)
+        {
+            _componenteBarra = GetComponent<Slider>();
+            _minValue = _componenteBarra.minValue;
+            _value = _minValue;
+            if(_componenteBarra == null)
+            {
+                _componenteBarra = GetComponentInChildren<Slider>();
+                _minValue = _componenteBarra.maxValue;
+                _value = _minValue;
+            }
+        }
+        else
+        {
+            Debug.Log("No se encontró el componente Slider en " + gameObject.name);
+        }
     }
 
     /// <summary>
@@ -69,9 +95,18 @@ public class QTE1 : MonoBehaviour
     /// </summary>
     void Update()
     {
+        if(_componenteBarra.value > 0)
+        {
+            _componenteBarra.value -= Disminucion;
+        }
         if(InputManager.Instance.JumpWasPressedThisFrame())
         {
-            ComponenteBarra.value += AumentoPorCLick;
+            Debug.Log("Spam");
+            _componenteBarra.value += AumentoPorClick;
+        }
+        if(_componenteBarra.value >=_componenteBarra.maxValue)
+        {
+            transform.parent.gameObject.SetActive(false);
         }
     }
     #endregion
