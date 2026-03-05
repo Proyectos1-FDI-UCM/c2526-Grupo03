@@ -316,7 +316,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AumentoPorClick: 5
-  Disminucion: 0.4
+  Disminucion: 0.05
+  IsRepairing: 0
+  Repaired: 0
+  HasFinishedRepairing: 0
 --- !u!1 &5277117629285950482
 GameObject:
   m_ObjectHideFlags: 0

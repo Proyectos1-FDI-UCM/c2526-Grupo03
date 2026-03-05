@@ -1,10 +1,11 @@
 //---------------------------------------------------------
-// Script que se encarga de llenar la barra cuando pulsas la tecla asignada
-// Víctor Román Román
-// Nombre del juego
+// Breve descripción del contenido del archivo
+// Gabriel Adrian Oltean
+// Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
 
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 // Añadir aquí el resto de directivas using
@@ -14,7 +15,7 @@ using UnityEngine.UI;
 /// Antes de cada class, descripción de qué es y para qué sirve,
 /// usando todas las líneas que sean necesarias.
 /// </summary>
-public class QTE1 : MonoBehaviour
+public class Repair : MonoBehaviour
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -24,26 +25,16 @@ public class QTE1 : MonoBehaviour
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
 
-    /// <summary>
-    /// Cantidad que aumenta la barra por click del botón asignado.
-    /// </summary>
-    [SerializeField]
-    private float AumentoPorClick = 5.0f;
 
-    [SerializeField]
-    private float Disminucion = 0.5f;
-
+    [SerializeField] private Sprite SpriteBroken;
+    [SerializeField] private Sprite SpriteRepaired;
 
     /// <summary>
-    /// Variable que indica cuando iniciar la reparación
+    /// Aqui se elegira un QTE de una lista (De momento solo hay uno)
     /// </summary>
-    public bool IsRepairing = false;
+    [SerializeField] GameObject QTE;
 
-    public bool Repaired = false;
-    /// <summary>
-    /// Variable que nos indicara si ha terminado el QTE
-    /// </summary>
-    public bool HasFinishedRepairing = false;
+    [SerializeField] GameObject Key; 
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -56,19 +47,17 @@ public class QTE1 : MonoBehaviour
     // Ejemplo: _maxHealthPoints
 
     /// <summary>
-    /// Componente de la barra
+    /// Indica si estás encima del objeto a reparar
     /// </summary>
-    private Slider _componenteBarra;
-
+    private bool _canRepair = false;
     /// <summary>
-    /// Valor máximo de la barra
+    /// Nos indica si estamos reparando
     /// </summary>
-    float _minValue;
+    private bool _isRepairing = false;
     /// <summary>
-    /// Valor de la barra
+    /// Componente con el que cambiaremos el sprite por el reparado
     /// </summary>
-    float _value;
-
+    private SpriteRenderer _spriteRenderer;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -82,24 +71,10 @@ public class QTE1 : MonoBehaviour
     /// Start is called on the frame when a script is enabled just before 
     /// any of the Update methods are called the first time.
     /// </summary>
-    void Awake()
+    void Start()
     {
-        if (_componenteBarra == null)
-        {
-            _componenteBarra = GetComponent<Slider>();
-            _minValue = _componenteBarra.minValue;
-            _value = _minValue;
-            if(_componenteBarra == null)
-            {
-                _componenteBarra = GetComponentInChildren<Slider>();
-                _minValue = _componenteBarra.maxValue;
-                _value = _minValue;
-            }
-        }
-        else
-        {
-            Debug.Log("No se encontró el componente Slider en " + gameObject.name);
-        }
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _spriteRenderer.sprite = SpriteBroken;
     }
 
     /// <summary>
@@ -107,19 +82,16 @@ public class QTE1 : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (_componenteBarra.value > 0)
+        if (_canRepair && InputManager.Instance.RepairWasPressedThisFrame())
         {
-            _componenteBarra.value -= Disminucion;
+            QTE.SetActive(true);
+            _isRepairing = true;
         }
-        if (InputManager.Instance.JumpWasPressedThisFrame())
+        if (_isRepairing && QTE.GetComponentInChildren<QTE1>().Repaired)
         {
-            Debug.Log("Spam");
-            _componenteBarra.value += AumentoPorClick;
-        }
-        if (_componenteBarra.value >= _componenteBarra.maxValue)
-        {
-            transform.parent.gameObject.SetActive(false);
-            Repaired = true;
+            Destroy(this.GetComponent<Repair>());
+            _spriteRenderer.sprite = SpriteRepaired;
+            Key.SetActive(false);
         }
     }
     #endregion
@@ -133,15 +105,30 @@ public class QTE1 : MonoBehaviour
     // Ejemplo: GetPlayerController
 
     #endregion
-    
+
     // ---- MÉTODOS PRIVADOS ----
     #region Métodos Privados
     // Documentar cada método que aparece aquí
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
-
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<Movement_Player>() != null)
+        {
+            Key.SetActive(true);
+            _canRepair = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<Movement_Player>() != null)
+        {
+            _canRepair = false;
+            Key.SetActive(false);
+        }
+    }
     #endregion   
 
-} // class QTE1 
+} // class Repair 
 // namespace
