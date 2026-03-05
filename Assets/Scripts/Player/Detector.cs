@@ -97,7 +97,7 @@ public class Detector : MonoBehaviour
         {
             Detected = true;
             _floorYAxisSize = collision.bounds.size.y;
-            FloorTopPosition = collision.gameObject.transform.position + new Vector3(0f, _floorYAxisSize);
+            FloorTopPosition = collision.gameObject.transform.position + new Vector3(0f, _floorYAxisSize/2);
         }
     }
 

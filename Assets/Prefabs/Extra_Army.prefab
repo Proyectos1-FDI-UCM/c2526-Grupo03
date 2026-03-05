@@ -179,8 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c5e05a0a42a65a459f1696e063b4ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Resistance: 5
-  _speedextra: 4
+  _speedextra: 2
   FloorDetector: {fileID: 4081295452639071204}
   RoofDetector: {fileID: 3296966712150212385}
   FrontDetector: {fileID: 7597571102397938924}
@@ -360,7 +359,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.8}
+  m_Offset: {x: 0, y: -0.7}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -370,7 +369,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 3, y: 0.2}
+  m_Size: {x: 3, y: 0.1}
   m_EdgeRadius: 0
 --- !u!114 &2192584468404971339
 MonoBehaviour:
