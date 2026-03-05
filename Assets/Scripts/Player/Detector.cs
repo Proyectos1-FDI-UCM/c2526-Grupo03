@@ -85,7 +85,6 @@ public class Detector : MonoBehaviour
     {
         if (collision.gameObject.layer == 6)
         {
-            Debug.Log("chocado");
             Detected = true;
         }
     }

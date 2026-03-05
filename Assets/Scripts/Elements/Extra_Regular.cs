@@ -21,12 +21,15 @@ public class Extra_Regular : MonoBehaviour
     // El convenio de nombres de Unity recomienda que los atributos
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
-    // Ejemplo: MaxHealthPoints
-    // Resistencia o numero de disparos para que se vaya
-    [SerializeField] private int Resistance = 2;
+    // Ejemplo: MaxHealthPoint
+
+    /// <summary>
+    /// Detector de suelo
+    /// </summary>
+    [SerializeField] GameObject FloorDetector;
     // Distancia que recorre hacia cada lado desde el punto inicial
     [SerializeField] private int Distance = 5;
-    [SerializeField] private float _speed = 1f; // Velocidad del extra
+    [SerializeField] private float Speed = 1f; // Velocidad del extra
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -37,15 +40,18 @@ public class Extra_Regular : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-    private Vector3 iniPos; // Posicion inicial del extra 
-    private Vector3 maxPosL;
-    private Vector3 maxPosR;
-    //Ancho y alto del extra para poder detectar cuando se va  a salir de una plataforma
-    private float _extraHeight = 0.0f;
-    private float _extraWidth = 0.0f;
+
+    private Vector3 _iniPos; // Posicion inicial del extra 
+    private Vector3 _maxPosL;
+    private Vector3 _maxPosR;
     // direccion del movimiento -1 para que vaya a izquierda, 1 para ir a derecha
     private int dir = -1;
     SpriteRenderer _spriteRenderer; // sprite del extra
+
+    /// <summary>
+    /// Indica si el detector de suelo dice que estamos en el suelo
+    /// </summary>
+    private bool _landed;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -68,22 +74,20 @@ public class Extra_Regular : MonoBehaviour
     /// </summary>
     void Start()
     {
-        _extraHeight = GetComponent<BoxCollider2D>().bounds.size.y;
-        _extraWidth = GetComponent<BoxCollider2D>().bounds.size.x;
         // Establece la posicion inicial del extra a la extablecida por el editor
-        iniPos = transform.position;
-        maxPosL = transform.position;
-        maxPosL.x -= Distance; 
-        maxPosR = transform.position;
-        maxPosR.x += Distance;
+        _iniPos = transform.position;
+        _maxPosL = transform.position;
+        _maxPosL.x -= Distance; 
+        _maxPosR = transform.position;
+        _maxPosR.x += Distance;
     }
-
     /// <summary>
     /// Update is called every frame, if the MonoBehaviour is enabled.
     /// </summary>
     void Update()
     {
-        if (!Dectection())
+        _landed = FloorDetector.GetComponent<Detector>().Detected;
+        if (!_landed)
         {// cambia la direccion si no detecta suelo
             if (dir == 1)
             {
@@ -94,22 +98,22 @@ public class Extra_Regular : MonoBehaviour
                 dir = 1;
             }
         }//Mira si se pasa de la distancia que recorre para volver 
-        if (transform.position.x <= maxPosL.x)
+        if (transform.position.x <= _maxPosL.x)
         {
             dir = 1;
         }
-        if (transform.position.x >= maxPosR.x)
+        if (transform.position.x >= _maxPosR.x)
         {
             dir = -1; 
         }
         if (dir == 1)//mueve el extra hacia la derecha
         {
-            transform.position += new Vector3(_speed, 0, 0) * Time.deltaTime;
+            transform.position += new Vector3(Speed, 0, 0) * Time.deltaTime;
             _spriteRenderer.flipX = false;
         }
         if (dir == -1)//mueve el extra hacia la izquierda
         {
-            transform.position -= new Vector3(_speed, 0, 0) * Time.deltaTime;
+            transform.position -= new Vector3(Speed, 0, 0) * Time.deltaTime;
             _spriteRenderer.flipX = true;
         }
     }
@@ -131,32 +135,7 @@ public class Extra_Regular : MonoBehaviour
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
-    private bool Dectection()
-    {
-        bool Detection = false;
-        // Puntos de lanzamiento de los rayos
-        Vector3 Center = transform.position - new Vector3(0.0f, _extraHeight / 2);
-        Vector3 Left = transform.position - new Vector3(_extraWidth / 2, _extraHeight / 2);
-        Vector3 Right = transform.position - new Vector3(-1 *(_extraWidth / 2+_extraWidth/4), _extraHeight / 2);
-
-        float RaycastMagnitude = 0.1f;
-        // Comprobamos si tiene suelo justo debajo en el centro
-        RaycastHit2D CenterRay = Physics2D.Raycast(Center, new Vector3(0.0f, -1), RaycastMagnitude);
-
-        // Comprobamos si tiene suelo justo debajo de la esquina inferior izquierda
-        RaycastHit2D LeftRay = Physics2D.Raycast(Left, new Vector3(0.0f, -1), RaycastMagnitude);
-
-        // Comprobamos si tiene suelo justo debajo de la esquina inferior derecha
-        RaycastHit2D RightRay = Physics2D.Raycast(Right, new Vector3(0.0f, -1), RaycastMagnitude);
-
-        // Comprobamos si hay algo debajo
-        if ((LeftRay.collider != null ) && (RightRay.collider != null )&& (CenterRay.collider != null))
-        {
-            Detection = true;
-            
-        }
-        return Detection;
-    }
+    
     #endregion
 
 } // class Extra_Regular 

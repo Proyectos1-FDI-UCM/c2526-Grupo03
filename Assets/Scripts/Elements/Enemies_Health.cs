@@ -66,7 +66,11 @@ public class Enemies_Health : MonoBehaviour
     /// </summary>
     void Update()
     {
-        
+        // Destruimos el enemigo si ya no le queda vida
+        if (Health <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
     #endregion
 
@@ -87,12 +91,13 @@ public class Enemies_Health : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         // Comprobamos que lo que ha chocado es una exclamación o grito
-        if (collision.gameObject.GetComponent<Bullet_Exclamation>() != null) Health -= DamagePerHit;
-        // Destruimos el enemigo si ya no le queda vida
-        if (Health <= 0) Destroy(this.gameObject);
+        if (collision.gameObject.GetComponent<Bullet_Exclamation>() != null)
+        {
+            Health -= DamagePerHit;
+        }
     }
     #endregion
 
