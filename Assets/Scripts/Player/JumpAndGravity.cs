@@ -125,8 +125,6 @@ public class JumpAndGravity : MonoBehaviour
     /// </summary>
     void Update()
     {
-        Vector2 dir = InputManager.Instance.MovementVector;
-
         // De momento hacemos el salto con el movimiento en el eje y para no tocar el input action
         if (InputManager.Instance.JumpWasPressedThisFrame())
         {

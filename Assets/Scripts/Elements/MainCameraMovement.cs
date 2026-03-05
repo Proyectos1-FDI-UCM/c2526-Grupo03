@@ -1,10 +1,11 @@
 //---------------------------------------------------------
-// Script que hace a la cámara Dolly seguir la bola.
-// Víctor Román
+// Breve descripción del contenido del archivo
+// Responsable de la creación de este archivo
 // Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
 
+using TMPro;
 using UnityEngine;
 // Añadir aquí el resto de directivas using
 
@@ -13,7 +14,7 @@ using UnityEngine;
 /// Antes de cada class, descripción de qué es y para qué sirve,
 /// usando todas las líneas que sean necesarias.
 /// </summary>
-public class Dolly_Movement : MonoBehaviour
+public class MainCameraMovement : MonoBehaviour
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -22,10 +23,8 @@ public class Dolly_Movement : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
-    [SerializeField]
-    private GameObject ObjetoASeguir;
-    [SerializeField]
-    private float offset = 1f;
+    [SerializeField] private GameObject Player;
+
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -37,11 +36,12 @@ public class Dolly_Movement : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
+    private Vector3 _offset;
     #endregion
-
+    
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-    private Vector2 PosicionObjetoASeguir;
+    
     // Por defecto están los típicos (Update y Start) pero:
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
@@ -52,7 +52,7 @@ public class Dolly_Movement : MonoBehaviour
     /// </summary>
     void Start()
     {
-        
+        _offset = Player.transform.position - transform.position;
     }
 
     /// <summary>
@@ -60,8 +60,7 @@ public class Dolly_Movement : MonoBehaviour
     /// </summary>
     void Update()
     {
-        PosicionObjetoASeguir = ObjetoASeguir.transform.position;
-        transform.position = new Vector3(PosicionObjetoASeguir.x + offset, 0, 0);
+        transform.position = Player.transform.position - _offset;
     }
     #endregion
 
@@ -84,5 +83,5 @@ public class Dolly_Movement : MonoBehaviour
 
     #endregion   
 
-} // class Dolly_Movement 
+} // class MainCameraMovement 
 // namespace

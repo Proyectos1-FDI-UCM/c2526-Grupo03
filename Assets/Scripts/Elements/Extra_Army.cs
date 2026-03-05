@@ -23,7 +23,7 @@ public class Extra_Army : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
-    [SerializeField] private float _speedextra = 1f;
+    [SerializeField] private float SpeedExtra = 3f;
     /// <summary>
     /// Trigger que detecta si estás en el suelo
     /// </summary>
@@ -63,6 +63,10 @@ public class Extra_Army : MonoBehaviour
     /// </summary>
     private float _speed = 0.0f;
     /// <summary>
+    /// Simula la velocidad afectada por la gravedad
+    /// </summary>
+    private float _horizontalSpeed = 0.0f;
+    /// <summary>
     /// Aceleración negativa con la que simulamos gravedad
     /// </summary>
     private float _gravity = 0.0f;
@@ -87,6 +91,11 @@ public class Extra_Army : MonoBehaviour
     /// </summary>
     private Vector3 _maxPosJumped;
     SpriteRenderer _spriteRenderer;
+
+    /// <summary>
+    /// Indica si el detector de suelo dice que estás en el suelo
+    /// </summary>
+    private bool _landed;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -115,66 +124,73 @@ public class Extra_Army : MonoBehaviour
     /// </summary>
     void Update()
     {
-        transform.position += new Vector3(-_speedextra, 0, 0) * Time.deltaTime;
+        if (FloorDetector.GetComponent<Detector>().Detected)
+        {
+            _landed = true;
+        }
+        else
+        {
+            _landed = false;
+        }
+        // De momento hacemos el salto con el movimiento en el eje y para no tocar el input action
         if (FrontDetector.GetComponent<Detector>().Detected)
         {
-            // Comprobamos si el detector de suelo dice que estás en el suelo
-            if (FloorDetector.GetComponent<Detector>().Detected)
-            {
-                // Iniciamos las variables necesarias
-                _maxPosJumped = transform.position + new Vector3(0.0f, JumpHeight);
-                _hasJumped = true;
-                _hasReachedMaxHeight = false;
-                _speed = _initialSpeed;
-            }
+            // Iniciamos las variables necesarias para saltar
+            _maxPosJumped = transform.position + new Vector3(0.0f, JumpHeight);
+            _hasJumped = true;
+            _hasReachedMaxHeight = false;
+            _speed = _initialSpeed;
+            _landed = false;
+
+            _horizontalSpeed = 0f;
+        }
+        else
+        {
+            _horizontalSpeed = 4f;
+            transform.position += new Vector3(-1f, 0f) * _horizontalSpeed * Time.deltaTime;
         }
         // Si ha saltado
         if (_hasJumped)
         {
-            
             // Comprobamos si ha llegado a la altura máxima o choca con el techo
             if (transform.position.y >= _maxPosJumped.y || RoofDetector.GetComponent<Detector>().Detected)
             {
                 _hasReachedMaxHeight = true;
                 if (_speed > 0.0f) _speed = 0.0f;
+                _hasJumped = false;
             }
             // Mientras no ha llegado a la altura máxima
             if (!_hasReachedMaxHeight)
             {
-                // mueve al personaje hacia arriba en base a la velocidad en el eje y
-                this.transform.position += new Vector3(0.0f, 1.0f) * _speed * Time.deltaTime;
                 _speed -= _gravity * Time.deltaTime;
-            }
-            // Cuando se ha terminado el salto
-            else
-            {
-                _hasJumped = false;
             }
         }
         // Parte de gravedad
-        else // Se ejecuta cuando ha terminado el salto para no añadir dos veces la gravedad
+        if (!_landed)
         {
-            // Mientras no toca suelo
-            if (!FloorDetector.GetComponent<Detector>().Detected)
+            // mueve al personaje hacia abajo en base a la velocidad en el eje y
+            this.transform.position += new Vector3(0.0f, 1.0f) * _speed * Time.deltaTime;
+            // Limitamos la velocidad de caída hasta la velocidad de impulso
+            if (_speed > -1* _initialSpeed * 1.5f)
             {
-                // mueve al personaje hacia abajo en base a la velocidad en el eje y
-                this.transform.position -= new Vector3(0.0f, 1.0f) * _speed * Time.deltaTime;
-                // Limitamos la velocidad de caída hasta la velocidad de impulso
-                if (_speed < _initialSpeed * 1.5f)
-                {
-                    _speed += _gravity * Time.deltaTime;
-                }
-                else _speed = _initialSpeed * 1.5f;
+                _speed -= _gravity * Time.deltaTime;
             }
-            // Cuando toco suelo
-            else
-            {
-                
-            }
+            else _speed = -1 * _initialSpeed * 1.5f;
+        }
+        // Cuando toco suelo
+        else
+        {
+            // Calculamos la posicion del Jugador justo encima del suelo
+            float posY = FloorDetector.GetComponent<Detector>().FloorTopPosition.y + _extraHeight / 2; // 0.2f es la mitad del tamaño del floor detector
+            float posX = transform.position.x;
+            // Movemos al personaje justo encima del suelo si no lo estaba
+            if (transform.position != new Vector3(posX, posY)) transform.position = new Vector3(posX, posY);
+
+            // Cambio la velocidad actual a 0 para que no siga aumentando
+            _speed = 0.0f;
         }
     }
-    
-    
+
     #endregion
 
 

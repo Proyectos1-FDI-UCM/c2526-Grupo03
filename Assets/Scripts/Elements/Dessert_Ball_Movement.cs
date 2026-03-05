@@ -24,9 +24,6 @@ public class Dessert_Ball_Movement : MonoBehaviour
     // Ejemplo: MaxHealthPoints
 
     [SerializeField] private float Speed = 0.7f; // Velocidad de la bola
-    [SerializeField] private float Amplitude = 1f; // Altura que alcanza el rebote de la bola
-    [SerializeField] private float Separation = 1.5f; // Distancia de salto
-
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -40,6 +37,7 @@ public class Dessert_Ball_Movement : MonoBehaviour
 
     private Vector3 iniPos; // Posicion inicial de la bola
 
+    private float posX;
     #endregion
     
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -56,26 +54,18 @@ public class Dessert_Ball_Movement : MonoBehaviour
     void Start()
     {
         // Carga la posicion inicial nada mas carga el script
-        iniPos = transform.position; 
+        posX = transform.position.x;
     }
 
     /// <summary>
     /// Update is called every frame, if the MonoBehaviour is enabled.
     /// </summary>
-    void FixedUpdate()
+    void Update()
     {
-        float t = Time.time;
-
         // Basicamente recrea la ecuacion y = |sin(k*x)|
-        float y = Mathf.Abs(Mathf.Sin(Speed * t)) * Amplitude;
-        float x = 0f; 
-        x += Speed * t;
-
-        transform.position = new Vector3(
-            (iniPos.x + x) * Separation,
-            iniPos.y + y,
-            iniPos.z
-        );
+        float posY = Mathf.Sin(posX + Speed * Time.deltaTime);
+        posX += Speed * Time.deltaTime;
+        transform.position = new Vector3 (posX, posY);
     }
     #endregion
 
