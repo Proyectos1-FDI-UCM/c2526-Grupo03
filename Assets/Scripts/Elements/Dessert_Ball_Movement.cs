@@ -5,6 +5,7 @@
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
 
+using Unity.Mathematics;
 using UnityEngine;
 // Añadir aquí el resto de directivas using
 
@@ -38,6 +39,7 @@ public class Dessert_Ball_Movement : MonoBehaviour
     private Vector3 iniPos; // Posicion inicial de la bola
 
     private float posX;
+    private float posIniY;
     #endregion
     
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -55,6 +57,7 @@ public class Dessert_Ball_Movement : MonoBehaviour
     {
         // Carga la posicion inicial nada mas carga el script
         posX = transform.position.x;
+        posIniY = transform.position.y;
     }
 
     /// <summary>
@@ -63,7 +66,7 @@ public class Dessert_Ball_Movement : MonoBehaviour
     void Update()
     {
         // Basicamente recrea la ecuacion y = |sin(k*x)|
-        float posY = Mathf.Sin(posX + Speed * Time.deltaTime);
+        float posY = math.abs(Mathf.Sin(posX + Speed * Time.deltaTime)) + posIniY;
         posX += Speed * Time.deltaTime;
         transform.position = new Vector3 (posX, posY);
     }

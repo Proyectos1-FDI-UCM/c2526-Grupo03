@@ -381,7 +381,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 402389212074765397, guid: 51f172daaeafbbf48ba2b1bf2aac3553, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.73
+      value: -3.24
       objectReference: {fileID: 0}
     - target: {fileID: 402389212074765397, guid: 51f172daaeafbbf48ba2b1bf2aac3553, type: 3}
       propertyPath: m_LocalPosition.z
@@ -780,7 +780,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ObjetoASeguir: {fileID: 1570893870}
-  offset: 2
+  Offset: 1
 --- !u!1001 &489226305
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1850,12 +1850,16 @@ PrefabInstance:
       value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 1999541649939268212, guid: 7ed54c3cdb60d8b448114796a7468975, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 7.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1999541649939268212, guid: 7ed54c3cdb60d8b448114796a7468975, type: 3}
       propertyPath: m_LocalPosition.x
       value: -23
       objectReference: {fileID: 0}
     - target: {fileID: 1999541649939268212, guid: 7ed54c3cdb60d8b448114796a7468975, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1999541649939268212, guid: 7ed54c3cdb60d8b448114796a7468975, type: 3}
       propertyPath: m_LocalPosition.z

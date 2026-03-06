@@ -67,9 +67,10 @@ public class Enemies_Health : MonoBehaviour
     void Update()
     {
         // Destruimos el enemigo si ya no le queda vida
-        if (Health <= 0)
+        if (Health < 1)
         {
             Destroy(this.gameObject);
+            Debug.Log($"Me he destruido con {Health} puntos de vida");
         }
     }
     #endregion
@@ -97,7 +98,10 @@ public class Enemies_Health : MonoBehaviour
         // Comprobamos que lo que ha chocado es una exclamación o grito
         if (a != null)
         {
+
+            DamagePerHit = 1;
             Health = Health - DamagePerHit;
+            Debug.Log($"Me ha golpeado {collision.gameObject.name} y me queda {Health} vida");
         }
     }
     #endregion

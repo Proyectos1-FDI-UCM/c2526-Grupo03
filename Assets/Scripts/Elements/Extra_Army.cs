@@ -146,7 +146,7 @@ public class Extra_Army : MonoBehaviour
         }
         else
         {
-            _horizontalSpeed = 4f;
+            _horizontalSpeed = SpeedExtra;
             transform.position += new Vector3(-1f, 0f) * _horizontalSpeed * Time.deltaTime;
         }
         // Si ha saltado

@@ -25,7 +25,8 @@ public class Dolly_Movement : MonoBehaviour
     [SerializeField]
     private GameObject ObjetoASeguir;
     [SerializeField]
-    private float offset = 1f;
+    private float Offset = 1f;
+
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -41,7 +42,9 @@ public class Dolly_Movement : MonoBehaviour
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-    private Vector2 PosicionObjetoASeguir;
+
+    private float _followingObjectPositionXAxis;
+
     // Por defecto están los típicos (Update y Start) pero:
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
@@ -60,8 +63,8 @@ public class Dolly_Movement : MonoBehaviour
     /// </summary>
     void Update()
     {
-        PosicionObjetoASeguir = ObjetoASeguir.transform.position;
-        transform.position = new Vector3(PosicionObjetoASeguir.x + offset, 0, 0);
+        _followingObjectPositionXAxis = ObjetoASeguir.transform.position.x;
+        transform.position = new Vector3(_followingObjectPositionXAxis + Offset, 0f);
     }
     #endregion
 
