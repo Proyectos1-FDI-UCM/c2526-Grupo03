@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7f3f94701ae9a894e97dcc4db59c3aaa
+guid: 43aa481e9947cf74e8bc878833a36db1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7873444928579934181
-    second: Cactus_0
+      213: -2637613928643774764
+    second: Cactus_Arreglado_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,12 +46,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 250
+  spritePixelsToUnits: 26
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Cactus_0
+      name: Cactus_Arreglado_0
       rect:
         serializedVersion: 2
-        x: 14
-        y: 26
-        width: 352
-        height: 512
+        x: 0
+        y: 0
+        width: 35
+        height: 52
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5e79b9e7278144d60800000000000000
-      internalID: 7873444928579934181
+      spriteID: 4d6b0984b10556bd0800000000000000
+      internalID: -2637613928643774764
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Cactus_0: 7873444928579934181
+      Cactus_Arreglado_0: -2637613928643774764
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
