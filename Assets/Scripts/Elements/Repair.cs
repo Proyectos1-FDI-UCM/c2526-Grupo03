@@ -34,7 +34,25 @@ public class Repair : MonoBehaviour
     /// </summary>
     [SerializeField] GameObject QTE;
 
-    [SerializeField] GameObject Key; 
+    [SerializeField] GameObject Key;
+
+
+    /// <summary>
+    /// Indica si estás encima del objeto a reparar
+    /// </summary>
+    public bool CanRepair = false;
+    /// <summary>
+    /// Nos indica si estamos reparando
+    /// </summary>
+    public bool IsRepairing = false; 
+    /// <summary>
+    /// Nos indica si el objeto está reparado
+    /// </summary>
+    public bool Repaired = false;
+    /// <summary>
+    /// Variable que nos indicara si has fallado el QTE
+    /// </summary>
+    public bool HasFinishedRepairing = false;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -46,14 +64,6 @@ public class Repair : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
-    /// <summary>
-    /// Indica si estás encima del objeto a reparar
-    /// </summary>
-    private bool _canRepair = false;
-    /// <summary>
-    /// Nos indica si estamos reparando
-    /// </summary>
-    private bool _isRepairing = false;
     /// <summary>
     /// Componente con el que cambiaremos el sprite por el reparado
     /// </summary>
@@ -82,16 +92,27 @@ public class Repair : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (_canRepair && InputManager.Instance.RepairWasPressedThisFrame())
+        if (CanRepair && InputManager.Instance.RepairWasPressedThisFrame())
         {
             QTE.SetActive(true);
-            _isRepairing = true;
+            Key.SetActive(false);
+            IsRepairing = true;
         }
-        if (_isRepairing && QTE.GetComponentInChildren<QTE1>().Repaired)
+        if (IsRepairing && CanRepair)
+        {
+            CanRepair = false;
+        }
+        if (Repaired)
         {
             Destroy(this.GetComponent<Repair>());
             _spriteRenderer.sprite = SpriteRepaired;
             Key.SetActive(false);
+        }
+        if (HasFinishedRepairing) 
+        {
+            _spriteRenderer.sprite = SpriteBroken;
+            Key.SetActive(false);
+            HasFinishedRepairing = false;
         }
     }
     #endregion
@@ -114,17 +135,20 @@ public class Repair : MonoBehaviour
     // mayúscula, incluida la primera letra)
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<Movement_Player>() != null)
+        if (!IsRepairing)
         {
-            Key.SetActive(true);
-            _canRepair = true;
+            if (collision.gameObject.GetComponent<Movement_Player>() != null)
+            {
+                Key.SetActive(true);
+                CanRepair = true;
+            }
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.GetComponent<Movement_Player>() != null)
         {
-            _canRepair = false;
+            CanRepair = false;
             Key.SetActive(false);
         }
     }

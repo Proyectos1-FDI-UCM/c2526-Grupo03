@@ -255,6 +255,10 @@ MonoBehaviour:
   SpriteRepaired: {fileID: 21300000, guid: 43aa481e9947cf74e8bc878833a36db1, type: 3}
   QTE: {fileID: 1825485709791816537}
   Key: {fileID: 6679229377780583808}
+  CanRepair: 0
+  IsRepairing: 0
+  Repaired: 0
+  HasFinishedRepairing: 0
 --- !u!1001 &4122496064540247517
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -274,6 +278,10 @@ PrefabInstance:
     - target: {fileID: 2333816512935063172, guid: 6375e38e311123d488e4c2c3e6680734, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8062615499841846730, guid: 6375e38e311123d488e4c2c3e6680734, type: 3}
+      propertyPath: AumentoPorClick
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8179618660305492535, guid: 6375e38e311123d488e4c2c3e6680734, type: 3}
       propertyPath: m_Pivot.x

@@ -7,6 +7,7 @@
 
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 // Añadir aquí el resto de directivas using
 
 
@@ -25,7 +26,8 @@ public class QTE3 : MonoBehaviour
     // Ejemplo: MaxHealthPoints
 
     [SerializeField] private float AumentoPorAcierto = 5.0f;
-    [SerializeField] private float Disminución = 0.5f;
+    [SerializeField] private float Disminucion = 0.5f;
+    [SerializeField] private float TiempoPorFlecha = 1.0f;
 
     [SerializeField] private Image ChangingArrow;
 
@@ -34,9 +36,9 @@ public class QTE3 : MonoBehaviour
     [SerializeField] private Sprite Left_Arrow;
     [SerializeField] private Sprite Right_Arrow;
 
-    public bool IsRepairing;
-    public bool Repaired;
-    public bool HasFinishedRepairing;
+    public bool IsRepairing = false;
+    public bool Repaired = false;
+    public bool HasFinishedRepairing = false;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -48,6 +50,10 @@ public class QTE3 : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
+    /// <summary>
+    /// Componente de la Barra que se va llenando
+    /// </summary>
+    private Slider _componenteBarra;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -57,13 +63,18 @@ public class QTE3 : MonoBehaviour
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
 
-    /// <summary>
-    /// Start is called on the frame when a script is enabled just before 
-    /// any of the Update methods are called the first time.
-    /// </summary>
-    void Start()
+
+    void Awake()
     {
-        
+        _componenteBarra = GetComponent<Slider>();
+        if (_componenteBarra == null)
+        {
+            _componenteBarra = GetComponentInChildren<Slider>();
+        }
+        if (_componenteBarra == null)
+        {
+            Debug.Log("No se encontró el componente Slider en " + gameObject.name);
+        }
     }
 
     /// <summary>
@@ -71,7 +82,23 @@ public class QTE3 : MonoBehaviour
     /// </summary>
     void Update()
     {
-        
+        if (_componenteBarra.value > _componenteBarra.minValue)
+        {
+            _componenteBarra.value -= Disminucion;
+            if (_componenteBarra.value < _componenteBarra.minValue)
+            {
+                _componenteBarra.value = _componenteBarra.minValue;
+            }
+        }
+        if (InputManager.Instance.JumpWasPressedThisFrame())
+        {
+            _componenteBarra.value += AumentoPorAcierto;
+        }
+        if (_componenteBarra.value >= _componenteBarra.maxValue)
+        {
+            transform.parent.gameObject.SetActive(false);
+            this.gameObject.GetComponentInParent<Repair>().Repaired = true;
+        }
     }
     #endregion
 
@@ -84,7 +111,7 @@ public class QTE3 : MonoBehaviour
     // Ejemplo: GetPlayerController
 
     #endregion
-    
+
     // ---- MÉTODOS PRIVADOS ----
     #region Métodos Privados
     // Documentar cada método que aparece aquí
@@ -92,7 +119,7 @@ public class QTE3 : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
 
-    #endregion   
+    #endregion
 
 } // class QTE3 
 // namespace
