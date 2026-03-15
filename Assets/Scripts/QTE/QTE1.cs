@@ -32,18 +32,7 @@ public class QTE1 : MonoBehaviour
 
     [SerializeField]
     private float Disminucion = 0.5f;
-
-
-    /// <summary>
-    /// Variable que indica cuando iniciar la reparación
-    /// </summary>
-    public bool IsRepairing = false;
-
-    public bool Repaired = false;
-    /// <summary>
-    /// Variable que nos indicara si ha terminado el QTE
-    /// </summary>
-    public bool HasFinishedRepairing = false;
+    
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -119,7 +108,7 @@ public class QTE1 : MonoBehaviour
         if (_componenteBarra.value >= _componenteBarra.maxValue)
         {
             transform.parent.gameObject.SetActive(false);
-            Repaired = true;
+            this.gameObject.GetComponentInParent<Repair>().Repaired = true;
         }
     }
     #endregion
