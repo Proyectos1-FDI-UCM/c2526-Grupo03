@@ -24,13 +24,15 @@ public class Movement_Player : MonoBehaviour
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
 
-    [SerializeField] private float MaxVelocity = 5.0f;
+    [SerializeField] public static float MaxVelocity = 5.0f;
     [SerializeField] private float Acceleration = 1.0f;
+    [SerializeField] public static int Ammo = 4;
 
     [SerializeField] private GameObject Exclamation;
 
     [SerializeField] private GameObject RightDetector;
     [SerializeField] private GameObject LeftDetector;
+
 
     #endregion
 
@@ -67,6 +69,7 @@ public class Movement_Player : MonoBehaviour
     void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
+
     }
 
     /// <summary>
@@ -74,7 +77,7 @@ public class Movement_Player : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if(InputManager.Instance.FireWasPressedThisFrame() && Time.time >= _timeToWait)
+        if(InputManager.Instance.FireWasPressedThisFrame() && Time.time >= _timeToWait && Ammo >0)
         {
             int direction = _rotation ? -1 : 1;
             // Crea una exclamacion un poco alejado del personaje (_bulletPositionOffset) sin rotacion
@@ -84,6 +87,8 @@ public class Movement_Player : MonoBehaviour
             sr.flipX = _rotation;
             // Reestablece el tiempo de espera al siguiente disparo
             _timeToWait = Time.time + _cooldown;
+            // Baja la munición de gritos
+            Ammo--;
         }
     }
     void FixedUpdate()
@@ -103,10 +108,13 @@ public class Movement_Player : MonoBehaviour
             _spriteRenderer.flipX = false;
 
             // Acelera al personaje o fija su velocidad si ha llegado al maximo de velocidad
-            _speed += Acceleration;
             if (_speed <= MaxVelocity)
             {
                 _speed += Acceleration;
+            }
+            else if (_speed >= MaxVelocity)
+            {
+                _speed -= Acceleration;
             }
             else _speed = MaxVelocity;
 
@@ -125,7 +133,11 @@ public class Movement_Player : MonoBehaviour
             {
                 _speed -= Acceleration;
             }
-            else _speed = -MaxVelocity;
+            else if (_speed <= -MaxVelocity)
+            {
+                _speed += Acceleration;
+            }
+            else _speed = Acceleration;
         }
         else _speed = .0f;
     }

@@ -386,6 +386,7 @@ GameObject:
   - component: {fileID: 3555808029603455080}
   - component: {fileID: 8407154709903920801}
   - component: {fileID: 6114695312325146849}
+  - component: {fileID: -2117695415589528348}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -479,7 +480,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f26c9ac460a3d9844883f99ddd2d796e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxVelocity: 5
   Acceleration: 1
   Exclamation: {fileID: 2590580355582167740, guid: c41fea627a4cadb4db77192638c429cf, type: 3}
   RightDetector: {fileID: 610096351653932614}
@@ -573,3 +573,18 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.4, y: 1.425}
   m_EdgeRadius: 0
+--- !u!114 &-2117695415589528348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7674669691530021310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48b9c5c093654f445bc171ae533fa74f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ReloadMovement: 3
+  ReloadSpeed: 1.5
+  ReloadCD: 5
