@@ -169,6 +169,13 @@ public class InputManager : MonoBehaviour
     public Vector2 MovementVector { get; private set; }
 
     /// <summary>
+    /// Propiedad para acceder al vector del QTE de flecha.
+    /// Según está configurado el InputActionController,
+    /// es un vector normalizado 
+    /// </summary>
+    public Vector2 ArrowsQTE { get; private set; }
+
+    /// <summary>
     /// Método para saber si el botón de disparo (Fire) está pulsado
     /// Devolverá true en todos los frames en los que se mantenga pulsado
     /// <returns>True, si el botón está pulsado</returns>
@@ -256,6 +263,14 @@ public class InputManager : MonoBehaviour
         movement.performed += OnMove;
         movement.canceled += OnMove;
 
+        /// Cacheamos la acción del QTE de flechas
+        InputAction arrowsQTE = _theController.Player.ArrowsQTE;
+        // Para el movimiento, actualizamos el vector de movimiento usando
+        // el método OnMove
+        arrowsQTE.performed += OnArrowsQTE;
+        arrowsQTE.canceled += OnArrowsQTE;
+        ;
+
         // Para el disparo solo cacheamos la acción de disparo.
         // El estado lo consultaremos a través de los métodos públicos que 
         // tenemos (FireIsPressed, FireWasPressedThisFrame 
@@ -274,6 +289,16 @@ public class InputManager : MonoBehaviour
     private void OnMove(InputAction.CallbackContext context)
     {
         MovementVector = context.ReadValue<Vector2>();
+    }
+
+    /// <summary>
+    /// Método que es llamado por el controlador de input cuando se producen
+    /// eventos del QTE de flechas (relacionados con la acción ArrowsQTE)
+    /// </summary>
+    /// <param name="context">Información sobre el evento del QTE de flechas</param>
+    private void OnArrowsQTE(InputAction.CallbackContext context)
+    {
+        ArrowsQTE = context.ReadValue<Vector2>();
     }
 
     #endregion
