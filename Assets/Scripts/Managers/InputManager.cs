@@ -77,6 +77,11 @@ public class InputManager : MonoBehaviour
     /// </summary>
     private InputAction _repair;
 
+    /// <summary>
+    /// Accion para recargar
+    /// </summary>
+    private InputAction _reload;
+
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -172,7 +177,15 @@ public class InputManager : MonoBehaviour
     {
         return _fire.IsPressed();
     }
-
+    /// <summary>
+    /// Método para saber si el botón de recarga (reload) está pulsado
+    /// Devolverá true en todos los frames en los que se mantenga pulsado
+    /// <returns>True, si el botón está pulsado</returns>
+    /// </summary>
+    public bool ReloadIsPressed()
+    {
+        return _reload.IsPressed();
+    }
     /// <summary>
     /// Método para saber si el botón de disparo (Fire) se ha pulsado en este frame
     /// <returns>Devuelve true, si el botón ha sido pulsado en este frame
@@ -183,6 +196,16 @@ public class InputManager : MonoBehaviour
     {
         return _fire.WasPressedThisFrame();
     }
+    /// <summary>
+    /// Método para saber si el botón de Recarga (reeload) se ha pulsado en este frame
+    /// <returns>Devuelve true, si el botón ha sido pulsado en este frame
+    /// y false, en otro caso
+    /// </returns>
+    /// </summary>
+    public bool RelaodWasPressedThisFrame()
+    {
+        return _reload.WasPressedThisFrame();
+    }
 
     /// <summary>
     /// Método para saber si el botón de disparo (Fire) ha dejado de pulsarse
@@ -191,6 +214,11 @@ public class InputManager : MonoBehaviour
     /// este frame; y false, en otro caso.
     /// </returns>
     /// </summary>
+     public bool ReloadWasReleasedThisFrame()
+    {
+        return _reload.WasReleasedThisFrame();
+    }
+
     public bool FireWasReleasedThisFrame()
     {
         return _fire.WasReleasedThisFrame();
@@ -235,6 +263,7 @@ public class InputManager : MonoBehaviour
         _fire = _theController.Player.Fire;
         _jump = _theController.Player.Jump;
         _repair = _theController.Player.Repair;
+        _reload = _theController.Player.Reload;
     }
 
     /// <summary>
