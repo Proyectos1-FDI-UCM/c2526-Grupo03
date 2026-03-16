@@ -7,6 +7,7 @@
 
 using System;
 using UnityEngine;
+using UnityEngine.Rendering;
 // Añadir aquí el resto de directivas using
 
 
@@ -89,6 +90,8 @@ public class Movement_Player : MonoBehaviour
             _timeToWait = Time.time + _cooldown;
             // Baja la munición de gritos
             Ammo--;
+
+           
         }
     }
     void FixedUpdate()
@@ -117,7 +120,7 @@ public class Movement_Player : MonoBehaviour
                 _speed -= Acceleration;
             }
             else _speed = MaxVelocity;
-
+           
         }
         // en caso de moverse a la izquierda
         else if (dir.x < 0 && !LeftDetector.GetComponent<Detector>().Detected)
@@ -140,6 +143,11 @@ public class Movement_Player : MonoBehaviour
             else _speed = Acceleration;
         }
         else _speed = .0f;
+
+        if (LeftDetector.GetComponent<Detector>().Detected)
+        {
+            _speed = 3f;
+        }
     }
     #endregion
 
@@ -150,6 +158,15 @@ public class Movement_Player : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
+
+    public void Empuja()
+    {
+        if (!LeftDetector.GetComponent<Detector>().Detected)
+        {
+            _speed = -20f;
+        }
+        
+    }
 
 
     #endregion
