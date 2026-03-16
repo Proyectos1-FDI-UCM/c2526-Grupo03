@@ -85,7 +85,6 @@ public class Scream_Reload : MonoBehaviour
 
         if (reloading && Time.time >= _timePassed)
         {
-            Movement_Player.Ammo = _cords;
             Movement_Player.MaxVelocity = ReloadMovement;
 
             _enOfModification = Time.time + ReloadSpeed;
@@ -96,6 +95,7 @@ public class Scream_Reload : MonoBehaviour
 
         if (_slowActive && Time.time >= _enOfModification)
         {
+            Movement_Player.Ammo = _cords;
             Movement_Player.MaxVelocity = _maxOriginalSpeed;
             _slowActive = false;
         }
