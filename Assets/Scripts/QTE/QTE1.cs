@@ -98,7 +98,7 @@ public class QTE1 : MonoBehaviour
     {
         if (_componenteBarra.value > 0)
         {
-            _componenteBarra.value -= Disminucion;
+            _componenteBarra.value -= (Disminucion * Time.deltaTime);
         }
         if (InputManager.Instance.JumpWasPressedThisFrame())
         {
