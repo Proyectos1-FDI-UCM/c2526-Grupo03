@@ -6,6 +6,7 @@
 //---------------------------------------------------------
 
 using UnityEngine;
+using UnityEngine.UI;
 // Añadir aquí el resto de directivas using
 
 
@@ -23,7 +24,9 @@ public class Balas : MonoBehaviour
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
     [SerializeField]
-    private TMPro.TextMeshProUGUI TextoRecarga;
+    private Image Recarga;
+    [SerializeField]
+    public Image Barra_puntuacion;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -51,8 +54,8 @@ public class Balas : MonoBehaviour
     /// </summary>
     void Start()
     {
-        balas = Movement_Player.Ammo;
-        TextoRecarga.text = "Gritos " + balas + " / 4";
+        Update_Bala();
+        Update_Puntuacion();
     }
 
     /// <summary>
@@ -60,8 +63,7 @@ public class Balas : MonoBehaviour
     /// </summary>
     void Update()
     {
-        balas = Movement_Player.Ammo;
-        TextoRecarga.text = "Gritos " + balas + " / 4";
+        Update_Bala();
     }
     #endregion
 
@@ -81,7 +83,15 @@ public class Balas : MonoBehaviour
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
-
+    void Update_Bala()
+    {
+        balas = Movement_Player.Ammo;
+        Recarga.fillAmount = balas/4;
+    }
+    void Update_Puntuacion()
+    {
+        Barra_puntuacion.fillAmount = 1f;
+    }
     #endregion   
 
 } // class Balas 
