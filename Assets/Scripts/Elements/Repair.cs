@@ -1,4 +1,4 @@
-//---------------------------------------------------------
+﻿//---------------------------------------------------------
 // Breve descripción del contenido del archivo
 // Gabriel Adrian Oltean
 // Rodaje Rodante
@@ -68,6 +68,11 @@ public class Repair : MonoBehaviour
     /// Componente con el que cambiaremos el sprite por el reparado
     /// </summary>
     private SpriteRenderer _spriteRenderer;
+
+    /// <summary>
+    /// GameObject del jugador para restringir su movimiento durante las reparaciones
+    /// </summary>
+    private GameObject _player;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -100,16 +105,22 @@ public class Repair : MonoBehaviour
         }
         if (IsRepairing && CanRepair)
         {
+            _player.GetComponent<Movement_Player>().enabled = false;
+            _player.GetComponent<JumpAndGravity>().enabled = false;
             CanRepair = false;
         }
         if (Repaired)
         {
-            Destroy(this.GetComponent<Repair>());
+            _player.GetComponent<Movement_Player>().enabled = true;
+            _player.GetComponent<JumpAndGravity>().enabled = true;
+            this.GetComponent<Repair>().enabled = false; // mejor desactivarlo que destruirlo
             _spriteRenderer.sprite = SpriteRepaired;
             Key.SetActive(false);
         }
         if (HasFinishedRepairing) 
         {
+            _player.GetComponent<Movement_Player>().enabled = true;
+            _player.GetComponent<JumpAndGravity>().enabled = true;
             _spriteRenderer.sprite = SpriteBroken;
             Key.SetActive(false);
             HasFinishedRepairing = false;
@@ -139,6 +150,7 @@ public class Repair : MonoBehaviour
         {
             if (collision.gameObject.GetComponent<Movement_Player>() != null)
             {
+                _player = collision.gameObject;
                 Key.SetActive(true);
                 CanRepair = true;
             }
