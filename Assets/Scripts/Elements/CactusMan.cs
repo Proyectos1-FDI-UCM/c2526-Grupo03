@@ -23,6 +23,8 @@ public class CactusMan : MonoBehaviour
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
 
+    [SerializeField] private int Empuje = 20;
+
     /// <summary>
     /// Trigger que detecta si cactusman detecta algo frente a él
     /// </summary>
@@ -86,7 +88,7 @@ public class CactusMan : MonoBehaviour
     {
         if (collision.GetComponent<Movement_Player>())
         {
-            collision.GetComponent<Movement_Player>().Empuja();
+            collision.GetComponent<Movement_Player>().Empuja(Empuje);
         }
     }
 
