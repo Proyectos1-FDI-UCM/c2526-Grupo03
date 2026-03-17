@@ -1,4 +1,4 @@
-//---------------------------------------------------------
+﻿//---------------------------------------------------------
 // Breve descripción del contenido del archivo
 // Responsable de la creación de este archivo
 // Rodaje Rodante
@@ -7,6 +7,7 @@
 
 using TMPro;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 // Añadir aquí el resto de directivas using
 
 
@@ -23,8 +24,17 @@ public class MainCameraMovement : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
+
     [SerializeField] private GameObject Player;
 
+    /// <summary> Suavizado del movimiento de la camara </summary>
+    [SerializeField] float SmoothSpeed = 5f;
+
+    /// <summary> Distancia maxima a la que se adelanta la camara </summary>
+    [SerializeField] float LookAheadDistance = 2f;
+
+    /// <summary> Altura fija de la camara </summary>
+    [SerializeField] float VerticalOffset = 1f; // Altura fija de la cámara
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -36,7 +46,11 @@ public class MainCameraMovement : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
-    private Vector3 _offset;
+    private float _currentLookAhead = 0f;
+    private float _targetLookAhead = 0f;
+    private float _lookAheadVelocity = 0f;
+
+    private float _lastTargetX;
     #endregion
     
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -52,7 +66,7 @@ public class MainCameraMovement : MonoBehaviour
     /// </summary>
     void Start()
     {
-        _offset = Player.transform.position - transform.position;
+        _lastTargetX = Player.transform.position.x;
     }
 
     /// <summary>
@@ -60,8 +74,39 @@ public class MainCameraMovement : MonoBehaviour
     /// </summary>
     void Update()
     {
-        transform.position = Player.transform.position - _offset;
+        float moveDirection = Player.transform.position.x - _lastTargetX;
+
+        // Detectar dirección del movimiento
+        if (Mathf.Abs(moveDirection) > 0.01f)
+        {
+            _targetLookAhead = Mathf.Sign(moveDirection) * LookAheadDistance;
+        }
+
+        // Suavizar el adelantamiento
+        _currentLookAhead = Mathf.SmoothDamp(
+            _currentLookAhead,
+            _targetLookAhead,
+            ref _lookAheadVelocity,
+            0.3f
+        );
+
+        // Posición objetivo
+        Vector3 targetPosition = new Vector3(
+            Player.transform.position.x + _currentLookAhead,
+            Player.transform.position.y + VerticalOffset,
+            transform.position.z
+        );
+
+        // Movimiento suave de cámara
+        transform.position = Vector3.Lerp(
+            transform.position,
+            targetPosition,
+            SmoothSpeed * Time.deltaTime
+        );
+
+        _lastTargetX = Player.transform.position.x;
     }
+
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
