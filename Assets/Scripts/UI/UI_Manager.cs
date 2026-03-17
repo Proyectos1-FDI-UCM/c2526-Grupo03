@@ -86,11 +86,23 @@ public class Balas : MonoBehaviour
     void Update_Bala()
     {
         balas = Movement_Player.Ammo;
-        Recarga.fillAmount = balas/4;
+        Reduce_Grito(balas);
     }
     void Update_Puntuacion()
     {
         Barra_puntuacion.fillAmount = 1f;
+    }
+    void Reduce_Grito(int bala)
+    {
+        switch (bala)
+        {
+            case 4: Recarga.fillAmount = 1f;break;
+            case 3: Recarga.fillAmount = 0.65f; break;
+            case 2: Recarga.fillAmount = 0.46f; break;
+            case 1: Recarga.fillAmount = 0.28f; break;
+            case 0: Recarga.fillAmount = 0f; break;
+        }
+
     }
     #endregion   
 
