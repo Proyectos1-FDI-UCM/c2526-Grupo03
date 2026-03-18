@@ -24,6 +24,7 @@ public class Dolly_Detection_System : MonoBehaviour
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
     [SerializeField] private GameObject LoseScreen;
+    [SerializeField] private float IntervaloParaSubir = 0f;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -34,8 +35,16 @@ public class Dolly_Detection_System : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-    
-    
+
+    ///<summary>
+    /// Variable que cuenta el tiempo pasado
+    ///</summary>
+    private float _timepassed;
+
+    ///<summary>
+    /// Variable que determina si se ha encontrado un objeto interactuable o no
+    ///</summary>
+    private bool _detected;
 
     #endregion
 
@@ -53,6 +62,24 @@ public class Dolly_Detection_System : MonoBehaviour
     void Awake()
     {
         LoseScreen.SetActive(false);
+        _detected = false;
+    }
+
+    /// <summary>
+    /// Update is called every frame the monovehaviour is active
+    /// </summary>
+    private void Update()
+    {
+        if (_detected)
+        {
+            _timepassed = Time.time + IntervaloParaSubir;
+            _detected = false;
+        }
+        else if (!_detected && Time.time >= _timepassed)
+        {
+            _timepassed = Time.time + IntervaloParaSubir;
+            GameManager.Instance.QualityUp();
+        }
     }
     #endregion
 
@@ -73,14 +100,17 @@ public class Dolly_Detection_System : MonoBehaviour
         else if (collision.gameObject.TryGetComponent<Repair>(out var Repair) && !Repair.Repaired)
         {
             GameManager.Instance.UnrepairedElementDetected();
+            _detected = true;
         }
         else if (collision.gameObject.GetComponent<Extra_Regular>() != null)
         {
             GameManager.Instance.ExtraRegularDetected();
+            _detected = true;
         }
         else if (collision.gameObject.GetComponent<Extra_Army>() != null)
         {
             GameManager.Instance.ExtraArmyDetected();
+            _detected = true;
         }
         
     }

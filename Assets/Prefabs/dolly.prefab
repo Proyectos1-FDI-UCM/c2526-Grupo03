@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LoseScreen: {fileID: 6547406078629569876, guid: c07129f316da99a42a01b5facbaddf53, type: 3}
+  IntervaloParaSubir: 0
 --- !u!114 &4020016496966100813
 MonoBehaviour:
   m_ObjectHideFlags: 0

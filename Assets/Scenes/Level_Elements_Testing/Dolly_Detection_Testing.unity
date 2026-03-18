@@ -662,7 +662,7 @@ PrefabInstance:
       objectReference: {fileID: 815568759}
     - target: {fileID: 31519331706352411, guid: ad756c137b6e1154ba13e8e8b3e5bae6, type: 3}
       propertyPath: Quality_Up
-      value: 20
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 31519331706352411, guid: ad756c137b6e1154ba13e8e8b3e5bae6, type: 3}
       propertyPath: Army_Penalty
@@ -799,6 +799,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6238678687177223467, guid: 7ed54c3cdb60d8b448114796a7468975, type: 3}
+      propertyPath: IntervaloParaSubir
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1999541649939268212, guid: 7ed54c3cdb60d8b448114796a7468975, type: 3}
       propertyPath: m_LocalPosition.x
       value: -16
@@ -862,7 +866,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -2117695415589528348, guid: 8e518f3f91021964490aa4c6a5d8d0d8, type: 3}
       propertyPath: ReloadCD
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 257530346216282606, guid: 8e518f3f91021964490aa4c6a5d8d0d8, type: 3}
       propertyPath: m_LocalPosition.x
