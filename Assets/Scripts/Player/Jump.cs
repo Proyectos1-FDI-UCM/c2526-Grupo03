@@ -1,6 +1,6 @@
 ﻿//---------------------------------------------------------
-// Componente de salto y gravedad combinados
-// Gabriel Adrian Oltean
+// Componente encargado del salto del personaje jugable
+// Gabriel Adrian Oltean, Alejandro Garcia Diaz
 // Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
@@ -13,7 +13,7 @@ using UnityEngine;
 /// Antes de cada class, descripción de qué es y para qué sirve,
 /// usando todas las líneas que sean necesarias.
 /// </summary>
-public class JumpAndGravity : MonoBehaviour
+public class Jump : MonoBehaviour
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -55,18 +55,6 @@ public class JumpAndGravity : MonoBehaviour
     /// </summary>
     private float _initialSpeed = 0.0f;
     /// <summary>
-    /// Aceleración negativa con la que simulamos gravedad
-    /// </summary>
-    private float _gravity = 0.0f;
-    /// <summary>
-    /// Altura del collider del jugador
-    /// </summary>
-    private float _playerHeight = 0.0f;
-    /// <summary>
-    /// Anchura del collider del jugador
-    /// </summary>
-    private float _playerWidth = 0.0f;
-    /// <summary>
     /// Simula la velocidad afectada por la gravedad
     /// </summary>
     private float _speed = 0.0f;
@@ -91,6 +79,10 @@ public class JumpAndGravity : MonoBehaviour
     /// Indica si el detector de techo dice que has chocado
     /// </summary>
     private bool _collidesWithRoof;
+    /// <summary>
+    /// Aceleración negativa con la que simulamos gravedad
+    /// </summary>
+    private float _gravity = 0.0f;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -106,8 +98,6 @@ public class JumpAndGravity : MonoBehaviour
     /// </summary>
     void Start()
     {
-        _playerHeight = GetComponent<BoxCollider2D>().bounds.size.y;
-        _playerWidth = GetComponent<BoxCollider2D>().bounds.size.x;
         _initialSpeed = (2 * JumpHeight) / TimeToReachMaxHeight;
         _gravity = _initialSpeed / TimeToReachMaxHeight;
     }
@@ -136,6 +126,7 @@ public class JumpAndGravity : MonoBehaviour
                 _hasJumped = true;
                 _hasReachedMaxHeight = false;
                 _speed = _initialSpeed;
+                this.GetComponent<Gravity>().gravitySwitch();
             }
         }
         // Si ha saltado
@@ -158,33 +149,7 @@ public class JumpAndGravity : MonoBehaviour
             else
             {
                 _hasJumped = false;
-            }
-        }
-        // Parte de gravedad
-        else // Se ejecuta cuando ha terminado el salto para no añadir dos veces la gravedad
-        {
-            // Mientras no toca suelo
-            if (!_landed)
-            {
-                // mueve al personaje hacia abajo en base a la velocidad en el eje y
-                this.transform.position -= new Vector3(0.0f, 1.0f) * _speed * Time.deltaTime;
-                // Limitamos la velocidad de caída hasta la velocidad de impulso
-                if (_speed < _initialSpeed * 1.5f)
-                {
-                    _speed += _gravity * Time.deltaTime;
-                }
-                else _speed = _initialSpeed * 1.5f;
-            }
-            // Cuando toco suelo
-            else
-            {
-                // Calculamos la posicion del Jugador justo encima del suelo
-                float posY = FloorDetector.GetComponent<Detector>().FloorTopPosition.y + _playerHeight/2; // 0.2f es la mitad del tamaño del floor detector
-                float posX = transform.position.x;
-                // Movemos al personaje justo encima del suelo si no lo estaba
-                if (transform.position != new Vector3(posX, posY)) transform.position = new Vector3(posX, posY);
-                // Cambio la velocidad actual a 0 para que no siga aumentando
-                _speed = 0.0f;
+                this.GetComponent<Gravity>().gravitySwitch();
             }
         }
     }
