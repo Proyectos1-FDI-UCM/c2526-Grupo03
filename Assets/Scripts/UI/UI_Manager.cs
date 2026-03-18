@@ -1,6 +1,6 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
-// Responsable de la creación de este archivo
+// Se encargara de renderizar los datos que son necesarios para el bucle de juego
+// Tristan Sanchez Lopez
 // Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
@@ -39,7 +39,8 @@ public class Balas : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
     private int balas;
-
+    private int puntuacion;
+    private int puntuacionInicial;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -55,6 +56,7 @@ public class Balas : MonoBehaviour
     /// </summary>
     void Start()
     {
+        puntuacionInicial = GameManager.Instance.GetcurrentScore();
         Update_Bala();
         Update_Puntuacion();
     }
@@ -65,6 +67,7 @@ public class Balas : MonoBehaviour
     void Update()
     {
         Update_Bala();
+        Update_Puntuacion();
     }
     #endregion
 
@@ -84,17 +87,21 @@ public class Balas : MonoBehaviour
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
-    void Update_Bala()
-    {
-        // Meter aqui el player
+    private void Update_Bala()
+    { //miramos las balas que tiene el jugador para representarlas  
+        balas = Player.GetComponent<Movement_Player>().getAmmo();
+        // Y reducimos el grafico si ha bajado
         Reduce_Grito(balas);
     }
-    void Update_Puntuacion()
-    {
-        Barra_puntuacion.fillAmount = 1f;
+    private void Update_Puntuacion()
+    {   
+        puntuacion = GameManager.Instance.GetcurrentScore();
+        Debug.Log(puntuacion);
+        Barra_puntuacion.fillAmount = ConviertePorcent(puntuacionInicial,puntuacion);
     }
-    void Reduce_Grito(int bala)
-    {
+     private void Reduce_Grito(int bala)
+    { //Mira en cada caso la cantidad de balas que tenenmos en el momento y asi podedemos
+      // representar las balas correspondientes
         switch (bala)
         {
             case 4: Recarga.fillAmount = 1f;break;
@@ -104,6 +111,20 @@ public class Balas : MonoBehaviour
             case 0: Recarga.fillAmount = 0f; break;
         }
 
+    }
+    private float ConviertePorcent(float max ,float min)
+    {
+        float Porcentaje;
+        Porcentaje = max - min;
+        if(Porcentaje == 0)
+        {
+            Porcentaje = 1f;
+        }
+        else
+        {
+            Porcentaje = min / max;
+        }
+        return Porcentaje;
     }
     #endregion   
 

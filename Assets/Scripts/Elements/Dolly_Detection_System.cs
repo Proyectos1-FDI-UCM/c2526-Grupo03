@@ -24,22 +24,7 @@ public class Dolly_Detection_System : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
-    [SerializeField] private GameObject LoseScreen;
     [SerializeField] private float IntervaloParaSubir = 0f;
-
-    // Cantidad de puntos restados por cada elemento
-    [SerializeField] private int Extra_Penalty = 0;
-    [SerializeField] private int Army_Penalty = 0;
-    [SerializeField] private int Unrepaired_Penalty = 0;
-
-    // Cantidad de puntuación aumentada cada "pulso" (frecuencia del pulso definida en la cámara)
-    [SerializeField] private int Quality_Up = 0;
-
-    // Puntuación de inicio de nivel
-    [SerializeField] private int Starting_Quality = 0;
-
-    // A borrar
-    [SerializeField] private TextMeshProUGUI score;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -60,7 +45,8 @@ public class Dolly_Detection_System : MonoBehaviour
     /// Variable que determina si se ha encontrado un objeto interactuable o no
     ///</summary>
     private bool _detected;
-
+    
+    
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -76,10 +62,7 @@ public class Dolly_Detection_System : MonoBehaviour
     /// </summary>
     void Awake()
     {
-        LoseScreen.SetActive(false);
-        _detected = true;
-        GameManager.Instance.SetQuality(Starting_Quality);
-        score.text = $"Score: {GameManager.Instance.GetCurrentQuality()}";
+        _detected = true;  
     }
 
     /// <summary>
@@ -95,13 +78,9 @@ public class Dolly_Detection_System : MonoBehaviour
         else if (!_detected && Time.time >= _timepassed)
         {
             _timepassed = Time.time + IntervaloParaSubir;
-            GameManager.Instance.QualityUp(Quality_Up);
-            score.text = $"Score: {GameManager.Instance.GetCurrentQuality()}";
+            GameManager.Instance.QualityUp();
         }
-        if (GameManager.Instance.GetCurrentQuality() <= 0) 
-        { 
-            // Instanciar aqui la losescreen
-        }
+        
             
 
     }
@@ -119,26 +98,26 @@ public class Dolly_Detection_System : MonoBehaviour
         if (collision.gameObject.GetComponent<Movement_Player>() != null)
         {
             _detected = true;
-            GameManager.Instance.QualityDown(GameManager.Instance.GetCurrentQuality());
-            score.text = $"Score: {GameManager.Instance.GetCurrentQuality()}";
+            GameManager.Instance.QualityDown("Player");
+            
         }
         else if (collision.gameObject.TryGetComponent<Repair>(out var Repair) && !Repair.Repaired)
         {
             _detected = true;
-            GameManager.Instance.QualityDown(Unrepaired_Penalty);
-            score.text = $"Score: {GameManager.Instance.GetCurrentQuality()}";
+            GameManager.Instance.QualityDown("Unrepaired");
+           
         }
         else if (collision.gameObject.GetComponent<Extra_Regular>() != null)
         {
             _detected = true;
-            GameManager.Instance.QualityDown(Extra_Penalty);
-            score.text = $"Score: {GameManager.Instance.GetCurrentQuality()}";
+            GameManager.Instance.QualityDown("Extra");
+            
         }
         else if (collision.gameObject.GetComponent<Extra_Army>() != null)
         { 
             _detected = true;
-            GameManager.Instance.QualityDown(Army_Penalty);
-            score.text = $"Score: {GameManager.Instance.GetCurrentQuality()}";
+            GameManager.Instance.QualityDown("Army");
+           
         }
     }
     #endregion

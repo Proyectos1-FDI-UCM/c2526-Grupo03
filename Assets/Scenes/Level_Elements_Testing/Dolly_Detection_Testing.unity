@@ -253,6 +253,30 @@ PrefabInstance:
       propertyPath: Score
       value: 
       objectReference: {fileID: 815568759}
+    - target: {fileID: 31519331706352411, guid: ad756c137b6e1154ba13e8e8b3e5bae6, type: 3}
+      propertyPath: Quality_Up
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 31519331706352411, guid: ad756c137b6e1154ba13e8e8b3e5bae6, type: 3}
+      propertyPath: Army_Penalty
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 31519331706352411, guid: ad756c137b6e1154ba13e8e8b3e5bae6, type: 3}
+      propertyPath: Extra_Penalty
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 31519331706352411, guid: ad756c137b6e1154ba13e8e8b3e5bae6, type: 3}
+      propertyPath: Starting_Quality
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 31519331706352411, guid: ad756c137b6e1154ba13e8e8b3e5bae6, type: 3}
+      propertyPath: IntervaloParaSubir
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 31519331706352411, guid: ad756c137b6e1154ba13e8e8b3e5bae6, type: 3}
+      propertyPath: Unrepaired_Penalty
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 3071660206240161065, guid: ad756c137b6e1154ba13e8e8b3e5bae6, type: 3}
       propertyPath: m_Name
       value: GameManager

@@ -33,9 +33,22 @@ public class GameManager : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
+    //pantalla de partida paerdida 
+    [SerializeField] private GameObject LoseScreen;
+    /// Variable que define el intervalo entre subida de puntuacion
+    [SerializeField] private float IntervaloParaSubir = 0f;
 
+    // Cantidad de puntos restados por cada elemento
+    [SerializeField] private int Extra_Penalty = 0;
+    [SerializeField] private int Army_Penalty = 0;
+    [SerializeField] private int Unrepaired_Penalty = 0;
+
+    // Cantidad de puntuación aumentada cada "pulso" (frecuencia del pulso definida en la cámara)
+    [SerializeField] private int Quality_Up = 0;
+
+    // Puntuación de inicio de nivel
+    [SerializeField] private int Quality = 100;
     
-
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -46,11 +59,14 @@ public class GameManager : MonoBehaviour
     /// Instancia única de la clase (singleton).
     /// </summary>
     private static GameManager _instance;
-
+    ///<summary>
+    /// Variable que cuenta el tiempo pasado
+    ///</summary>
+    private float _timepassed;
     /// <summary>
-    /// Variable de calidad de la película
+    /// variable que guarda la calidad inicial
     /// </summary>
-    private int _currentScore = 0;
+    private int InicialQuality;
 
     #endregion
 
@@ -92,8 +108,10 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
             Init();
         } // if-else somos instancia nueva o no.
-    }
+        
 
+    }
+    
     /// <summary>
     /// Método llamado cuando se destruye el componente.
     /// </summary>
@@ -169,44 +187,39 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Método que sube la calidad de la película en la cantidad que le digas
     /// </summary>
-    /// <param name="CantidadASubir">Cantidad que sube</param>
-    public void QualityUp(int CantidadASubir)
+    public void QualityUp()
     {
-        if (_currentScore > 0)
+        if (Quality > 0 && Quality < InicialQuality)
         {
-            _currentScore += CantidadASubir;
+            Quality += Quality_Up;
         }
     }
     /// <summary>
-    /// Método que baja la calidad de la película en la cantidad que le digas
+    /// Método que baja la calidad de la película dependiendo de con que objeto collisione
     /// </summary>
-    /// <param name="CantidadABajar">Cantidad que baja</param>
-    public void QualityDown(int CantidadABajar)
+    /// <param name="objetoEncontrado">Nombre del objeto collisionado</param>
+    public void QualityDown(string objetoEncontrado)
     {
-        if (_currentScore > 0)
+        switch (objetoEncontrado)
         {
-            _currentScore -= CantidadABajar;
-        }
-        if (_currentScore <= 0)
-        {
-            _currentScore = 0;
+            case "Army": Quality -= Army_Penalty;break;
+            case "Extra": Quality -= Extra_Penalty; break;
+            case "Unrepaired": Quality -= Unrepaired_Penalty; break;
+            case "Player": Lose();break;
         }
     }
     /// <summary>
     /// Método que devuelve la puntuación actual de la película
     /// </summary>
-    public int GetCurrentQuality()
+    public float GetIntervaloParaSubir()
     {
-        return _currentScore;
+        return IntervaloParaSubir;
     }
-    /// <summary>
-    /// Método que inicializa la puntuación a lo que se pase como parámetro
-    /// </summary>
-    /// <param name="StartingQuality"> Puntuación con la que se inicia </param>
-    public void SetQuality(int StartingQuality)
+    public int GetcurrentScore()
     {
-        _currentScore = StartingQuality;
+        return Quality;
     }
+
 
     #endregion
 
@@ -220,6 +233,11 @@ public class GameManager : MonoBehaviour
     private void Init()
     {
         // De momento no hay nada que inicializar
+        // Ponemos la pantalla de muerte a false al inicializar
+        LoseScreen.SetActive(false);
+        //inicializamos la puntuacion
+        InicialQuality = Quality;
+        
     }
 
     private void TransferManagerSetup()
@@ -227,6 +245,13 @@ public class GameManager : MonoBehaviour
         // De momento no hay que transferir ningún setup
         // a otro manager
     }
+    private void Lose()
+    {
+        //ponemos el panel de fin de partida 
+        LoseScreen.SetActive(true);
+    }
+   
+
 
     #endregion
 } // class GameManager 
