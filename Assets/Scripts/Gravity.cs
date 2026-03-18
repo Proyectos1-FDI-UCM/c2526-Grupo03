@@ -96,7 +96,7 @@ public class Gravity : MonoBehaviour
 
     void FixedUpdate()
     {
-        _landed = FloorDetector.GetComponent<Detector>().Detected;
+
     }
 
     /// <summary>
@@ -105,7 +105,9 @@ public class Gravity : MonoBehaviour
     void Update()
     {
         if (!_gravityOn) return;
-        
+
+        _landed = FloorDetector.GetComponent<Detector>().Detected;
+
         // Mientras no toca suelo
         if (!_landed)
         {

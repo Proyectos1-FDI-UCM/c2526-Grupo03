@@ -70,7 +70,7 @@ public class Detector : MonoBehaviour
     /// </summary>
     void Update()
     {
-        
+
     }
     #endregion
 
