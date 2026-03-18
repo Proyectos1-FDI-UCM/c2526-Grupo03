@@ -6,6 +6,7 @@
 //---------------------------------------------------------
 
 using UnityEngine;
+using UnityEngine.UI;
 // Añadir aquí el resto de directivas using
 
 
@@ -13,7 +14,7 @@ using UnityEngine;
 /// Antes de cada class, descripción de qué es y para qué sirve,
 /// usando todas las líneas que sean necesarias.
 /// </summary>
-public class CactusMan : MonoBehaviour
+public class Balas : MonoBehaviour
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -22,15 +23,10 @@ public class CactusMan : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
-
-    [SerializeField] private int Empuje = 20;
-
-    /// <summary>
-    /// Trigger que detecta si cactusman detecta algo frente a él
-    /// </summary>
-
-
-
+    [SerializeField]
+    private Image Recarga;
+    [SerializeField]
+    public Image Barra_puntuacion;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -41,6 +37,8 @@ public class CactusMan : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
+    private int balas;
+
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -56,7 +54,8 @@ public class CactusMan : MonoBehaviour
     /// </summary>
     void Start()
     {
-        
+        Update_Bala();
+        Update_Puntuacion();
     }
 
     /// <summary>
@@ -64,7 +63,7 @@ public class CactusMan : MonoBehaviour
     /// </summary>
     void Update()
     {
-        
+        Update_Bala();
     }
     #endregion
 
@@ -77,22 +76,35 @@ public class CactusMan : MonoBehaviour
     // Ejemplo: GetPlayerController
 
     #endregion
-
+    
     // ---- MÉTODOS PRIVADOS ----
     #region Métodos Privados
     // Documentar cada método que aparece aquí
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
-    private void OnTriggerEnter2D(Collider2D collision)
+    void Update_Bala()
     {
-        if (collision.GetComponent<Movement_Player>())
-        {
-            collision.GetComponent<Movement_Player>().Empuja(Empuje);
-        }
+        balas = Movement_Player.Ammo;
+        Reduce_Grito(balas);
     }
+    void Update_Puntuacion()
+    {
+        Barra_puntuacion.fillAmount = 1f;
+    }
+    void Reduce_Grito(int bala)
+    {
+        switch (bala)
+        {
+            case 4: Recarga.fillAmount = 1f;break;
+            case 3: Recarga.fillAmount = 0.65f; break;
+            case 2: Recarga.fillAmount = 0.46f; break;
+            case 1: Recarga.fillAmount = 0.28f; break;
+            case 0: Recarga.fillAmount = 0f; break;
+        }
 
+    }
     #endregion   
 
-} // class CactusMan 
+} // class Balas 
 // namespace

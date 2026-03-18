@@ -52,6 +52,7 @@ public class Movement_Player : MonoBehaviour
     private float _cooldown = .8f; // Tiempo de espera entre disparo y disparo
     private float _timeToWait = .0f; // Tiempo en el que se podra volver a disparar
     private Vector3 _bulletPositionOffset = new Vector3(0.8f, 0); // Posicion de la bala en relacion al personaje
+    private bool _empujado = false;
 
     SpriteRenderer _spriteRenderer;
     #endregion
@@ -144,9 +145,11 @@ public class Movement_Player : MonoBehaviour
         }
         else _speed = .0f;
 
-        if (LeftDetector.GetComponent<Detector>().Detected)
+        if (LeftDetector.GetComponent<Detector>().Detected && _empujado)
         {
-            _speed = 3f;
+            _empujado = false;
+            transform.position = new Vector3 (transform.position.x, 0, 0);
+            _speed = 0f;
         }
     }
     #endregion
@@ -159,12 +162,13 @@ public class Movement_Player : MonoBehaviour
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
-    public void Empuja()
+    public void Empuja(int emp)
     {
         if (!LeftDetector.GetComponent<Detector>().Detected)
         {
-            _speed = -20f;
+            _speed = -emp;
         }
+        _empujado = true;
         
     }
 
