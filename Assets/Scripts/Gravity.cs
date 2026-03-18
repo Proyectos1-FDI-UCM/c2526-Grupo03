@@ -1,13 +1,11 @@
 ﻿//---------------------------------------------------------
-// Breve descripción del contenido del archivo
-// Gabriel Adrian Oltean
+// Script encargado de reproducir el efecto de gravedad en el prefab aplicado
+// Alejandro Garcia Diaz
 // Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
 
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
 // Añadir aquí el resto de directivas using
 
 
@@ -15,7 +13,7 @@ using UnityEngine.UI;
 /// Antes de cada class, descripción de qué es y para qué sirve,
 /// usando todas las líneas que sean necesarias.
 /// </summary>
-public class Repair : MonoBehaviour
+public class Gravity : MonoBehaviour
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -25,34 +23,22 @@ public class Repair : MonoBehaviour
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
 
-
-    [SerializeField] private Sprite SpriteBroken;
-    [SerializeField] private Sprite SpriteRepaired;
-
     /// <summary>
-    /// Aqui se elegira un QTE de una lista (De momento solo hay uno)
+    /// Trigger que detecta si estás en el suelo
     /// </summary>
-    [SerializeField] GameObject QTE;
-
-    [SerializeField] GameObject Key;
-
-
+    [SerializeField] private GameObject FloorDetector;
     /// <summary>
-    /// Indica si estás encima del objeto a reparar
+    /// Distancia vertical del salto
     /// </summary>
-    public bool CanRepair = false;
+    [SerializeField] private float JumpHeight = 2.0f;
     /// <summary>
-    /// Nos indica si estamos reparando
+    /// Tiempo necesario para alcanzar la altura máxima
     /// </summary>
-    public bool IsRepairing = false; 
+    [SerializeField] private float TimeToReachMaxHeight = 0.5f;
     /// <summary>
-    /// Nos indica si el objeto está reparado
+    /// Velocidad maxima alcanzada al caer
     /// </summary>
-    public bool Repaired = false;
-    /// <summary>
-    /// Variable que nos indicara si has fallado el QTE
-    /// </summary>
-    public bool HasFinishedRepairing = false;
+    [SerializeField] private float MaxSpeedDown = 1.0f;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -65,14 +51,29 @@ public class Repair : MonoBehaviour
     // Ejemplo: _maxHealthPoints
 
     /// <summary>
-    /// Componente con el que cambiaremos el sprite por el reparado
+    /// Velocidad con la que impulsamos al iniciar un salt0
     /// </summary>
-    private SpriteRenderer _spriteRenderer;
-
+    private float _initialSpeed = 0.0f;
     /// <summary>
-    /// GameObject del jugador para restringir su movimiento durante las reparaciones
+    /// Aceleración negativa con la que simulamos gravedad
     /// </summary>
-    private GameObject _player;
+    private float _gravity = 0.0f;
+    /// <summary>
+    /// Altura del collider del jugador
+    /// </summary>
+    private float _playerHeight = 0.0f;
+    /// <summary>
+    /// Simula la velocidad afectada por la gravedad
+    /// </summary>
+    private float _speed = 0.0f;
+    /// <summary>
+    /// Indica si el detector de suelo dice que estás en el suelo
+    /// </summary>
+    private bool _landed;
+
+    private bool _gravityOn = true;
+
+
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -88,8 +89,14 @@ public class Repair : MonoBehaviour
     /// </summary>
     void Start()
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _spriteRenderer.sprite = SpriteBroken;
+        _playerHeight = GetComponent<BoxCollider2D>().bounds.size.y;
+        _initialSpeed = (2 * JumpHeight) / TimeToReachMaxHeight;
+        _gravity = _initialSpeed / TimeToReachMaxHeight;
+    }
+
+    void FixedUpdate()
+    {
+        _landed = FloorDetector.GetComponent<Detector>().Detected;
     }
 
     /// <summary>
@@ -97,33 +104,33 @@ public class Repair : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (CanRepair && InputManager.Instance.RepairWasPressedThisFrame())
+        if (!_gravityOn) return;
+        
+        // Mientras no toca suelo
+        if (!_landed)
         {
-            QTE.SetActive(true);
-            Key.SetActive(false);
-            IsRepairing = true;
+            // mueve al personaje hacia abajo en base a la velocidad en el eje y
+            this.transform.position -= new Vector3(0.0f, 1.0f) * _speed * Time.deltaTime;
+            // Limitamos la velocidad de caída hasta la velocidad de impulso
+            if (_speed < MaxSpeedDown / 1.1)
+            {
+                _speed += _gravity * Time.deltaTime;
+            }
+            else
+            {
+                _speed += _gravity / 2 * Time.deltaTime;
+            }
         }
-        if (IsRepairing && CanRepair)
+        // Cuando toco suelo
+        else
         {
-            _player.GetComponent<Movement_Player>().enabled = false;
-            _player.GetComponent<Jump>().enabled = false;
-            CanRepair = false;
-        }
-        if (Repaired)
-        {
-            _player.GetComponent<Movement_Player>().enabled = true;
-            _player.GetComponent<Jump>().enabled = true;
-            this.GetComponent<Repair>().enabled = false; // mejor desactivarlo que destruirlo
-            _spriteRenderer.sprite = SpriteRepaired;
-            Key.SetActive(false);
-        }
-        if (HasFinishedRepairing) 
-        {
-            _player.GetComponent<Movement_Player>().enabled = true;
-            _player.GetComponent<Jump>().enabled = true;
-            _spriteRenderer.sprite = SpriteBroken;
-            Key.SetActive(false);
-            HasFinishedRepairing = false;
+            // Calculamos la posicion del Jugador justo encima del suelo
+            float posY = FloorDetector.GetComponent<Detector>().FloorTopPosition.y + _playerHeight / 2; // 0.2f es la mitad del tamaño del floor detector
+            float posX = transform.position.x;
+            // Movemos al personaje justo encima del suelo si no lo estaba
+            if (transform.position != new Vector3(posX, posY)) transform.position = new Vector3(posX, posY);
+            // Cambio la velocidad actual a 0 para que no siga aumentando
+            _speed = 0.0f;
         }
     }
     #endregion
@@ -136,35 +143,21 @@ public class Repair : MonoBehaviour
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
-    #endregion
+    public void gravitySwitch()
+    {
+        _gravityOn = !_gravityOn;
+    }
 
+    #endregion
+    
     // ---- MÉTODOS PRIVADOS ----
     #region Métodos Privados
     // Documentar cada método que aparece aquí
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (!IsRepairing)
-        {
-            if (collision.gameObject.GetComponent<Movement_Player>() != null)
-            {
-                _player = collision.gameObject;
-                Key.SetActive(true);
-                CanRepair = true;
-            }
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.GetComponent<Movement_Player>() != null)
-        {
-            CanRepair = false;
-            Key.SetActive(false);
-        }
-    }
+
     #endregion   
 
-} // class Repair 
+} // class Gravity 
 // namespace

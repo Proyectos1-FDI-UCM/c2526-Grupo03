@@ -373,6 +373,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 295215949}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &992292565 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1780064950487419383, guid: 8e518f3f91021964490aa4c6a5d8d0d8, type: 3}
+  m_PrefabInstance: {fileID: 1588871680}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1009993086
 GameObject:
   m_ObjectHideFlags: 0
@@ -561,6 +566,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7803231264905722889, guid: 8e518f3f91021964490aa4c6a5d8d0d8, type: 3}
+      propertyPath: FloorDetector
+      value: 
+      objectReference: {fileID: 992292565}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
