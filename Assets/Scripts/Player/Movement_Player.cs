@@ -79,24 +79,6 @@ public class Movement_Player : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if(InputManager.Instance.FireWasPressedThisFrame() && Time.time >= _timeToWait && Ammo >0)
-        {
-            int direction = _rotation ? -1 : 1;
-            // Crea una exclamacion un poco alejado del personaje (_bulletPositionOffset) sin rotacion
-            GameObject obj = Instantiate(Exclamation, this.transform.position + (_bulletPositionOffset * direction), new Quaternion());
-            // Dependiendo de la direccion se dibuja en modo espejo o no
-            SpriteRenderer sr = obj.GetComponent<SpriteRenderer>();
-            sr.flipX = _rotation;
-            // Reestablece el tiempo de espera al siguiente disparo
-            _timeToWait = Time.time + _cooldown;
-            // Baja la munición de gritos
-            Ammo--;
-
-           
-        }
-    }
-    void FixedUpdate()
-    {
         //  ---- Movimiento del Personaje ----
 
         // direccion de movimiento
@@ -116,12 +98,7 @@ public class Movement_Player : MonoBehaviour
             {
                 _speed += Acceleration;
             }
-            else if (_speed >= MaxVelocity)
-            {
-                _speed -= Acceleration;
-            }
             else _speed = MaxVelocity;
-           
         }
         // en caso de moverse a la izquierda
         else if (dir.x < 0 && !LeftDetector.GetComponent<Detector>().Detected)
@@ -137,14 +114,30 @@ public class Movement_Player : MonoBehaviour
             {
                 _speed -= Acceleration;
             }
-            else if (_speed <= -MaxVelocity)
-            {
-                _speed += Acceleration;
-            }
-            else _speed = Acceleration;
+            else _speed = -MaxVelocity;
         }
         else _speed = .0f;
 
+        //  ---- Disparo ----
+
+        if (InputManager.Instance.FireWasPressedThisFrame() && Time.time >= _timeToWait && Ammo >0)
+        {
+            int direction = _rotation ? -1 : 1;
+            // Crea una exclamacion un poco alejado del personaje (_bulletPositionOffset) sin rotacion
+            GameObject obj = Instantiate(Exclamation, this.transform.position + (_bulletPositionOffset * direction), new Quaternion());
+            // Dependiendo de la direccion se dibuja en modo espejo o no
+            SpriteRenderer sr = obj.GetComponent<SpriteRenderer>();
+            sr.flipX = _rotation;
+            // Reestablece el tiempo de espera al siguiente disparo
+            _timeToWait = Time.time + _cooldown;
+            // Baja la munición de gritos
+            Ammo--;
+
+          
+        }
+    }
+    void FixedUpdate()
+    {
         if (LeftDetector.GetComponent<Detector>().Detected && _empujado)
         {
             _empujado = false;

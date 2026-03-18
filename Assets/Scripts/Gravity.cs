@@ -96,7 +96,7 @@ public class Gravity : MonoBehaviour
 
     void FixedUpdate()
     {
-        _landed = FloorDetector.GetComponent<Detector>().Detected;
+
     }
 
     /// <summary>
@@ -105,7 +105,9 @@ public class Gravity : MonoBehaviour
     void Update()
     {
         if (!_gravityOn) return;
-        
+
+        _landed = FloorDetector.GetComponent<Detector>().Detected;
+
         // Mientras no toca suelo
         if (!_landed)
         {
@@ -126,9 +128,9 @@ public class Gravity : MonoBehaviour
         {
             // Calculamos la posicion del Jugador justo encima del suelo
             float posY = FloorDetector.GetComponent<Detector>().FloorTopPosition.y + _playerHeight / 2; // 0.2f es la mitad del tamaño del floor detector
-            float posX = transform.position.x;
+            float aumentoY = posY - transform.position.y;
             // Movemos al personaje justo encima del suelo si no lo estaba
-            if (transform.position != new Vector3(posX, posY)) transform.position = new Vector3(posX, posY);
+            if (transform.position.y != posY) transform.position += new Vector3(.0f, aumentoY);
             // Cambio la velocidad actual a 0 para que no siga aumentando
             _speed = 0.0f;
         }

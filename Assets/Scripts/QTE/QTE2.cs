@@ -1,6 +1,7 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
-// Responsable de la creación de este archivo
+// Script que detecta la posición del ratón y si este está clickado para rotar la manivela de modo que siempre mire al ratón.
+// En caso de usar mando la manivela transformará su ángulo en la pos del joystick.
+// Víctor Román Román
 // Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
@@ -95,6 +96,7 @@ public class QTE2 : MonoBehaviour
             {
                 _ultimoAngulo += 360f;
             }
+
             gameObject.transform.rotation = Quaternion.Euler(gameObject.transform.rotation.x, gameObject.transform.rotation.y, _ultimoAngulo);
 
             if (contador == 0)  //Empieza a contar para después calcular la "velocidad angular del objeto".
@@ -102,7 +104,7 @@ public class QTE2 : MonoBehaviour
                 _anguloInicial = gameObject.transform.rotation.z;
                 contador++;
             }
-            else if (contador == 5) //Si ya han pasado 5 frames calcular la "velocidad angular del objeto".
+            else if (contador == 2) //Si ya han pasado 5 frames calcular la "velocidad angular del objeto".
             {
                 _anguloFinal = gameObject.transform.rotation.z;
                 _velocidadAngular = _anguloFinal - _anguloInicial;
@@ -157,6 +159,16 @@ public class QTE2 : MonoBehaviour
         {
             _arrastrando = false;
         }
+        return _arrastrando;
+    }
+
+    private bool MoviendoJoyStick()
+    {
+        return _arrastrando;
+    }
+
+    private bool ParaJoyStick()
+    {
         return _arrastrando;
     }
 
