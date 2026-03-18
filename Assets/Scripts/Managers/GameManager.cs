@@ -34,19 +34,7 @@ public class GameManager : MonoBehaviour
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
 
-    // Texto de puntuación
-    [SerializeField] private TextMeshProUGUI Score;
-
-    // Cantidad de puntos restados por cada elemento
-    [SerializeField] private int Extra_Penalty;
-    [SerializeField] private int Army_Penalty;
-    [SerializeField] private int Unrepaired_Penalty;
-
-    // Cantidad de puntuación aumentada cada "pulso" (frecuencia del pulso definida en la cámara)
-    [SerializeField] private int Quality_Up;
-
-    // Puntuación de inicio de nivel
-    [SerializeField] private int Starting_Quality;
+    
 
     #endregion
 
@@ -104,8 +92,6 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
             Init();
         } // if-else somos instancia nueva o no.
-        _currentScore = Starting_Quality;
-        Score.text = $"Quality: {_currentScore}";
     }
 
     /// <summary>
@@ -178,49 +164,50 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Método que sube la calidad de la película
     /// </summary>
-    public void QualityUp()
-    {
-        if (_currentScore >= 0)
-        {
-            _currentScore += Quality_Up;
-            Score.text = $"Quality: {_currentScore}";
-        }
-    }
+
 
     /// <summary>
-    /// Métodos que restan calidad a la película dependiendo de qué entró en contacto con dolly
+    /// Método que sube la calidad de la película en la cantidad que le digas
     /// </summary>
-    public void ExtraRegularDetected()
+    /// <param name="CantidadASubir">Cantidad que sube</param>
+    public void QualityUp(int CantidadASubir)
     {
-        if (_currentScore >= 0)
+        if (_currentScore > 0)
         {
-            _currentScore += -Extra_Penalty;
-            Score.text = $"Quality: {_currentScore}";
+            _currentScore += CantidadASubir;
         }
     }
-
-    public void ExtraArmyDetected()
+    /// <summary>
+    /// Método que baja la calidad de la película en la cantidad que le digas
+    /// </summary>
+    /// <param name="CantidadABajar">Cantidad que baja</param>
+    public void QualityDown(int CantidadABajar)
     {
-        if (_currentScore >= 0)
+        if (_currentScore > 0)
         {
-            _currentScore += -Army_Penalty;
-            Score.text = $"Quality: {_currentScore}";
-        }  
-    }
-
-    public void UnrepairedElementDetected()
-    {
-        if (_currentScore >= 0)
+            _currentScore -= CantidadABajar;
+        }
+        if (_currentScore <= 0)
         {
-            _currentScore += -Unrepaired_Penalty;
-            Score.text = $"Quality: {_currentScore}";
+            _currentScore = 0;
         }
     }
-    public void PlayerDetected()
+    /// <summary>
+    /// Método que devuelve la puntuación actual de la película
+    /// </summary>
+    public int GetCurrentQuality()
     {
-        _currentScore = 0;
-        Score.text = $"Quality: {_currentScore}";
+        return _currentScore;
     }
+    /// <summary>
+    /// Método que inicializa la puntuación a lo que se pase como parámetro
+    /// </summary>
+    /// <param name="StartingQuality"> Puntuación con la que se inicia </param>
+    public void SetQuality(int StartingQuality)
+    {
+        _currentScore = StartingQuality;
+    }
+
     #endregion
 
     // ---- MÉTODOS PRIVADOS ----

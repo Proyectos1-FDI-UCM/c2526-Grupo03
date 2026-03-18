@@ -5,6 +5,7 @@
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
 
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 // Añadir aquí el resto de directivas using
@@ -25,6 +26,20 @@ public class Dolly_Detection_System : MonoBehaviour
     // Ejemplo: MaxHealthPoints
     [SerializeField] private GameObject LoseScreen;
     [SerializeField] private float IntervaloParaSubir = 0f;
+
+    // Cantidad de puntos restados por cada elemento
+    [SerializeField] private int Extra_Penalty = 0;
+    [SerializeField] private int Army_Penalty = 0;
+    [SerializeField] private int Unrepaired_Penalty = 0;
+
+    // Cantidad de puntuación aumentada cada "pulso" (frecuencia del pulso definida en la cámara)
+    [SerializeField] private int Quality_Up = 0;
+
+    // Puntuación de inicio de nivel
+    [SerializeField] private int Starting_Quality = 0;
+
+    // A borrar
+    [SerializeField] private TextMeshProUGUI score;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -62,13 +77,15 @@ public class Dolly_Detection_System : MonoBehaviour
     void Awake()
     {
         LoseScreen.SetActive(false);
-        _detected = false;
+        _detected = true;
+        GameManager.Instance.SetQuality(Starting_Quality);
+        score.text = $"Score: {GameManager.Instance.GetCurrentQuality()}";
     }
 
     /// <summary>
     /// Update is called every frame the monovehaviour is active
     /// </summary>
-    private void Update()
+    void Update()
     {
         if (_detected)
         {
@@ -78,8 +95,15 @@ public class Dolly_Detection_System : MonoBehaviour
         else if (!_detected && Time.time >= _timepassed)
         {
             _timepassed = Time.time + IntervaloParaSubir;
-            GameManager.Instance.QualityUp();
+            GameManager.Instance.QualityUp(Quality_Up);
+            score.text = $"Score: {GameManager.Instance.GetCurrentQuality()}";
         }
+        if (GameManager.Instance.GetCurrentQuality() <= 0) 
+        { 
+            // Instanciar aqui la losescreen
+        }
+            
+
     }
     #endregion
 
@@ -94,25 +118,28 @@ public class Dolly_Detection_System : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<Movement_Player>() != null)
         {
-            LoseScreen.SetActive(true);
-            GameManager.Instance.PlayerDetected();
+            _detected = true;
+            GameManager.Instance.QualityDown(GameManager.Instance.GetCurrentQuality());
+            score.text = $"Score: {GameManager.Instance.GetCurrentQuality()}";
         }
         else if (collision.gameObject.TryGetComponent<Repair>(out var Repair) && !Repair.Repaired)
         {
-            GameManager.Instance.UnrepairedElementDetected();
             _detected = true;
+            GameManager.Instance.QualityDown(Unrepaired_Penalty);
+            score.text = $"Score: {GameManager.Instance.GetCurrentQuality()}";
         }
         else if (collision.gameObject.GetComponent<Extra_Regular>() != null)
         {
-            GameManager.Instance.ExtraRegularDetected();
             _detected = true;
+            GameManager.Instance.QualityDown(Extra_Penalty);
+            score.text = $"Score: {GameManager.Instance.GetCurrentQuality()}";
         }
         else if (collision.gameObject.GetComponent<Extra_Army>() != null)
-        {
-            GameManager.Instance.ExtraArmyDetected();
+        { 
             _detected = true;
+            GameManager.Instance.QualityDown(Army_Penalty);
+            score.text = $"Score: {GameManager.Instance.GetCurrentQuality()}";
         }
-        
     }
     #endregion
 
