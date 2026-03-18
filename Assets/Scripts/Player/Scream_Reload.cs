@@ -72,8 +72,8 @@ public class Scream_Reload : MonoBehaviour
     /// </summary>
     void Start()
     {
-        _cords = Movement_Player.Ammo;
-        _maxOriginalSpeed = Movement_Player.MaxVelocity;
+        _cords = this.gameObject.GetComponent<Movement_Player>().getAmmo();
+        _maxOriginalSpeed = this.gameObject.GetComponent<Movement_Player>().getMaxVel();
     }
 
     /// <summary>
@@ -85,7 +85,7 @@ public class Scream_Reload : MonoBehaviour
 
         if (reloading && Time.time >= _timePassed)
         {
-            Movement_Player.MaxVelocity = ReloadMovement;
+            this.gameObject.GetComponent<Movement_Player>().setMaxVel(ReloadMovement);
 
             _enOfModification = Time.time + ReloadSpeed;
             _slowActive = true;
@@ -95,8 +95,8 @@ public class Scream_Reload : MonoBehaviour
 
         if (_slowActive && Time.time >= _enOfModification)
         {
-            Movement_Player.Ammo = _cords;
-            Movement_Player.MaxVelocity = _maxOriginalSpeed;
+            this.gameObject.GetComponent<Movement_Player>().setAmmo(_cords);
+            this.gameObject.GetComponent<Movement_Player>().setMaxVel(_maxOriginalSpeed);
             _slowActive = false;
         }
     }

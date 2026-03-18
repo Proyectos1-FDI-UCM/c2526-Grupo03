@@ -8,6 +8,7 @@
 
 using System;
 using UnityEngine;
+using TMPro;
 
 
 /// <summary>
@@ -33,6 +34,20 @@ public class GameManager : MonoBehaviour
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
 
+    // Texto de puntuación
+    [SerializeField] private TextMeshProUGUI Score;
+
+    // Cantidad de puntos restados por cada elemento
+    [SerializeField] private int Extra_Penalty;
+    [SerializeField] private int Army_Penalty;
+    [SerializeField] private int Unrepaired_Penalty;
+
+    // Cantidad de puntuación aumentada cada "pulso" (frecuencia del pulso definida en la cámara)
+    [SerializeField] private int Quality_Up;
+
+    // Puntuación de inicio de nivel
+    [SerializeField] private int Starting_Quality;
+
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -43,6 +58,11 @@ public class GameManager : MonoBehaviour
     /// Instancia única de la clase (singleton).
     /// </summary>
     private static GameManager _instance;
+
+    /// <summary>
+    /// Variable de calidad de la película
+    /// </summary>
+    private int _currentScore = 0;
 
     #endregion
 
@@ -84,6 +104,8 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
             Init();
         } // if-else somos instancia nueva o no.
+        _currentScore = Starting_Quality;
+        Score.text = $"Quality: {_currentScore}";
     }
 
     /// <summary>
@@ -153,6 +175,52 @@ public class GameManager : MonoBehaviour
         System.GC.Collect();
     } // ChangeScene
 
+    /// <summary>
+    /// Método que sube la calidad de la película
+    /// </summary>
+    public void QualityUp()
+    {
+        if (_currentScore >= 0)
+        {
+            _currentScore += Quality_Up;
+            Score.text = $"Quality: {_currentScore}";
+        }
+    }
+
+    /// <summary>
+    /// Métodos que restan calidad a la película dependiendo de qué entró en contacto con dolly
+    /// </summary>
+    public void ExtraRegularDetected()
+    {
+        if (_currentScore >= 0)
+        {
+            _currentScore += -Extra_Penalty;
+            Score.text = $"Quality: {_currentScore}";
+        }
+    }
+
+    public void ExtraArmyDetected()
+    {
+        if (_currentScore >= 0)
+        {
+            _currentScore += -Army_Penalty;
+            Score.text = $"Quality: {_currentScore}";
+        }  
+    }
+
+    public void UnrepairedElementDetected()
+    {
+        if (_currentScore >= 0)
+        {
+            _currentScore += -Unrepaired_Penalty;
+            Score.text = $"Quality: {_currentScore}";
+        }
+    }
+    public void PlayerDetected()
+    {
+        _currentScore = 0;
+        Score.text = $"Quality: {_currentScore}";
+    }
     #endregion
 
     // ---- MÉTODOS PRIVADOS ----

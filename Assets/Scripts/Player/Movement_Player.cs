@@ -25,9 +25,9 @@ public class Movement_Player : MonoBehaviour
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
 
-    [SerializeField] public static float MaxVelocity = 5.0f;
+    [SerializeField] private float MaxVelocity = 5.0f;
     [SerializeField] private float Acceleration = 1.0f;
-    [SerializeField] public static int Ammo = 4;
+    [SerializeField] private int Ammo = 4;
 
     [SerializeField] private GameObject Exclamation;
 
@@ -170,6 +170,23 @@ public class Movement_Player : MonoBehaviour
         }
         _empujado = true;
         
+    }
+
+    public int getAmmo()
+    {
+        return Ammo;
+    }
+    public void setAmmo(int ammoReset)
+    {
+        Ammo = ammoReset;
+    }
+    public float getMaxVel()
+    {
+        return MaxVelocity;
+    }
+    public void setMaxVel(float rlMovement)
+    {
+        MaxVelocity = rlMovement;
     }
 
 

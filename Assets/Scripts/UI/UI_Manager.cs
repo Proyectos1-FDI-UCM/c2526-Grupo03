@@ -26,7 +26,8 @@ public class Balas : MonoBehaviour
     [SerializeField]
     private Image Recarga;
     [SerializeField]
-    public Image Barra_puntuacion;
+    private Image Barra_puntuacion;
+    [SerializeField] private GameObject Player;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -85,7 +86,7 @@ public class Balas : MonoBehaviour
     // mayúscula, incluida la primera letra)
     void Update_Bala()
     {
-        balas = Movement_Player.Ammo;
+        // Meter aqui el player
         Reduce_Grito(balas);
     }
     void Update_Puntuacion()

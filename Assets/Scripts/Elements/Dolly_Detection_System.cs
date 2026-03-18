@@ -35,6 +35,7 @@ public class Dolly_Detection_System : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
     
+    
 
     #endregion
 
@@ -67,18 +68,19 @@ public class Dolly_Detection_System : MonoBehaviour
         if (collision.gameObject.GetComponent<Movement_Player>() != null)
         {
             LoseScreen.SetActive(true);
+            GameManager.Instance.PlayerDetected();
         }
-        else if (collision.gameObject.TryGetComponent<Repairable_Element>(out var repairable_Element) && !repairable_Element.Repaired)
+        else if (collision.gameObject.TryGetComponent<Repair>(out var Repair) && !Repair.Repaired)
         {
-
+            GameManager.Instance.UnrepairedElementDetected();
         }
         else if (collision.gameObject.GetComponent<Extra_Regular>() != null)
         {
-
+            GameManager.Instance.ExtraRegularDetected();
         }
         else if (collision.gameObject.GetComponent<Extra_Army>() != null)
         {
-
+            GameManager.Instance.ExtraArmyDetected();
         }
         
     }
