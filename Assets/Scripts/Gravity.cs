@@ -129,13 +129,14 @@ public class Gravity : MonoBehaviour
             Detector _floorDetector = FloorDetector.GetComponent<Detector>();
             // Calculamos la posicion del Jugador justo al lado de la pared
             float _posEncimaSuelo = _floorDetector.CollisionedObject.gameObject.transform.position.y + _floorDetector.CollisionedObject.bounds.size.y / 2;
-            float _posY = _posEncimaSuelo + this.gameObject.GetComponent<Collider2D>().bounds.size.y / 2 + 0.1f;
+            float _posY = _posEncimaSuelo + this.gameObject.GetComponent<Collider2D>().bounds.size.y / 2;
             float _aumentoY = _posY - transform.position.y;
 
+            float _maxPosTeletransporte = transform.position.y + 0.4f;
             // Movemos al personaje justo al lado de la pared
 
             // teletransporte
-            if (transform.position.y != _posY) transform.position += new Vector3(.0f, _aumentoY);
+            if ((_posY <= _maxPosTeletransporte) && (transform.position.y != _posY)) transform.position += new Vector3(.0f, _aumentoY);
             _speed = 0.0f;
         }
     }
