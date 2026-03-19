@@ -180,13 +180,16 @@ public class Extra_Army : MonoBehaviour
         // Cuando toco suelo
         else
         {
-            // Calculamos la posicion del Jugador justo encima del suelo
-            float posY = FloorDetector.GetComponent<Detector>().FloorTopPosition.y + _extraHeight / 2; // 0.2f es la mitad del tamaño del floor detector
-            float posX = transform.position.x;
-            // Movemos al personaje justo encima del suelo si no lo estaba
-            if (transform.position != new Vector3(posX, posY)) transform.position = new Vector3(posX, posY);
+            Detector _floorDetector = FloorDetector.GetComponent<Detector>();
+            // Calculamos la posicion del Jugador justo al lado de la pared
+            float _posEncimaSuelo = _floorDetector.CollisionedObject.gameObject.transform.position.y + _floorDetector.CollisionedObject.bounds.size.y / 2;
+            float _posY = _posEncimaSuelo + this.gameObject.GetComponent<Collider2D>().bounds.size.y / 2 + 0.1f;
+            float _aumentoY = _posY - transform.position.y;
 
-            // Cambio la velocidad actual a 0 para que no siga aumentando
+            // Movemos al personaje justo al lado de la pared
+
+            // teletransporte
+            if (transform.position.y != _posY) transform.position += new Vector3(.0f, _aumentoY);
             _speed = 0.0f;
         }
     }

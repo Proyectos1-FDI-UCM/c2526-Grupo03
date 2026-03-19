@@ -29,9 +29,9 @@ public class Detector : MonoBehaviour
     /// </summary>
     public bool Detected = false;
     /// <summary>
-    /// Cuando detecta el suelo nos dirá la posición justo encima de éste
+    /// Cuando detecta una collisión nos da la información del collider de éste
     /// </summary>
-    public Vector3 FloorTopPosition;
+    public Collider2D CollisionedObject;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -97,7 +97,7 @@ public class Detector : MonoBehaviour
         {
             Detected = true;
             _floorYAxisSize = collision.bounds.size.y;
-            FloorTopPosition = collision.gameObject.transform.position + new Vector3(0f, _floorYAxisSize/2);
+            CollisionedObject = collision;
         }
     }
 

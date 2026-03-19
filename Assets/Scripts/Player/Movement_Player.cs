@@ -116,7 +116,28 @@ public class Movement_Player : MonoBehaviour
             }
             else _speed = -MaxVelocity;
         }
-        else _speed = .0f;
+        else
+        {
+            if (LeftDetector.GetComponent<Detector>().Detected)
+            {
+                if (_empujado)
+                {
+                    _empujado = false;
+                }
+                Detector leftDetector = LeftDetector.GetComponent<Detector>();
+                // Calculamos la posicion del Jugador justo al lado de la pared
+                float _posAlLadoPared = leftDetector.CollisionedObject.gameObject.transform.position.x + leftDetector.CollisionedObject.bounds.size.x / 2;
+                float _posX = _posAlLadoPared + this.gameObject.GetComponent<Collider2D>().bounds.size.x / 2 + 0.1f;
+                float _aumentoX = _posX - transform.position.x;
+
+                // Movemos al personaje justo al lado de la pared
+
+                // teletransporte
+                if (transform.position.y != _posX) transform.position += new Vector3(_aumentoX, 0.0f);
+            }
+            
+            _speed = .0f;
+        }
 
         //  ---- Disparo ----
 
@@ -134,15 +155,6 @@ public class Movement_Player : MonoBehaviour
             Ammo--;
 
           
-        }
-    }
-    void FixedUpdate()
-    {
-        if (LeftDetector.GetComponent<Detector>().Detected && _empujado)
-        {
-            _empujado = false;
-            transform.position = new Vector3 (transform.position.x, 0, 0);
-            _speed = 0f;
         }
     }
     #endregion
