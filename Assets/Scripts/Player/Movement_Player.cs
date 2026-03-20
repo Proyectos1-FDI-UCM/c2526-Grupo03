@@ -1,6 +1,7 @@
 ﻿//---------------------------------------------------------
 // Script encargado del manejo del movimiento del personaje jugable
-// Alejandro Garcia
+// Alejandro Garcia && Aportadores:
+//      - Gabriel Adrian Oltean
 // Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
@@ -52,9 +53,17 @@ public class Movement_Player : MonoBehaviour
     private float _cooldown = .8f; // Tiempo de espera entre disparo y disparo
     private float _timeToWait = .0f; // Tiempo en el que se podra volver a disparar
     private Vector3 _bulletPositionOffset = new Vector3(0.8f, 0); // Posicion de la bala en relacion al personaje
-    private bool _empujado = false;
 
     SpriteRenderer _spriteRenderer;
+
+    /// <summary>
+    /// Indica si has sido empujado
+    /// </summary>
+    private bool _empujado = false;
+    /// <summary>
+    /// Velocidad actual durante el empuje
+    /// </summary>
+    private float _velEmpuje = 0.0f;
     #endregion
     
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -85,7 +94,7 @@ public class Movement_Player : MonoBehaviour
         Vector2 dir = InputManager.Instance.MovementVector;
 
         // en caso de moverse a la derecha
-        if (dir.x > 0 && !RightDetector.GetComponent<Detector>().Detected)
+        if (dir.x > 0 && !RightDetector.GetComponent<Detector>().Detected && !_empujado)
         {
             // Guarda la direccion en la que mira el personaje
             _rotation = false;
@@ -118,30 +127,69 @@ public class Movement_Player : MonoBehaviour
         }
         else
         {
-            if (LeftDetector.GetComponent<Detector>().Detected)
-            {
-                if (_empujado)
-                {
-                    _empujado = false;
-                }
-                Detector leftDetector = LeftDetector.GetComponent<Detector>();
-                // Calculamos la posicion del Jugador justo al lado de la pared
-                float _posAlLadoPared = leftDetector.CollisionedObject.gameObject.transform.position.x + leftDetector.CollisionedObject.bounds.size.x / 2;
-                float _posX = _posAlLadoPared + this.gameObject.GetComponent<Collider2D>().bounds.size.x / 2 + 0.1f;
-                float _aumentoX = _posX - transform.position.x;
-
-                // Movemos al personaje justo al lado de la pared
-
-                // teletransporte
-                if (transform.position.y != _posX) transform.position += new Vector3(_aumentoX, 0.0f);
-            }
-            
             _speed = .0f;
         }
 
+        // ---- Detección de paredes ----
+
+        if (LeftDetector.GetComponent<Detector>().Detected)
+        {
+            Detector _leftDetector = LeftDetector.GetComponent<Detector>();
+            // Calculamos la posicion del Jugador justo al lado de la pared
+            float _posAlLadoPared = _leftDetector.CollisionedObject.gameObject.transform.position.x + _leftDetector.CollisionedObject.bounds.size.x / 2;
+            float _posX = _posAlLadoPared + this.gameObject.GetComponent<Collider2D>().bounds.size.x / 2;
+            float _aumentoX = _posX - transform.position.x;
+
+            // Movemos al personaje justo al lado de la pared
+
+            // teletransporte
+            if (transform.position.x < _posX) transform.position += new Vector3(_aumentoX, 0.0f);
+        }
+        else if (RightDetector.GetComponent<Detector>().Detected && !_empujado)
+        {
+            Detector _rightDetector = RightDetector.GetComponent<Detector>();
+            // Calculamos la posicion del Jugador justo al lado de la pared
+            float _posAlLadoPared = _rightDetector.CollisionedObject.gameObject.transform.position.x - _rightDetector.CollisionedObject.bounds.size.x / 2;
+            float _posX = _posAlLadoPared - this.gameObject.GetComponent<Collider2D>().bounds.size.x / 2;
+            float _aumentoX = _posX - transform.position.x;
+
+            // Movemos al personaje justo al lado de la pared
+
+            // teletransporte
+            if (transform.position.x > _posX) transform.position += new Vector3(_aumentoX, 0.0f);
+        }
+
+        // ---- Empuje del personaje ----
+
+        if (_empujado)
+        {
+            if (_velEmpuje >= 0.0f)
+            {
+                _empujado = false;
+            }
+            else if (LeftDetector.GetComponent<Detector>().Detected)
+            {
+                _velEmpuje = 0.0f;
+                _empujado = false;
+            }
+            else
+            {
+
+                this.transform.position += new Vector3(_velEmpuje, 0.0f) * Time.deltaTime;
+
+                if (_velEmpuje < 0.0f)
+                {
+                    _velEmpuje += Acceleration;
+                }
+                else _velEmpuje = 0.0f;
+            }
+                
+        }
+
+
         //  ---- Disparo ----
 
-        if (InputManager.Instance.FireWasPressedThisFrame() && Time.time >= _timeToWait && Ammo >0)
+        if (InputManager.Instance.FireWasPressedThisFrame() && Time.time >= _timeToWait && Ammo > 0)
         {
             int direction = _rotation ? -1 : 1;
             // Crea una exclamacion un poco alejado del personaje (_bulletPositionOffset) sin rotacion
@@ -154,7 +202,7 @@ public class Movement_Player : MonoBehaviour
             // Baja la munición de gritos
             Ammo--;
 
-          
+
         }
     }
     #endregion
@@ -171,7 +219,7 @@ public class Movement_Player : MonoBehaviour
     {
         if (!LeftDetector.GetComponent<Detector>().Detected)
         {
-            _speed = -emp;
+            _velEmpuje = -emp;
         }
         _empujado = true;
         
