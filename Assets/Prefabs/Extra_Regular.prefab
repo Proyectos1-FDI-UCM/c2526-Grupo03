@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Detected: 0
-  FloorTopPosition: {x: 0, y: 0, z: 0}
+  CollisionedObject: {fileID: 0}
 --- !u!1 &8598689100644146211
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 4729678499331756981}
   - component: {fileID: 4425074454894943730}
   - component: {fileID: 8362696599745833514}
+  - component: {fileID: 6573563344826325777}
   m_Layer: 0
   m_Name: Extra_Regular
   m_TagString: Untagged
@@ -287,3 +288,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 1
   DamagePerHit: 1
+--- !u!114 &6573563344826325777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8598689100644146211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef928c09c57fe22469f3f3a11f26ea43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CalidadABajar: 0

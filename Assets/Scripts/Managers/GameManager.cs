@@ -34,20 +34,6 @@ public class GameManager : MonoBehaviour
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
     //pantalla de partida paerdida 
-    [SerializeField] private GameObject LoseScreen;
-    /// Variable que define el intervalo entre subida de puntuacion
-    [SerializeField] private float IntervaloParaSubir = 0f;
-
-    // Cantidad de puntos restados por cada elemento
-    [SerializeField] private int Extra_Penalty = 0;
-    [SerializeField] private int Army_Penalty = 0;
-    [SerializeField] private int Unrepaired_Penalty = 0;
-
-    // Cantidad de puntuación aumentada cada "pulso" (frecuencia del pulso definida en la cámara)
-    [SerializeField] private int Quality_Up = 0;
-
-    // Puntuación de inicio de nivel
-    [SerializeField] private int Quality = 100;
     
     #endregion
 
@@ -179,79 +165,23 @@ public class GameManager : MonoBehaviour
         System.GC.Collect();
     } // ChangeScene
 
-    /// <summary>
-    /// Método que sube la calidad de la película
-    /// </summary>
-
-
-    /// <summary>
-    /// Método que sube la calidad de la película en la cantidad que le digas
-    /// </summary>
-    public void QualityUp()
-    {
-        if (Quality > 0 && Quality < InicialQuality)
-        {
-            Quality += Quality_Up;
-        }
-    }
-    /// <summary>
-    /// Método que baja la calidad de la película dependiendo de con que objeto collisione
-    /// </summary>
-    /// <param name="objetoEncontrado">Nombre del objeto collisionado</param>
-    public void QualityDown(string objetoEncontrado)
-    {
-        switch (objetoEncontrado)
-        {
-            case "Army": Quality -= Army_Penalty;break;
-            case "Extra": Quality -= Extra_Penalty; break;
-            case "Unrepaired": Quality -= Unrepaired_Penalty; break;
-            case "Player": Lose();break;
-        }
-    }
-    /// <summary>
-    /// Método que devuelve la puntuación actual de la película
-    /// </summary>
-    public float GetIntervaloParaSubir()
-    {
-        return IntervaloParaSubir;
-    }
-    public int GetcurrentScore()
-    {
-        return Quality;
-    }
-
 
     #endregion
 
     // ---- MÉTODOS PRIVADOS ----
 
-    #region Métodos Privados
-
-    /// <summary>
-    /// Dispara la inicialización.
-    /// </summary>
-    private void Init()
-    {
-        // De momento no hay nada que inicializar
-        // Ponemos la pantalla de muerte a false al inicializar
-        LoseScreen.SetActive(false);
-        //inicializamos la puntuacion
-        InicialQuality = Quality;
-        
-    }
+    #region Métodos Privados 
 
     private void TransferManagerSetup()
     {
         // De momento no hay que transferir ningún setup
         // a otro manager
     }
-    private void Lose()
-    {
-        //ponemos el panel de fin de partida 
-        LoseScreen.SetActive(true);
-    }
    
-
+    private void Init()
+    {
+        // De momento no hay nada que inicializar
+    }
 
     #endregion
 } // class GameManager 

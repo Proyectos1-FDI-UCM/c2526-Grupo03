@@ -1,12 +1,11 @@
 //---------------------------------------------------------
-// Se encargara de renderizar los datos que son necesarios para el bucle de juego
-// Tristan Sanchez Lopez
+// Componente que indica la calidad que baja el elemento asignado
+// Gabriel Adrian Oltean
 // Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
 
 using UnityEngine;
-using UnityEngine.UI;
 // Añadir aquí el resto de directivas using
 
 
@@ -14,7 +13,7 @@ using UnityEngine.UI;
 /// Antes de cada class, descripción de qué es y para qué sirve,
 /// usando todas las líneas que sean necesarias.
 /// </summary>
-public class Balas : MonoBehaviour
+public class DetectableObject : MonoBehaviour
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -23,13 +22,9 @@ public class Balas : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
-    [SerializeField]
-    private Image Recarga;
-    [SerializeField]
-    private Image Barra_puntuacion;
-    [SerializeField] private GameObject Player;
+    [SerializeField] public int CalidadABajar = 0;
     #endregion
-
+    
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
     // Documentar cada atributo que aparece aquí.
@@ -38,27 +33,23 @@ public class Balas : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-    private int balas;
-    private int puntuacion;
-    private int puntuacionInicial;
-    #endregion
 
+    #endregion
+    
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-
+    
     // Por defecto están los típicos (Update y Start) pero:
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
-
+    
     /// <summary>
     /// Start is called on the frame when a script is enabled just before 
     /// any of the Update methods are called the first time.
     /// </summary>
     void Start()
     {
-        puntuacionInicial = LevelManager.Instance.GetcurrentScore();
-        Update_Bala();
-        Update_Puntuacion();
+        
     }
 
     /// <summary>
@@ -66,8 +57,7 @@ public class Balas : MonoBehaviour
     /// </summary>
     void Update()
     {
-        Update_Bala();
-        Update_Puntuacion();
+        
     }
     #endregion
 
@@ -87,46 +77,8 @@ public class Balas : MonoBehaviour
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
-    private void Update_Bala()
-    { //miramos las balas que tiene el jugador para representarlas  
-        balas = Player.GetComponent<Movement_Player>().getAmmo();
-        // Y reducimos el grafico si ha bajado
-        Reduce_Grito(balas);
-    }
-    private void Update_Puntuacion()
-    {   
-        puntuacion = LevelManager.Instance.GetcurrentScore();
-        Debug.Log(puntuacion);
-        Barra_puntuacion.fillAmount = ConviertePorcent(puntuacionInicial,puntuacion);
-    }
-     private void Reduce_Grito(int bala)
-    { //Mira en cada caso la cantidad de balas que tenenmos en el momento y asi podedemos
-      // representar las balas correspondientes
-        switch (bala)
-        {
-            case 4: Recarga.fillAmount = 1f;break;
-            case 3: Recarga.fillAmount = 0.65f; break;
-            case 2: Recarga.fillAmount = 0.46f; break;
-            case 1: Recarga.fillAmount = 0.28f; break;
-            case 0: Recarga.fillAmount = 0f; break;
-        }
 
-    }
-    private float ConviertePorcent(float max ,float min)
-    {
-        float Porcentaje;
-        Porcentaje = max - min;
-        if(Porcentaje == 0)
-        {
-            Porcentaje = 1f;
-        }
-        else
-        {
-            Porcentaje = min / max;
-        }
-        return Porcentaje;
-    }
     #endregion   
 
-} // class Balas 
+} // class DetectableObject 
 // namespace

@@ -78,11 +78,8 @@ public class Dolly_Detection_System : MonoBehaviour
         else if (!_detected && Time.time >= _timepassed)
         {
             _timepassed = Time.time + IntervaloParaSubir;
-            GameManager.Instance.QualityUp();
+            LevelManager.Instance.QualityUp();
         }
-        
-            
-
     }
     #endregion
 
@@ -95,29 +92,19 @@ public class Dolly_Detection_System : MonoBehaviour
     // Ejemplo: GetPlayerController
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<Movement_Player>() != null)
+        if (collision.gameObject.GetComponent<DetectableObject>() != null)
         {
+            if (collision.gameObject.GetComponent<Repair>() != null && collision.gameObject.GetComponent<Repair>().Repaired)
+            {
+                return;
+            }
             _detected = true;
-            GameManager.Instance.QualityDown("Player");
+            LevelManager.Instance.QualityDown(collision.gameObject.GetComponent<DetectableObject>().CalidadABajar);
             
         }
-        else if (collision.gameObject.TryGetComponent<Repair>(out var Repair) && !Repair.Repaired)
+        else if (collision.gameObject.GetComponent<Movement_Player>() != null)
         {
-            _detected = true;
-            GameManager.Instance.QualityDown("Unrepaired");
-           
-        }
-        else if (collision.gameObject.GetComponent<Extra_Regular>() != null)
-        {
-            _detected = true;
-            GameManager.Instance.QualityDown("Extra");
-            
-        }
-        else if (collision.gameObject.GetComponent<Extra_Army>() != null)
-        { 
-            _detected = true;
-            GameManager.Instance.QualityDown("Army");
-           
+            LevelManager.Instance.QualityDown(LevelManager.Instance.GetcurrentScore());
         }
     }
     #endregion

@@ -115,6 +115,7 @@ GameObject:
   - component: {fileID: 7929760530401316513}
   - component: {fileID: 5999592212315120117}
   - component: {fileID: 6431397718151425457}
+  - component: {fileID: 5992958224214010914}
   m_Layer: 0
   m_Name: Grafiti
   m_TagString: Untagged
@@ -287,6 +288,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &5992958224214010914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5011662305757098312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef928c09c57fe22469f3f3a11f26ea43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CalidadABajar: 0
 --- !u!1 &8927491161982240498
 GameObject:
   m_ObjectHideFlags: 0
