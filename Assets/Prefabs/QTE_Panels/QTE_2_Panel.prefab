@@ -53,9 +53,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BarraReperacion: {fileID: 4439265930056523301}
   ReferencePoint: {fileID: 3915248275040524635}
-  CantidadSumada: 7.5
-  Disminucion: 5
+  CantidadSumada: 3
+  Disminucion: 10
   VelQueDebeLlevar: 0.1
+  VelAngularMax: 0.4
 --- !u!1 &1588972825848935062
 GameObject:
   m_ObjectHideFlags: 0

@@ -37,6 +37,8 @@ public class QTE2 : MonoBehaviour
     private float Disminucion;
     [SerializeField]
     private float VelQueDebeLlevar;
+    [SerializeField]
+    private float VelAngularMax;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -80,18 +82,28 @@ public class QTE2 : MonoBehaviour
     /// </summary>
     void Update()
     {
+        Vector2 inputdir = InputManager.Instance.MovementVector;
         if (_sliderBarra.value > 0)
         {
             _sliderBarra.value -= (Disminucion * Time.deltaTime);
         }
         ClickRaton();
         SoltarClickRaton();
-        if(_arrastrando == true)
+        if(_arrastrando || inputdir != new Vector2(0,0))
         {
             _mousePos = Input.mousePosition;
             _mousePos.z = ReferencePoint.position.z;
-            Vector2 direccion = _mousePos - ReferencePoint.position;
-            _ultimoAngulo = Mathf.Atan2(direccion.y, direccion.x) * Mathf.Rad2Deg;
+            Vector2 direccion = new Vector2(0,0);
+            if(_arrastrando)
+            {
+                direccion = _mousePos - ReferencePoint.position;
+                _ultimoAngulo = Mathf.Atan2(direccion.y, direccion.x) * Mathf.Rad2Deg;
+            }
+            else if(InputManager.Instance.MovementVector != new Vector2(0, 0))
+            {
+                direccion = InputManager.Instance.MovementVector;
+                _ultimoAngulo = Mathf.Atan2(direccion.y, direccion.x) * Mathf.Rad2Deg;
+            }
             if (_ultimoAngulo < 0)
             {
                 _ultimoAngulo += 360f;
@@ -109,7 +121,7 @@ public class QTE2 : MonoBehaviour
                 _anguloFinal = gameObject.transform.rotation.z;
                 _velocidadAngular = _anguloFinal - _anguloInicial;
                 Debug.Log(Mathf.Abs(_velocidadAngular));
-                if(Mathf.Abs(_velocidadAngular) >= VelQueDebeLlevar)
+                if(Mathf.Abs(_velocidadAngular) >= VelQueDebeLlevar && Mathf.Abs(_velocidadAngular) < VelAngularMax)
                 {
                     _sliderBarra.value += CantidadSumada;
                 }
@@ -120,7 +132,7 @@ public class QTE2 : MonoBehaviour
                 contador++;
             }
         }
-        if(_sliderBarra.value >= _sliderBarra.maxValue)
+        if (_sliderBarra.value >= _sliderBarra.maxValue)
         {
             transform.parent.gameObject.SetActive(false);
         }
