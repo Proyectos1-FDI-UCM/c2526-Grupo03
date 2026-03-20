@@ -458,6 +458,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 735535649}
     m_Modifications:
     - target: {fileID: 3132451563573240249, guid: 3a041978a980e4c4792861c340ab8a3a, type: 3}
+      propertyPath: Disminucion
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3132451563573240249, guid: 3a041978a980e4c4792861c340ab8a3a, type: 3}
       propertyPath: VelAngularMax
       value: 0.4
       objectReference: {fileID: 0}
