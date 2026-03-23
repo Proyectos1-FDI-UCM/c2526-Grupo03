@@ -23,10 +23,19 @@ public class Balas : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
+    /// <summary>
+    /// Imagen encargada de representar las balas restantes
+    /// </summary>
     [SerializeField]
     private Image Recarga;
+    /// <summary>
+    /// Barra encargada de repesentar la puntuación del Juego
+    /// </summary>
     [SerializeField]
     private Image Barra_puntuacion;
+    /// <summary>
+    /// Referencia al jugador 
+    /// </summary>
     [SerializeField] private GameObject Player;
     #endregion
 
@@ -38,8 +47,11 @@ public class Balas : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
+    // Variable privada encargada de almacenar el numero de balas
     private int balas;
+    //Variable privada encargada de almacenar la puntuacion en cada momento
     private int puntuacion;
+    //Variable que almacena la puntuacion inicial de el nivel
     private int puntuacionInicial;
     #endregion
 
@@ -55,9 +67,11 @@ public class Balas : MonoBehaviour
     /// any of the Update methods are called the first time.
     /// </summary>
     void Start()
-    {
+    {   //Guardamos la puntuación inicial  
         puntuacionInicial = LevelManager.Instance.GetcurrentScore();
+        //Actualizamos el GUI de la bala para poner el valor inical
         Update_Bala();
+        //Actualizamos la barra de puntuación para establecer el valor inical
         Update_Puntuacion();
     }
 
@@ -65,8 +79,9 @@ public class Balas : MonoBehaviour
     /// Update is called every frame, if the MonoBehaviour is enabled.
     /// </summary>
     void Update()
-    {
+    {  //Actualizamos el GUI de la bala
         Update_Bala();
+        //Actualizamos la barra de puntuación
         Update_Puntuacion();
     }
     #endregion
@@ -87,21 +102,35 @@ public class Balas : MonoBehaviour
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
+    /// <summary>
+    /// Metodo encargado de actualizar la Gui de las balas cuando el jugador dispare
+    /// </summary>
     private void Update_Bala()
-    { //miramos las balas que tiene el jugador para representarlas  
+    { 
+        //miramos las balas que tiene el jugador para representarlas  
         balas = Player.GetComponent<Movement_Player>().getAmmo();
         // Y reducimos el grafico si ha bajado
         Reduce_Grito(balas);
     }
+    /// <summary>
+    /// Metodo que actualiza el GUI de la puntuacion cuando esta crece o se ve reducida
+    /// </summary>
     private void Update_Puntuacion()
-    {   
+    {   //Obtenemos el valor de la puntuación 
         puntuacion = LevelManager.Instance.GetcurrentScore();
+        //Debug para saber en las pruebas cuanto vale
         Debug.Log(puntuacion);
+        //Actualizamos la barra con el metodo conviertePorcent
         Barra_puntuacion.fillAmount = ConviertePorcent(puntuacionInicial,puntuacion);
     }
-     private void Reduce_Grito(int bala)
-    { //Mira en cada caso la cantidad de balas que tenenmos en el momento y asi podedemos
-      // representar las balas correspondientes
+    /// <summary>
+    /// Metodo que reduce la GUI de balas a la cantidad correspondiente
+    /// </summary>
+    /// <param name="bala"> Numero de balas que tiene el jugador </param>
+    private void Reduce_Grito(int bala)
+    { 
+    //Mira en cada caso la cantidad de balas que tenenmos en el momento y asi podedemos
+    // representar las balas correspondientes
         switch (bala)
         {
             case 4: Recarga.fillAmount = 1f;break;
@@ -112,18 +141,31 @@ public class Balas : MonoBehaviour
         }
 
     }
-    private float ConviertePorcent(float max ,float min)
+    /// <summary>
+    /// Metodo encargado de convertir el numero de puntos a porcentaje para poder ser representado
+    /// </summary>
+    /// <param name="max">Valor maximo de puntacion posible</param>
+    /// <param name="act">Valor correspondiente al numero de puntos</param>
+    /// <returns></returns>
+    private float ConviertePorcent(float max ,float act)
     {
+        //Variable encargada del porcentaje representada entre 0 y 1 en float
         float Porcentaje;
-        Porcentaje = max - min;
+        //Guardamos el diferencia en  la variable 
+        Porcentaje = max - act;
+        //Miramos si esta es 0 entonces esta llena
         if(Porcentaje == 0)
         {
+            //Representamos la barra completa
             Porcentaje = 1f;
         }
+        //Si es distinto de 0 entonces ya no esta llena y calculamos su porcentaje
         else
         {
-            Porcentaje = min / max;
+            //Representamos el porcentaje correspondiente
+            Porcentaje = act / max;
         }
+        //Devolvemos la variable porcentaje
         return Porcentaje;
     }
     #endregion   
