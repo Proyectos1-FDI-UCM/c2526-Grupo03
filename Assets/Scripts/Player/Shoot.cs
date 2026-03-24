@@ -126,7 +126,7 @@ public class Shoot : MonoBehaviour
 
     public int GetAmmo() // Devuelve la cantidad de disparos restantes
     {
-        Debug.Log("balas restantes: " + _ammo);
+        //Debug.Log("balas restantes: " + _ammo);
         return _ammo;
     }
     public void ReloadAmmo() // Recarga las balas al maximo

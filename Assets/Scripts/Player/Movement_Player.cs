@@ -173,8 +173,16 @@ public class Movement_Player : MonoBehaviour
                 }
                 else _velEmpuje = 0.0f;
             }
-                
+            // --- Menu de pausa activacion ---
+
+            
+
         }
+        if (InputManager.Instance.PauseWasPressedThisFrame())
+            {
+                Debug.Log("Pausando");
+                LevelManager.Instance._Pausa();
+            }
     }
     #endregion
 
@@ -214,7 +222,9 @@ public class Movement_Player : MonoBehaviour
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
-
+    
+        
+    
     #endregion   
 
 } // class Movement_Player 

@@ -36,6 +36,10 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     [SerializeField] private GameObject LoseScreen;
     /// <summary>
+    /// Panel de pausa
+    /// </summary>
+    [SerializeField] private GameObject PauseScreen;
+    /// <summary>
     /// Calidad inicial
     /// </summary>
     [SerializeField] private int StartingQuality = 100;
@@ -48,6 +52,10 @@ public class LevelManager : MonoBehaviour
     /// Cantidad que sube la película
     /// </summary>
     [SerializeField] private int Quality_Add = 0;
+    /// <summary>
+    /// Objeto padre en el que se encuentran todos los objetos a pausar
+    /// </summary>
+    [SerializeField] private GameObject objetos_pausados;
 
     // Cantidad de puntuación aumentada cada "pulso" (frecuencia del pulso definida en la cámara)
 
@@ -149,6 +157,34 @@ public class LevelManager : MonoBehaviour
     public static bool HasInstance()
     {
         return _instance != null;
+    }
+    /// <summary>
+    /// Metodo encargado de pausar la partida 
+    /// </summary>
+    public void _Pausa()
+    {
+        /*Se manda un mensaje a todos los objetos que sean hijos de este para
+        que activen el metodo "UnPause" */
+        objetos_pausados.BroadcastMessage("Pause");
+        // Activa el panel de pausa
+        PauseScreen.SetActive(true);
+    }
+    /// <summary>
+    /// Metod encargado de restablecer la partida desde el punto que la dejaste 
+    /// </summary>
+    public void Resume()
+    {
+        /* Se manda un mensaje a todos los objetos que sean hijos de este para
+        que activen el metodo "UnPause" */
+        objetos_pausados.BroadcastMessage("UnPause");
+        //Desactiva el panel de pausa
+        PauseScreen.SetActive(false);
+    }
+    public void Restart()
+    {  //Restablece el nivel al inicio
+        GameManager.Instance.ChangeScene(1);
+        //Desactiva el panel de pausa
+        PauseScreen.SetActive(false);
     }
 
     #endregion

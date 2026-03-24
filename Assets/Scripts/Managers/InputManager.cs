@@ -81,6 +81,10 @@ public class InputManager : MonoBehaviour
     /// Accion para recargar
     /// </summary>
     private InputAction _reload;
+    /// <summary>
+    /// Accion para pausar
+    /// </summary>
+    private InputAction _pause;
 
     #endregion
 
@@ -240,6 +244,10 @@ public class InputManager : MonoBehaviour
     {
         return _repair.WasPressedThisFrame();
     }
+    public bool PauseWasPressedThisFrame()
+    {
+        return _pause.WasPressedThisFrame();
+    }
 
     #endregion
 
@@ -279,6 +287,7 @@ public class InputManager : MonoBehaviour
         _jump = _theController.Player.Jump;
         _repair = _theController.Player.Repair;
         _reload = _theController.Player.Reload;
+        _pause = _theController.Player.Pause;
     }
 
     /// <summary>
