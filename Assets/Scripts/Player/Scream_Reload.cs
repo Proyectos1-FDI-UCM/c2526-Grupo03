@@ -1,4 +1,4 @@
-//---------------------------------------------------------
+﻿//---------------------------------------------------------
 // Breve descripción del contenido del archivo
 // Responsable de la creación de este archivo
 // Rodaje Rodante
@@ -46,9 +46,6 @@ public class Scream_Reload : MonoBehaviour
     // Vartiable de cuenta de tiempo desde última recarga
     private float _timePassed;
 
-    // Munición del script "Movement_Player" (Ammo)
-    private int _cords;
-
     // Velocidad máxima del script "Movement_Player" (Max_Speed)
     private float _maxOriginalSpeed;
 
@@ -72,7 +69,6 @@ public class Scream_Reload : MonoBehaviour
     /// </summary>
     void Start()
     {
-        _cords = this.gameObject.GetComponent<Movement_Player>().getAmmo();
         _maxOriginalSpeed = this.gameObject.GetComponent<Movement_Player>().getMaxVel();
     }
 
@@ -95,7 +91,7 @@ public class Scream_Reload : MonoBehaviour
 
         if (_slowActive && Time.time >= _enOfModification)
         {
-            this.gameObject.GetComponent<Movement_Player>().setAmmo(_cords);
+            this.gameObject.GetComponent<Shoot>().ReloadAmmo();
             this.gameObject.GetComponent<Movement_Player>().setMaxVel(_maxOriginalSpeed);
             _slowActive = false;
         }

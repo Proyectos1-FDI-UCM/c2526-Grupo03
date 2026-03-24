@@ -665,6 +665,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2613398142267486895, guid: ae1a9226cccf11c49b990e01bcf05101, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1003983386}
     - target: {fileID: 4306164689981147991, guid: ae1a9226cccf11c49b990e01bcf05101, type: 3}
       propertyPath: m_Name
       value: GUI_Manager
@@ -1092,6 +1096,37 @@ Transform:
   - {fileID: 1328836323}
   - {fileID: 1234096736}
   - {fileID: 1678072671}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &800301111
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 800301112}
+  m_Layer: 0
+  m_Name: BulletsPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &800301112
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800301111}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -7.346186, y: -2.324351, z: -0.032057166}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &828528430
@@ -1654,25 +1689,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 299496412898801103, guid: 8e518f3f91021964490aa4c6a5d8d0d8, type: 3}
-      propertyPath: m_Size.y
-      value: 0.14398813
-      objectReference: {fileID: 0}
-    - target: {fileID: 299496412898801103, guid: 8e518f3f91021964490aa4c6a5d8d0d8, type: 3}
-      propertyPath: m_Offset.y
-      value: -1.1169941
-      objectReference: {fileID: 0}
+    - target: {fileID: 2964731405231165147, guid: 8e518f3f91021964490aa4c6a5d8d0d8, type: 3}
+      propertyPath: BulletsContainer
+      value: 
+      objectReference: {fileID: 800301112}
     - target: {fileID: 7674669691530021310, guid: 8e518f3f91021964490aa4c6a5d8d0d8, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7803231264905722889, guid: 8e518f3f91021964490aa4c6a5d8d0d8, type: 3}
-      propertyPath: MaxSpeedDown
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 8407154709903920801, guid: 8e518f3f91021964490aa4c6a5d8d0d8, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2858,6 +2881,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 7554322537895096548}
   - {fileID: 1175004614}
+  - {fileID: 800301112}
   - {fileID: 188457997}
   - {fileID: 726307187}
   - {fileID: 665644686}

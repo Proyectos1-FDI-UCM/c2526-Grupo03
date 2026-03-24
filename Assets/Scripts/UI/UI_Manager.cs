@@ -1,4 +1,4 @@
-//---------------------------------------------------------
+﻿//---------------------------------------------------------
 // Se encargara de renderizar los datos que son necesarios para el bucle de juego
 // Tristan Sanchez Lopez
 // Rodaje Rodante
@@ -108,7 +108,7 @@ public class Balas : MonoBehaviour
     private void Update_Bala()
     { 
         //miramos las balas que tiene el jugador para representarlas  
-        balas = Player.GetComponent<Movement_Player>().getAmmo();
+        balas = Player.GetComponent<Shoot>().GetAmmo();
         // Y reducimos el grafico si ha bajado
         Reduce_Grito(balas);
     }
@@ -119,19 +119,19 @@ public class Balas : MonoBehaviour
     {   //Obtenemos el valor de la puntuación 
         puntuacion = LevelManager.Instance.GetcurrentScore();
         //Debug para saber en las pruebas cuanto vale
-        Debug.Log(puntuacion);
+        //Debug.Log(puntuacion);
         //Actualizamos la barra con el metodo conviertePorcent
         Barra_puntuacion.fillAmount = ConviertePorcent(puntuacionInicial,puntuacion);
     }
     /// <summary>
     /// Metodo que reduce la GUI de balas a la cantidad correspondiente
     /// </summary>
-    /// <param name="bala"> Numero de balas que tiene el jugador </param>
-    private void Reduce_Grito(int bala)
+    /// <param name="numBalas"> Numero de balas que tiene el jugador </param>
+    private void Reduce_Grito(int numBalas)
     { 
     //Mira en cada caso la cantidad de balas que tenenmos en el momento y asi podedemos
     // representar las balas correspondientes
-        switch (bala)
+        switch (numBalas)
         {
             case 4: Recarga.fillAmount = 1f;break;
             case 3: Recarga.fillAmount = 0.65f; break;

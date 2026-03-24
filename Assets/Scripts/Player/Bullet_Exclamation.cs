@@ -59,7 +59,7 @@ public class Bullet_Exclamation : MonoBehaviour
     /// <summary>
     /// Update is called every frame, if the MonoBehaviour is enabled.
     /// </summary>
-    void FixedUpdate()
+    void Update()
     {
         int direction = _spriteRenderer.flipX ? -1 : 1;
         transform.position += new Vector3(Speed * direction, .0f) * Time.deltaTime;
@@ -86,13 +86,11 @@ public class Bullet_Exclamation : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D col)
     {
         this.gameObject.SetActive(false);
-        Destroy(this.gameObject);
     }
 
     private void OnBecameInvisible()
     {
         this.gameObject.SetActive(false);
-        Destroy(this.gameObject);
     }
 
     #endregion   
