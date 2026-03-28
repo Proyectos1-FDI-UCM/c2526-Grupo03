@@ -1,6 +1,6 @@
 ﻿//---------------------------------------------------------
 // Componente encargado del salto del personaje jugable
-// Gabriel Adrian Oltean, Alejandro Garcia Diaz
+// Gabriel Adrian Oltean, Alejandro Garcia Diaz, Víctor Román Román
 // Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
@@ -83,6 +83,10 @@ public class Jump : MonoBehaviour
     /// Aceleración negativa con la que simulamos gravedad
     /// </summary>
     private float _gravity = 0.0f;
+    /// <summary>
+    /// Contiene la información del componente Animator.
+    /// </summary>
+    private Animator _animator;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -100,6 +104,7 @@ public class Jump : MonoBehaviour
     {
         _initialSpeed = (2 * JumpHeight) / TimeToReachMaxHeight;
         _gravity = _initialSpeed / TimeToReachMaxHeight;
+        _animator = GetComponent<Animator>();
     }
     /// <summary>
     /// FixedUpdate is called many times every frame, if the MonoBehaviour is enabled.
@@ -121,6 +126,11 @@ public class Jump : MonoBehaviour
             // Comprobamos si el detector de suelo dice que estás en el suelo
             if (_landed)
             {
+                //Iniciar animacion idle
+                if(_animator)
+                {
+                    _animator.SetBool("Landed", true);
+                }
                 // Iniciamos las variables necesarias
                 _maxPosJumped = transform.position + new Vector3(0.0f, JumpHeight);
                 _hasJumped = true;
@@ -132,9 +142,19 @@ public class Jump : MonoBehaviour
         // Si ha saltado
         if (_hasJumped)
         {
+            //Animacion de salto empieza
+            if(_animator)
+            {
+                _animator.SetBool("IsJumpingAnim", true);
+            }
             // Comprobamos si ha llegado a la altura máxima o choca con el techo
             if (transform.position.y >= _maxPosJumped.y || _collidesWithRoof)
             {
+                if(_animator)
+                {
+                    _animator.SetBool("IsJumpingAnim", false);
+                    _animator.SetBool("IsFalling", true);
+                }
                 _hasReachedMaxHeight = true;
                 if (_speed > 0.0f) _speed = 0.0f;
             }
