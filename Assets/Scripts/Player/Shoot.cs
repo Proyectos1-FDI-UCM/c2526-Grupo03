@@ -1,6 +1,6 @@
 ﻿//---------------------------------------------------------
 // Encargado del disparo del jugador y el pool de balas
-// Alejandro Garcia
+// Alejandro Garcia y Víctor Román
 // Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
@@ -37,15 +37,35 @@ public class Shoot : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
+
+    /// <summary>
+    /// Controla el número de balas que tiene el jugador.
+    /// </summary>
     private int _ammo;
 
+    /// <summary>
+    /// Controla el tiempo que debe pasar entre disparos.
+    /// </summary>
     private float _cooldown = .8f; // Tiempo de espera entre disparo y disparo
+
+    /// <summary>
+    /// Tiempo que ha pasado entre disparos.
+    /// </summary>
     private float _timeToWait = .0f; // Tiempo en el que se podra volver a disparar
 
+    /// <summary>
+    ///  Posicion de la bala en relacion al personaje.
+    /// </summary>
     private Vector3 _bulletPositionOffset = new Vector3(0.8f, 0); // Posicion de la bala en relacion al personaje
 
+    /// <summary>
+    /// Contiene el sprite del personaje.
+    /// </summary>
     private SpriteRenderer _playerSpriteRenderer;
 
+    /// <summary>
+    /// Pool de balas máximas que podrán aparecer.
+    /// </summary>
     private GameObject[] _bulletsPool;
 
     #endregion
@@ -59,9 +79,15 @@ public class Shoot : MonoBehaviour
 
     private void Awake()
     {
+        _animator = GetComponent<Animator>();
         _ammo = MaxAmmo;
         _playerSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
+
+    /// <summary>
+    /// Contiene la información del componente Animator.
+    /// </summary>
+    private Animator _animator;
 
     /// <summary>
     /// Start is called on the frame when a script is enabled just before 
@@ -69,7 +95,6 @@ public class Shoot : MonoBehaviour
     /// </summary>
     void Start()
     {
-
         _bulletsPool = new GameObject[NumBulletsPool]; // Reserva el espacio en el array
         for (int i = 0; i < NumBulletsPool; i++) // Por cada hueco genera una bala
         {
@@ -86,7 +111,10 @@ public class Shoot : MonoBehaviour
     void Update()
     {
         // ---- DISPARO ----
-
+        if(_animator)
+        {
+            _animator.SetBool("IsShootingAnim", false);
+        }
         if (InputManager.Instance.FireWasPressedThisFrame() && Time.time >= _timeToWait && _ammo > 0)
         {
             // -- Comprueba si hay balas usables --
@@ -99,7 +127,10 @@ public class Shoot : MonoBehaviour
             if (i == NumBulletsPool) return; // No se puede disparar porque todas las balas estan en uso
 
             // -- Si hay balas usables --
-
+            if(_animator)
+            {
+                _animator.SetBool("IsShootingAnim", true);
+            }
             int dir = _playerSpriteRenderer.flipX ? -1 : 1; // Para saber en que direccion mira el personjae principal
 
             Vector3 bulletOffset = gameObject.transform.position + (_bulletPositionOffset * dir);
@@ -112,6 +143,10 @@ public class Shoot : MonoBehaviour
             _ammo--;
 
             _timeToWait = Time.time + _cooldown;
+            if(_animator)
+            {
+                _animator.SetBool("ReverseShooting", true);
+            }
         }
     }
     #endregion

@@ -2,6 +2,7 @@
 // Script encargado del manejo del movimiento del personaje jugable
 // Alejandro Garcia && Aportadores:
 //      - Gabriel Adrian Oltean
+//      - Víctor Román Román
 // Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
@@ -58,6 +59,10 @@ public class Movement_Player : MonoBehaviour
     /// Velocidad actual durante el empuje
     /// </summary>
     private float _velEmpuje = 0.0f;
+    /// <summary>
+    /// Contiene la información del componente Animator.
+    /// </summary>
+    private Animator _animator;
     #endregion
     
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -74,7 +79,7 @@ public class Movement_Player : MonoBehaviour
     void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
-
+        _animator = GetComponent<Animator>();
     }
 
     /// <summary>
@@ -93,7 +98,10 @@ public class Movement_Player : MonoBehaviour
             // mueve al personaje en base a la velocidad (_velocity) en el eje x
             this.transform.position += new Vector3(_speed, 0.0f) * Time.deltaTime;
             _spriteRenderer.flipX = false;
-
+            if(_animator)
+            {
+                _animator.SetBool("IsWalkingAnim", true);
+            }
             // Acelera al personaje o fija su velocidad si ha llegado al maximo de velocidad
             if (_speed <= MaxVelocity)
             {
@@ -107,7 +115,10 @@ public class Movement_Player : MonoBehaviour
             // mueve al personaje en base a la velocidad (_velocity) en el eje x
             this.transform.position += new Vector3(_speed, 0.0f) * Time.deltaTime;
             _spriteRenderer.flipX = true;
-
+            if (_animator)
+            {
+                _animator.SetBool("IsWalkingAnim", true);
+            }
             // Acelera al personaje o fija su velocidad si ha llegado al maximo de velocidad
             if (_speed >= -MaxVelocity)
             {
@@ -118,6 +129,10 @@ public class Movement_Player : MonoBehaviour
         else
         {
             _speed = .0f;
+            if (_animator)
+            {
+                _animator.SetBool("IsWalkingAnim", false);
+            }
         }
 
         // ---- Detección de paredes ----
