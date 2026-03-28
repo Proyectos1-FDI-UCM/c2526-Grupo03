@@ -135,6 +135,8 @@ public class QTE2 : MonoBehaviour
         if (_sliderBarra.value >= _sliderBarra.maxValue)
         {
             transform.parent.gameObject.SetActive(false);
+            // Marcamos el objeto como reparado
+            this.gameObject.GetComponentInParent<Repair>().Repaired = true;
         }
     }
     #endregion
