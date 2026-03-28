@@ -96,6 +96,12 @@ public class QTE1 : MonoBehaviour
     /// </summary>
     void Update()
     {
+        Repair comp = this.gameObject.GetComponentInParent<Repair>();
+        if (comp.IsRepairing && InputManager.Instance.RepairWasPressedThisFrame() && Time.time >= comp._repairIniTime + comp.TiempoParaPoderSalir)
+        {
+            _componenteBarra.value = 0;
+            comp.HasPressedExit = true;
+        }
         if (_componenteBarra.value > 0)
         {
             _componenteBarra.value -= (Disminucion * Time.deltaTime);

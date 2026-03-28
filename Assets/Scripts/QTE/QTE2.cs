@@ -82,6 +82,12 @@ public class QTE2 : MonoBehaviour
     /// </summary>
     void Update()
     {
+        Repair comp = this.gameObject.GetComponentInParent<Repair>();
+        if (comp.IsRepairing && InputManager.Instance.RepairWasPressedThisFrame() && Time.time >= comp._repairIniTime + comp.TiempoParaPoderSalir)
+        {
+            _sliderBarra.value = 0;
+            comp.HasPressedExit = true;
+        }
         Vector2 inputdir = InputManager.Instance.MovementVector;
         if (_sliderBarra.value > 0)
         {

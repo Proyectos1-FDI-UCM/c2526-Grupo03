@@ -198,6 +198,29 @@ public class QTE3 : MonoBehaviour
     /// </summary>
     void Update()
     {
+        Repair comp = this.gameObject.GetComponentInParent<Repair>();
+        if (comp.IsRepairing && InputManager.Instance.RepairWasPressedThisFrame() && Time.time >= comp._repairIniTime + comp.TiempoParaPoderSalir)
+        {
+            _componenteBarra.value = 0;
+            _failedQTE = false;
+            int i = 0;
+            // Activamos las flechas
+            while (i <= _indiceUltimaFlecha)
+            {
+                // Escogemos la flecha a activar
+                _ArrowToManipulate = ObjetosDeFlechas[i];
+                // Activamos la flecha
+                _ArrowToManipulate.SetActive(true);
+                // Pasamos a la siguiente flecha
+                i++;
+            }
+            _ArrowToManipulate = ObjetosDeFlechas[0];
+            _indiceFlechaActual = 0;
+            _dirFlechaActual = _dirFlechas[_indiceFlechaActual];
+
+            comp.HasPressedExit = true;
+        }
+
         // Recogida de input
         Vector2 input = InputManager.Instance.ArrowsQTE;
 
@@ -265,6 +288,7 @@ public class QTE3 : MonoBehaviour
                 // Si la pulsación es correcta
                 if (_correctPress)
                 {
+                    ObjetosDeFlechas[_indiceFlechaActual - 1].SetActive(false);
                     // Le sumamos al valor del slider el aumento por acierto
                     _componenteBarra.value += _aumentoAcierto;
                     // En caso de que sea la última flecha, nos aseguramos de que llegue al 100%
@@ -282,7 +306,7 @@ public class QTE3 : MonoBehaviour
                     int i = 0;
                     while (i <= _indiceUltimaFlecha)
                     {
-                        // Escogemos la flecha a activar
+                        // Escogemos la flecha a desactivar
                         _ArrowToManipulate = ObjetosDeFlechas[i];
                         // Desactivamos la flecha
                         _ArrowToManipulate.SetActive(false);
