@@ -7,6 +7,7 @@
 //---------------------------------------------------------
 
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// Componente que se encarga de la gestión de un nivel concreto.
@@ -182,7 +183,7 @@ public class LevelManager : MonoBehaviour
     }
     public void Restart()
     {  //Restablece el nivel al inicio
-        GameManager.Instance.ChangeScene(1);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
         //Desactiva el panel de pausa
         PauseScreen.SetActive(false);
     }

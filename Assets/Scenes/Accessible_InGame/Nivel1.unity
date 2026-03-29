@@ -1507,6 +1507,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1102564246 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5573134665005540480, guid: c07129f316da99a42a01b5facbaddf53, type: 3}
+  m_PrefabInstance: {fileID: 828528430}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1149575630
 GameObject:
   m_ObjectHideFlags: 0
@@ -2455,7 +2460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 1102564246}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1811683836
