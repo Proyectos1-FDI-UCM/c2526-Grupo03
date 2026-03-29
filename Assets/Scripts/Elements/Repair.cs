@@ -36,6 +36,18 @@ public class Repair : MonoBehaviour
 
     [SerializeField] GameObject Key;
 
+    /// <summary>
+    /// Momento en el que se ha empezado a reparar
+    /// </summary>
+    public float _repairIniTime = .0f;
+
+    /// <summary>
+    /// Tiempo necesario para poder salir
+    /// </summary>
+    public float TiempoParaPoderSalir = 1f;
+    
+
+    public bool HasPressedExit = false;
 
     /// <summary>
     /// Indica si estás encima del objeto a reparar
@@ -108,6 +120,7 @@ public class Repair : MonoBehaviour
             _player.GetComponent<Movement_Player>().enabled = false;
             _player.GetComponent<Jump>().enabled = false;
             CanRepair = false;
+            _repairIniTime = Time.time;
         }
         if (Repaired)
         {
@@ -124,6 +137,17 @@ public class Repair : MonoBehaviour
             _spriteRenderer.sprite = SpriteBroken;
             Key.SetActive(false);
             HasFinishedRepairing = false;
+        }
+
+        if (HasPressedExit)
+        {
+            _player.GetComponent<Movement_Player>().enabled = true;
+            _player.GetComponent<Jump>().enabled = true;
+            QTE.SetActive(false);
+            Key.SetActive(true);
+            IsRepairing = false;
+            CanRepair = true;
+            HasPressedExit = false;
         }
     }
     #endregion

@@ -82,6 +82,12 @@ public class QTE2 : MonoBehaviour
     /// </summary>
     void Update()
     {
+        Repair comp = this.gameObject.GetComponentInParent<Repair>();
+        if (comp.IsRepairing && InputManager.Instance.RepairWasPressedThisFrame() && Time.time >= comp._repairIniTime + comp.TiempoParaPoderSalir)
+        {
+            _sliderBarra.value = 0;
+            comp.HasPressedExit = true;
+        }
         Vector2 inputdir = InputManager.Instance.MovementVector;
         if (_sliderBarra.value > 0)
         {
@@ -135,6 +141,8 @@ public class QTE2 : MonoBehaviour
         if (_sliderBarra.value >= _sliderBarra.maxValue)
         {
             transform.parent.gameObject.SetActive(false);
+            // Marcamos el objeto como reparado
+            this.gameObject.GetComponentInParent<Repair>().Repaired = true;
         }
     }
     #endregion
