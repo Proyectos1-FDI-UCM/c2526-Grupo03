@@ -146,6 +146,8 @@ public class Jump : MonoBehaviour
             if(_animator)
             {
                 _animator.SetBool("IsJumpingAnim", true);
+                _animator.SetBool("IsWalkingAnim", false);
+                gameObject.GetComponent<Movement_Player>().OnlyWalking(false);
             }
             // Comprobamos si ha llegado a la altura máxima o choca con el techo
             if (transform.position.y >= _maxPosJumped.y || _collidesWithRoof)
@@ -170,6 +172,7 @@ public class Jump : MonoBehaviour
             {
                 _hasJumped = false;
                 this.GetComponent<Gravity>().gravitySwitch();
+                gameObject.GetComponent<Movement_Player>().OnlyWalking(true);
             }
         }
     }

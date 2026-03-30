@@ -63,6 +63,10 @@ public class Movement_Player : MonoBehaviour
     /// Contiene la información del componente Animator.
     /// </summary>
     private Animator _animator;
+    /// <summary>
+    /// Controla si sólo está andando para mostrar la animación correcta.
+    /// </summary>
+    private bool _onlyWalking = true;
     #endregion
     
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -98,7 +102,7 @@ public class Movement_Player : MonoBehaviour
             // mueve al personaje en base a la velocidad (_velocity) en el eje x
             this.transform.position += new Vector3(_speed, 0.0f) * Time.deltaTime;
             _spriteRenderer.flipX = false;
-            if(_animator)
+            if(_animator && _onlyWalking)
             {
                 _animator.SetBool("IsWalkingAnim", true);
             }
@@ -115,7 +119,7 @@ public class Movement_Player : MonoBehaviour
             // mueve al personaje en base a la velocidad (_velocity) en el eje x
             this.transform.position += new Vector3(_speed, 0.0f) * Time.deltaTime;
             _spriteRenderer.flipX = true;
-            if (_animator)
+            if (_animator && _onlyWalking)
             {
                 _animator.SetBool("IsWalkingAnim", true);
             }
@@ -226,6 +230,12 @@ public class Movement_Player : MonoBehaviour
     public void setMaxVel(float rlMovement)
     {
         MaxVelocity = rlMovement;
+    }
+
+    public bool OnlyWalking(bool IsOnlyWalking)
+    {
+        _onlyWalking = IsOnlyWalking;
+        return _onlyWalking;
     }
 
 
