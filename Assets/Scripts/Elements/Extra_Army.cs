@@ -96,6 +96,11 @@ public class Extra_Army : MonoBehaviour
     /// Indica si el detector de suelo dice que estás en el suelo
     /// </summary>
     private bool _landed;
+
+    /// <summary>
+    /// Se sacará si se puede mover extra_army o no desde aquí
+    /// </summary>
+    private Warning _warning;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -117,6 +122,7 @@ public class Extra_Army : MonoBehaviour
         _initialSpeed = (2 * JumpHeight) / TimeToReachMaxHeight;
         _gravity = _initialSpeed / TimeToReachMaxHeight;
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _warning = GetComponentInChildren<Warning>();
     }
 
     /// <summary>
@@ -124,73 +130,77 @@ public class Extra_Army : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (FloorDetector.GetComponent<Detector>().Detected)
+        if (_warning.GetDone())
         {
-            _landed = true;
-        }
-        else
-        {
-            _landed = false;
-        }
-        // De momento hacemos el salto con el movimiento en el eje y para no tocar el input action
-        if (FrontDetector.GetComponent<Detector>().Detected)
-        {
-            // Iniciamos las variables necesarias para saltar
-            _maxPosJumped = transform.position + new Vector3(0.0f, JumpHeight);
-            _hasJumped = true;
-            _hasReachedMaxHeight = false;
-            _speed = _initialSpeed;
-            _landed = false;
-
-            _horizontalSpeed = 0f;
-        }
-        else
-        {
-            _horizontalSpeed = SpeedExtra;
-            transform.position += new Vector3(-1f, 0f) * _horizontalSpeed * Time.deltaTime;
-        }
-        // Si ha saltado
-        if (_hasJumped)
-        {
-            // Comprobamos si ha llegado a la altura máxima o choca con el techo
-            if (transform.position.y >= _maxPosJumped.y || RoofDetector.GetComponent<Detector>().Detected)
+            Debug.Log("Extra_Army activado");
+            if (FloorDetector.GetComponent<Detector>().Detected)
             {
-                _hasReachedMaxHeight = true;
-                if (_speed > 0.0f) _speed = 0.0f;
-                _hasJumped = false;
+                _landed = true;
             }
-            // Mientras no ha llegado a la altura máxima
-            if (!_hasReachedMaxHeight)
+            else
             {
-                _speed -= _gravity * Time.deltaTime;
+                _landed = false;
             }
-        }
-        // Parte de gravedad
-        if (!_landed)
-        {
-            // mueve al personaje hacia abajo en base a la velocidad en el eje y
-            this.transform.position += new Vector3(0.0f, 1.0f) * _speed * Time.deltaTime;
-            // Limitamos la velocidad de caída hasta la velocidad de impulso
-            if (_speed > -1* _initialSpeed * 1.5f)
+            // De momento hacemos el salto con el movimiento en el eje y para no tocar el input action
+            if (FrontDetector.GetComponent<Detector>().Detected)
             {
-                _speed -= _gravity * Time.deltaTime;
+                // Iniciamos las variables necesarias para saltar
+                _maxPosJumped = transform.position + new Vector3(0.0f, JumpHeight);
+                _hasJumped = true;
+                _hasReachedMaxHeight = false;
+                _speed = _initialSpeed;
+                _landed = false;
+
+                _horizontalSpeed = 0f;
             }
-            else _speed = -1 * _initialSpeed * 1.5f;
-        }
-        // Cuando toco suelo
-        else
-        {
-            Detector _floorDetector = FloorDetector.GetComponent<Detector>();
-            // Calculamos la posicion del Jugador justo al lado de la pared
-            float _posEncimaSuelo = _floorDetector.CollisionedObject.gameObject.transform.position.y + _floorDetector.CollisionedObject.bounds.size.y / 2;
-            float _posY = _posEncimaSuelo + this.gameObject.GetComponent<Collider2D>().bounds.size.y / 2 + 0.1f;
-            float _aumentoY = _posY - transform.position.y;
+            else
+            {
+                _horizontalSpeed = SpeedExtra;
+                transform.position += new Vector3(-1f, 0f) * _horizontalSpeed * Time.deltaTime;
+            }
+            // Si ha saltado
+            if (_hasJumped)
+            {
+                // Comprobamos si ha llegado a la altura máxima o choca con el techo
+                if (transform.position.y >= _maxPosJumped.y || RoofDetector.GetComponent<Detector>().Detected)
+                {
+                    _hasReachedMaxHeight = true;
+                    if (_speed > 0.0f) _speed = 0.0f;
+                    _hasJumped = false;
+                }
+                // Mientras no ha llegado a la altura máxima
+                if (!_hasReachedMaxHeight)
+                {
+                    _speed -= _gravity * Time.deltaTime;
+                }
+            }
+            // Parte de gravedad
+            if (!_landed)
+            {
+                // mueve al personaje hacia abajo en base a la velocidad en el eje y
+                this.transform.position += new Vector3(0.0f, 1.0f) * _speed * Time.deltaTime;
+                // Limitamos la velocidad de caída hasta la velocidad de impulso
+                if (_speed > -1 * _initialSpeed * 1.5f)
+                {
+                    _speed -= _gravity * Time.deltaTime;
+                }
+                else _speed = -1 * _initialSpeed * 1.5f;
+            }
+            // Cuando toco suelo
+            else
+            {
+                Detector _floorDetector = FloorDetector.GetComponent<Detector>();
+                // Calculamos la posicion del Jugador justo al lado de la pared
+                float _posEncimaSuelo = _floorDetector.CollisionedObject.gameObject.transform.position.y + _floorDetector.CollisionedObject.bounds.size.y / 2;
+                float _posY = _posEncimaSuelo + this.gameObject.GetComponent<Collider2D>().bounds.size.y / 2 + 0.1f;
+                float _aumentoY = _posY - transform.position.y;
 
-            // Movemos al personaje justo al lado de la pared
+                // Movemos al personaje justo al lado de la pared
 
-            // teletransporte
-            if (transform.position.y != _posY) transform.position += new Vector3(.0f, _aumentoY);
-            _speed = 0.0f;
+                // teletransporte
+                if (transform.position.y != _posY) transform.position += new Vector3(.0f, _aumentoY);
+                _speed = 0.0f;
+            }
         }
     }
 
