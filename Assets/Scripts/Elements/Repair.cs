@@ -83,7 +83,7 @@ public class Repair : MonoBehaviour
     private GameObject _player;
 
     /// <summary>
-    /// Número que dirá quñe QTE cargar.
+    /// Número que codifica el QTE seleccionado al azar
     /// </summary>
     private int _selectedQTE;
     #endregion
@@ -103,6 +103,7 @@ public class Repair : MonoBehaviour
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.sprite = SpriteBroken;
+        _selectedQTE = Random.Range(0, 2);
     }
 
     /// <summary>
@@ -112,7 +113,7 @@ public class Repair : MonoBehaviour
     {
         if (CanRepair && InputManager.Instance.RepairWasPressedThisFrame())
         {
-            ChooseQTE();
+            ActivateChosenQTE();
             Key.SetActive(false);
             IsRepairing = true;
         }
@@ -144,7 +145,7 @@ public class Repair : MonoBehaviour
         {
             _player.GetComponent<Movement_Player>().enabled = true;
             _player.GetComponent<Jump>().enabled = true;
-            ChooseQTE();
+            DisableChosenQTE();
             Key.SetActive(true);
             IsRepairing = false;
             CanRepair = true;
@@ -195,7 +196,10 @@ public class Repair : MonoBehaviour
         }
     }
 
-    private void ChooseQTE()
+    /// <summary>
+    /// Activa el panel del QTE seleccionado
+    /// </summary>
+    private void ActivateChosenQTE()
     {
         if(_selectedQTE == 0)
         {
@@ -214,6 +218,27 @@ public class Repair : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Desactiva el panel del QTE seleccionado
+    /// </summary>
+    private void DisableChosenQTE()
+    {
+        if (_selectedQTE == 0)
+        {
+            Transform Hijo = transform.Find("Canvas/QTE_1_Panel");
+            Hijo.gameObject.SetActive(false);
+        }
+        else if (_selectedQTE == 1)
+        {
+            Transform Hijo = transform.Find("Canvas/QTE_2_Panel");
+            Hijo.gameObject.SetActive(false);
+        }
+        else if (_selectedQTE == 2)
+        {
+            Transform Hijo = transform.Find("Canvas/QTE_3_Panel");
+            Hijo.gameObject.SetActive(false);
+        }
+    }
     #endregion   
 
 } // class Repair 
