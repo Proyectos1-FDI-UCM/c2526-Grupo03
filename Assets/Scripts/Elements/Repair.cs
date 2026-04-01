@@ -1,6 +1,7 @@
 ﻿//---------------------------------------------------------
 // Breve descripción del contenido del archivo
 // Gabriel Adrian Oltean
+// Aportadores: Víctor Román Román
 // Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
@@ -28,11 +29,6 @@ public class Repair : MonoBehaviour
 
     [SerializeField] private Sprite SpriteBroken;
     [SerializeField] private Sprite SpriteRepaired;
-
-    /// <summary>
-    /// Aqui se elegira un QTE de una lista (De momento solo hay uno)
-    /// </summary>
-    [SerializeField] GameObject QTE;
 
     [SerializeField] GameObject Key;
 
@@ -85,6 +81,11 @@ public class Repair : MonoBehaviour
     /// GameObject del jugador para restringir su movimiento durante las reparaciones
     /// </summary>
     private GameObject _player;
+
+    /// <summary>
+    /// Número que dirá quñe QTE cargar.
+    /// </summary>
+    private int _selectedQTE;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -111,7 +112,7 @@ public class Repair : MonoBehaviour
     {
         if (CanRepair && InputManager.Instance.RepairWasPressedThisFrame())
         {
-            QTE.SetActive(true);
+            ChooseQTE();
             Key.SetActive(false);
             IsRepairing = true;
         }
@@ -143,7 +144,7 @@ public class Repair : MonoBehaviour
         {
             _player.GetComponent<Movement_Player>().enabled = true;
             _player.GetComponent<Jump>().enabled = true;
-            QTE.SetActive(false);
+            ChooseQTE();
             Key.SetActive(true);
             IsRepairing = false;
             CanRepair = true;
@@ -159,6 +160,11 @@ public class Repair : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
+
+    public void ValorQTE(int val)
+    {
+        _selectedQTE = val;
+    }
 
     #endregion
 
@@ -188,6 +194,26 @@ public class Repair : MonoBehaviour
             Key.SetActive(false);
         }
     }
+
+    private void ChooseQTE()
+    {
+        if(_selectedQTE == 0)
+        {
+            Transform Hijo = transform.Find("Canvas/QTE_1_Panel");
+            Hijo.gameObject.SetActive(true);
+        }
+        else if( _selectedQTE == 1)
+        {
+            Transform Hijo = transform.Find("Canvas/QTE_2_Panel");
+            Hijo.gameObject.SetActive(true);
+        }
+        else if (_selectedQTE == 2)
+        {
+            Transform Hijo = transform.Find("Canvas/QTE_3_Panel");
+            Hijo.gameObject.SetActive(true);
+        }
+    }
+
     #endregion   
 
 } // class Repair 
