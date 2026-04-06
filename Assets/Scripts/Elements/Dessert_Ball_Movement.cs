@@ -79,7 +79,14 @@ public class Dessert_Ball_Movement : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
-
+    /// <summary>
+    /// Metodo encargado de cambiar la velocidad a la bola del desierto
+    /// </summary>
+    /// <param name="num"> velocidad deseada </param>
+    public void SetSpeed(float num)
+    {
+        Speed = num;
+    }
     #endregion
     
     // ---- MÉTODOS PRIVADOS ----

@@ -187,6 +187,10 @@ public class LevelManager : MonoBehaviour
         //Desactiva el panel de pausa
         PauseScreen.SetActive(false);
     }
+    public void BackToMenu()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    }
 
     #endregion
 

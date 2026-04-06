@@ -25,6 +25,7 @@ public class Dolly_Detection_System : MonoBehaviour
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
     [SerializeField] private float IntervaloParaSubir = 0f;
+    [SerializeField] private GameObject _Finish;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -102,7 +103,7 @@ public class Dolly_Detection_System : MonoBehaviour
             LevelManager.Instance.QualityDown(collision.gameObject.GetComponent<DetectableObject>().CalidadABajar);
             
         }
-        else if (collision.gameObject.GetComponent<Movement_Player>() != null)
+        else if (collision.gameObject.GetComponent<Movement_Player>() != null && !_Finish.GetComponent<Finish>().HasWin())
         {
             LevelManager.Instance.QualityDown(LevelManager.Instance.GetcurrentScore());
         }

@@ -150,23 +150,23 @@ public class Balas : MonoBehaviour
     private float ConviertePorcent(float max ,float act)
     {
         //Variable encargada del porcentaje representada entre 0 y 1 en float
-        float Porcentaje;
+        float Diferencia;
         //Guardamos el diferencia en  la variable 
-        Porcentaje = max - act;
+        Diferencia = max - act;
         //Miramos si esta es 0 entonces esta llena
-        if(Porcentaje == 0)
+        if(Diferencia == 0)
         {
             //Representamos la barra completa
-            Porcentaje = 1f;
+            Diferencia = 1f;
         }
         //Si es distinto de 0 entonces ya no esta llena y calculamos su porcentaje
         else
         {
             //Representamos el porcentaje correspondiente
-            Porcentaje = act / max;
+            Diferencia = act / max;
         }
-        //Devolvemos la variable porcentaje
-        return Porcentaje;
+        //Devolvemos la variable Diferencia
+        return Diferencia;
     }
     #endregion   
 
