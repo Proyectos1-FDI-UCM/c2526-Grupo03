@@ -1,6 +1,7 @@
 ﻿//---------------------------------------------------------
-// Breve descripción del contenido del archivo
-// Responsable de la creación de este archivo
+// Movimiento y rotación de la bola del desierto
+// Alejandro García Diaz && Colaboradores:
+//      Gabriel Adrian Oltean
 // Nombre del juego
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
@@ -24,7 +25,14 @@ public class Dessert_Ball_Movement : MonoBehaviour
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
 
-    [SerializeField] private float Speed = 0.7f; // Velocidad de la bola
+    /// <summary>
+    /// Velocidad de la bola
+    /// </summary>
+    [SerializeField] private float Speed = 0.7f;
+    /// <summary>
+    /// Velocidad de rotación de la bola
+    /// </summary>
+    [SerializeField] private float RotationSpeed = 100.0f;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -36,10 +44,14 @@ public class Dessert_Ball_Movement : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
-    private Vector3 iniPos; // Posicion inicial de la bola
+    /// <summary>
+    /// Posicion inicial de la bola
+    /// </summary>
+    private Vector3 _iniPos;
 
-    private float posX;
-    private float posIniY;
+    private float _posX;
+    private float _posIniY;
+    private float _anguloEjeZ;
     #endregion
     
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -56,8 +68,8 @@ public class Dessert_Ball_Movement : MonoBehaviour
     void Start()
     {
         // Carga la posicion inicial nada mas carga el script
-        posX = transform.position.x;
-        posIniY = transform.position.y;
+        _posX = transform.position.x;
+        _posIniY = transform.position.y;
     }
 
     /// <summary>
@@ -66,9 +78,13 @@ public class Dessert_Ball_Movement : MonoBehaviour
     void Update()
     {
         // Basicamente recrea la ecuacion y = |sin(k*x)|
-        float posY = math.abs(Mathf.Sin(posX + Speed * Time.deltaTime)) + posIniY;
-        posX += Speed * Time.deltaTime;
-        transform.position = new Vector3 (posX, posY);
+        float posY = math.abs(Mathf.Sin(_posX + Speed * Time.deltaTime)) + _posIniY;
+        _posX += Speed * Time.deltaTime;
+        transform.position = new Vector3(_posX, posY);
+
+        // Rotación 
+        _anguloEjeZ = transform.rotation.eulerAngles.z - RotationSpeed*Time.deltaTime;
+        transform.rotation = Quaternion.Euler(0f, 0f, _anguloEjeZ);
     }
     #endregion
 
