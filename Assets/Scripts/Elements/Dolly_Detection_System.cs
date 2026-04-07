@@ -24,8 +24,14 @@ public class Dolly_Detection_System : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
+    /// <summary>
+    /// Intervalo para subir la puntuacion
+    /// </summary>
     [SerializeField] private float IntervaloParaSubir = 0f;
-    [SerializeField] private GameObject _Finish;
+    /// <summary>
+    /// Objeto de la meta
+    /// </summary>
+    [SerializeField] private GameObject _Finish = null;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -93,19 +99,40 @@ public class Dolly_Detection_System : MonoBehaviour
     // Ejemplo: GetPlayerController
     public void OnTriggerEnter2D(Collider2D collision)
     {
+        //Miramos si es un objeto detectable 
         if (collision.gameObject.GetComponent<DetectableObject>() != null)
         {
+            //Miramos si es reparable 
             if (collision.gameObject.GetComponent<Repair>() != null && collision.gameObject.GetComponent<Repair>().Repaired)
             {
                 return;
             }
+            //Miramos si no es reparable para sumar puntuacion 
             _detected = true;
             LevelManager.Instance.QualityDown(collision.gameObject.GetComponent<DetectableObject>().CalidadABajar);
             
         }
-        else if (collision.gameObject.GetComponent<Movement_Player>() != null && !_Finish.GetComponent<Finish>().HasWin())
-        {
-            LevelManager.Instance.QualityDown(LevelManager.Instance.GetcurrentScore());
+        //Miramos si es el jugador  
+        else if (collision.gameObject.GetComponent<Movement_Player>() != null){
+            //revisamos si existe una meta
+
+            if( _Finish != null)
+            {
+                //Si existe la meta miramos si tiene el componente finish y si has ganado 
+                if (!_Finish.GetComponent<Finish>().HasWin())
+                {
+                    //Restamos puntuacion para perder
+                    LevelManager.Instance.QualityDown(LevelManager.Instance.GetcurrentScore());
+                }
+                
+            }
+            else
+            {
+                //sino hay meta perdemos directamente
+                LevelManager.Instance.QualityDown(LevelManager.Instance.GetcurrentScore());
+            }
+        
+           
         }
     }
     #endregion

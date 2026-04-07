@@ -171,6 +171,16 @@ public class LevelManager : MonoBehaviour
         PauseScreen.SetActive(true);
     }
     /// <summary>
+    /// Metodo que pausara el juego sin activar el panel de pausa (ideal para cuando llegas a la meta)
+    /// </summary>
+    public void _Pausa_SinPanel()
+    {
+        /*Se manda un mensaje a todos los objetos que sean hijos de este para
+        que activen el metodo "UnPause" */
+        objetos_pausados.BroadcastMessage("Pause");
+
+    }
+    /// <summary>
     /// Metod encargado de restablecer la partida desde el punto que la dejaste 
     /// </summary>
     public void Resume()

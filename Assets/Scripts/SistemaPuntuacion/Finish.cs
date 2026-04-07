@@ -1,6 +1,6 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
-// Responsable de la creación de este archivo
+// Script responsable de la presentacion de la puntuacion final del nivel con estrellas
+// Tristan Sanchez Lopez
 // Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
@@ -85,7 +85,9 @@ public class Finish : MonoBehaviour
     /// </summary>
     void Start()
     {
+        //Guardamos la puntuacion inicial
         puntuacionInicial = LevelManager.Instance.GetcurrentScore();
+        //Desactivamos el panel de rating por si acaso
         RatingScreen.SetActive(false);
     }
     #endregion
@@ -97,9 +99,13 @@ public class Finish : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
-
+    /// <summary>
+    /// Metodo publico que se puede usar para ver si el jugador ya ha llegado a la meta
+    /// </summary>
+    /// <returns>Devuelve true si has ganado y false si no </returns>
     public bool HasWin()
     {
+        // Devuelve la variable que indica si ha llegado a la meta
         return Jugador_Pausado;
     }
     #endregion
@@ -131,9 +137,8 @@ public class Finish : MonoBehaviour
         //Si ya se ha realizado la collision del jugador buscamos que nos choque la camara también
         if (Jugador_Pausado && collision.gameObject.GetComponent<Dolly_Movement>() != null)
         {
-            //activamos el panel de las estrellas
+            //Activamos el panel de las estrellas
             Stars_FillAmount();
-            RatingScreen.SetActive(true);
         }
     }
     /// <summary>
@@ -141,6 +146,7 @@ public class Finish : MonoBehaviour
     /// </summary>
     private void PausePlayer()
     {
+        //desactivamos cada componente
         _player.GetComponent<Movement_Player>().enabled = false;
         _player.GetComponent<Jump>().enabled = false;
         _player.GetComponent<Shoot>().enabled = false;
@@ -151,6 +157,7 @@ public class Finish : MonoBehaviour
     /// </summary>
     private void Accelera_Dolly()
     {
+        //cambiamos la velocidad de la bola del desierto para que viaje mas rapido y no aburrir al usuario
         _desertBall.GetComponent<Dessert_Ball_Movement>().SetSpeed(SpeedBost);
     }
     /// <summary>
@@ -168,8 +175,11 @@ public class Finish : MonoBehaviour
     /// </summary>
     private void Stars_FillAmount()
     {
+        //Conseguimos la puntuacion actual
         puntiacionActual = LevelManager.Instance.GetcurrentScore();
+        //Establecemos el numero de estrellas que vas a tener 
         Stars.fillAmount = Conviertefloat(puntuacionInicial, puntiacionActual);
+        //Activamos el panel de final de partida
         RatingScreen.SetActive(true);
 
     }
