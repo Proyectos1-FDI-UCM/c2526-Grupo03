@@ -283,7 +283,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -23, y: 5}
+  m_Offset: {x: -20, y: 5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -308,7 +308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WarningSign: {fileID: 3291340966182950862}
-  WarningDuration: 2
+  WarningDuration: 0
 --- !u!1 &3291340966182950862
 GameObject:
   m_ObjectHideFlags: 0
