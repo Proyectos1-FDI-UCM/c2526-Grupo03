@@ -78,7 +78,7 @@ public class LevelManager : MonoBehaviour
     #region Métodos de MonoBehaviour
     private void Start()
     {
-        GameManager.Instance.SetLevelToRestart(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+        GameManager.Instance.SetLevelToRestart(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
     }
     protected void Awake()
     {
