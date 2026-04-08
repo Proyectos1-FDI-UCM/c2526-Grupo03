@@ -192,6 +192,15 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    /// <summary>
+    /// Cierra la build
+    /// </summary>
+    public void Exit()
+    {
+        Debug.Log("Cerrando juego");
+        Application.Quit();
+    }
+
     // ---- MÉTODOS PRIVADOS ----
 
     #region Métodos Privados 
