@@ -25,7 +25,9 @@ public class Dolly_Movement : MonoBehaviour
     [SerializeField]
     private GameObject ObjetoASeguir;
     [SerializeField]
-    private float Offset = 1f;
+    private float OffsetX = 1f;
+    [SerializeField]
+    private float OffsetY = 1f;
 
     #endregion
 
@@ -38,24 +40,28 @@ public class Dolly_Movement : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
+    /// <summary>
+    /// Vatiables de seguimiento
+    /// </summary>
+    private float _followingObjectPositionXAxis;
+    private float _followingObjectPositionYAxis;
+
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
 
-    private float _followingObjectPositionXAxis;
-
     // Por defecto están los típicos (Update y Start) pero:
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
-    
+
     /// <summary>
     /// Start is called on the frame when a script is enabled just before 
     /// any of the Update methods are called the first time.
     /// </summary>
     void Start()
     {
-        
+        _followingObjectPositionYAxis = ObjetoASeguir.transform.position.y + OffsetY;
     }
 
     /// <summary>
@@ -64,7 +70,7 @@ public class Dolly_Movement : MonoBehaviour
     void Update()
     {
         _followingObjectPositionXAxis = ObjetoASeguir.transform.position.x;
-        transform.position = new Vector3(_followingObjectPositionXAxis + Offset, 0f);
+        transform.position = new Vector3(_followingObjectPositionXAxis + OffsetX, _followingObjectPositionYAxis);
     }
     #endregion
 
