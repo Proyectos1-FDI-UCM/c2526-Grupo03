@@ -103,7 +103,7 @@ public class Repair : MonoBehaviour
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.sprite = SpriteBroken;
-        _selectedQTE = Random.Range(0, 2);
+        _selectedQTE = Random.Range(0, 3);
     }
 
     /// <summary>
