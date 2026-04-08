@@ -8,12 +8,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Accessible_InGame/Menu.unity
     guid: b13e49dfc910045ba80034544cb5011b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Accessible_InGame/Nivel1.unity
     guid: 593e4707f5faf5449ab580b8ca93d6ec
   - enabled: 1
     path: Assets/Scenes/Accessible_InGame/Lose_Scene.unity
     guid: c46f79edd15f3fd4aad8b60a105d9da2
+  - enabled: 1
+    path: Assets/Scenes/Accessible_InGame/Definitive_Level.unity
+    guid: 3a4afcc48a64f5c4d95d14b56f6fda76
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: b7a764e4dfe031342a2ef8852b70aa88, type: 3}
   m_UseUCBPForAssetBundles: 0
