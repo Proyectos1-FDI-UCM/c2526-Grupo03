@@ -87,6 +87,11 @@ public class Jump : MonoBehaviour
     /// Contiene la información del componente Animator.
     /// </summary>
     private Animator _animator;
+
+    /// <summary>
+    /// Indica si debemos impedir el siguiente salto
+    /// </summary>
+    private bool _desactivated = false;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -121,7 +126,7 @@ public class Jump : MonoBehaviour
     void Update()
     {
         // De momento hacemos el salto con el movimiento en el eje y para no tocar el input action
-        if (InputManager.Instance.JumpWasPressedThisFrame())
+        if (InputManager.Instance.JumpWasPressedThisFrame() && !_desactivated)
         {
             // Comprobamos si el detector de suelo dice que estás en el suelo
             if (_landed)
@@ -187,6 +192,14 @@ public class Jump : MonoBehaviour
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
+    public void DesactivateJump()
+    {
+        _desactivated = true;
+    }
+    public void ActivateJump()
+    {
+        _desactivated = false;
+    }
     #endregion
 
     // ---- MÉTODOS PRIVADOS ----

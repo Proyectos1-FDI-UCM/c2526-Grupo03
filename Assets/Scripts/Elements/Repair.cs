@@ -119,29 +119,30 @@ public class Repair : MonoBehaviour
         }
         if (IsRepairing && CanRepair)
         {
-            _player.GetComponent<Movement_Player>().enabled = false;
-            _player.GetComponent<Jump>().enabled = false;
-            _player.GetComponent<Shoot>().enabled = false;
-            _player.GetComponent<Scream_Reload>().enabled = false;
+            _player.GetComponent<Movement_Player>().DesactivateMovement();
+            _player.GetComponent<Jump>().DesactivateJump();
+            _player.GetComponent<Shoot>().DesactivateShoot();
+            _player.GetComponent<Scream_Reload>().DesactivateReload();
+
             CanRepair = false;
             _repairIniTime = Time.time;
         }
         if (Repaired)
         {
-            _player.GetComponent<Movement_Player>().enabled = true;
-            _player.GetComponent<Jump>().enabled = true;
+            _player.GetComponent<Movement_Player>().ActivateMovement();
+            _player.GetComponent<Jump>().ActivateJump();
+            _player.GetComponent<Shoot>().ActivateShoot();
+            _player.GetComponent<Scream_Reload>().ActivateReload();
             this.GetComponent<Repair>().enabled = false; // mejor desactivarlo que destruirlo
-            _player.GetComponent<Shoot>().enabled = true;
-            _player.GetComponent<Scream_Reload>().enabled = true;
             _spriteRenderer.sprite = SpriteRepaired;
             Key.SetActive(false);
         }
         if (HasFinishedRepairing) 
         {
-            _player.GetComponent<Movement_Player>().enabled = true;
-            _player.GetComponent<Jump>().enabled = true;
-            _player.GetComponent<Shoot>().enabled = true;
-            _player.GetComponent<Scream_Reload>().enabled = true;
+            _player.GetComponent<Movement_Player>().ActivateMovement();
+            _player.GetComponent<Jump>().ActivateJump();
+            _player.GetComponent<Shoot>().ActivateShoot();
+            _player.GetComponent<Scream_Reload>().ActivateReload();
             _spriteRenderer.sprite = SpriteBroken;
             Key.SetActive(false);
             HasFinishedRepairing = false;
@@ -149,10 +150,10 @@ public class Repair : MonoBehaviour
 
         if (HasPressedExit)
         {
-            _player.GetComponent<Movement_Player>().enabled = true;
-            _player.GetComponent<Jump>().enabled = true;
-            _player.GetComponent<Shoot>().enabled = true;
-            _player.GetComponent<Scream_Reload>().enabled = true;
+            _player.GetComponent<Movement_Player>().ActivateMovement();
+            _player.GetComponent<Jump>().ActivateJump();
+            _player.GetComponent<Shoot>().ActivateShoot();
+            _player.GetComponent<Scream_Reload>().ActivateReload();
             DisableChosenQTE();
             Key.SetActive(true);
             IsRepairing = false;
@@ -170,10 +171,6 @@ public class Repair : MonoBehaviour
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
-    public void ValorQTE(int val)
-    {
-        _selectedQTE = val;
-    }
 
     #endregion
 

@@ -67,15 +67,20 @@ public class Movement_Player : MonoBehaviour
     /// Controla si sólo está andando para mostrar la animación correcta.
     /// </summary>
     private bool _onlyWalking = true;
+
+    /// <summary>
+    /// Indica si debemos impedir el siguiente movimiento
+    /// </summary>
+    private bool _desactivated = false;
     #endregion
-    
+
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-    
+
     // Por defecto están los típicos (Update y Start) pero:
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
-    
+
     /// <summary>
     /// Start is called on the frame when a script is enabled just before 
     /// any of the Update methods are called the first time.
@@ -97,7 +102,7 @@ public class Movement_Player : MonoBehaviour
         Vector2 dir = InputManager.Instance.MovementVector;
 
         // en caso de moverse a la derecha
-        if (dir.x > 0 && !RightDetector.GetComponent<Detector>().Detected && !_empujado)
+        if (dir.x > 0 && !RightDetector.GetComponent<Detector>().Detected && !_empujado && !_desactivated)
         {
             // mueve al personaje en base a la velocidad (_velocity) en el eje x
             this.transform.position += new Vector3(_speed, 0.0f) * Time.deltaTime;
@@ -114,7 +119,7 @@ public class Movement_Player : MonoBehaviour
             else _speed = MaxVelocity;
         }
         // en caso de moverse a la izquierda
-        else if (dir.x < 0 && !LeftDetector.GetComponent<Detector>().Detected)
+        else if (dir.x < 0 && !LeftDetector.GetComponent<Detector>().Detected && !_desactivated)
         {
             // mueve al personaje en base a la velocidad (_velocity) en el eje x
             this.transform.position += new Vector3(_speed, 0.0f) * Time.deltaTime;
@@ -238,19 +243,26 @@ public class Movement_Player : MonoBehaviour
         return _onlyWalking;
     }
 
-
+    public void DesactivateMovement()
+    {
+        _desactivated = true;
+    }
+    public void ActivateMovement()
+    {
+        _desactivated = false;
+    }
     #endregion
-    
+
     // ---- MÉTODOS PRIVADOS ----
     #region Métodos Privados
     // Documentar cada método que aparece aquí
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
-    
-        
-    
-    #endregion   
+
+
+
+    #endregion
 
 } // class Movement_Player 
 // namespace

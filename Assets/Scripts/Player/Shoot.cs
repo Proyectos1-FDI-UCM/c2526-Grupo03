@@ -1,6 +1,6 @@
 ﻿//---------------------------------------------------------
 // Encargado del disparo del jugador y el pool de balas
-// Alejandro Garcia y Víctor Román
+// Alejandro Garcia y Víctor Román y Gabriel Adrian
 // Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
@@ -68,6 +68,10 @@ public class Shoot : MonoBehaviour
     /// </summary>
     private GameObject[] _bulletsPool;
 
+    /// <summary>
+    /// Indica si debemos impedir el siguiente disparo
+    /// </summary>
+    private bool _desactivated = false;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -115,7 +119,7 @@ public class Shoot : MonoBehaviour
         {
             _animator.SetBool("IsShootingAnim", false);
         }
-        if (InputManager.Instance.FireWasPressedThisFrame() && Time.time >= _timeToWait && _ammo > 0)
+        if (InputManager.Instance.FireWasPressedThisFrame() && !_desactivated && Time.time >= _timeToWait && _ammo > 0)
         {
             // -- Comprueba si hay balas usables --
             int i = 0;
@@ -169,6 +173,14 @@ public class Shoot : MonoBehaviour
         _ammo = MaxAmmo;
     }
 
+    public void DesactivateShoot()
+    {
+        _desactivated = true;
+    }
+    public void ActivateShoot()
+    {
+        _desactivated = false;
+    }
     #endregion
 
     // ---- MÉTODOS PRIVADOS ----

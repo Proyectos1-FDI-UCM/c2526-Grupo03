@@ -1,6 +1,6 @@
 ﻿//---------------------------------------------------------
 // Script encargado de la recarga de municion del personaje
-// Sergio Higuera, Alejandro Garcia
+// Sergio Higuera, Alejandro Garcia, Gabriel Adrian
 // Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
@@ -60,6 +60,10 @@ public class Scream_Reload : MonoBehaviour
     // Variable que determina si el efecto de realentización está activo o no
     private bool _slowActive = false;
 
+    /// <summary>
+    /// Indica si debemos impedir la siguiente recarga
+    /// </summary>
+    private bool _desactivated = false;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -85,7 +89,7 @@ public class Scream_Reload : MonoBehaviour
     {
         bool reloading = InputManager.Instance.RelaodWasPressedThisFrame();
 
-        if (reloading && Time.time >= _timePassed)
+        if (reloading &&  !_desactivated && Time.time >= _timePassed)
         {
             this.gameObject.GetComponent<Movement_Player>().setMaxVel(ReloadMovement);
 
@@ -115,6 +119,14 @@ public class Scream_Reload : MonoBehaviour
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
+    public void DesactivateReload()
+    {
+        _desactivated = true;
+    }
+    public void ActivateReload()
+    {
+        _desactivated = false;
+    }
     #endregion
 
     // ---- MÉTODOS PRIVADOS ----
