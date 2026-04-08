@@ -109,6 +109,7 @@ public class Balas : MonoBehaviour
     { 
         //miramos las balas que tiene el jugador para representarlas  
         balas = Player.GetComponent<Shoot>().GetAmmo();
+        Debug.Log("Balas restantes: " + balas);
         // Y reducimos el grafico si ha bajado
         Reduce_Grito(balas);
     }
