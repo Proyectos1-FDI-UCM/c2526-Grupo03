@@ -181,6 +181,7 @@ public class Finish : MonoBehaviour
         Stars.fillAmount = Conviertefloat(puntuacionInicial, puntiacionActual);
         //Activamos el panel de final de partida
         RatingScreen.SetActive(true);
+        LevelManager.Instance._Pausa_SinPanel();
 
     }
     /// <summary>
