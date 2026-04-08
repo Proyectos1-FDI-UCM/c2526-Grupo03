@@ -393,7 +393,18 @@
                 {
                     "name": "",
                     "id": "acb67337-cb38-4ab6-ad8b-c890f4cdc2ba",
-                    "path": "<Keyboard>/z",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "48545e12-65de-49e7-84aa-ca7461cc9afe",
+                    "path": "<Keyboard>/leftAlt",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
