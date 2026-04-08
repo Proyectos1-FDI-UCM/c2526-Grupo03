@@ -54,6 +54,10 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private int InicialQuality;
 
+    /// <summary>
+    /// Nombre de la escena a reiniciar en caso necesario
+    /// </summary>
+    private string _levelName;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -164,8 +168,28 @@ public class GameManager : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(index);
         System.GC.Collect();
     } // ChangeScene
+    
+    public void ChangeLoseScene()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Lose_Scene");
+    }
 
-
+    /// <summary>
+    /// Guarda el nombre de la escena a reiniciar en caso necesario
+    /// </summary>
+    /// <param name="name">Nombre de la escena que quieres reiniciar</param>
+    public void SetLevelToRestart(string name)
+    {
+        _levelName = name;
+    }
+    /// <summary>
+    /// Reinicia la escena del último nivel jugado
+    /// </summary>
+    public void RestartLevel()
+    {
+        //Restablece el nivel al inicio
+        UnityEngine.SceneManagement.SceneManager.LoadScene(_levelName);
+    }
     #endregion
 
     // ---- MÉTODOS PRIVADOS ----

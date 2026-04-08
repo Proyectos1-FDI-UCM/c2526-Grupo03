@@ -33,10 +33,6 @@ public class LevelManager : MonoBehaviour
     // Ejemplo: MaxHealthPoints
 
     /// <summary>
-    /// Panel de muerte
-    /// </summary>
-    [SerializeField] private GameObject LoseScreen;
-    /// <summary>
     /// Panel de pausa
     /// </summary>
     [SerializeField] private GameObject PauseScreen;
@@ -80,7 +76,10 @@ public class LevelManager : MonoBehaviour
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
 
     #region Métodos de MonoBehaviour
-
+    private void Start()
+    {
+        GameManager.Instance.SetLevelToRestart(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+    }
     protected void Awake()
     {
         if (_instance == null)
@@ -121,7 +120,7 @@ public class LevelManager : MonoBehaviour
     public void QualityDown(int cant)
     {
         if (_quality>0) _quality -= cant;
-        if (_quality<=0) LoseScreen.SetActive(true);
+        if (_quality<=0) GameManager.Instance.ChangeLoseScene();
     }
     /// <summary>
     /// Método que devuelve la puntuación actual de la película
@@ -213,7 +212,6 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     private void Init()
     {
-        LoseScreen.SetActive(false);
         _quality = StartingQuality;
     }
 
