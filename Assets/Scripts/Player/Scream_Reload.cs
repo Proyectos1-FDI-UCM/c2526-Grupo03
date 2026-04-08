@@ -1,6 +1,6 @@
 ﻿//---------------------------------------------------------
-// Breve descripción del contenido del archivo
-// Responsable de la creación de este archivo
+// Script encargado de la recarga de municion del personaje
+// Sergio Higuera, Alejandro Garcia
 // Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
@@ -28,10 +28,15 @@ public class Scream_Reload : MonoBehaviour
     [SerializeField] private float ReloadMovement = 3.0f;
 
     // Rapidez a la cual bebe el agua
-    [SerializeField] private float ReloadSpeed = 1.5f;
+    [SerializeField] private float ReloadDuration = 1.5f;
 
     // Tiempo de espera entre recargas (para que no se sature de agua el pobre)
     [SerializeField] private float ReloadCD = 5.0f;
+
+    /// <summary>
+    /// Indica si se esta recargando
+    /// </summary>
+    public bool Reloading = false;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -54,6 +59,7 @@ public class Scream_Reload : MonoBehaviour
 
     // Variable que determina si el efecto de realentización está activo o no
     private bool _slowActive = false;
+
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -83,7 +89,9 @@ public class Scream_Reload : MonoBehaviour
         {
             this.gameObject.GetComponent<Movement_Player>().setMaxVel(ReloadMovement);
 
-            _enOfModification = Time.time + ReloadSpeed;
+            Reloading = true;
+
+            _enOfModification = Time.time + ReloadDuration;
             _slowActive = true;
 
             _timePassed = Time.time + ReloadCD;
@@ -91,6 +99,7 @@ public class Scream_Reload : MonoBehaviour
 
         if (_slowActive && Time.time >= _enOfModification)
         {
+            Reloading = false;
             this.gameObject.GetComponent<Shoot>().ReloadAmmo();
             this.gameObject.GetComponent<Movement_Player>().setMaxVel(_maxOriginalSpeed);
             _slowActive = false;

@@ -1,6 +1,6 @@
 ﻿//---------------------------------------------------------
 // Se encargara de renderizar los datos que son necesarios para el bucle de juego
-// Tristan Sanchez Lopez
+// Tristan Sanchez Lopez, Alejandro Garcia
 // Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
@@ -34,6 +34,10 @@ public class Balas : MonoBehaviour
     [SerializeField]
     private Image Barra_puntuacion;
     /// <summary>
+    /// Botella de recarga de municion
+    /// </summary>
+    [SerializeField] private Image Botella;
+    /// <summary>
     /// Referencia al jugador 
     /// </summary>
     [SerializeField] private GameObject Player;
@@ -47,12 +51,33 @@ public class Balas : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-    // Variable privada encargada de almacenar el numero de balas
-    private int balas;
-    //Variable privada encargada de almacenar la puntuacion en cada momento
-    private int puntuacion;
-    //Variable que almacena la puntuacion inicial de el nivel
-    private int puntuacionInicial;
+
+    /// <summary>
+    /// Almacena el numero de balas
+    /// </summary>
+    private int _balas;
+    /// <summary>
+    /// Almacena la puntuacion en cada momento
+    /// </summary>
+    private int _puntuacion;
+    /// <summary>
+    /// Almacena la puntuacion inicial de el nivel
+    /// </summary>
+    private int _puntuacionInicial;
+
+    /// <summary>
+    /// Referencia al script de recarga del jugador
+    /// </summary>
+    private Scream_Reload _playerReload;
+    /// <summary>
+    /// Velocidad de rotacion de la botella
+    /// </summary>
+    private float _velocidadBotella = 700.0f;
+    /// <summary>
+    /// Rotacion actual de la botella
+    /// </summary>
+    private float _rotacionBotella = .0f;
+
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -62,13 +87,20 @@ public class Balas : MonoBehaviour
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
 
+    private void Awake()
+    {
+        Botella.gameObject.SetActive(false);
+        Botella.gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
+    }
+
     /// <summary>
     /// Start is called on the frame when a script is enabled just before 
     /// any of the Update methods are called the first time.
     /// </summary>
     void Start()
     {   //Guardamos la puntuación inicial  
-        puntuacionInicial = LevelManager.Instance.GetcurrentScore();
+        _puntuacionInicial = LevelManager.Instance.GetcurrentScore();
+        _playerReload = Player.GetComponent<Scream_Reload>();
         //Actualizamos el GUI de la bala para poner el valor inical
         Update_Bala();
         //Actualizamos la barra de puntuación para establecer el valor inical
@@ -83,6 +115,19 @@ public class Balas : MonoBehaviour
         Update_Bala();
         //Actualizamos la barra de puntuación
         Update_Puntuacion();
+
+        if (_playerReload.Reloading)
+        {
+            Debug.Log("Rotacion: " + _rotacionBotella);
+            Botella.gameObject.SetActive(true);
+            _rotacionBotella = Botella.transform.rotation.eulerAngles.z - _velocidadBotella * Time.deltaTime;
+            Botella.transform.rotation = Quaternion.Euler(0f, 0f, _rotacionBotella);
+        }
+        else
+        {
+            Botella.transform.rotation = Quaternion.identity;
+            Botella.gameObject.SetActive(false);
+        }
     }
     #endregion
 
@@ -93,6 +138,11 @@ public class Balas : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
+
+    public void RecargaBotella()
+    {
+
+    }
 
     #endregion
     
@@ -108,20 +158,20 @@ public class Balas : MonoBehaviour
     private void Update_Bala()
     { 
         //miramos las balas que tiene el jugador para representarlas  
-        balas = Player.GetComponent<Shoot>().GetAmmo();
+        _balas = Player.GetComponent<Shoot>().GetAmmo();
         // Y reducimos el grafico si ha bajado
-        Reduce_Grito(balas);
+        Reduce_Grito(_balas);
     }
     /// <summary>
     /// Metodo que actualiza el GUI de la puntuacion cuando esta crece o se ve reducida
     /// </summary>
     private void Update_Puntuacion()
     {   //Obtenemos el valor de la puntuación 
-        puntuacion = LevelManager.Instance.GetcurrentScore();
+        _puntuacion = LevelManager.Instance.GetcurrentScore();
         //Debug para saber en las pruebas cuanto vale
         //Debug.Log(puntuacion);
         //Actualizamos la barra con el metodo conviertePorcent
-        Barra_puntuacion.fillAmount = ConviertePorcent(puntuacionInicial,puntuacion);
+        Barra_puntuacion.fillAmount = ConviertePorcent(_puntuacionInicial,_puntuacion);
     }
     /// <summary>
     /// Metodo que reduce la GUI de balas a la cantidad correspondiente
