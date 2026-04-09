@@ -1,6 +1,7 @@
 //---------------------------------------------------------
 // Script responsable de la presentacion de la puntuacion final del nivel con estrellas
-// Tristan Sanchez Lopez
+// Tristan Sanchez Lopez && Colaboradores:
+//      Gabriel Adrian Oltean
 // Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
@@ -138,7 +139,7 @@ public class Finish : MonoBehaviour
     {
         //desactivamos cada componente
         _player.GetComponent<Movement_Player>().enabled = false;
-        _player.GetComponent<Jump>().enabled = false;
+        _player.GetComponent<Jump>().DesactivateJump();
         _player.GetComponent<Shoot>().enabled = false;
         _player.GetComponent<Scream_Reload>().enabled = false;
     }
