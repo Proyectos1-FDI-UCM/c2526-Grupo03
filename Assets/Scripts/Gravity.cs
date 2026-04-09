@@ -136,7 +136,7 @@ public class Gravity : MonoBehaviour
             // Movemos al personaje justo al lado de la pared
 
             // teletransporte
-            if ((math.abs(_aumentoY) < 0.8) && (transform.position.y != _posY)) transform.position += new Vector3(.0f, _aumentoY);
+            if ((math.abs(_aumentoY) < 0.8) && (transform.position.y < _posY)) transform.position += new Vector3(.0f, _aumentoY);
             _speed = 0.0f;
         }
     }

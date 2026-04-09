@@ -5,6 +5,7 @@
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
 
+using Unity.Mathematics;
 using UnityEngine;
 // Añadir aquí el resto de directivas using
 
@@ -118,6 +119,20 @@ public class Jump : MonoBehaviour
     {
         _landed = FloorDetector.GetComponent<Detector>().Detected;
         _collidesWithRoof = RoofDetector.GetComponent<Detector>().Detected;
+        if (_collidesWithRoof)
+        {
+            Detector _RoofDetector = RoofDetector.GetComponent<Detector>();
+            // Calculamos la posicion del Jugador justo debajo del techo
+            float _posDebajoTecho = _RoofDetector.CollisionedObject.gameObject.transform.position.y - _RoofDetector.CollisionedObject.bounds.size.y / 2;
+            float _posY = _posDebajoTecho - this.gameObject.GetComponent<Collider2D>().bounds.size.y / 2;
+            float _aumentoY = _posY - transform.position.y;
+
+            // Movemos al personaje justo al lado de la pared
+
+            // teletransporte
+            if ((math.abs(_aumentoY) < 0.8) && (transform.position.y > _posY)) transform.position += new Vector3(.0f, _aumentoY);
+            _speed = 0.0f;
+        }
     }
 
     /// <summary>
