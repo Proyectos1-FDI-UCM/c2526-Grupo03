@@ -8,6 +8,7 @@
 //---------------------------------------------------------
 
 using System;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Rendering;
 // Añadir aquí el resto de directivas using
@@ -157,7 +158,7 @@ public class Movement_Player : MonoBehaviour
             // Movemos al personaje justo al lado de la pared
 
             // teletransporte
-            if (transform.position.x < _posX) transform.position += new Vector3(_aumentoX, 0.0f);
+            if (transform.position.x < _posX && math.abs(_aumentoX) < 1) transform.position += new Vector3(_aumentoX, 0.0f);
         }
         else if (RightDetector.GetComponent<Detector>().Detected && !_empujado)
         {
@@ -170,7 +171,7 @@ public class Movement_Player : MonoBehaviour
             // Movemos al personaje justo al lado de la pared
 
             // teletransporte
-            if (transform.position.x > _posX) transform.position += new Vector3(_aumentoX, 0.0f);
+            if (transform.position.x > _posX && math.abs(_aumentoX) < 1) transform.position += new Vector3(_aumentoX, 0.0f);
         }
 
         // ---- Empuje del personaje ----
@@ -204,7 +205,7 @@ public class Movement_Player : MonoBehaviour
         }
         if (InputManager.Instance.PauseWasPressedThisFrame())
             {
-                Debug.Log("Pausando");
+                // Debug.Log("Pausando");
                 LevelManager.Instance._Pausa();
             }
     }
