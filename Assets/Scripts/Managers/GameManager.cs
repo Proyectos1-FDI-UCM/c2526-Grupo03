@@ -218,6 +218,23 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
+    /// <summary>
+    /// Abre la escena de créditos
+    /// </summary>
+    public void ChangeCreditsScene()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Creditos");
+    }
+
+    /// <summary>
+    /// Abre el menú
+    /// </summary>
+    public void ChangeMenuScene()
+    {
+        Debug.Log("Menú");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
+    }
+
     // ---- MÉTODOS PRIVADOS ----
 
     #region Métodos Privados 
