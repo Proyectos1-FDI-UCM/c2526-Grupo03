@@ -71,6 +71,11 @@ public class Warning : MonoBehaviour
         _detected = false;
         _done = false;
         _touched = false;
+        // Desactivamos la vida para que no pueda matarlo sin haber activado el warning
+        if(this.gameObject.GetComponentInParent<Enemies_Health>() != null)
+        {
+            this.gameObject.GetComponentInParent<Enemies_Health>().enabled = false;
+        }
     }
 
     /// <summary>
@@ -82,6 +87,11 @@ public class Warning : MonoBehaviour
         {
             WarningSign.SetActive(false);
             _done = true;
+            // Activamos la vida y daño
+            if (this.gameObject.GetComponentInParent<Enemies_Health>() != null)
+            {
+                this.gameObject.GetComponentInParent<Enemies_Health>().enabled = true;
+            }
         }
     }
     #endregion

@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 1039243851940484214}
   - component: {fileID: 114572400180690761}
   - component: {fileID: 6972060860075040498}
-  m_Layer: 3
+  m_Layer: 4
   m_Name: WarningDetector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -776,7 +776,7 @@ GameObject:
   - component: {fileID: 2719763197742270648}
   - component: {fileID: 8941890414146022982}
   - component: {fileID: 5339615733073637316}
-  m_Layer: 3
+  m_Layer: 4
   m_Name: FrontDetector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
