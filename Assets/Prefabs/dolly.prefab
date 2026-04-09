@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4836459426543934732}
   - component: {fileID: -6238678687177223467}
   - component: {fileID: 4020016496966100813}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: dolly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,8 +148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba508fa9b3abfbd4ca4e55ea0f83a4e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LoseScreen: {fileID: 6547406078629569876, guid: c07129f316da99a42a01b5facbaddf53, type: 3}
   IntervaloParaSubir: 0
+  _Finish: {fileID: 0}
 --- !u!114 &4020016496966100813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,4 +163,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ObjetoASeguir: {fileID: 0}
-  Offset: 3
+  OffsetX: 1
+  OffsetY: 1
