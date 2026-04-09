@@ -4929,6 +4929,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+--- !u!1 &754764394 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5659521580523066734, guid: 999616f028854d24dbb68033461fab7e, type: 3}
+  m_PrefabInstance: {fileID: 1336116488}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &767111879
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7331,7 +7336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 754764394}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1143994160
@@ -8393,6 +8398,14 @@ PrefabInstance:
     - target: {fileID: 7318379492740483152, guid: 999616f028854d24dbb68033461fab7e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Restart
+      objectReference: {fileID: 0}
+    - target: {fileID: 8534865899874576143, guid: 999616f028854d24dbb68033461fab7e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2075658539}
+    - target: {fileID: 8534865899874576143, guid: 999616f028854d24dbb68033461fab7e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Resume
       objectReference: {fileID: 0}
     - target: {fileID: 8574470158432304131, guid: 999616f028854d24dbb68033461fab7e, type: 3}
       propertyPath: m_Name

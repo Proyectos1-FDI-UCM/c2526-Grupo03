@@ -5,6 +5,7 @@
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
 
+using Unity.Mathematics;
 using UnityEngine;
 // Añadir aquí el resto de directivas using
 
@@ -132,11 +133,10 @@ public class Gravity : MonoBehaviour
             float _posY = _posEncimaSuelo + this.gameObject.GetComponent<Collider2D>().bounds.size.y / 2;
             float _aumentoY = _posY - transform.position.y;
 
-            float _maxPosTeletransporte = transform.position.y + 0.4f;
             // Movemos al personaje justo al lado de la pared
 
             // teletransporte
-            if ((_posY <= _maxPosTeletransporte) && (transform.position.y != _posY)) transform.position += new Vector3(.0f, _aumentoY);
+            if ((math.abs(_aumentoY) < 0.8) && (transform.position.y != _posY)) transform.position += new Vector3(.0f, _aumentoY);
             _speed = 0.0f;
         }
     }

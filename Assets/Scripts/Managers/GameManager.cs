@@ -214,7 +214,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void Exit()
     {
-        Debug.Log("Cerrando juego");
+        // Debug.Log("Cerrando juego");
         Application.Quit();
     }
 
@@ -231,7 +231,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void ChangeMenuScene()
     {
-        Debug.Log("Menú");
+        // Debug.Log("Menú");
         UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
     }
 
