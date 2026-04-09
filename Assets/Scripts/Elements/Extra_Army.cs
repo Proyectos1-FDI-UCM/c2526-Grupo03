@@ -132,7 +132,7 @@ public class Extra_Army : MonoBehaviour
     {
         if (_warning.GetDone())
         {
-            Debug.Log("Extra_Army activado");
+            //Debug.Log("Extra_Army activado");
             if (FloorDetector.GetComponent<Detector>().Detected)
             {
                 _landed = true;

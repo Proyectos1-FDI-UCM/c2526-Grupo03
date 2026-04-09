@@ -70,7 +70,7 @@ public class Enemies_Health : MonoBehaviour
         if (Health < 1)
         {
             Destroy(this.gameObject);
-            Debug.Log($"Me he destruido con {Health} puntos de vida");
+            //Debug.Log($"Me he destruido con {Health} puntos de vida");
         }
     }
     #endregion
@@ -101,7 +101,7 @@ public class Enemies_Health : MonoBehaviour
 
             DamagePerHit = 1;
             Health = Health - DamagePerHit;
-            Debug.Log($"Me ha golpeado {collision.gameObject.name} y me queda {Health} vida");
+            //Debug.Log($"Me ha golpeado {collision.gameObject.name} y me queda {Health} vida");
         }
     }
     #endregion

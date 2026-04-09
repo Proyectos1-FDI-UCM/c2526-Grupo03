@@ -108,7 +108,7 @@ public class QTE1 : MonoBehaviour
         }
         if (InputManager.Instance.JumpWasPressedThisFrame())
         {
-            Debug.Log("Spam");
+            //Debug.Log("Spam");
             _componenteBarra.value += AumentoPorClick;
         }
         if (_componenteBarra.value >= _componenteBarra.maxValue)

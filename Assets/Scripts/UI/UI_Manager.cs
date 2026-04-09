@@ -89,8 +89,11 @@ public class Balas : MonoBehaviour
 
     private void Awake()
     {
-        Botella.gameObject.SetActive(false);
-        Botella.gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
+        if (Botella.gameObject != null)
+        {
+            Botella.gameObject.SetActive(false);
+            Botella.gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
+        }
     }
 
     /// <summary>
@@ -116,17 +119,20 @@ public class Balas : MonoBehaviour
         //Actualizamos la barra de puntuación
         Update_Puntuacion();
 
-        if (_playerReload.Reloading)
+        if (_playerReload.Reloading && Botella.gameObject != null)
         {
-            Debug.Log("Rotacion: " + _rotacionBotella);
+            //Debug.Log("Rotacion: " + _rotacionBotella);
             Botella.gameObject.SetActive(true);
             _rotacionBotella = Botella.transform.rotation.eulerAngles.z - _velocidadBotella * Time.deltaTime;
             Botella.transform.rotation = Quaternion.Euler(0f, 0f, _rotacionBotella);
         }
         else
         {
-            Botella.transform.rotation = Quaternion.identity;
-            Botella.gameObject.SetActive(false);
+            if (Botella.gameObject != null)
+            {
+                Botella.transform.rotation = Quaternion.identity;
+                Botella.gameObject.SetActive(false);
+            }
         }
     }
     #endregion

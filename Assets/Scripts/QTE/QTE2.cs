@@ -126,7 +126,7 @@ public class QTE2 : MonoBehaviour
             {
                 _anguloFinal = gameObject.transform.rotation.z;
                 _velocidadAngular = _anguloFinal - _anguloInicial;
-                Debug.Log(Mathf.Abs(_velocidadAngular));
+                //Debug.Log(Mathf.Abs(_velocidadAngular));
                 if(Mathf.Abs(_velocidadAngular) >= VelQueDebeLlevar && Mathf.Abs(_velocidadAngular) < VelAngularMax)
                 {
                     _sliderBarra.value += CantidadSumada;
