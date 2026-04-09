@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1240163603700538314}
   - component: {fileID: 8383262689143215504}
   - component: {fileID: 4651604097179790807}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Exclamation
   m_TagString: Untagged
   m_Icon: {fileID: 0}

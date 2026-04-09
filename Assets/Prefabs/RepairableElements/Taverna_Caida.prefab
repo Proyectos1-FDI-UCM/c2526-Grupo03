@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6839620482530576191}
   - component: {fileID: 8263852032163106545}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Repair_Keybinds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 8530409138022009372}
   - component: {fileID: 4603528108918438681}
   - component: {fileID: 5462877382129120709}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 5577199827432842717}
   - component: {fileID: 1163340426565688211}
   - component: {fileID: 3664734182915351577}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Taverna_Caida
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -362,13 +362,41 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 580294132018378343, guid: 6375e38e311123d488e4c2c3e6680734, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2333816512935063172, guid: 6375e38e311123d488e4c2c3e6680734, type: 3}
       propertyPath: m_Name
       value: QTE_1_Panel
       objectReference: {fileID: 0}
     - target: {fileID: 2333816512935063172, guid: 6375e38e311123d488e4c2c3e6680734, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2333816512935063172, guid: 6375e38e311123d488e4c2c3e6680734, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3968362168588411817, guid: 6375e38e311123d488e4c2c3e6680734, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4689323006978925390, guid: 6375e38e311123d488e4c2c3e6680734, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5277117629285950482, guid: 6375e38e311123d488e4c2c3e6680734, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5634448945056414978, guid: 6375e38e311123d488e4c2c3e6680734, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7621584566590344067, guid: 6375e38e311123d488e4c2c3e6680734, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8179618660305492535, guid: 6375e38e311123d488e4c2c3e6680734, type: 3}
       propertyPath: m_Pivot.x
@@ -449,6 +477,10 @@ PrefabInstance:
     - target: {fileID: 8179618660305492535, guid: 6375e38e311123d488e4c2c3e6680734, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9101615223946111356, guid: 6375e38e311123d488e4c2c3e6680734, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -468,9 +500,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4019046247879596555}
     m_Modifications:
+    - target: {fileID: 1261484996756531344, guid: dcbceaabd40cf364ea3ce4804f0b12bf, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1373367300393284063, guid: dcbceaabd40cf364ea3ce4804f0b12bf, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1557955247621819798, guid: dcbceaabd40cf364ea3ce4804f0b12bf, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 3039895128321870516, guid: dcbceaabd40cf364ea3ce4804f0b12bf, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3046104019206548296, guid: dcbceaabd40cf364ea3ce4804f0b12bf, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897994168896295394, guid: dcbceaabd40cf364ea3ce4804f0b12bf, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3977632460563087254, guid: dcbceaabd40cf364ea3ce4804f0b12bf, type: 3}
       propertyPath: m_Pivot.x
@@ -552,13 +604,45 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4057885426944075932, guid: dcbceaabd40cf364ea3ce4804f0b12bf, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522385270161405733, guid: dcbceaabd40cf364ea3ce4804f0b12bf, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5576786077106437979, guid: dcbceaabd40cf364ea3ce4804f0b12bf, type: 3}
       propertyPath: m_Name
       value: QTE_3_Panel
       objectReference: {fileID: 0}
     - target: {fileID: 5576786077106437979, guid: dcbceaabd40cf364ea3ce4804f0b12bf, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5576786077106437979, guid: dcbceaabd40cf364ea3ce4804f0b12bf, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214070767359088102, guid: dcbceaabd40cf364ea3ce4804f0b12bf, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7521462456087060428, guid: dcbceaabd40cf364ea3ce4804f0b12bf, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7826229261510040474, guid: dcbceaabd40cf364ea3ce4804f0b12bf, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8783932255360818785, guid: dcbceaabd40cf364ea3ce4804f0b12bf, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9157390789545508490, guid: dcbceaabd40cf364ea3ce4804f0b12bf, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -578,6 +662,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4019046247879596555}
     m_Modifications:
+    - target: {fileID: 4241323955707552, guid: 3a041978a980e4c4792861c340ab8a3a, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1028297213904222200, guid: 3a041978a980e4c4792861c340ab8a3a, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1287747855246066490, guid: 3a041978a980e4c4792861c340ab8a3a, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588972825848935062, guid: 3a041978a980e4c4792861c340ab8a3a, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 3132451563573240249, guid: 3a041978a980e4c4792861c340ab8a3a, type: 3}
       propertyPath: Disminucion
       value: 10
@@ -593,6 +693,10 @@ PrefabInstance:
     - target: {fileID: 3132451563573240249, guid: 3a041978a980e4c4792861c340ab8a3a, type: 3}
       propertyPath: VelQueDebeLlevar
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3233279921129025888, guid: 3a041978a980e4c4792861c340ab8a3a, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3535888436775779491, guid: 3a041978a980e4c4792861c340ab8a3a, type: 3}
       propertyPath: m_Pivot.x
@@ -679,12 +783,36 @@ PrefabInstance:
       value: QTE_2_Panel
       objectReference: {fileID: 0}
     - target: {fileID: 3904420632369198748, guid: 3a041978a980e4c4792861c340ab8a3a, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3904420632369198748, guid: 3a041978a980e4c4792861c340ab8a3a, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4355570042564868786, guid: 3a041978a980e4c4792861c340ab8a3a, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4439265930056523301, guid: 3a041978a980e4c4792861c340ab8a3a, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4568458226664463120, guid: 3a041978a980e4c4792861c340ab8a3a, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522471418892234255, guid: 3a041978a980e4c4792861c340ab8a3a, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5652819436349755572, guid: 3a041978a980e4c4792861c340ab8a3a, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7768185403442265698, guid: 3a041978a980e4c4792861c340ab8a3a, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
