@@ -32,14 +32,6 @@ public class Finish : MonoBehaviour
     /// </summary>
     [SerializeField] private float SpeedBost = 1f;
     /// <summary>
-    /// Panel de rating
-    /// </summary>
-    [SerializeField] private GameObject RatingScreen;
-    /// <summary>
-    /// Imagen de las estrellas representadas
-    /// </summary>
-    [SerializeField] private Image Stars;
-    /// <summary>
     /// Porcentaje para conseguir la maxima puntuacion
     /// </summary>
     [SerializeField] private float Porcentaje_victoria;
@@ -87,8 +79,6 @@ public class Finish : MonoBehaviour
     {
         //Guardamos la puntuacion inicial
         puntuacionInicial = LevelManager.Instance.GetcurrentScore();
-        //Desactivamos el panel de rating por si acaso
-        RatingScreen.SetActive(false);
     }
     #endregion
 
@@ -137,7 +127,7 @@ public class Finish : MonoBehaviour
         //Si ya se ha realizado la collision del jugador buscamos que nos choque la camara también
         if (Jugador_Pausado && collision.gameObject.GetComponent<Dolly_Movement>() != null)
         {
-            //Activamos el panel de las estrellas
+            // Guardamos el porcentaje final
             Stars_FillAmount();
         }
     }
@@ -178,11 +168,9 @@ public class Finish : MonoBehaviour
         //Conseguimos la puntuacion actual
         puntiacionActual = LevelManager.Instance.GetcurrentScore();
         //Establecemos el numero de estrellas que vas a tener 
-        Stars.fillAmount = Conviertefloat(puntuacionInicial, puntiacionActual);
-        //Activamos el panel de final de partida
-        RatingScreen.SetActive(true);
-        LevelManager.Instance._Pausa_SinPanel();
-
+        float fillAmount = Conviertefloat(puntuacionInicial, puntiacionActual);
+        GameManager.Instance.SetFinalRating(fillAmount);
+        GameManager.Instance.ChangeScene(3);
     }
     /// <summary>
     /// Convierte a diferencia dos numeros 

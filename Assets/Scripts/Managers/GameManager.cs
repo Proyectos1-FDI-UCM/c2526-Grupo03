@@ -58,6 +58,11 @@ public class GameManager : MonoBehaviour
     /// Nombre de la escena a reiniciar en caso necesario
     /// </summary>
     private int _levelIndex;
+
+    /// <summary>
+    /// Guarda la puntuación final despúes de cada nivel
+    /// </summary>
+    private float _FinalRating;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -120,6 +125,18 @@ public class GameManager : MonoBehaviour
 
     #region Métodos públicos
 
+    /// <summary>
+    /// Método que guarda la puntuación final para otras escenas
+    /// </summary>
+    /// <param name="rating">Puntuación a establecer</param>
+    public void SetFinalRating(float rating)
+    {
+        _FinalRating = rating;
+    }
+    public float GetFinalRating()
+    {
+        return _FinalRating;
+    }
     /// <summary>
     /// Propiedad para acceder a la única instancia de la clase.
     /// </summary>
