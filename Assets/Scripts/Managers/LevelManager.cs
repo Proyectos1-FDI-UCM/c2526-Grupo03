@@ -7,6 +7,7 @@
 //---------------------------------------------------------
 
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 /// <summary>
@@ -31,6 +32,25 @@ public class LevelManager : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
+
+    /// <summary>
+    /// Objeto del EventSystem de la escena
+    /// </summary>
+    [SerializeField] GameObject EventSystem;
+
+    /// <summary>
+    /// Primer botón del panel de muerte
+    /// </summary>
+    [SerializeField] GameObject DeadFirstSelectedButton;
+    /// <summary>
+    /// Primer Botón del menú de pausa
+    /// </summary>
+    [SerializeField] GameObject PauseFirstSelectedButton;
+    /// <summary>
+    /// Primer botón del panel de victoria
+    /// </summary>
+    [SerializeField] GameObject VictoryFirstSelectedButton;
+
 
     /// <summary>
     /// Panel de pausa
@@ -71,6 +91,11 @@ public class LevelManager : MonoBehaviour
     /// Calidad en cada momento de la película
     /// </summary>
     private int _quality;
+
+    /// <summary>
+    /// Componente del eventsystem
+    /// </summary>
+    private EventSystem _eventSystem;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -78,6 +103,11 @@ public class LevelManager : MonoBehaviour
     #region Métodos de MonoBehaviour
     private void Start()
     {
+        if (EventSystem.GetComponent<EventSystem>() != null)
+        {
+            _eventSystem = EventSystem.GetComponent<EventSystem>();
+            ChangeButtonToPause();
+        }
         GameManager.Instance.SetLevelToRestart(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
     }
     protected void Awake()
@@ -96,7 +126,27 @@ public class LevelManager : MonoBehaviour
 
     #region Métodos públicos
 
-
+    /// <summary>
+    /// Cambia el boton seleccionado al del panel de victoria
+    /// </summary>
+    public void ChangeButtonToVictory()
+    {
+        _eventSystem.SetSelectedGameObject(VictoryFirstSelectedButton);
+    }
+    /// <summary>
+    /// Cambia el boton seleccionado al del panel de muerte
+    /// </summary>
+    public void ChangeButtonToDead()
+    {
+        _eventSystem.SetSelectedGameObject(DeadFirstSelectedButton);
+    }
+    /// <summary>
+    /// Cambia el boton seleccionado al del panel de pausa
+    /// </summary>
+    public void ChangeButtonToPause()
+    {
+        _eventSystem.SetSelectedGameObject(PauseFirstSelectedButton);
+    }
 
     /// <summary>
     /// Método que sube la calidad de la película
