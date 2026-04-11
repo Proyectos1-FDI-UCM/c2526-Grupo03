@@ -171,7 +171,7 @@ public class Finish : MonoBehaviour
         //Establecemos el numero de estrellas que vas a tener 
         float fillAmount = Conviertefloat(puntuacionInicial, puntiacionActual);
         GameManager.Instance.SetFinalRating(fillAmount);
-        GameManager.Instance.ChangeScene(3);
+        LevelManager.Instance.ChangeButtonToVictory();
     }
     /// <summary>
     /// Convierte a diferencia dos numeros 

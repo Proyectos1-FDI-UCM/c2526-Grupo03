@@ -57,6 +57,15 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     [SerializeField] private GameObject PauseScreen;
     /// <summary>
+    /// Panel de Muerte
+    /// </summary>
+    [SerializeField] private GameObject Lose_Screen;
+    /// <summary>
+    /// Panel de victoria
+    /// </summary>
+    [SerializeField] private GameObject VictoryScreen;  
+
+    /// <summary>
     /// Calidad inicial
     /// </summary>
     [SerializeField] private int StartingQuality = 100;
@@ -108,10 +117,12 @@ public class LevelManager : MonoBehaviour
     #region Métodos de MonoBehaviour
     private void Start()
     {
+        // Guardamos el componente del eventsystem
         if (EventSystem.GetComponent<EventSystem>() != null)
         {
             _eventSystem = EventSystem.GetComponent<EventSystem>();
-            ChangeButtonToPause();
+            // Seleccionamos primero el menu de pausa
+            _eventSystem.SetSelectedGameObject(PauseFirstSelectedButton);
         }
         GameManager.Instance.SetLevelToRestart(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
     }
@@ -132,25 +143,30 @@ public class LevelManager : MonoBehaviour
     #region Métodos públicos
 
     /// <summary>
-    /// Cambia el boton seleccionado al del panel de victoria
+    /// Pausa el juego, cambia el boton seleccionado al del panel de victoria y activa el panel
     /// </summary>
     public void ChangeButtonToVictory()
     {
+        _Pausa_SinPanel();
         _eventSystem.SetSelectedGameObject(VictoryFirstSelectedButton);
+        VictoryScreen.SetActive(true);
     }
     /// <summary>
-    /// Cambia el boton seleccionado al del panel de muerte
+    /// Pausa el juego, cambia el boton seleccionado al del panel de muerte y activa el panel
     /// </summary>
     public void ChangeButtonToDead()
     {
+        _Pausa_SinPanel();
         _eventSystem.SetSelectedGameObject(DeadFirstSelectedButton);
+        Lose_Screen.SetActive(true);
     }
     /// <summary>
-    /// Cambia el boton seleccionado al del panel de pausa
+    /// Cambia el boton seleccionado al del panel de pausa y activa el panel
     /// </summary>
     public void ChangeButtonToPause()
     {
         _eventSystem.SetSelectedGameObject(PauseFirstSelectedButton);
+        PauseScreen.SetActive(true);
     }
 
     /// <summary>
@@ -175,7 +191,10 @@ public class LevelManager : MonoBehaviour
     public void QualityDown(int cant)
     {
         if (_quality>0) _quality -= cant;
-        if (_quality<=0) GameManager.Instance.ChangeLoseScene();
+        if (_quality <= 0)
+        {
+            ChangeButtonToDead(); 
+        }
     }
     /// <summary>
     /// Método que devuelve la puntuación actual de la película
@@ -222,7 +241,7 @@ public class LevelManager : MonoBehaviour
         que activen el metodo "UnPause" */
         objetos_pausados.BroadcastMessage("Pause");
         // Activa el panel de pausa
-        PauseScreen.SetActive(true);
+        ChangeButtonToPause();
     }
     /// <summary>
     /// Metodo que pausara el juego sin activar el panel de pausa (ideal para cuando llegas a la meta)
