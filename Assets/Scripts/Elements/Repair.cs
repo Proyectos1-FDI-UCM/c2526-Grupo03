@@ -31,9 +31,6 @@ public class Repair : MonoBehaviour
     [SerializeField] private Sprite SpriteRepaired;
 
     [SerializeField] GameObject Key;
-
-    [SerializeField] private GameObject _levelManager;
-
     /// <summary>
     /// Momento en el que se ha empezado a reparar
     /// </summary>
@@ -128,12 +125,12 @@ public class Repair : MonoBehaviour
             if (_firstOpened)
             {
                 _selectedQTE = Random.Range(0, 3);
-                _lastQTE = _levelManager.GetComponent<LevelManager>().LastQTE();
+                _lastQTE = LevelManager.Instance.LastQTE();
                 while (_selectedQTE == _lastQTE)
                 {
                     _selectedQTE = Random.Range(0, 3);
                 }
-                _levelManager.GetComponent<LevelManager>().CambiarValor(_selectedQTE);
+                LevelManager.Instance.CambiarValor(_selectedQTE);
                 _firstOpened = false;
             }
             ActivateChosenQTE();
