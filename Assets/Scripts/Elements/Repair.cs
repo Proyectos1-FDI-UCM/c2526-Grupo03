@@ -32,6 +32,8 @@ public class Repair : MonoBehaviour
 
     [SerializeField] GameObject Key;
 
+    [SerializeField] private GameObject _levelManager;
+
     /// <summary>
     /// Momento en el que se ha empezado a reparar
     /// </summary>
@@ -86,6 +88,16 @@ public class Repair : MonoBehaviour
     /// Número que codifica el QTE seleccionado al azar
     /// </summary>
     private int _selectedQTE;
+
+    /// <summary>
+    /// Número que guarda el QTE anterior
+    /// </summary>
+    private int _lastQTE;
+
+    /// <summary>
+    /// booleano que detecta si es la primera vez que se entra al QTE
+    /// </summary>
+    private bool _firstOpened = true;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -103,7 +115,7 @@ public class Repair : MonoBehaviour
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.sprite = SpriteBroken;
-        _selectedQTE = Random.Range(0, 3);
+       
     }
 
     /// <summary>
@@ -113,6 +125,17 @@ public class Repair : MonoBehaviour
     {
         if (CanRepair && InputManager.Instance.RepairWasPressedThisFrame())
         {
+            if (_firstOpened)
+            {
+                _selectedQTE = Random.Range(0, 3);
+                _lastQTE = _levelManager.GetComponent<LevelManager>().LastQTE();
+                while (_selectedQTE == _lastQTE)
+                {
+                    _selectedQTE = Random.Range(0, 3);
+                }
+                _levelManager.GetComponent<LevelManager>().CambiarValor(_selectedQTE);
+                _firstOpened = false;
+            }
             ActivateChosenQTE();
             Key.SetActive(false);
             IsRepairing = true;
