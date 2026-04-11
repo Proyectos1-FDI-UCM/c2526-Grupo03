@@ -71,6 +71,11 @@ public class LevelManager : MonoBehaviour
     /// Calidad en cada momento de la película
     /// </summary>
     private int _quality;
+
+    /// <summary>
+    /// Variable que guarda el último QTE
+    /// </summary>
+    private int _lastqte = -1;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -200,6 +205,23 @@ public class LevelManager : MonoBehaviour
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
+
+    /// <summary>
+    /// Metodo que devuelve el QTE anterior
+    /// </summary>
+    public int LastQTE()
+    {
+        return _lastqte;
+    }
+
+    /// <summary>
+    /// Metodo que actualiza el valor del QTE anterior
+    /// </summary>
+    public void CambiarValor(int valor)
+    {
+        _lastqte = valor;
+    }
+
 
     #endregion
 
