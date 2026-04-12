@@ -1,6 +1,6 @@
 //---------------------------------------------------------
-// Se encarga del movimiento del extra que se puede configurar su distancia de recorrido
-// Tristan Sanchez Lopez
+// Script encargado de dirigir la logica del juego durante el tutorial
+// Tristan Sanchez
 // Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
@@ -13,7 +13,7 @@ using UnityEngine;
 /// Antes de cada class, descripción de qué es y para qué sirve,
 /// usando todas las líneas que sean necesarias.
 /// </summary>
-public class Extra_Regular : MonoBehaviour
+public class Tutorial_Manager : MonoBehaviour
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -21,15 +21,24 @@ public class Extra_Regular : MonoBehaviour
     // El convenio de nombres de Unity recomienda que los atributos
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
-    // Ejemplo: MaxHealthPoint
-
+    // Ejemplo: MaxHealthPoints
     /// <summary>
-    /// Detector de suelo
+    /// GameObject de Dolly
     /// </summary>
-    [SerializeField] GameObject FloorDetector;
-    // Distancia que recorre hacia cada lado desde el punto inicial
-    [SerializeField] private int Distance = 5;
-    [SerializeField] private float Speed = 1f; // Velocidad del extra
+    [SerializeField] private GameObject Dolly = null;
+    /// <summary>
+    /// GameObject de Desert_Ball
+    /// </summary>
+    [SerializeField] private GameObject Desert_Ball = null;
+    /// <summary>
+    /// GameObject de Player
+    /// </summary>
+    [SerializeField] private GameObject Player = null;
+    /// <summary>
+    /// GameObject de GUI
+    /// </summary>
+    [SerializeField] private GameObject GUI = null;
+
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -40,18 +49,7 @@ public class Extra_Regular : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-
-    private Vector3 _iniPos; // Posicion inicial del extra 
-    private Vector3 _maxPosL;
-    private Vector3 _maxPosR;
-    // direccion del movimiento -1 para que vaya a izquierda, 1 para ir a derecha
-    private int dir = -1;
-    SpriteRenderer _spriteRenderer; // sprite del extra
-
-    /// <summary>
-    /// Indica si el detector de suelo dice que estamos en el suelo
-    /// </summary>
-    private bool _landed;
+    private static Tutorial_Manager _instance;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -62,60 +60,36 @@ public class Extra_Regular : MonoBehaviour
     // - Hay que borrar los que no se usen 
 
     /// <summary>
-    /// Awake is called 
-    /// </summary>
-    void Awake()
-    {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-    /// <summary>
     /// Start is called on the frame when a script is enabled just before 
     /// any of the Update methods are called the first time.
     /// </summary>
     void Start()
     {
-        // Establece la posicion inicial del extra a la extablecida por el editor
-        _iniPos = transform.position;
-        _maxPosL = transform.position;
-        _maxPosL.x -= Distance; 
-        _maxPosR = transform.position;
-        _maxPosR.x += Distance;
-        _spriteRenderer.flipX = true;
+        //Desactivamos los componentes del jugador
+        Player.GetComponent<Jump>().enabled = false;
+        Player.GetComponent<Scream_Reload>().enabled = false;
+        Player.GetComponent<Shoot>().enabled = false;
+        //Desactivamos los objetos no necesareos al principo
+        Desert_Ball.SetActive(false);
+        GUI.SetActive(false);
+        Dolly.SetActive(false);
     }
+
     /// <summary>
     /// Update is called every frame, if the MonoBehaviour is enabled.
     /// </summary>
     void Update()
     {
-        _landed = FloorDetector.GetComponent<Detector>().Detected;
-        if (!_landed)
-        {// cambia la direccion si no detecta suelo
-            if (dir == 1)
-            {
-                dir = -1;
-            }
-            else if (dir == -1)
-            {
-                dir = 1;
-            }
-        }//Mira si se pasa de la distancia que recorre para volver 
-        if (transform.position.x <= _maxPosL.x)
+        
+    }
+
+    protected void Awake()
+    {
+        if (_instance == null)
         {
-            dir = 1;
-        }
-        if (transform.position.x >= _maxPosR.x)
-        {
-            dir = -1; 
-        }
-        if (dir == 1)//mueve el extra hacia la derecha
-        {
-            transform.position += new Vector3(Speed, 0, 0) * Time.deltaTime;
-            _spriteRenderer.flipX = false;
-        }
-        if (dir == -1)//mueve el extra hacia la izquierda
-        {
-            transform.position -= new Vector3(Speed, 0, 0) * Time.deltaTime;
-            _spriteRenderer.flipX = true;
+            // Somos la primera y única instancia
+            _instance = this;
+            Init();
         }
     }
     #endregion
@@ -127,6 +101,39 @@ public class Extra_Regular : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
+    /// <summary>
+    /// Activa a dolly a la Dessert_Ball cuando se llame al metodo
+    /// </summary>
+    public void Activa_Dolly()
+    {
+        Desert_Ball.SetActive(true);
+        Dolly.SetActive(true);
+       
+    }
+    /// <summary>
+    /// Propiedad para acceder a la única instancia de la clase.
+    /// </summary>
+    public static Tutorial_Manager Instance
+    {
+        get
+        {
+            Debug.Assert(_instance != null);
+            return _instance;
+        }
+    }
+    /// <summary>
+    /// Devuelve cierto si la instancia del singleton está creada y
+    /// falso en otro caso.
+    /// Lo normal es que esté creada, pero puede ser útil durante el
+    /// cierre para evitar usar el LevelManager que podría haber sido
+    /// destruído antes de tiempo.
+    /// </summary>
+    /// <returns>Cierto si hay instancia creada.</returns>
+    public static bool HasInstance()
+    {
+        return _instance != null;
+    }
+
 
     #endregion
 
@@ -136,8 +143,12 @@ public class Extra_Regular : MonoBehaviour
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
+    private void Init()
+    {
+    
+    }
 
     #endregion
 
-} // class Extra_Regular 
+} // class Turorial_Manager 
 // namespace
