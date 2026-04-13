@@ -38,6 +38,7 @@ public class Tutorial_Manager : MonoBehaviour
     /// GameObject de GUI
     /// </summary>
     [SerializeField] private GameObject GUI = null;
+    
 
     #endregion
 
@@ -54,7 +55,7 @@ public class Tutorial_Manager : MonoBehaviour
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-
+    private Vector2 posicionInicialDessertBall = new Vector2();
     // Por defecto están los típicos (Update y Start) pero:
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
@@ -70,6 +71,7 @@ public class Tutorial_Manager : MonoBehaviour
         Player.GetComponent<Scream_Reload>().enabled = false;
         Player.GetComponent<Shoot>().enabled = false;
         //Desactivamos los objetos no necesareos al principo
+        posicionInicialDessertBall = Desert_Ball.transform.position;
         Desert_Ball.SetActive(false);
         GUI.SetActive(false);
         Dolly.SetActive(false);
@@ -133,7 +135,7 @@ public class Tutorial_Manager : MonoBehaviour
     {
         return _instance != null;
     }
-
+   
 
     #endregion
 
