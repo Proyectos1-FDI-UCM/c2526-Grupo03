@@ -1,6 +1,6 @@
 ﻿//---------------------------------------------------------
 // Encargado del disparo del jugador y el pool de balas
-// Alejandro Garcia y Víctor Román y Gabriel Adrian
+// Alejandro Garcia, Víctor Román y Gabriel Adrian
 // Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
