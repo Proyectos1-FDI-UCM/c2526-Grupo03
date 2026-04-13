@@ -1,6 +1,6 @@
 ﻿//---------------------------------------------------------
 // Componente encargado del salto del personaje jugable
-// Gabriel Adrian Oltean, Alejandro Garcia Diaz, Víctor Román Román
+// Gabriel Adrian Oltean, Alejandro Garcia Diaz y Víctor Román Román
 // Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------

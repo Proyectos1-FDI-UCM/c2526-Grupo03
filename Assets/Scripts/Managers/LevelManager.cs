@@ -306,6 +306,18 @@ public class LevelManager : MonoBehaviour
         _quality = StartingQuality;
     }
 
+    /// <summary>
+    /// Pausa el juego en caso de quedarse en segundo plano.
+    /// </summary>
+    /// <param name="FocusMode"></param>
+    private void OnApplicationFocus(bool FocusMode)
+    {
+        if(!FocusMode)
+        {
+            _Pausa();
+        }
+    }
+
     #endregion
 } // class LevelManager 
 // namespace
