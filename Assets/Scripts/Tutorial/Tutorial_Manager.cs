@@ -66,15 +66,7 @@ public class Tutorial_Manager : MonoBehaviour
     /// </summary>
     void Start()
     {
-        //Desactivamos los componentes del jugador
-        Player.GetComponent<Jump>().enabled = false;
-        Player.GetComponent<Scream_Reload>().enabled = false;
-        Player.GetComponent<Shoot>().enabled = false;
-        //Desactivamos los objetos no necesareos al principo
-        posicionInicialDessertBall = Desert_Ball.transform.position;
-        Desert_Ball.SetActive(false);
-        GUI.SetActive(false);
-        Dolly.SetActive(false);
+        
     }
 
     /// <summary>
@@ -147,7 +139,16 @@ public class Tutorial_Manager : MonoBehaviour
     // mayúscula, incluida la primera letra)
     private void Init()
     {
-    
+        //Desactivamos los componentes del jugador
+        Player.GetComponent<Jump>().enabled = false;
+        Player.GetComponent<Scream_Reload>().enabled = false;
+        Player.GetComponent<Shoot>().enabled = false;
+        //Desactivamos los objetos no necesareos al principo
+        posicionInicialDessertBall = Desert_Ball.transform.position;
+        Desert_Ball.SetActive(false);
+        GUI.SetActive(false);
+        Dolly.SetActive(false);
+
     }
 
     #endregion

@@ -42,24 +42,27 @@ public class LevelManager : MonoBehaviour
     /// Primer botón del panel de muerte
     /// </summary>
     [SerializeField] GameObject DeadFirstSelectedButton;
+
     /// <summary>
     /// Primer Botón del menú de pausa
     /// </summary>
     [SerializeField] GameObject PauseFirstSelectedButton;
+
     /// <summary>
     /// Primer botón del panel de victoria
     /// </summary>
     [SerializeField] GameObject VictoryFirstSelectedButton;
 
-
     /// <summary>
     /// Panel de pausa
     /// </summary>
     [SerializeField] private GameObject PauseScreen;
+
     /// <summary>
     /// Panel de Muerte
     /// </summary>
     [SerializeField] private GameObject Lose_Screen;
+
     /// <summary>
     /// Panel de victoria
     /// </summary>
@@ -69,6 +72,7 @@ public class LevelManager : MonoBehaviour
     /// Calidad inicial
     /// </summary>
     [SerializeField] private int StartingQuality = 100;
+
     /// <summary>
     /// Tiempo que tiene que pasar para que la puntuación empiece a subir
     /// </summary>
@@ -78,10 +82,11 @@ public class LevelManager : MonoBehaviour
     /// Cantidad que sube la película
     /// </summary>
     [SerializeField] private int Quality_Add = 0;
+
     /// <summary>
     /// Objeto padre en el que se encuentran todos los objetos a pausar
     /// </summary>
-    [SerializeField] private GameObject objetos_pausados;
+    [SerializeField] private GameObject objetos_pausados =  null;
 
     // Cantidad de puntuación aumentada cada "pulso" (frecuencia del pulso definida en la cámara)
 
@@ -110,6 +115,7 @@ public class LevelManager : MonoBehaviour
     /// Componente del eventsystem
     /// </summary>
     private EventSystem _eventSystem;
+
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----

@@ -8,6 +8,12 @@
 using UnityEngine;
 // Añadir aquí el resto de directivas using
 
+//----------------------------------------------------------
+//                   ¿ COMO SE USA ?
+//Crear una entidad,hacer hijos a todo lo que quieras pausar.
+//Añadir a la entidad el script
+//Añadir a todos los QTE's el script y activar la opción de QTE
+//----------------------------------------------------------
 
 /// <summary>
 /// Antes de cada class, descripción de qué es y para qué sirve,
@@ -22,8 +28,9 @@ public class Activate_Deactivate : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
+    [SerializeField] private bool QTE = false;
     #endregion
-    
+
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
     // Documentar cada atributo que aparece aquí.
@@ -32,15 +39,27 @@ public class Activate_Deactivate : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-
+    /// <summary>
+    /// Array de MonoBehaviour que contiene todos los scrips del objeto
+    /// </summary>
+    private MonoBehaviour[] Scripts;
+    /// <summary>
+    /// Array de MonoBehaviour que contiene todos los scripts del objeto que estan activados
+    /// </summary>
+    private MonoBehaviour[] ScriptsActivados;
     #endregion
-    
+
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-    
+
     // Por defecto están los típicos (Update y Start) pero:
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
+    void Start()
+    {
+        //Inicializamos el array de ScriptsActivados
+        InicializarArrayActivos();
+    }
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -55,12 +74,22 @@ public class Activate_Deactivate : MonoBehaviour
     /// </summary>
     public void Pause()
     {
-        //Hacemos un array de MonoBehaviour todos los componentes que estan en el objeto o son hijos de este
-        MonoBehaviour[] scripts = GetComponentsInChildren<MonoBehaviour>(true);
-        //Desactivamos uno a uno cada script
-        foreach (MonoBehaviour s in scripts)
+        //Revisamos si es un QTE para volver a inicializar el array de ScriptsActivados
+        if (QTE)
         {
-            s.enabled = false;
+            //Inicializamos el array de ScriptsActivados
+            InicializarArrayActivos();
+        }
+        //Desactivamos uno a uno cada script que estaban activados
+        foreach (MonoBehaviour s in ScriptsActivados)
+        {
+            //Miramos que no sea null
+            if (s != null)
+            {
+                //Lo desactivamos
+                s.enabled = false;
+                Debug.Log("activando");
+            }
         }
     }
     /// <summary>
@@ -68,24 +97,64 @@ public class Activate_Deactivate : MonoBehaviour
     /// </summary>
     public void UnPause()
     {
-        //Hacemos un array de MonoBehaviour todos los componentes que estan en el objeto o son hijos de este
-        MonoBehaviour[] scripts = GetComponentsInChildren<MonoBehaviour>(true);
-        //Activamos uno a uno cada script
-        foreach (MonoBehaviour s in scripts)
+        //Activamos uno a uno cada script pero solo los que estaban desactivados antes
+        foreach (MonoBehaviour s in ScriptsActivados)
         {
+            ////Miramos que no sea null
+            if (s != null)
+            {
+                //Lo activamos
                 s.enabled = true;
+            }
         }
     }
     #endregion
-    
+
     // ---- MÉTODOS PRIVADOS ----
     #region Métodos Privados
     // Documentar cada método que aparece aquí
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
+    /// <summary>
+    /// Metodo encargado de inicializar el array de scripts activados 
+    /// </summary>
+    private void InicializarArrayActivos()
+    {
+        //variable local del start que va a llevar la cuenta del numero scripts que estan activados 
+        int i = 0;
+        //Hacemos un array de MonoBehaviour todos los componentes que estan en el objeto o son hijos de este
+        Scripts = GetComponentsInChildren<MonoBehaviour>(true);
+        //Recorremos el array por cada uno de los scripts
+        foreach (MonoBehaviour s in Scripts)
+        {
+            //Miramos si estan activados
+            if (s.enabled == true)
+            {
+                //Si lo estan sumamos uno al contador
+                Debug.Log("Un componete estaba desactivado");
+                i++;
 
-    #endregion   
+            }
+        }
+        //Declaramos el array de scripts activados con el numero correspondiente
+        ScriptsActivados = new MonoBehaviour[i];
+        //hacemos una variable auxiliar para recorrer el array
+        int j = 0;
+        //Recorremos el array por cada uno de los scripts
+        foreach (MonoBehaviour s in Scripts)
+        {
+            //Miramos si estan activados
+            if (s.enabled == true)
+            {
+                //Lo guardamos en el array
+                ScriptsActivados[j] = s;
+                //Incrementamos la variable para que no se sobre escriba
+                j++;
+            }
+        }
+    }
+    #endregion
 
 } // class Activate_Deactivate 
 // namespace
