@@ -205,6 +205,7 @@ GameObject:
   - component: {fileID: 3664734182915351577}
   - component: {fileID: -2690277762436398441}
   - component: {fileID: 2510572134867328439}
+  - component: {fileID: 6967436169554318493}
   m_Layer: 8
   m_Name: Taverna_Caida
   m_TagString: Untagged
@@ -392,6 +393,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &6967436169554318493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9088401248152341740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc6628c78c69434488f1c26bb5446444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  QTE: 1
 --- !u!1001 &2265052868670906180
 PrefabInstance:
   m_ObjectHideFlags: 0

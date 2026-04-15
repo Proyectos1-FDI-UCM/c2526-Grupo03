@@ -11,7 +11,7 @@ using UnityEngine;
 //----------------------------------------------------------
 //                   ¿ COMO SE USA ?
 //Crear una entidad,hacer hijos a todo lo que quieras pausar.
-//Añadir a la entidad el script
+//Y añadir a cada uno de los objetos el activate desactivate
 //Añadir a todos los QTE's el script y activar la opción de QTE
 //----------------------------------------------------------
 
@@ -75,11 +75,6 @@ public class Activate_Deactivate : MonoBehaviour
     public void Pause()
     {
         //Revisamos si es un QTE para volver a inicializar el array de ScriptsActivados
-        if (QTE)
-        {
-            //Inicializamos el array de ScriptsActivados
-            InicializarArrayActivos();
-        }
         //Desactivamos uno a uno cada script que estaban activados
         foreach (MonoBehaviour s in ScriptsActivados)
         {

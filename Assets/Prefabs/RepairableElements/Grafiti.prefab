@@ -118,6 +118,7 @@ GameObject:
   - component: {fileID: 5999592212315120117}
   - component: {fileID: 6431397718151425457}
   - component: {fileID: 5992958224214010914}
+  - component: {fileID: 9009070293048046639}
   m_Layer: 8
   m_Name: Grafiti
   m_TagString: Grafiti
@@ -305,6 +306,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CalidadABajar: 0
+--- !u!114 &9009070293048046639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5011662305757098312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc6628c78c69434488f1c26bb5446444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  QTE: 1
 --- !u!1 &8927491161982240498
 GameObject:
   m_ObjectHideFlags: 0
