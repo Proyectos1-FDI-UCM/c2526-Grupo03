@@ -88,7 +88,7 @@ public class Activate_Deactivate : MonoBehaviour
             {
                 //Lo desactivamos
                 s.enabled = false;
-                Debug.Log("activando");
+                //Debug.Log("activando");
             }
         }
     }
@@ -132,7 +132,7 @@ public class Activate_Deactivate : MonoBehaviour
             if (s.enabled == true)
             {
                 //Si lo estan sumamos uno al contador
-                Debug.Log("Un componete estaba desactivado");
+                //Debug.Log("Un componete estaba desactivado");
                 i++;
 
             }
