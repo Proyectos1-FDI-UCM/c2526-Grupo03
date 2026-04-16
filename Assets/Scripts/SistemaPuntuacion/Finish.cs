@@ -32,10 +32,6 @@ public class Finish : MonoBehaviour
     /// Veloccidad a la que viaja la camara cuando el jugador llegue a la meta 
     /// </summary>
     [SerializeField] private float SpeedBost = 1f;
-    /// <summary>
-    /// Porcentaje para conseguir la maxima puntuacion
-    /// </summary>
-    [SerializeField] private float Porcentaje_victoria;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -138,10 +134,10 @@ public class Finish : MonoBehaviour
     private void PausePlayer()
     {
         //desactivamos cada componente
-        _player.GetComponent<Movement_Player>().enabled = false;
+        _player.GetComponent<Movement_Player>().DesactivateMovement();
         _player.GetComponent<Jump>().DesactivateJump();
-        _player.GetComponent<Shoot>().enabled = false;
-        _player.GetComponent<Scream_Reload>().enabled = false;
+        _player.GetComponent<Shoot>().DesactivateShoot();
+        _player.GetComponent<Scream_Reload>().DesactivateReload();
     }
     /// <summary>
     /// Metodo que modifica la veloccidad de la camara 
@@ -182,20 +178,8 @@ public class Finish : MonoBehaviour
     {
         //Variable encargada del porcentaje representada entre 0 y 1 en float
         float Diferencia;
-        //Guardamos el diferencia en  la variable 
-        Diferencia = inicial - final;
-        //Miramos si esta es mayor que lo necesario para tres estrellas
-        if (final >= inicial * Porcentaje_victoria)
-        {
-            //Representamos la barra completa
-            Diferencia = 1f;
-        }
-        //Si es distinto entonces ya no esta llena y calculamos su porcentaje
-        else
-        {
-            //Representamos la diferencia en el flotante correspondiente
-            Diferencia = final / inicial * Porcentaje_victoria;
-        }
+        //Representamos la diferencia en el flotante correspondiente
+        Diferencia = final / inicial;
         //Devolvemos la variable porcentaje
         return Diferencia;
     }
