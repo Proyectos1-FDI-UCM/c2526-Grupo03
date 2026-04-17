@@ -27,7 +27,7 @@ public class Finish : MonoBehaviour
     /// <summary>
     /// Bola del dessierto 
     /// </summary>
-    [SerializeField] private Dessert_Ball_Movement _desertBall;
+    [SerializeField] private Dessert_Ball_Movement DesertBall;
     /// <summary>
     /// Veloccidad a la que viaja la camara cuando el jugador llegue a la meta 
     /// </summary>
@@ -49,15 +49,15 @@ public class Finish : MonoBehaviour
     /// <summary>
     /// puntuaccion inicial del nivel
     /// </summary>
-    private float puntuacionInicial;
+    private float _puntuacionInicial;
     /// <summary>
     /// Puntuacion actual del nivel
     /// </summary>
-    private float puntiacionActual;
+    private float _puntiacionActual;
     /// <summary>
     /// Dice si el jugador esta pausado o no
     /// </summary>
-    private bool Jugador_Pausado;
+    private bool _jugadorPausado;
 
     #endregion
 
@@ -75,7 +75,7 @@ public class Finish : MonoBehaviour
     void Start()
     {
         //Guardamos la puntuacion inicial
-        puntuacionInicial = LevelManager.Instance.GetcurrentScore();
+        _puntuacionInicial = LevelManager.Instance.GetcurrentScore();
     }
     #endregion
 
@@ -93,7 +93,7 @@ public class Finish : MonoBehaviour
     public bool HasWin()
     {
         // Devuelve la variable que indica si ha llegado a la meta
-        return Jugador_Pausado;
+        return _jugadorPausado;
     }
     #endregion
 
@@ -115,14 +115,14 @@ public class Finish : MonoBehaviour
             _player = collision.gameObject;
             PausePlayer();
             //Hacer que ignore la deteccion del jugador
-            Jugador_Pausado = Player_ignore();
+            _jugadorPausado = Player_ignore();
             //Accelerar el movimiento de la camara
             Accelera_Dolly();
 
 
         }
         //Si ya se ha realizado la collision del jugador buscamos que nos choque la camara también
-        if (Jugador_Pausado && collision.gameObject.GetComponent<Dolly_Movement>() != null)
+        if (_jugadorPausado && collision.gameObject.GetComponent<Dolly_Movement>() != null)
         {
             // Guardamos el porcentaje final
             Stars_FillAmount();
@@ -145,7 +145,7 @@ public class Finish : MonoBehaviour
     private void Accelera_Dolly()
     {
         //cambiamos la velocidad de la bola del desierto para que viaje mas rapido y no aburrir al usuario
-        _desertBall.SetSpeed(SpeedBost);
+        DesertBall.SetSpeed(SpeedBost);
     }
     /// <summary>
     /// Metodo que hace que el jugador no sea detectable con la camara y por tanto al llegar a la meta no muera cuandp pase la camara
@@ -163,10 +163,12 @@ public class Finish : MonoBehaviour
     private void Stars_FillAmount()
     {
         //Conseguimos la puntuacion actual
-        puntiacionActual = LevelManager.Instance.GetcurrentScore();
+        _puntiacionActual = LevelManager.Instance.GetcurrentScore();
         //Establecemos el numero de estrellas que vas a tener 
-        float fillAmount = Conviertefloat(puntuacionInicial, puntiacionActual);
+        float fillAmount = Conviertefloat(_puntuacionInicial, _puntiacionActual);
+        //Ponemos el rating final de las estrellas
         GameManager.Instance.SetFinalRating(fillAmount);
+        //Cambiamos el botton para podernos mover por el menu de victoria
         LevelManager.Instance.ChangeButtonToVictory();
     }
     /// <summary>
