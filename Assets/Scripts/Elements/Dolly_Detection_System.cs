@@ -1,7 +1,8 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
-// Responsable de la creación de este archivo
-// Nombre del juego
+// Componente que detecta cuándo un objeto entra dentro del campo de visión de la cámara Dolly.
+// Sergio Higuera Gil && Colaboradores:
+//      Víctor Román Román
+// Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
 
@@ -102,7 +103,7 @@ public class Dolly_Detection_System : MonoBehaviour
         if (collision.gameObject.GetComponent<DetectableObject>() != null)
         {
             //Miramos si es reparable 
-            if (collision.gameObject.GetComponent<Repair>() != null && collision.gameObject.GetComponent<Repair>().Repaired)
+            if (collision.gameObject.GetComponent<Repair>() != null && collision.gameObject.GetComponent<Repair>().IsRepaired())
             {
                 return;
             }
