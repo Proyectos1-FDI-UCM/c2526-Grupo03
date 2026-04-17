@@ -5,7 +5,6 @@
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
 
-using System;
 using UnityEngine;
 // Añadir aquí el resto de directivas using
 
@@ -28,10 +27,6 @@ public class Detector : MonoBehaviour
     /// True si se detecta un collider
     /// </summary>
     public bool Detected = false;
-    /// <summary>
-    /// Cuando detecta una collisión nos da la información del collider de éste
-    /// </summary>
-    public Collider2D CollisionedObject;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -43,6 +38,10 @@ public class Detector : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
+    /// <summary>
+    /// Guarda el collider del último objeto colisionado
+    /// </summary>
+    private Collider2D _collisionedObject;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -58,7 +57,7 @@ public class Detector : MonoBehaviour
     /// </summary>
     void Start()
     {
-        
+
     }
 
     /// <summary>
@@ -78,6 +77,14 @@ public class Detector : MonoBehaviour
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
+    public Vector3 GetCollisionedObjectPosition()
+    {
+        return _collisionedObject.gameObject.transform.position;
+    }
+    public Vector3 GetCollisionedObjectSize()
+    {
+        return _collisionedObject.bounds.size;
+    }
     #endregion
 
     // ---- MÉTODOS PRIVADOS ----
@@ -89,19 +96,13 @@ public class Detector : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 6 && !Detected)
-        {
-            Detected = true;
-            CollisionedObject = collision;
-        }
+        Detected = true;
+        _collisionedObject = collision;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 6)
-        {
-            Detected = false;
-        }
+        Detected = false;
     }
 
     #endregion   

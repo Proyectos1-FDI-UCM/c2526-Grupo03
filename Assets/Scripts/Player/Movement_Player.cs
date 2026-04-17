@@ -151,7 +151,7 @@ public class Movement_Player : MonoBehaviour
         {
             Detector _leftDetector = LeftDetector.GetComponent<Detector>();
             // Calculamos la posicion del Jugador justo al lado de la pared
-            float _posAlLadoPared = _leftDetector.CollisionedObject.gameObject.transform.position.x + _leftDetector.CollisionedObject.bounds.size.x / 2;
+            float _posAlLadoPared = _leftDetector.GetCollisionedObjectPosition().x + _leftDetector.GetCollisionedObjectSize().x / 2;
             float _posX = _posAlLadoPared + this.gameObject.GetComponent<Collider2D>().bounds.size.x / 2;
             float _aumentoX = _posX - transform.position.x;
 
@@ -164,7 +164,7 @@ public class Movement_Player : MonoBehaviour
         {
             Detector _rightDetector = RightDetector.GetComponent<Detector>();
             // Calculamos la posicion del Jugador justo al lado de la pared
-            float _posAlLadoPared = _rightDetector.CollisionedObject.gameObject.transform.position.x - _rightDetector.CollisionedObject.bounds.size.x / 2;
+            float _posAlLadoPared = _rightDetector.GetCollisionedObjectPosition().x - _rightDetector.GetCollisionedObjectSize().x / 2;
             float _posX = _posAlLadoPared - this.gameObject.GetComponent<Collider2D>().bounds.size.x / 2;
             float _aumentoX = _posX - transform.position.x;
 
