@@ -191,7 +191,7 @@ public class Extra_Army : MonoBehaviour
             {
                 Detector _floorDetector = FloorDetector.GetComponent<Detector>();
                 // Calculamos la posicion del Jugador justo al lado de la pared
-                float _posEncimaSuelo = _floorDetector.CollisionedObject.gameObject.transform.position.y + _floorDetector.CollisionedObject.bounds.size.y / 2;
+                float _posEncimaSuelo = _floorDetector.GetCollisionedObjectPosition().y + _floorDetector.GetCollisionedObjectSize().y / 2;
                 float _posY = _posEncimaSuelo + this.gameObject.GetComponent<Collider2D>().bounds.size.y / 2 + 0.1f;
                 float _aumentoY = _posY - transform.position.y;
 
