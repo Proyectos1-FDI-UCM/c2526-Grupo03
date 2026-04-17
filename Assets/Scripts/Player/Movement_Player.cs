@@ -206,7 +206,7 @@ public class Movement_Player : MonoBehaviour
         if (InputManager.Instance.PauseWasPressedThisFrame())
             {
                 // Debug.Log("Pausando");
-                LevelManager.Instance._Pausa();
+                LevelManager.Instance.Pausa();
             }
     }
     #endregion

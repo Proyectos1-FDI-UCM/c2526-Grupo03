@@ -59,11 +59,11 @@ public class UI_Manager : MonoBehaviour
     /// <summary>
     /// Almacena la puntuacion en cada momento
     /// </summary>
-    private int _puntuacion;
+    private float _puntuacion;
     /// <summary>
     /// Almacena la puntuacion inicial de el nivel
     /// </summary>
-    private int _puntuacionInicial;
+    private float _puntuacionInicial;
 
     /// <summary>
     /// Referencia al script de recarga del jugador

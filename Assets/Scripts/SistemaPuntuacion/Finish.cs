@@ -27,7 +27,7 @@ public class Finish : MonoBehaviour
     /// <summary>
     /// Bola del dessierto 
     /// </summary>
-    [SerializeField] private GameObject _desertBall;
+    [SerializeField] private Dessert_Ball_Movement _desertBall;
     /// <summary>
     /// Veloccidad a la que viaja la camara cuando el jugador llegue a la meta 
     /// </summary>
@@ -49,11 +49,11 @@ public class Finish : MonoBehaviour
     /// <summary>
     /// puntuaccion inicial del nivel
     /// </summary>
-    private int puntuacionInicial;
+    private float puntuacionInicial;
     /// <summary>
     /// Puntuacion actual del nivel
     /// </summary>
-    private int puntiacionActual;
+    private float puntiacionActual;
     /// <summary>
     /// Dice si el jugador esta pausado o no
     /// </summary>
@@ -145,7 +145,7 @@ public class Finish : MonoBehaviour
     private void Accelera_Dolly()
     {
         //cambiamos la velocidad de la bola del desierto para que viaje mas rapido y no aburrir al usuario
-        _desertBall.GetComponent<Dessert_Ball_Movement>().SetSpeed(SpeedBost);
+        _desertBall.SetSpeed(SpeedBost);
     }
     /// <summary>
     /// Metodo que hace que el jugador no sea detectable con la camara y por tanto al llegar a la meta no muera cuandp pase la camara

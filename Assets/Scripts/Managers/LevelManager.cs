@@ -8,7 +8,6 @@
 
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 
 /// <summary>
 /// Componente que se encarga de la gestión de un nivel concreto.
@@ -36,7 +35,7 @@ public class LevelManager : MonoBehaviour
     /// <summary>
     /// Objeto del EventSystem de la escena
     /// </summary>
-    [SerializeField] GameObject EventSystem;
+    [SerializeField] EventSystem EventSystem;
 
     /// <summary>
     /// Primer botón del panel de muerte
@@ -61,7 +60,7 @@ public class LevelManager : MonoBehaviour
     /// <summary>
     /// Panel de Muerte
     /// </summary>
-    [SerializeField] private GameObject Lose_Screen;
+    [SerializeField] private GameObject LoseScreen;
 
     /// <summary>
     /// Panel de victoria
@@ -71,7 +70,7 @@ public class LevelManager : MonoBehaviour
     /// <summary>
     /// Calidad inicial
     /// </summary>
-    [SerializeField] private int StartingQuality = 100;
+    [SerializeField] private float StartingQuality = 100;
 
     /// <summary>
     /// Tiempo que tiene que pasar para que la puntuación empiece a subir
@@ -81,12 +80,12 @@ public class LevelManager : MonoBehaviour
     /// <summary>
     /// Cantidad que sube la película
     /// </summary>
-    [SerializeField] private int Quality_Add = 0;
+    [SerializeField] private float QualityAdd = 0;
 
     /// <summary>
     /// Objeto padre en el que se encuentran todos los objetos a pausar
     /// </summary>
-    [SerializeField] private GameObject objetos_pausados =  null;
+    [SerializeField] private GameObject ObjetosPausados =  null;
 
     // Cantidad de puntuación aumentada cada "pulso" (frecuencia del pulso definida en la cámara)
 
@@ -104,17 +103,12 @@ public class LevelManager : MonoBehaviour
     /// <summary>
     /// Calidad en cada momento de la película
     /// </summary>
-    private int _quality;
+    private float _quality;
 
     /// <summary>
     /// Variable que guarda el último QTE
     /// </summary>
-    private int _lastqte = -1;
-
-    /// <summary>
-    /// Componente del eventsystem
-    /// </summary>
-    private EventSystem _eventSystem;
+    private int _lastQte = -1;
 
     #endregion
 
@@ -124,11 +118,11 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         // Guardamos el componente del eventsystem
-        if (EventSystem.GetComponent<EventSystem>() != null)
+        if (EventSystem != null)
         {
-            _eventSystem = EventSystem.GetComponent<EventSystem>();
+            
             // Seleccionamos primero el menu de pausa
-            _eventSystem.SetSelectedGameObject(PauseFirstSelectedButton);
+            EventSystem.SetSelectedGameObject(PauseFirstSelectedButton);
         }
         GameManager.Instance.SetLevelToRestart(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
     }
@@ -138,6 +132,7 @@ public class LevelManager : MonoBehaviour
         {
             // Somos la primera y única instancia
             _instance = this;
+            // Hacemos init
             Init();
         }
     }
@@ -153,8 +148,11 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     public void ChangeButtonToVictory()
     {
-        _Pausa_SinPanel();
-        _eventSystem.SetSelectedGameObject(VictoryFirstSelectedButton);
+        //Puasamos el juego sin activar el panel
+        PausaSinPanel();
+        //Cambiamos el boton selecionado al de pausa
+        EventSystem.SetSelectedGameObject(VictoryFirstSelectedButton);
+        //Activamos el panel de victoria 
         VictoryScreen.SetActive(true);
     }
     /// <summary>
@@ -162,16 +160,21 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     public void ChangeButtonToDead()
     {
-        _Pausa_SinPanel();
-        _eventSystem.SetSelectedGameObject(DeadFirstSelectedButton);
-        Lose_Screen.SetActive(true);
+        //Pausamos el juego sin usar el panel
+        PausaSinPanel();
+        //Cambiamos el boton selecionado al del Lose Screen
+        EventSystem.SetSelectedGameObject(DeadFirstSelectedButton);
+        //Activamos la Lose Screen
+        LoseScreen.SetActive(true);
     }
     /// <summary>
     /// Cambia el boton seleccionado al del panel de pausa y activa el panel
     /// </summary>
     public void ChangeButtonToPause()
     {
-        _eventSystem.SetSelectedGameObject(PauseFirstSelectedButton);
+        //Cambiamos el boton selecionado al de pausa
+        EventSystem.SetSelectedGameObject(PauseFirstSelectedButton);
+        //Activamos el Pause Screen
         PauseScreen.SetActive(true);
     }
 
@@ -185,20 +188,25 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     public void QualityUp()
     {
+        //Chequeamos que la calidad es mayor que cero y que sea menor que la inicial
         if (_quality > 0 && _quality < StartingQuality)
         {
-            _quality += Quality_Add;
+         //Añadimos la calidad a subir
+            _quality += QualityAdd;
         }
     }
     /// <summary>
     /// Método que baja la calidad de la película dependiendo de con que objeto collisione
     /// </summary>
     /// <param name="cant">Cantidad a bajar</param>
-    public void QualityDown(int cant)
+    public void QualityDown(float cant)
     {
+        //Miramos que la calidad sea mayor que 0
         if (_quality>0) _quality -= cant;
+        //Miramos si ya has perdido
         if (_quality <= 0)
         {
+            //Cambiamos al boton de muerte
             ChangeButtonToDead(); 
         }
     }
@@ -209,7 +217,7 @@ public class LevelManager : MonoBehaviour
     {
         return TimeToStartAdding;
     }
-    public int GetcurrentScore()
+    public float GetcurrentScore()
     {
         return _quality;
     }
@@ -241,22 +249,22 @@ public class LevelManager : MonoBehaviour
     /// <summary>
     /// Metodo encargado de pausar la partida 
     /// </summary>
-    public void _Pausa()
+    public void Pausa()
     {
         /*Se manda un mensaje a todos los objetos que sean hijos de este para
         que activen el metodo "UnPause" */
-        objetos_pausados.BroadcastMessage("Pause");
+        PausaSinPanel();
         // Activa el panel de pausa
         ChangeButtonToPause();
     }
     /// <summary>
     /// Metodo que pausara el juego sin activar el panel de pausa (ideal para cuando llegas a la meta)
     /// </summary>
-    public void _Pausa_SinPanel()
+    public void PausaSinPanel()
     {
         /*Se manda un mensaje a todos los objetos que sean hijos de este para
         que activen el metodo "UnPause" */
-        objetos_pausados.BroadcastMessage("Pause");
+        ObjetosPausados.SetActive(false);
 
     }
     /// <summary>
@@ -266,16 +274,22 @@ public class LevelManager : MonoBehaviour
     {
         /* Se manda un mensaje a todos los objetos que sean hijos de este para
         que activen el metodo "UnPause" */
-        objetos_pausados.BroadcastMessage("UnPause");
+        ObjetosPausados.SetActive(true);
         //Desactiva el panel de pausa
         PauseScreen.SetActive(false);
     }
+    /// <summary>
+    /// Metodo que Resetea la escena
+    /// </summary>
     public void Restart()
     {  //Restablece el nivel al inicio
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
         //Desactiva el panel de pausa
         PauseScreen.SetActive(false);
     }
+    /// <summary>
+    /// Metodo que carga la escena del menu
+    /// </summary>
     public void BackToMenu()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
@@ -286,7 +300,7 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     public int LastQTE()
     {
-        return _lastqte;
+        return _lastQte;
     }
 
     /// <summary>
@@ -294,7 +308,7 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     public void CambiarValor(int valor)
     {
-        _lastqte = valor;
+        _lastQte = valor;
     }
 
 
@@ -305,7 +319,7 @@ public class LevelManager : MonoBehaviour
     #region Métodos Privados
 
     /// <summary>
-    /// Dispara la inicialización.
+    /// inicialización de puntuacion.
     /// </summary>
     private void Init()
     {
@@ -315,12 +329,14 @@ public class LevelManager : MonoBehaviour
     /// <summary>
     /// Pausa el juego en caso de quedarse en segundo plano.
     /// </summary>
-    /// <param name="FocusMode"></param>
+    /// <param name="FocusMode">bool que indica si esta en primer plano</param>
     private void OnApplicationFocus(bool FocusMode)
     {
+        //Miramos si no esta en focus mode
         if(!FocusMode)
         {
-            _Pausa();
+            //Pausa el juego
+            Pausa();
         }
     }
 
