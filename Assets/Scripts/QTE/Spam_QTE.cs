@@ -1,7 +1,8 @@
 //---------------------------------------------------------
-// Script que se encarga de llenar la barra cuando pulsas la tecla asignada
+// Script que se encarga de llenar la barra cuando pulsas la tecla asignada y de reducirla cada
+// x segundos. Este QTE no acaba si la barra se vacía completamente.
 // Víctor Román Román
-// Nombre del juego
+// Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
 
@@ -30,6 +31,9 @@ public class Spam_QTE : MonoBehaviour
     [SerializeField]
     private float AumentoPorClick = 5.0f;
 
+    /// <summary>
+    /// Cantidad que dispinuye la barra por unidad de tiempo.
+    /// </summary>
     [SerializeField]
     private float Disminucion = 0.5f;
     
@@ -48,6 +52,11 @@ public class Spam_QTE : MonoBehaviour
     /// Componente de la barra
     /// </summary>
     private Slider _componenteBarra;
+
+    /// <summary>
+    /// Contiene la información del componente Repair.
+    /// </summary>
+    private Repair _comp;
 
     /// <summary>
     /// Valor máximo de la barra
@@ -73,6 +82,7 @@ public class Spam_QTE : MonoBehaviour
     /// </summary>
     void Awake()
     {
+        _comp = this.gameObject.GetComponentInParent<Repair>();
         if (_componenteBarra == null)
         {
             _componenteBarra = GetComponent<Slider>();
@@ -96,25 +106,28 @@ public class Spam_QTE : MonoBehaviour
     /// </summary>
     void Update()
     {
-        Repair comp = this.gameObject.GetComponentInParent<Repair>();
-        if (comp.IsRepairing && InputManager.Instance.RepairWasPressedThisFrame() && Time.time >= comp._repairIniTime + comp.TiempoParaPoderSalir)
+        //Si está reparando y se pulsa el botón de reparar
+        if (_comp.IsRepairing() && InputManager.Instance.RepairWasPressedThisFrame() && Time.time >= _comp.RepairIniTime() + _comp.ExitTime())
         {
             _componenteBarra.value = 0;
-            comp.HasPressedExit = true;
+            _comp.HasPressedExit(true);
         }
+        //Si la barra no está vacía se resta x valor por unidad de tiempo.
         if (_componenteBarra.value > 0)
         {
             _componenteBarra.value -= (Disminucion * Time.deltaTime);
         }
+        //Si se pulsa el botón de salto (el que se usa como botón de spam) la barra sube.
         if (InputManager.Instance.JumpWasPressedThisFrame())
         {
             //Debug.Log("Spam");
             _componenteBarra.value += AumentoPorClick;
         }
+        //Si la barra se llena se da el objeto como reparado y acaba el QTE.
         if (_componenteBarra.value >= _componenteBarra.maxValue)
         {
             transform.parent.gameObject.SetActive(false);
-            this.gameObject.GetComponentInParent<Repair>().Repaired = true;
+            _comp.Repaired(true);
         }
     }
     #endregion

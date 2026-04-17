@@ -1,5 +1,5 @@
 ﻿//---------------------------------------------------------
-// Script encargado del manejo del movimiento del personaje jugable
+// Script encargado del manejo del movimiento del personaje jugable.
 // Alejandro Garcia && Aportadores:
 //      - Gabriel Adrian Oltean
 //      - Víctor Román Román

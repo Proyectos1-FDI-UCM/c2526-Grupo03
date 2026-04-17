@@ -1,5 +1,5 @@
 //---------------------------------------------------------
-// Script encargado de activar y desactivar/activar todos los scripts del mismo elemento 
+// Script encargado de activar y desactivar/activar todos los scripts del mismo elemento.
 // Tristan Sanchez Lopez
 // Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
