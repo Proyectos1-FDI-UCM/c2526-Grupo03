@@ -1,13 +1,15 @@
 //---------------------------------------------------------
-// Componente del QTE de flechas
-//  Reparación de tipo automática
-// Gabriel Adrian Oltean
+// Componente del QTE de flechas.
+// Reparación de tipo automática.
+// Gabriel Adrian Oltean && Colaboradores
+//      Víctor Román Román
 // Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
 
 using UnityEngine;
 using UnityEngine.UI;
+using static Unity.Burst.Intrinsics.X86.Avx;
 using static UnityEngine.Rendering.DebugUI;
 // Añadir aquí el resto de directivas using
 
@@ -32,7 +34,7 @@ public class Fila_de_Teclas_QTE : MonoBehaviour
     [SerializeField] private int NumFlechas_Max6 = 6;
 
     /// <summary>
-    /// Duraci´´on de la reparación automática
+    /// Duración de la reparación automática
     /// </summary>
     [SerializeField] private float AumentoAutomático = 2.22f;
 
@@ -69,64 +71,71 @@ public class Fila_de_Teclas_QTE : MonoBehaviour
     // Ejemplo: _maxHealthPoints
 
     /// <summary>
-    /// Componente de la Barra que se va llenando
+    /// Componente de la Barra que se va llenando.
     /// </summary>
     private Slider _componenteBarra;
 
     /// <summary>
-    /// Indica si has fallado el QTE
+    /// Indica si has fallado el QTE.
     /// </summary>
     private bool _failedQTE = false;
 
     /// <summary>
-    /// Indica si ha presionado una flecha
+    /// Indica si ha presionado una flecha.
     /// </summary>
     private bool _hasPressed = false;
 
     /// <summary>
-    /// Variable que nos dice si ha hecho una pulsación correcta
+    /// Variable que nos dice si ha hecho una pulsación correcta.
     /// </summary>
     private bool _correctPress = false;
 
     /// <summary>
-    /// Direcciónes de todas las flechas (1 = arriba || 2 = abajo || 3 = izquierda || 4 = derecha)
+    /// Direcciónes de todas las flechas (1 = arriba || 2 = abajo || 3 = izquierda || 4 = derecha).
     /// </summary>
-    private int[] _dirFlechas;
+    private _arrowDirection[] _dirFlechas;
 
     /// <summary>
-    /// Dirección del input codificado
+    /// Dirección del input codificado.
     /// </summary>
-    private int _dirFlechaInput;
+    private _arrowDirection _dirFlechaInput;
 
     /// <summary>
-    /// Dirección de la flecha que debemos acertar
+    /// Dirección de la flecha que debemos acertar.
     /// </summary>
-    private int _dirFlechaActual;
+    private _arrowDirection _dirFlechaActual;
 
     /// <summary>
-    /// Indice de la flecha actual
+    /// Indice de la flecha actual.
     /// </summary>
     private int _indiceFlechaActual = 0;
     /// <summary>
-    /// Indice de la ultima flecha a activar
+    /// Indice de la ultima flecha a activar.
     /// </summary>
     private int _indiceUltimaFlecha;
 
 
     /// <summary>
-    /// Tiempo entre cambio de flecha
+    /// Tiempo entre cambio de flecha.
     /// </summary>
     private float _aumentoAcierto = 0f;
 
     /// <summary>
-    /// Objeto de la flecha que vamos a cambiar en cada momento
+    /// Objeto de la flecha que vamos a cambiar en cada momento.
     /// </summary>
     private GameObject _ArrowToManipulate;
 
     /// <summary>
-    /// Momento en que se hizo la última pulsación
+    /// Momento en que se hizo la última pulsación.
     /// </summary>
     private float _lastInputTime = 0.0f;
+
+    /// <summary>
+    /// Contiene la información de la variable Repair.
+    /// </summary>
+    Repair _comp;
+
+    private enum _arrowDirection {ARRIBA, ABAJO, IZQUIERDA, DERECHA};
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -139,6 +148,7 @@ public class Fila_de_Teclas_QTE : MonoBehaviour
 
     void Awake()
     {
+        _comp = this.gameObject.GetComponentInParent<Repair>();
         _componenteBarra = GetComponent<Slider>();
         if (_componenteBarra == null)
         {
@@ -163,7 +173,7 @@ public class Fila_de_Teclas_QTE : MonoBehaviour
         _indiceUltimaFlecha = NumFlechas_Max6 - 1;
 
         // Direcciónes de flechas
-        _dirFlechas = new int[ObjetosDeFlechas.Length];
+        _dirFlechas = new _arrowDirection[ObjetosDeFlechas.Length];
 
         int i = 0;
         // Activamos las flechas necesarias
@@ -173,14 +183,27 @@ public class Fila_de_Teclas_QTE : MonoBehaviour
             _ArrowToManipulate = ObjetosDeFlechas[i];
 
             // Escogemos direccion aleatoria para la flecha actual
-            _dirFlechas[i] = Random.Range(1, 4);
+            int[] rnd = new int[ObjetosDeFlechas.Length];
+            rnd[i] = Random.Range(1, 5);
             // Cambiamos el sprite según la dirección
-            switch (_dirFlechas[i])
+            switch (rnd[i])
             {
-                case 1: _ArrowToManipulate.GetComponent<Image>().sprite = ArrowUp; break;
-                case 2: _ArrowToManipulate.GetComponent<Image>().sprite = ArrowDown; break;
-                case 3: _ArrowToManipulate.GetComponent<Image>().sprite = ArrowLeft; break;
-                case 4: _ArrowToManipulate.GetComponent<Image>().sprite = ArrowRight; break;
+                case 1:
+                    _ArrowToManipulate.GetComponent<Image>().sprite = ArrowUp;
+                    _dirFlechas[i] = _arrowDirection.ARRIBA;
+                    break;
+                case 2: 
+                    _ArrowToManipulate.GetComponent<Image>().sprite = ArrowDown;
+                    _dirFlechas[i] = _arrowDirection.ABAJO;
+                    break;
+                case 3: 
+                    _ArrowToManipulate.GetComponent<Image>().sprite = ArrowLeft;
+                    _dirFlechas[i] = _arrowDirection.IZQUIERDA;
+                    break;
+                case 4:
+                    _ArrowToManipulate.GetComponent<Image>().sprite = ArrowRight;
+                    _dirFlechas[i] = _arrowDirection.DERECHA;
+                    break;
             }
             // Activamos la flecha
             _ArrowToManipulate.SetActive(true);
@@ -198,8 +221,7 @@ public class Fila_de_Teclas_QTE : MonoBehaviour
     /// </summary>
     void Update()
     {
-        Repair comp = this.gameObject.GetComponentInParent<Repair>();
-        if (comp.IsRepairing && InputManager.Instance.RepairWasPressedThisFrame() && Time.time >= comp._repairIniTime + comp.TiempoParaPoderSalir)
+        if (_comp.IsRepairing() && InputManager.Instance.RepairWasPressedThisFrame() && Time.time >= _comp.RepairIniTime() + _comp.ExitTime())
         {
             _componenteBarra.value = 0;
             _failedQTE = false;
@@ -218,7 +240,7 @@ public class Fila_de_Teclas_QTE : MonoBehaviour
             _indiceFlechaActual = 0;
             _dirFlechaActual = _dirFlechas[_indiceFlechaActual];
 
-            comp.HasPressedExit = true;
+            _comp.HasPressedExit(true);
         }
 
         // Recogida de input
@@ -238,25 +260,21 @@ public class Fila_de_Teclas_QTE : MonoBehaviour
         // Codificamos la dirección del input
         if (_hasPressed)
         {
-            // Hacia arriba
             if (input.y > 0.5f)
             {
-                _dirFlechaInput = 1;
+                _dirFlechaInput = _arrowDirection.ARRIBA;
             }
-            // Hacia abajo
             else if (input.y < -0.5f)
             {
-                _dirFlechaInput = 2;
+                _dirFlechaInput = _arrowDirection.ABAJO;
             }
-            // Hacia izquierda
             else if (input.x < -0.5f)
             {
-                _dirFlechaInput = 3;
+                _dirFlechaInput = _arrowDirection.IZQUIERDA;
             }
-            // Hacia derecha
             else if (input.x > 0.5f)
             {
-                _dirFlechaInput = 4;
+                _dirFlechaInput = _arrowDirection.DERECHA;
             }
 
             // Comprobamos si el input es correcto
@@ -325,7 +343,7 @@ public class Fila_de_Teclas_QTE : MonoBehaviour
             // Desactivamos el panel
             transform.parent.gameObject.SetActive(false);
             // Marcamos el objeto como reparado
-            this.gameObject.GetComponentInParent<Repair>().Repaired = true;
+            _comp.Repaired(true);
         }
 
     }

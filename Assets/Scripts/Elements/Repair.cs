@@ -1,5 +1,6 @@
 ﻿//---------------------------------------------------------
-// Breve descripción del contenido del archivo
+// Componente del comportamiento de los objetos reparables. En él se establecen las condiciones para que un elemento pueda
+// ser reparado y cuando pasa a estarlo.
 // Gabriel Adrian Oltean && Colaboradores:
 //      Víctor Román Román
 // Rodaje Rodante
@@ -26,40 +27,40 @@ public class Repair : MonoBehaviour
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
 
-
+    /// <summary>
+    /// Sprite del objeto reparable en su estado roto.
+    /// </summary>
     [SerializeField] private Sprite SpriteBroken;
+
+    /// <summary>
+    /// Sprite del objeto reparable en su estado reparado.
+    /// </summary>
     [SerializeField] private Sprite SpriteRepaired;
 
+    /// <summary>
+    /// GameObject que contiene el jugador de la escena.
+    /// </summary>
+    [SerializeField] private GameObject Player;
+
+    /// <summary>
+    /// GameObject que contiene el QTE de spam.
+    /// </summary>
+    [SerializeField] private GameObject SpamQTE;
+
+    /// <summary>
+    /// GameObject que contiene el QTE de la manivela.
+    /// </summary>
+    [SerializeField] private GameObject ManivelaQTE;
+
+    /// <summary>
+    /// GameObject que contiene el QTE de fila de teclas.
+    /// </summary>
+    [SerializeField] private GameObject TeclasQTE;
+
+    /// <summary>
+    /// GameObject que contiene la tecla a mostrar.
+    /// </summary>
     [SerializeField] GameObject Key;
-    /// <summary>
-    /// Momento en el que se ha empezado a reparar
-    /// </summary>
-    public float _repairIniTime = .0f;
-
-    /// <summary>
-    /// Tiempo necesario para poder salir
-    /// </summary>
-    public float TiempoParaPoderSalir = 1f;
-    
-
-    public bool HasPressedExit = false;
-
-    /// <summary>
-    /// Indica si estás encima del objeto a reparar
-    /// </summary>
-    public bool CanRepair = false;
-    /// <summary>
-    /// Nos indica si estamos reparando
-    /// </summary>
-    public bool IsRepairing = false; 
-    /// <summary>
-    /// Nos indica si el objeto está reparado
-    /// </summary>
-    public bool Repaired = false;
-    /// <summary>
-    /// Variable que nos indicara si has fallado el QTE
-    /// </summary>
-    public bool HasFailedRepairing = false;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -75,11 +76,6 @@ public class Repair : MonoBehaviour
     /// Componente con el que cambiaremos el sprite por el reparado
     /// </summary>
     private SpriteRenderer _spriteRenderer;
-
-    /// <summary>
-    /// GameObject del jugador para restringir su movimiento durante las reparaciones
-    /// </summary>
-    private GameObject _player;
 
     /// <summary>
     /// Número que codifica el QTE seleccionado al azar
@@ -121,7 +117,40 @@ public class Repair : MonoBehaviour
     /// </summary>
     private Scream_Reload _screamReloadComponent;
 
+    /// <summary>
+    /// Momento en el que se ha empezado a reparar
+    /// </summary>
+    private float _repairIniTime = .0f;
 
+    /// <summary>
+    /// Tiempo necesario para poder salir
+    /// </summary>
+    private float _exitTime = 1f;
+
+    /// <summary>
+    /// Indica si el jugador ha salido del QTE
+    /// </summary>
+    private bool _hasPressedExit = false;
+
+    /// <summary>
+    /// Indica si estás encima del objeto a reparar
+    /// </summary>
+    private bool _canRepair = false;
+
+    /// <summary>
+    /// Nos indica si estamos reparando
+    /// </summary>
+    private bool _isRepairing = false;
+
+    /// <summary>
+    /// Nos indica si el objeto está reparado
+    /// </summary>
+    private bool _repaired = false;
+
+    /// <summary>
+    /// Variable que nos indicara si has fallado el QTE
+    /// </summary>
+    private bool _hasFailedRepairing = false;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -139,10 +168,10 @@ public class Repair : MonoBehaviour
     {
         //Se cachean todos los componentes que se van a usar en variables.
         _repairComponent = this.GetComponent<Repair>();
-        _movementPlayerComponent = _player.GetComponent<Movement_Player>();
-        _jumpComponent = _player.GetComponent<Jump>();
-        _shootComponent = _player.GetComponent<Shoot>();
-        _screamReloadComponent = _player.GetComponent<Scream_Reload>();
+        _movementPlayerComponent = Player.GetComponent<Movement_Player>();
+        _jumpComponent = Player.GetComponent<Jump>();
+        _shootComponent = Player.GetComponent<Shoot>();
+        _screamReloadComponent = Player.GetComponent<Scream_Reload>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         //SpriteBroken será el sprite roto del objeto reparable.
         _spriteRenderer.sprite = SpriteBroken;
@@ -153,7 +182,7 @@ public class Repair : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (CanRepair && InputManager.Instance.RepairWasPressedThisFrame()) //Si el objeto es reparable y se ha pulsado la tecla de reparación
+        if (_canRepair && InputManager.Instance.RepairWasPressedThisFrame()) //Si el objeto es reparable y se ha pulsado la tecla de reparación
         {
             if (_firstOpened) //Si es la primera vez que se abre el QTE
             {
@@ -171,9 +200,9 @@ public class Repair : MonoBehaviour
             //Se activa el QTE que ha salido random y se desactiva el icono del input de encima del objeto reparable.
             ActivateChosenQTE();
             Key.SetActive(false);
-            IsRepairing = true;
+            _isRepairing = true;
         }
-        if (IsRepairing && CanRepair)
+        if (_isRepairing && _canRepair)
         {
             //Se desactivan todas las acciones del player para prohibirle interactuar con el nivel mientras repara
             _movementPlayerComponent.DesactivateMovement();
@@ -181,10 +210,10 @@ public class Repair : MonoBehaviour
             _shootComponent.DesactivateShoot();
             _screamReloadComponent.DesactivateReload();
 
-            CanRepair = false;
+            _canRepair = false;
             _repairIniTime = Time.time;
         }
-        if (Repaired)
+        if (_repaired)
         {
             //Al terminar de reparar se vuelven a activar todas las acciones que se habían desactivado
             _movementPlayerComponent.ActivateMovement();
@@ -196,7 +225,7 @@ public class Repair : MonoBehaviour
             _spriteRenderer.sprite = SpriteRepaired;
             Key.SetActive(false);
         }
-        if (HasFailedRepairing) 
+        if (_hasFailedRepairing) 
         {
             //Si se falla el QTE se vuelven a activar todos las acciones que se habían desactivado
             _movementPlayerComponent.ActivateMovement();
@@ -205,10 +234,10 @@ public class Repair : MonoBehaviour
             _screamReloadComponent.ActivateReload();
             _spriteRenderer.sprite = SpriteBroken;  //Se mantiene el sprite de roto
             Key.SetActive(false);
-            HasFailedRepairing = false; //Se cambia a false para no volver a entrar en la siguiente vuelta del bucle
+            _hasFailedRepairing = false; //Se cambia a false para no volver a entrar en la siguiente vuelta del bucle
         }
 
-        if (HasPressedExit)
+        if (_hasPressedExit)
         {
             //Si se sale del QTE se vuelven a activar todos las acciones que se habían desactivado
             _movementPlayerComponent.ActivateMovement();
@@ -217,9 +246,9 @@ public class Repair : MonoBehaviour
             _screamReloadComponent.ActivateReload();
             DisableChosenQTE();
             Key.SetActive(true);
-            IsRepairing = false;
-            CanRepair = true;
-            HasPressedExit = false; //Se cambia a false para no volver a entrar en la siguiente vuelta del bucle
+            _isRepairing = false;
+            _canRepair = true;
+            _hasPressedExit = false; //Se cambia a false para no volver a entrar en la siguiente vuelta del bucle
         }
     }
     #endregion
@@ -232,6 +261,59 @@ public class Repair : MonoBehaviour
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
+    /// <summary>
+    /// Comunica a componentes externos el valor del tiempo inicial de reparación de un QTE.
+    /// </summary>
+    /// <returns></returns>
+    public float RepairIniTime()
+    {
+        return _repairIniTime;
+    }
+
+    /// <summary>
+    /// Comunica a componentes externos el valor del tiempo de salida de un QTE.
+    /// </summary>
+    /// <returns></returns>
+    public float ExitTime()
+    {
+        return _exitTime;
+    }
+
+    /// <summary>
+    /// Comunica a componentes si se ha pulsado la tecla para salid de un QTE.
+    /// </summary>
+    /// <returns></returns>
+    public void HasPressedExit(bool hasPressed)
+    {
+        _hasPressedExit = hasPressed;
+    }
+
+    /// <summary>
+    /// Comunica a componentes si se está reparando un QTE.
+    /// </summary>
+    /// <returns></returns>
+    public bool IsRepairing()
+    {
+        return _isRepairing;
+    }
+
+    /// <summary>
+    /// Comunica a componentes si está reparado el QTE activo.
+    /// </summary>
+    /// <returns></returns>
+    public void Repaired(bool repaired)
+    {
+        _repaired = repaired;
+    }
+
+    /// <summary>
+    /// Comunica a componentes si se ha reparado el QTE activo.
+    /// </summary>
+    /// <returns></returns>
+    public bool IsRepaired()
+    {
+        return _repaired;
+    }
 
     #endregion
 
@@ -243,15 +325,15 @@ public class Repair : MonoBehaviour
     // mayúscula, incluida la primera letra)
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!IsRepairing)
+        if (!_isRepairing)
         {
             if (collision.gameObject.GetComponent<Movement_Player>() != null)
             {
                 //Si el objeto que colisiona coincide con el player y no está reparando su estado pasa a poder reparar
                 //y se activa la tecla superior del input para reparar
-                _player = collision.gameObject;
+                Player = collision.gameObject;
                 Key.SetActive(true);
-                CanRepair = true;
+                _canRepair = true;
             }
         }
     }
@@ -261,7 +343,7 @@ public class Repair : MonoBehaviour
         {
             //Si el objeto que sale del collider coincide con el player se le desactiva el estado de poder reparar
             //y se desactiva la tecla superior del input para reparar
-            CanRepair = false;
+            _canRepair = false;
             Key.SetActive(false);
         }
     }
@@ -274,18 +356,15 @@ public class Repair : MonoBehaviour
         //Dependiendo del número que resulta la elección aleatoria anterior se activa un QTE u otro.
         if(_selectedQTE == 0)
         {
-            Transform Hijo = transform.Find("Canvas/QTE_1_Panel");
-            Hijo.gameObject.SetActive(true);
+            SpamQTE.SetActive(true);
         }
         else if( _selectedQTE == 1)
         {
-            Transform Hijo = transform.Find("Canvas/QTE_2_Panel");
-            Hijo.gameObject.SetActive(true);
+            ManivelaQTE.SetActive(true);
         }
         else if (_selectedQTE == 2)
         {
-            Transform Hijo = transform.Find("Canvas/QTE_3_Panel");
-            Hijo.gameObject.SetActive(true);
+            TeclasQTE.SetActive(true);
         }
     }
 
@@ -297,18 +376,15 @@ public class Repair : MonoBehaviour
         //Dependiendo del número que resulta la elección aleatoria anterior se desactiva un QTE u otro.
         if (_selectedQTE == 0)
         {
-            Transform Hijo = transform.Find("Canvas/QTE_1_Panel");
-            Hijo.gameObject.SetActive(false);
+            SpamQTE.SetActive(false);
         }
         else if (_selectedQTE == 1)
         {
-            Transform Hijo = transform.Find("Canvas/QTE_2_Panel");
-            Hijo.gameObject.SetActive(false);
+            ManivelaQTE.SetActive(false);
         }
         else if (_selectedQTE == 2)
         {
-            Transform Hijo = transform.Find("Canvas/QTE_3_Panel");
-            Hijo.gameObject.SetActive(false);
+            TeclasQTE.SetActive(false);
         }
     }
     #endregion   

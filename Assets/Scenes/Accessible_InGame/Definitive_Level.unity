@@ -450,6 +450,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5011662305757098312, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
   m_PrefabInstance: {fileID: 1706524837}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &46933977 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7224804389197932412, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+  m_PrefabInstance: {fileID: 2128262407}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &62998909
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -756,6 +761,11 @@ Transform:
   - {fileID: 269188779}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &102739715 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6290379841019181947, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+  m_PrefabInstance: {fileID: 749085351}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &130981856 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4281742083118788844, guid: df4b60cd35a9b7c48a07e68acee9d39f, type: 3}
@@ -895,15 +905,35 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &136643233 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5434182869787823529, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
+  m_PrefabInstance: {fileID: 1615342175}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &138107940 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2975639880203098413, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+  m_PrefabInstance: {fileID: 1825196251}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &139800223 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1269227182867427392, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
   m_PrefabInstance: {fileID: 1825196251}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &140096146 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2975639880203098413, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
   m_PrefabInstance: {fileID: 749085351}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &144594142 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5766120623181500466, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+  m_PrefabInstance: {fileID: 1706524837}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &146095235 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1825485709791816537, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+  m_PrefabInstance: {fileID: 1353685215}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &152512179
 GameObject:
@@ -1120,6 +1150,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &195494230 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5766120623181500466, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+  m_PrefabInstance: {fileID: 1572393755}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &202562053 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7773901301304610856, guid: ad756c137b6e1154ba13e8e8b3e5bae6, type: 3}
@@ -1170,6 +1205,11 @@ MonoBehaviour:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4281742083118788844, guid: df4b60cd35a9b7c48a07e68acee9d39f, type: 3}
   m_PrefabInstance: {fileID: 1545552807}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &235662049 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 785289323165067273, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
+  m_PrefabInstance: {fileID: 1041312195}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &244511879
 PrefabInstance:
@@ -1985,6 +2025,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &320354000 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5434182869787823529, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
+  m_PrefabInstance: {fileID: 1041312195}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &339380894
 GameObject:
   m_ObjectHideFlags: 0
@@ -2796,6 +2841,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &435330416 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1825485709791816537, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+  m_PrefabInstance: {fileID: 749085351}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &441052225
 GameObject:
   m_ObjectHideFlags: 0
@@ -3536,6 +3586,11 @@ SpriteRenderer:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3898764378425669985, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
   m_PrefabInstance: {fileID: 672088218}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &604176258 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1269227182867427392, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+  m_PrefabInstance: {fileID: 961926843}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &613100216
 PrefabInstance:
@@ -4365,6 +4420,38 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1048712562}
+    - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+      propertyPath: SpamQTE
+      value: 
+      objectReference: {fileID: 1125364172}
+    - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 1048712562}
+    - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+      propertyPath: Spam_QTE
+      value: 
+      objectReference: {fileID: 1125364172}
+    - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+      propertyPath: TeclasQTE
+      value: 
+      objectReference: {fileID: 1103822625}
+    - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+      propertyPath: Teclas_QTE
+      value: 
+      objectReference: {fileID: 1103822625}
+    - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+      propertyPath: ManivelaQTE
+      value: 
+      objectReference: {fileID: 2114949020}
+    - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+      propertyPath: Manivela_QTE
+      value: 
+      objectReference: {fileID: 2114949020}
+    - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
       propertyPath: _levelManager
       value: 
       objectReference: {fileID: 2072457598}
@@ -4780,6 +4867,38 @@ PrefabInstance:
     m_TransformParent: {fileID: 1587672728}
     m_Modifications:
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1048712562}
+    - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: SpamQTE
+      value: 
+      objectReference: {fileID: 435330416}
+    - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 1048712562}
+    - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: Spam_QTE
+      value: 
+      objectReference: {fileID: 435330416}
+    - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: TeclasQTE
+      value: 
+      objectReference: {fileID: 1050154066}
+    - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: Teclas_QTE
+      value: 
+      objectReference: {fileID: 1050154066}
+    - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: ManivelaQTE
+      value: 
+      objectReference: {fileID: 102739715}
+    - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: Manivela_QTE
+      value: 
+      objectReference: {fileID: 102739715}
+    - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: _levelManager
       value: 
       objectReference: {fileID: 2072457598}
@@ -5093,6 +5212,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 76fa689b50e6b144abc60449cbc5593c, type: 3}
+--- !u!1 &843326121 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7224804389197932412, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+  m_PrefabInstance: {fileID: 1572393755}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &848611318 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5970668542827576001, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
@@ -5705,6 +5829,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &960822238 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5766120623181500466, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+  m_PrefabInstance: {fileID: 2128262407}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &961926843
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5713,6 +5842,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1587672728}
     m_Modifications:
+    - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1048712562}
+    - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: SpamQTE
+      value: 
+      objectReference: {fileID: 2033497156}
+    - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 1048712562}
+    - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: Spam_QTE
+      value: 
+      objectReference: {fileID: 2033497156}
+    - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: TeclasQTE
+      value: 
+      objectReference: {fileID: 604176258}
+    - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: Teclas_QTE
+      value: 
+      objectReference: {fileID: 604176258}
+    - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: ManivelaQTE
+      value: 
+      objectReference: {fileID: 1339390924}
+    - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: Manivela_QTE
+      value: 
+      objectReference: {fileID: 1339390924}
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: _levelManager
       value: 
@@ -6502,6 +6663,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df4b60cd35a9b7c48a07e68acee9d39f, type: 3}
+--- !u!1 &1041117627 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4543134035533410752, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
+  m_PrefabInstance: {fileID: 1041312195}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1041312195
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6510,6 +6676,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1587672728}
     m_Modifications:
+    - target: {fileID: 3664734182915351577, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1048712562}
+    - target: {fileID: 3664734182915351577, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
+      propertyPath: SpamQTE
+      value: 
+      objectReference: {fileID: 1041117627}
+    - target: {fileID: 3664734182915351577, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 1048712562}
+    - target: {fileID: 3664734182915351577, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
+      propertyPath: Spam_QTE
+      value: 
+      objectReference: {fileID: 1041117627}
+    - target: {fileID: 3664734182915351577, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
+      propertyPath: TeclasQTE
+      value: 
+      objectReference: {fileID: 235662049}
+    - target: {fileID: 3664734182915351577, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
+      propertyPath: Teclas_QTE
+      value: 
+      objectReference: {fileID: 235662049}
+    - target: {fileID: 3664734182915351577, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
+      propertyPath: ManivelaQTE
+      value: 
+      objectReference: {fileID: 320354000}
+    - target: {fileID: 3664734182915351577, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
+      propertyPath: Manivela_QTE
+      value: 
+      objectReference: {fileID: 320354000}
     - target: {fileID: 3664734182915351577, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
       propertyPath: _levelManager
       value: 
@@ -6602,6 +6800,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   QTE: 0
+--- !u!1 &1050154066 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1269227182867427392, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+  m_PrefabInstance: {fileID: 749085351}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1051940818 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6290379841019181947, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+  m_PrefabInstance: {fileID: 1353685215}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1053057135 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5958467358280890013, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+  m_PrefabInstance: {fileID: 1572393755}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1102230194 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 785289323165067273, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
+  m_PrefabInstance: {fileID: 1615342175}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1103822625 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7224804389197932412, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+  m_PrefabInstance: {fileID: 672088218}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1113715265
 GameObject:
   m_ObjectHideFlags: 0
@@ -6740,6 +6963,11 @@ SpriteRenderer:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9088401248152341740, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
   m_PrefabInstance: {fileID: 1533059619}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1125364172 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5766120623181500466, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+  m_PrefabInstance: {fileID: 672088218}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1136165598
 GameObject:
@@ -7371,6 +7599,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6111324552968823520, guid: 76fa689b50e6b144abc60449cbc5593c, type: 3}
   m_PrefabInstance: {fileID: 831287912}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1206565458 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5434182869787823529, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
+  m_PrefabInstance: {fileID: 1533059619}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1303460637
 GameObject:
   m_ObjectHideFlags: 0
@@ -7505,6 +7738,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1305610036 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 785289323165067273, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
+  m_PrefabInstance: {fileID: 1533059619}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1320126533
 GameObject:
   m_ObjectHideFlags: 0
@@ -7931,6 +8169,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 999616f028854d24dbb68033461fab7e, type: 3}
+--- !u!1 &1339390924 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6290379841019181947, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+  m_PrefabInstance: {fileID: 961926843}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1351787435
 GameObject:
   m_ObjectHideFlags: 0
@@ -8073,6 +8316,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1587672728}
     m_Modifications:
+    - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1048712562}
+    - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: SpamQTE
+      value: 
+      objectReference: {fileID: 146095235}
+    - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 1048712562}
+    - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: Spam_QTE
+      value: 
+      objectReference: {fileID: 146095235}
+    - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: TeclasQTE
+      value: 
+      objectReference: {fileID: 1652959087}
+    - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: Teclas_QTE
+      value: 
+      objectReference: {fileID: 1652959087}
+    - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: ManivelaQTE
+      value: 
+      objectReference: {fileID: 1051940818}
+    - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: Manivela_QTE
+      value: 
+      objectReference: {fileID: 1051940818}
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: _levelManager
       value: 
@@ -8360,6 +8635,21 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3eeeaccf46f684f6da400b898bbc2f73, type: 3}
+--- !u!1 &1403427828 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6290379841019181947, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+  m_PrefabInstance: {fileID: 1825196251}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1412891385 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7224804389197932412, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+  m_PrefabInstance: {fileID: 1706524837}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1419674268 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5958467358280890013, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+  m_PrefabInstance: {fileID: 2128262407}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1433611636 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4281742083118788844, guid: df4b60cd35a9b7c48a07e68acee9d39f, type: 3}
@@ -8891,6 +9181,38 @@ PrefabInstance:
     m_TransformParent: {fileID: 1587672728}
     m_Modifications:
     - target: {fileID: 3664734182915351577, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1048712562}
+    - target: {fileID: 3664734182915351577, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
+      propertyPath: SpamQTE
+      value: 
+      objectReference: {fileID: 1958677173}
+    - target: {fileID: 3664734182915351577, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 1048712562}
+    - target: {fileID: 3664734182915351577, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
+      propertyPath: Spam_QTE
+      value: 
+      objectReference: {fileID: 1958677173}
+    - target: {fileID: 3664734182915351577, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
+      propertyPath: TeclasQTE
+      value: 
+      objectReference: {fileID: 1305610036}
+    - target: {fileID: 3664734182915351577, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
+      propertyPath: Teclas_QTE
+      value: 
+      objectReference: {fileID: 1305610036}
+    - target: {fileID: 3664734182915351577, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
+      propertyPath: ManivelaQTE
+      value: 
+      objectReference: {fileID: 1206565458}
+    - target: {fileID: 3664734182915351577, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
+      propertyPath: Manivela_QTE
+      value: 
+      objectReference: {fileID: 1206565458}
+    - target: {fileID: 3664734182915351577, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
       propertyPath: _levelManager
       value: 
       objectReference: {fileID: 2072457598}
@@ -9124,6 +9446,38 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1048712562}
+    - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+      propertyPath: SpamQTE
+      value: 
+      objectReference: {fileID: 195494230}
+    - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 1048712562}
+    - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+      propertyPath: Spam_QTE
+      value: 
+      objectReference: {fileID: 195494230}
+    - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+      propertyPath: TeclasQTE
+      value: 
+      objectReference: {fileID: 843326121}
+    - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+      propertyPath: Teclas_QTE
+      value: 
+      objectReference: {fileID: 843326121}
+    - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+      propertyPath: ManivelaQTE
+      value: 
+      objectReference: {fileID: 1053057135}
+    - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+      propertyPath: Manivela_QTE
+      value: 
+      objectReference: {fileID: 1053057135}
+    - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
       propertyPath: _levelManager
       value: 
       objectReference: {fileID: 2072457598}
@@ -9344,6 +9698,38 @@ PrefabInstance:
     m_TransformParent: {fileID: 1587672728}
     m_Modifications:
     - target: {fileID: 3664734182915351577, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1048712562}
+    - target: {fileID: 3664734182915351577, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
+      propertyPath: SpamQTE
+      value: 
+      objectReference: {fileID: 1918447616}
+    - target: {fileID: 3664734182915351577, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 1048712562}
+    - target: {fileID: 3664734182915351577, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
+      propertyPath: Spam_QTE
+      value: 
+      objectReference: {fileID: 1918447616}
+    - target: {fileID: 3664734182915351577, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
+      propertyPath: TeclasQTE
+      value: 
+      objectReference: {fileID: 1102230194}
+    - target: {fileID: 3664734182915351577, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
+      propertyPath: Teclas_QTE
+      value: 
+      objectReference: {fileID: 1102230194}
+    - target: {fileID: 3664734182915351577, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
+      propertyPath: ManivelaQTE
+      value: 
+      objectReference: {fileID: 136643233}
+    - target: {fileID: 3664734182915351577, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
+      propertyPath: Manivela_QTE
+      value: 
+      objectReference: {fileID: 136643233}
+    - target: {fileID: 3664734182915351577, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
       propertyPath: _levelManager
       value: 
       objectReference: {fileID: 2072457598}
@@ -9551,6 +9937,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   QTE: 1
+--- !u!1 &1652959087 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1269227182867427392, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+  m_PrefabInstance: {fileID: 1353685215}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1675729408 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4281742083118788844, guid: df4b60cd35a9b7c48a07e68acee9d39f, type: 3}
@@ -9772,6 +10163,38 @@ PrefabInstance:
       propertyPath: CalidadABajar
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1048712562}
+    - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+      propertyPath: SpamQTE
+      value: 
+      objectReference: {fileID: 144594142}
+    - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 1048712562}
+    - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+      propertyPath: Spam_QTE
+      value: 
+      objectReference: {fileID: 144594142}
+    - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+      propertyPath: TeclasQTE
+      value: 
+      objectReference: {fileID: 1412891385}
+    - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+      propertyPath: Teclas_QTE
+      value: 
+      objectReference: {fileID: 1412891385}
+    - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+      propertyPath: ManivelaQTE
+      value: 
+      objectReference: {fileID: 2119898766}
+    - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+      propertyPath: Manivela_QTE
+      value: 
+      objectReference: {fileID: 2119898766}
     - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
       propertyPath: _levelManager
       value: 
@@ -10430,6 +10853,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1587672728}
     m_Modifications:
+    - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1048712562}
+    - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: SpamQTE
+      value: 
+      objectReference: {fileID: 2030097818}
+    - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 1048712562}
+    - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: Spam_QTE
+      value: 
+      objectReference: {fileID: 2030097818}
+    - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: TeclasQTE
+      value: 
+      objectReference: {fileID: 139800223}
+    - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: Teclas_QTE
+      value: 
+      objectReference: {fileID: 139800223}
+    - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: ManivelaQTE
+      value: 
+      objectReference: {fileID: 1403427828}
+    - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: Manivela_QTE
+      value: 
+      objectReference: {fileID: 1403427828}
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: _levelManager
       value: 
@@ -11409,6 +11864,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1918447616 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4543134035533410752, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
+  m_PrefabInstance: {fileID: 1615342175}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1958677173 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4543134035533410752, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
+  m_PrefabInstance: {fileID: 1533059619}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1970118531
 GameObject:
   m_ObjectHideFlags: 0
@@ -11908,6 +12373,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ed54c3cdb60d8b448114796a7468975, type: 3}
+--- !u!1 &2030097818 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1825485709791816537, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+  m_PrefabInstance: {fileID: 1825196251}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2033497156 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1825485709791816537, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+  m_PrefabInstance: {fileID: 961926843}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2044519862
 GameObject:
   m_ObjectHideFlags: 0
@@ -12807,6 +13282,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2114949020 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5958467358280890013, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+  m_PrefabInstance: {fileID: 672088218}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2119898766 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5958467358280890013, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+  m_PrefabInstance: {fileID: 1706524837}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2128262407
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12887,6 +13372,38 @@ PrefabInstance:
       propertyPath: CalidadABajar
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1048712562}
+    - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+      propertyPath: SpamQTE
+      value: 
+      objectReference: {fileID: 960822238}
+    - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 1048712562}
+    - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+      propertyPath: Spam_QTE
+      value: 
+      objectReference: {fileID: 960822238}
+    - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+      propertyPath: TeclasQTE
+      value: 
+      objectReference: {fileID: 46933977}
+    - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+      propertyPath: Teclas_QTE
+      value: 
+      objectReference: {fileID: 46933977}
+    - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+      propertyPath: ManivelaQTE
+      value: 
+      objectReference: {fileID: 1419674268}
+    - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+      propertyPath: Manivela_QTE
+      value: 
+      objectReference: {fileID: 1419674268}
     - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
       propertyPath: _levelManager
       value: 
