@@ -7,7 +7,6 @@
 //---------------------------------------------------------
 
 using UnityEngine;
-using UnityEngine.UI;
 // Añadir aquí el resto de directivas using
 
 
@@ -32,6 +31,10 @@ public class Finish : MonoBehaviour
     /// Veloccidad a la que viaja la camara cuando el jugador llegue a la meta 
     /// </summary>
     [SerializeField] private float SpeedBost = 1f;
+    /// <summary>
+    /// Objeto del player 
+    /// </summary>
+    [SerializeField] private GameObject Player;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -42,10 +45,6 @@ public class Finish : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-    /// <summary>
-    /// Objeto del collider con la meta 
-    /// </summary>
-    private GameObject _player;
     /// <summary>
     /// puntuaccion inicial del nivel
     /// </summary>
@@ -58,6 +57,22 @@ public class Finish : MonoBehaviour
     /// Dice si el jugador esta pausado o no
     /// </summary>
     private bool _jugadorPausado;
+    /// <summary>
+    /// Script del movement player
+    /// </summary>
+    private Movement_Player _movimientoJugador;
+    /// <summary>
+    /// Script del salto del jugador
+    /// </summary>
+    private Jump _saltoJugador;
+    /// <summary>
+    /// Script de la recarga del jugador
+    /// </summary>
+    private Scream_Reload _recargaJugador;
+    /// <summary>
+    /// Script del disparo del jugador
+    /// </summary>
+    private Shoot _disparoJugador;
 
     #endregion
 
@@ -76,6 +91,11 @@ public class Finish : MonoBehaviour
     {
         //Guardamos la puntuacion inicial
         _puntuacionInicial = LevelManager.Instance.GetcurrentScore();
+        //hacemos el GetComponent de todos los scripts del jugador
+        _movimientoJugador = Player.GetComponent<Movement_Player>();
+        _saltoJugador = Player.GetComponent<Jump>();
+        _disparoJugador = Player.GetComponent<Shoot>();
+        _recargaJugador = Player.GetComponent<Scream_Reload>();
     }
     #endregion
 
@@ -112,7 +132,8 @@ public class Finish : MonoBehaviour
         if (collision.gameObject.GetComponent<Movement_Player>() != null)
         {
             //Pausar el movimiento del jugador
-            _player = collision.gameObject;
+            Player = collision.gameObject;
+            //Pausamos el jugador
             PausePlayer();
             //Hacer que ignore la deteccion del jugador
             _jugadorPausado = Player_ignore();
@@ -134,10 +155,10 @@ public class Finish : MonoBehaviour
     private void PausePlayer()
     {
         //desactivamos cada componente
-        _player.GetComponent<Movement_Player>().DesactivateMovement();
-        _player.GetComponent<Jump>().DesactivateJump();
-        _player.GetComponent<Shoot>().DesactivateShoot();
-        _player.GetComponent<Scream_Reload>().DesactivateReload();
+        _disparoJugador.DesactivateShoot();
+        _saltoJugador.DesactivateJump();
+        _recargaJugador.DesactivateReload();
+        _movimientoJugador.DesactivateMovement();
     }
     /// <summary>
     /// Metodo que modifica la veloccidad de la camara 

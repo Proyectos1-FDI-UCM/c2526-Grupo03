@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 402389212074765397}
   - component: {fileID: 4002048501506024957}
   - component: {fileID: 4782971975926133299}
-  - component: {fileID: -2761490254467201314}
   m_Layer: 0
   m_Name: Dessert_Ball
   m_TagString: Untagged
@@ -103,16 +102,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 0.7
   RotationSpeed: 100
---- !u!114 &-2761490254467201314
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7006812373667949431}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc6628c78c69434488f1c26bb5446444, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  QTE: 0

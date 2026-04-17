@@ -26,13 +26,11 @@ public class UI_Manager : MonoBehaviour
     /// <summary>
     /// Imagen encargada de representar las balas restantes
     /// </summary>
-    [SerializeField]
-    private Image Recarga;
+    [SerializeField] private Image Recarga;
     /// <summary>
     /// Barra encargada de repesentar la puntuación del Juego
     /// </summary>
-    [SerializeField]
-    private Image Barra_puntuacion;
+    [SerializeField] private Image BarraPuntuacion;
     /// <summary>
     /// Botella de recarga de municion
     /// </summary>
@@ -89,9 +87,12 @@ public class UI_Manager : MonoBehaviour
 
     private void Awake()
     {
+        //Miramos si existe el objeto de la botella
         if (Botella.gameObject != null)
         {
+            //La desactivamos 
             Botella.gameObject.SetActive(false);
+            //Establecemos la rotacion inicial
             Botella.gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
         }
     }
@@ -103,6 +104,7 @@ public class UI_Manager : MonoBehaviour
     void Start()
     {   //Guardamos la puntuación inicial  
         _puntuacionInicial = LevelManager.Instance.GetcurrentScore();
+        //Obtenemos el Scream Reload
         _playerReload = Player.GetComponent<Scream_Reload>();
         //Actualizamos el GUI de la bala para poner el valor inical
         Update_Bala();
@@ -118,19 +120,25 @@ public class UI_Manager : MonoBehaviour
         Update_Bala();
         //Actualizamos la barra de puntuación
         Update_Puntuacion();
-
+        //Miramos si el jugador esta recargando y si existe el GameObjet de la botella
         if (_playerReload.Reloading && Botella.gameObject != null)
         {
             //Debug.Log("Rotacion: " + _rotacionBotella);
+            //Activamos la botella
             Botella.gameObject.SetActive(true);
+            //Hacemos la rotacion de la botella 
             _rotacionBotella = Botella.transform.rotation.eulerAngles.z - _velocidadBotella * Time.deltaTime;
+            //La aplicamos en la botella
             Botella.transform.rotation = Quaternion.Euler(0f, 0f, _rotacionBotella);
         }
         else
         {
+            //Miramos si existe el gameObject de la botella
             if (Botella.gameObject != null)
             {
+                //
                 Botella.transform.rotation = Quaternion.identity;
+                //La desactivamos
                 Botella.gameObject.SetActive(false);
             }
         }
@@ -172,12 +180,16 @@ public class UI_Manager : MonoBehaviour
     /// Metodo que actualiza el GUI de la puntuacion cuando esta crece o se ve reducida
     /// </summary>
     private void Update_Puntuacion()
-    {   //Obtenemos el valor de la puntuación 
-        _puntuacion = LevelManager.Instance.GetcurrentScore();
-        //Debug para saber en las pruebas cuanto vale
-        //Debug.Log(puntuacion);
-        //Actualizamos la barra con el metodo conviertePorcent
-        Barra_puntuacion.fillAmount = ConviertePorcent(_puntuacionInicial,_puntuacion);
+    {
+        if (BarraPuntuacion != null)
+        {
+            //Obtenemos el valor de la puntuación 
+            _puntuacion = LevelManager.Instance.GetcurrentScore();
+            //Debug para saber en las pruebas cuanto vale
+            //Debug.Log(puntuacion);
+            //Actualizamos la barra con el metodo conviertePorcent
+            BarraPuntuacion.fillAmount = ConviertePorcent(_puntuacionInicial, _puntuacion);
+        }
     }
     /// <summary>
     /// Metodo que reduce la GUI de balas a la cantidad correspondiente

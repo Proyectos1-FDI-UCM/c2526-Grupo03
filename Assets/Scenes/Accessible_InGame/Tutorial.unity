@@ -1016,13 +1016,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5426743865585603417, guid: 3d7448f5b32c0e64383cc0702c5584f2, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1065905784}
+    - target: {fileID: 5426743865585603417, guid: 3d7448f5b32c0e64383cc0702c5584f2, type: 3}
       propertyPath: SpeedBost
       value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 5426743865585603417, guid: 3d7448f5b32c0e64383cc0702c5584f2, type: 3}
+      propertyPath: DesertBall
+      value: 
+      objectReference: {fileID: 998112621}
+    - target: {fileID: 5426743865585603417, guid: 3d7448f5b32c0e64383cc0702c5584f2, type: 3}
       propertyPath: _desertBall
       value: 
-      objectReference: {fileID: 755036457}
+      objectReference: {fileID: 998112621}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1616,6 +1624,10 @@ PrefabInstance:
     - target: {fileID: 2381206548926653411, guid: 5edc708e29addfb4882513f1abafc082, type: 3}
       propertyPath: m_Name
       value: Extra_Army
+      objectReference: {fileID: 0}
+    - target: {fileID: 2734455768170907182, guid: 5edc708e29addfb4882513f1abafc082, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4874310030850002653, guid: 5edc708e29addfb4882513f1abafc082, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3273,6 +3285,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Extra_Regular
       objectReference: {fileID: 0}
+    - target: {fileID: 9103206977083397806, guid: df4b60cd35a9b7c48a07e68acee9d39f, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2455167613013096720, guid: df4b60cd35a9b7c48a07e68acee9d39f, type: 3}
     m_RemovedGameObjects: []
@@ -3991,6 +4007,10 @@ PrefabInstance:
     - target: {fileID: 8598689100644146211, guid: df4b60cd35a9b7c48a07e68acee9d39f, type: 3}
       propertyPath: m_Name
       value: Extra_Regular (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9103206977083397806, guid: df4b60cd35a9b7c48a07e68acee9d39f, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2455167613013096720, guid: df4b60cd35a9b7c48a07e68acee9d39f, type: 3}
@@ -5802,6 +5822,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 402389212074765397, guid: 51f172daaeafbbf48ba2b1bf2aac3553, type: 3}
   m_PrefabInstance: {fileID: 998112617}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &998112621 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4782971975926133299, guid: 51f172daaeafbbf48ba2b1bf2aac3553, type: 3}
+  m_PrefabInstance: {fileID: 998112617}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 755036457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cb7b8a106a0c634bb483cd47799861e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1018359063 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 785289323165067273, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
@@ -6238,7 +6269,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 257530346216282606, guid: 8e518f3f91021964490aa4c6a5d8d0d8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.8
+      value: -0.32
       objectReference: {fileID: 0}
     - target: {fileID: 257530346216282606, guid: 8e518f3f91021964490aa4c6a5d8d0d8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6270,6 +6301,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 257530346216282606, guid: 8e518f3f91021964490aa4c6a5d8d0d8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2361553781232682617, guid: 8e518f3f91021964490aa4c6a5d8d0d8, type: 3}
+      propertyPath: m_SortingLayerID
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7674669691530021310, guid: 8e518f3f91021964490aa4c6a5d8d0d8, type: 3}
@@ -6618,6 +6653,10 @@ PrefabInstance:
     - target: {fileID: 2381206548926653411, guid: 5edc708e29addfb4882513f1abafc082, type: 3}
       propertyPath: m_Name
       value: Extra_Army
+      objectReference: {fileID: 0}
+    - target: {fileID: 2734455768170907182, guid: 5edc708e29addfb4882513f1abafc082, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4874310030850002653, guid: 5edc708e29addfb4882513f1abafc082, type: 3}
       propertyPath: m_LocalPosition.x

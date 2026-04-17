@@ -1248,9 +1248,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5426743865585603417, guid: 3d7448f5b32c0e64383cc0702c5584f2, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1048712562}
+    - target: {fileID: 5426743865585603417, guid: 3d7448f5b32c0e64383cc0702c5584f2, type: 3}
       propertyPath: SpeedBost
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 5426743865585603417, guid: 3d7448f5b32c0e64383cc0702c5584f2, type: 3}
+      propertyPath: DesertBall
+      value: 
+      objectReference: {fileID: 1843740064}
     - target: {fileID: 5426743865585603417, guid: 3d7448f5b32c0e64383cc0702c5584f2, type: 3}
       propertyPath: _desertBall
       value: 
@@ -6322,6 +6330,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Extra_Army
       objectReference: {fileID: 0}
+    - target: {fileID: 3296966712150212385, guid: 5edc708e29addfb4882513f1abafc082, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4081295452639071204, guid: 5edc708e29addfb4882513f1abafc082, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 4874310030850002653, guid: 5edc708e29addfb4882513f1abafc082, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -6374,9 +6390,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6193610134884736035, guid: 5edc708e29addfb4882513f1abafc082, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 6972060860075040498, guid: 5edc708e29addfb4882513f1abafc082, type: 3}
       propertyPath: WarningDuration
       value: 1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7597571102397938924, guid: 5edc708e29addfb4882513f1abafc082, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4129107930184591654, guid: 5edc708e29addfb4882513f1abafc082, type: 3}
@@ -6384,6 +6408,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5edc708e29addfb4882513f1abafc082, type: 3}
+--- !u!114 &1008777196 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2894325544789227681, guid: ae1a9226cccf11c49b990e01bcf05101, type: 3}
+  m_PrefabInstance: {fileID: 1676793799}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1009402934 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7240575897375996625, guid: c851e76814be3a045b7840455e7ed4f8, type: 3}
@@ -9803,6 +9838,10 @@ PrefabInstance:
       propertyPath: Botella
       value: 
       objectReference: {fileID: 152512182}
+    - target: {fileID: 2613398142267486895, guid: ae1a9226cccf11c49b990e01bcf05101, type: 3}
+      propertyPath: BarraPuntuacion
+      value: 
+      objectReference: {fileID: 1008777196}
     - target: {fileID: 4306164689981147991, guid: ae1a9226cccf11c49b990e01bcf05101, type: 3}
       propertyPath: m_Name
       value: GUI_Manager
