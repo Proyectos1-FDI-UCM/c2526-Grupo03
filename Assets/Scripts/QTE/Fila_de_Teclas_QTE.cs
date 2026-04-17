@@ -16,7 +16,7 @@ using static UnityEngine.Rendering.DebugUI;
 /// Antes de cada class, descripción de qué es y para qué sirve,
 /// usando todas las líneas que sean necesarias.
 /// </summary>
-public class QTE3 : MonoBehaviour
+public class Fila_de_Teclas_QTE : MonoBehaviour
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)

@@ -31,7 +31,7 @@ public class Dolly_Detection_System : MonoBehaviour
     /// <summary>
     /// Objeto de la meta
     /// </summary>
-    [SerializeField] private GameObject _Finish = null;
+    [SerializeField] private Finish _Finish = null;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -75,7 +75,7 @@ public class Dolly_Detection_System : MonoBehaviour
     /// <summary>
     /// Update is called every frame the monovehaviour is active
     /// </summary>
-    void Update()
+    void FixedUpdate()
     {
         if (_detected)
         {
@@ -84,7 +84,6 @@ public class Dolly_Detection_System : MonoBehaviour
         }
         else if (!_detected && Time.time >= _timepassed)
         {
-            _timepassed = Time.time + IntervaloParaSubir;
             LevelManager.Instance.QualityUp();
         }
     }
@@ -109,7 +108,7 @@ public class Dolly_Detection_System : MonoBehaviour
             }
             //Miramos si no es reparable para sumar puntuacion 
             _detected = true;
-            LevelManager.Instance.QualityDown(collision.gameObject.GetComponent<DetectableObject>().CalidadABajar);
+            LevelManager.Instance.QualityDown(collision.gameObject.GetComponent<DetectableObject>().GetQualityDown());
             
         }
         //Miramos si es el jugador  
