@@ -22,7 +22,7 @@ public class DetectableObject : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
-    [SerializeField] public int CalidadABajar = 0;
+    [SerializeField] private int CalidadABajar = 0;
     #endregion
     
     // ---- ATRIBUTOS PRIVADOS ----
@@ -68,6 +68,12 @@ public class DetectableObject : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
+
+    // Método de obtención de Calidad a bajar
+    public int GetQualityDown()
+    {
+        return CalidadABajar;
+    }
 
     #endregion
     
