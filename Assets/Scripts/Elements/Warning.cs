@@ -1,6 +1,7 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
-// Responsable de la creación de este archivo
+// Componente de la señal de advertencia del extra army
+// Sergio Higuera Gil && Colaboradores:
+//      Gabriel Adrian Oltean
 // Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
@@ -23,11 +24,20 @@ public class Warning : MonoBehaviour
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
 
-    // Señal de warning
+    /// <summary>
+    /// Objeto de la señal de advertencia
+    /// </summary>
     [SerializeField] private GameObject WarningSign;
 
-    // Tiempo que dura la advertencia
+    /// <summary>
+    /// Tiempo que dura la advertencia
+    /// </summary>
     [SerializeField] private float WarningDuration;
+
+    /// <summary>
+    /// Tiempo entre parpadeos de la señal
+    /// </summary>
+    [SerializeField] private float TimeToShift;
 
     #endregion
 
@@ -40,41 +50,61 @@ public class Warning : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
-    // Variable activadora de señal
+    /// <summary>
+    /// Variable que dice si se ha detectado al jugador
+    /// </summary>
     private bool _detected;
 
-    // Variable que determina cuando acabó la advertencia
+    /// <summary>
+    /// Determina cuando se ha acabado la advertencia
+    /// </summary>
     private bool _done;
 
-    // Variable que determina si ya fue tocado el trigger o no
+    /// <summary>
+    /// Determina si la señal ya fue activada
+    /// </summary>
     private bool _touched;
 
-    // Variable de control de tiempo de señal
+    /// <summary>
+    /// Momento en el que acaba la advertencia
+    /// </summary>
     private float _timePassed;
 
+    /// <summary>
+    /// Tiempo en el que se tiene que cambiar el estado de la señal (Parpadeo)
+    /// </summary>
+    private float _shiftingTime;
+
+    /// <summary>
+    /// Componente de vida del enemigo
+    /// </summary>
+    private Enemies_Health _health;
     #endregion
-    
+
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-    
+
     // Por defecto están los típicos (Update y Start) pero:
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
-    
+
     /// <summary>
     /// Start is called on the frame when a script is enabled just before 
     /// any of the Update methods are called the first time.
     /// </summary>
-    void Awake()
+    void Start()
     {
+        // Desactivamos la señal de advertencia
         WarningSign.SetActive(false);
+        // Inicializamos las variables necesarias
         _detected = false;
         _done = false;
         _touched = false;
         // Desactivamos la vida para que no pueda matarlo sin haber activado el warning
-        if(this.gameObject.GetComponentInParent<Enemies_Health>() != null)
+        if (this.gameObject.GetComponentInParent<Enemies_Health>() != null)
         {
-            this.gameObject.GetComponentInParent<Enemies_Health>().enabled = false;
+            _health = this.gameObject.GetComponentInParent<Enemies_Health>();
+            _health.enabled = false;
         }
     }
 
@@ -83,14 +113,38 @@ public class Warning : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (_detected && Time.time > _timePassed)
+        // Cuando ha empezado la advertencia
+        if (_detected && !_done)
         {
-            WarningSign.SetActive(false);
-            _done = true;
-            // Activamos la vida y daño
-            if (this.gameObject.GetComponentInParent<Enemies_Health>() != null)
+            // ====== Parpadeo ======
+            if (Time.time >= _shiftingTime)
             {
-                this.gameObject.GetComponentInParent<Enemies_Health>().enabled = true;
+                // Si ya estaba activada la desactivamos
+                if (WarningSign.active)
+                {
+                    WarningSign.SetActive(false);
+                }
+                // Si estaba desactivada la activamos
+                else
+                {
+                    WarningSign.SetActive(true);
+                }
+                // Actualizamos el tiempo de cambio
+                _shiftingTime = Time.time + TimeToShift;
+            }
+
+            // ====== Finalización de la advertencia ======
+            if (Time.time >= _timePassed)
+            {
+                // Desactivamos la señal
+                WarningSign.SetActive(false);
+                // Activamos la vida y daño
+                if (_health != null)
+                {
+                    _health.enabled = true;
+                }
+                // Acabamos la advertencia
+                _done = true;
             }
         }
     }
@@ -109,15 +163,18 @@ public class Warning : MonoBehaviour
     /// </summary>
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<Movement_Player>() != null)
+        // Si aún no ha sido activada y es un jugador
+        if (!_touched && collision.gameObject.GetComponent<Movement_Player>() != null)
         {
+            // Iniciamos la advertencia
             _detected = true;
-            if (!_touched)
-            {
-                _timePassed = Time.time + WarningDuration;
-                WarningSign.SetActive(true);
-                _touched = true;
-            }
+            // Inicializamos las variables del parpadeo
+            _shiftingTime = Time.time + TimeToShift;
+            _timePassed = Time.time + WarningDuration;
+            // Activamos la señal
+            WarningSign.SetActive(true);
+            // Indicamos que ya ha sido activada
+            _touched = true;
         }
     }
 
