@@ -225,7 +225,7 @@ public class Jump : MonoBehaviour
             {
                 _animator.SetBool("IsJumpingAnim", false);
                 _animator.SetBool("IsFalling", false);
-                _animator.SetBool("IsWalkingAnim", true);
+                _animator.SetBool("Landed", true);
                 _movement_Player.OnlyWalking(true);
             }
 
