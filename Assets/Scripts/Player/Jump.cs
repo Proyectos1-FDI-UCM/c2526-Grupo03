@@ -201,6 +201,9 @@ public class Jump : MonoBehaviour
                 {
                     _animator.SetBool("IsJumpingAnim", false);
                     _animator.SetBool("IsFalling", true);
+                    _animator.SetBool("IsWalkingAnim", false);
+                    _animator.SetBool("Landed", true);
+                    _movement_Player.OnlyWalking(false);
                 }
             }
 
@@ -226,6 +229,7 @@ public class Jump : MonoBehaviour
                 _animator.SetBool("IsJumpingAnim", false);
                 _animator.SetBool("IsFalling", false);
                 _animator.SetBool("IsWalkingAnim", true);
+                _animator.SetBool("Landed", true);
                 _movement_Player.OnlyWalking(true);
             }
 
@@ -298,6 +302,7 @@ public class Jump : MonoBehaviour
             _animator.SetBool("IsJumpingAnim", true);
             _animator.SetBool("IsFalling", false);
             _animator.SetBool("IsWalkingAnim", false);
+            _animator.SetBool("Landed", false);
             _movement_Player.OnlyWalking(false);
         }
 
