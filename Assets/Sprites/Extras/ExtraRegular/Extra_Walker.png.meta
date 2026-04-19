@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 5a5355aa8d594e74e875c99c376a093a
+guid: b46d0f829069d59419c2ede09bd17ed2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5598478145739784373
-    second: Extra2_0
+      213: -6819685114819210198
+    second: Extra_Walker_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,12 +100,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Extra2_0
+      name: Extra_Walker_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 19
+        width: 20
         height: 37
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b4f7468d9c53e42b0800000000000000
-      internalID: -5598478145739784373
+      spriteID: a249e23358c9b51a0800000000000000
+      internalID: -6819685114819210198
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Extra2_0: -5598478145739784373
+      Extra_Walker_0: -6819685114819210198
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
