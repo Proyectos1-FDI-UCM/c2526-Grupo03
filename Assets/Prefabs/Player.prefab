@@ -586,8 +586,8 @@ MonoBehaviour:
   MaxVelocity: 5
   Acceleration: 1
   Exclamation: {fileID: 2590580355582167740, guid: c41fea627a4cadb4db77192638c429cf, type: 3}
-  RightDetector: {fileID: 610096351653932614}
-  LeftDetector: {fileID: 1448954321273965125}
+  RightDetector: {fileID: 8827501690762947852}
+  LeftDetector: {fileID: 7198135266529155256}
 --- !u!114 &6079678517650480398
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -121,7 +121,7 @@ public class UI_Manager : MonoBehaviour
         //Actualizamos la barra de puntuación
         Update_Puntuacion();
         //Miramos si el jugador esta recargando y si existe el GameObjet de la botella
-        if (_playerReload.Reloading && Botella.gameObject != null)
+        if (_playerReload.IsReloading() && Botella.gameObject != null)
         {
             //Debug.Log("Rotacion: " + _rotacionBotella);
             //Activamos la botella

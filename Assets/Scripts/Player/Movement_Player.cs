@@ -7,10 +7,8 @@
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
 
-using System;
 using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Rendering;
 // Añadir aquí el resto de directivas using
 
 
@@ -33,8 +31,8 @@ public class Movement_Player : MonoBehaviour
 
     [SerializeField] private GameObject Exclamation;
 
-    [SerializeField] private GameObject RightDetector;
-    [SerializeField] private GameObject LeftDetector;
+    [SerializeField] private Detector RightDetector;
+    [SerializeField] private Detector LeftDetector;
 
 
     #endregion
@@ -69,6 +67,8 @@ public class Movement_Player : MonoBehaviour
     /// </summary>
     private bool _onlyWalking = true;
 
+    private Collider2D _playerCollider;
+
     /// <summary>
     /// Indica si debemos impedir el siguiente movimiento
     /// </summary>
@@ -90,6 +90,7 @@ public class Movement_Player : MonoBehaviour
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
+        _playerCollider = GetComponent<Collider2D>();
     }
 
     /// <summary>
@@ -103,12 +104,12 @@ public class Movement_Player : MonoBehaviour
         Vector2 dir = InputManager.Instance.MovementVector;
 
         // en caso de moverse a la derecha
-        if (dir.x > 0 && !RightDetector.GetComponent<Detector>().Detected && !_empujado && !_desactivated)
+        if (dir.x > 0 && !RightDetector.Detected && !_empujado && !_desactivated)
         {
             // mueve al personaje en base a la velocidad (_velocity) en el eje x
             this.transform.position += new Vector3(_speed, 0.0f) * Time.deltaTime;
             _spriteRenderer.flipX = false;
-            if(_animator && _onlyWalking)
+            if (_animator && _onlyWalking)
             {
                 _animator.SetBool("IsWalkingAnim", true);
             }
@@ -120,7 +121,7 @@ public class Movement_Player : MonoBehaviour
             else _speed = MaxVelocity;
         }
         // en caso de moverse a la izquierda
-        else if (dir.x < 0 && !LeftDetector.GetComponent<Detector>().Detected && !_desactivated)
+        else if (dir.x < 0 && !LeftDetector.Detected && !_desactivated)
         {
             // mueve al personaje en base a la velocidad (_velocity) en el eje x
             this.transform.position += new Vector3(_speed, 0.0f) * Time.deltaTime;
@@ -147,12 +148,13 @@ public class Movement_Player : MonoBehaviour
 
         // ---- Detección de paredes ----
 
-        if (LeftDetector.GetComponent<Detector>().Detected)
+        if (LeftDetector.Detected && (_speed < 0 || _velEmpuje < 0))
         {
-            Detector _leftDetector = LeftDetector.GetComponent<Detector>();
+            _velEmpuje = 0;
+            _speed = 0;
             // Calculamos la posicion del Jugador justo al lado de la pared
-            float _posAlLadoPared = _leftDetector.GetCollisionedObjectPosition().x + _leftDetector.GetCollisionedObjectSize().x / 2;
-            float _posX = _posAlLadoPared + this.gameObject.GetComponent<Collider2D>().bounds.size.x / 2;
+            float _posAlLadoPared = LeftDetector.GetCollisionedObjectPosition().x + LeftDetector.GetCollisionedObjectSize().x / 2;
+            float _posX = _posAlLadoPared + _playerCollider.bounds.size.x / 2;
             float _aumentoX = _posX - transform.position.x;
 
             // Movemos al personaje justo al lado de la pared
@@ -160,12 +162,12 @@ public class Movement_Player : MonoBehaviour
             // teletransporte
             if (transform.position.x < _posX && math.abs(_aumentoX) < 1) transform.position += new Vector3(_aumentoX, 0.0f);
         }
-        else if (RightDetector.GetComponent<Detector>().Detected && !_empujado)
+        else if (RightDetector.Detected && _speed > 0 && !_empujado)
         {
-            Detector _rightDetector = RightDetector.GetComponent<Detector>();
+            _speed = 0;
             // Calculamos la posicion del Jugador justo al lado de la pared
-            float _posAlLadoPared = _rightDetector.GetCollisionedObjectPosition().x - _rightDetector.GetCollisionedObjectSize().x / 2;
-            float _posX = _posAlLadoPared - this.gameObject.GetComponent<Collider2D>().bounds.size.x / 2;
+            float _posAlLadoPared = RightDetector.GetCollisionedObjectPosition().x - RightDetector.GetCollisionedObjectSize().x / 2;
+            float _posX = _posAlLadoPared - _playerCollider.bounds.size.x / 2;
             float _aumentoX = _posX - transform.position.x;
 
             // Movemos al personaje justo al lado de la pared
@@ -178,11 +180,7 @@ public class Movement_Player : MonoBehaviour
 
         if (_empujado)
         {
-            if (_velEmpuje >= 0.0f)
-            {
-                _empujado = false;
-            }
-            else if (LeftDetector.GetComponent<Detector>().Detected)
+            if (_velEmpuje >= 0.0f || LeftDetector.Detected)
             {
                 _velEmpuje = 0.0f;
                 _empujado = false;
@@ -198,16 +196,13 @@ public class Movement_Player : MonoBehaviour
                 }
                 else _velEmpuje = 0.0f;
             }
-            // --- Menu de pausa activacion ---
-
-            
-
         }
+        // --- Menu de pausa activacion ---
         if (InputManager.Instance.PauseWasPressedThisFrame())
-            {
-                // Debug.Log("Pausando");
-                LevelManager.Instance.Pausa();
-            }
+        {
+            // Debug.Log("Pausando");
+            LevelManager.Instance.Pausa();
+        }
     }
     #endregion
 
@@ -221,12 +216,12 @@ public class Movement_Player : MonoBehaviour
 
     public void Empuja(int emp)
     {
-        if (!LeftDetector.GetComponent<Detector>().Detected)
+        if (!LeftDetector.Detected)
         {
             _velEmpuje = -emp;
         }
         _empujado = true;
-        
+
     }
 
     public float getMaxVel()

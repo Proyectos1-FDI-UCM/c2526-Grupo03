@@ -1,12 +1,13 @@
 ﻿//---------------------------------------------------------
 // Script encargado de la recarga de municion del personaje
-// Sergio Higuera, Alejandro Garcia, Gabriel Adrian
+// Sergio Higuera && Colaboradores:
+//      Alejandro Garcia
+//      Gabriel Adrian
 // Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
 
 using UnityEngine;
-using UnityEngine.InputSystem;
 // Añadir aquí el resto de directivas using
 
 
@@ -24,19 +25,22 @@ public class Scream_Reload : MonoBehaviour
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
 
-    // Velocidad de movimiento mientras recarga
+    /// <summary>
+    /// Velocidad de movimiento mientras recarga
+    /// </summary>
     [SerializeField] private float ReloadMovement = 3.0f;
 
-    // Rapidez a la cual bebe el agua
+    /// <summary>
+    /// Rapidez a la cual bebe el agua
+    /// </summary>
     [SerializeField] private float ReloadDuration = 1.5f;
 
-    // Tiempo de espera entre recargas (para que no se sature de agua el pobre)
+    /// <summary>
+    /// Tiempo de espera entre recargas (para que no se sature de agua el pobre)
+    /// </summary>
     [SerializeField] private float ReloadCD = 5.0f;
 
-    /// <summary>
-    /// Indica si se esta recargando
-    /// </summary>
-    public bool Reloading = false;
+
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -48,18 +52,39 @@ public class Scream_Reload : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
-    // Vartiable de cuenta de tiempo desde última recarga
+    /// <summary>
+    /// Indica si se esta recargando
+    /// </summary>
+    private bool _reloading = false;
+    /// <summary>
+    /// Vartiable de cuenta de tiempo desde última recarga
+    /// </summary>
     private float _timePassed;
 
-    // Velocidad máxima del script "Movement_Player" (Max_Speed)
+    /// <summary>
+    /// Velocidad máxima del script "Movement_Player" (Max_Speed)
+    /// </summary>
     private float _maxOriginalSpeed;
 
-    // Variable temporizador para el movimiento modificado
+    /// <summary>
+    /// Variable temporizador para el movimiento modificado
+    /// </summary>
     private float _enOfModification;
 
-    // Variable que determina si el efecto de realentización está activo o no
+    /// <summary>
+    /// Variable que determina si el efecto de realentización está activo o no
+    /// </summary>
     private bool _slowActive = false;
 
+    /// <summary>
+    /// Componente de movimiento del jugador
+    /// </summary>
+    private Movement_Player _playerMovement;
+
+    /// <summary>
+    /// Componente de disparo del jugador
+    /// </summary>
+    private Shoot _playerShoot;
     /// <summary>
     /// Indica si debemos impedir la siguiente recarga
     /// </summary>
@@ -79,7 +104,10 @@ public class Scream_Reload : MonoBehaviour
     /// </summary>
     void Start()
     {
+        // Cacheamos los componentes
         _maxOriginalSpeed = this.gameObject.GetComponent<Movement_Player>().getMaxVel();
+        _playerMovement = this.gameObject.GetComponent<Movement_Player>();
+        _playerShoot = this.gameObject.GetComponent<Shoot>();
     }
 
     /// <summary>
@@ -87,25 +115,26 @@ public class Scream_Reload : MonoBehaviour
     /// </summary>
     void Update()
     {
-        bool reloading = InputManager.Instance.RelaodWasPressedThisFrame();
-
-        if (reloading &&  !_desactivated && Time.time >= _timePassed)
+        // Comprobamos si puedes recargar
+        if (InputManager.Instance.RelaodWasPressedThisFrame() && !_desactivated && Time.time >= _timePassed)
         {
-            this.gameObject.GetComponent<Movement_Player>().setMaxVel(ReloadMovement);
-
-            Reloading = true;
-
+            // Cambiamos la velocidad de movimiento a la de recarga
+            _playerMovement.setMaxVel(ReloadMovement);
+            // Indicamos que estamos recargando
+            _reloading = true;
+            // Cambiamos el tiempo de fin de recarga
             _enOfModification = Time.time + ReloadDuration;
+            // Indicamos que se ha ralentizado
             _slowActive = true;
-
+            // Modificamos el tiempo para volver a recargar
             _timePassed = Time.time + ReloadCD;
         }
 
         if (_slowActive && Time.time >= _enOfModification)
         {
-            Reloading = false;
-            this.gameObject.GetComponent<Shoot>().ReloadAmmo();
-            this.gameObject.GetComponent<Movement_Player>().setMaxVel(_maxOriginalSpeed);
+            _reloading = false;
+            _playerShoot.ReloadAmmo();
+            _playerMovement.setMaxVel(_maxOriginalSpeed);
             _slowActive = false;
         }
     }
@@ -119,6 +148,10 @@ public class Scream_Reload : MonoBehaviour
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
+    public bool IsReloading()
+    {
+        return _reloading;
+    }
     public void DesactivateReload()
     {
         _desactivated = true;
