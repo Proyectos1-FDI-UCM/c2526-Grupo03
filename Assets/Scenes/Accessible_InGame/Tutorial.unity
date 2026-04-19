@@ -2737,14 +2737,14 @@ Transform:
   m_GameObject: {fileID: 486119700}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.445311, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 3.1099997, y: 3.8611412, z: 0.010843951}
+  m_LocalScale: {x: 2.5, y: 1.8503, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1452228240}
   - {fileID: 1022636693}
   - {fileID: 2094797980}
-  m_Father: {fileID: 1769138784}
+  m_Father: {fileID: 614423596}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &486119702
 SpriteRenderer:
@@ -3906,6 +3906,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1769138784}
+  - {fileID: 486119701}
   - {fileID: 1367310101}
   - {fileID: 941494274}
   - {fileID: 103973234}
@@ -4891,6 +4892,10 @@ PrefabInstance:
       propertyPath: Botella
       value: 
       objectReference: {fileID: 49385916}
+    - target: {fileID: 2613398142267486895, guid: ae1a9226cccf11c49b990e01bcf05101, type: 3}
+      propertyPath: BarraPuntuacion
+      value: 
+      objectReference: {fileID: 1928132092}
     - target: {fileID: 4306164689981147991, guid: ae1a9226cccf11c49b990e01bcf05101, type: 3}
       propertyPath: m_Name
       value: GUI_Manager
@@ -9210,7 +9215,6 @@ RectTransform:
   - {fileID: 1207158747}
   - {fileID: 1536653568}
   - {fileID: 260734381}
-  - {fileID: 486119701}
   m_Father: {fileID: 614423596}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -9834,6 +9838,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1884664724}
   m_CullTransparentMesh: 1
+--- !u!114 &1928132092 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2894325544789227681, guid: ae1a9226cccf11c49b990e01bcf05101, type: 3}
+  m_PrefabInstance: {fileID: 900568262}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1935060129 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1269227182867427392, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
