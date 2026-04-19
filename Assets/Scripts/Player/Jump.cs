@@ -1,6 +1,7 @@
 ﻿//---------------------------------------------------------
 // Componente encargado del salto del personaje jugable.
 // Gabriel Adrian Oltean, Alejandro Garcia Diaz y Víctor Román Román
+// && Colaboradores: Tristán Sánchez López 
 // Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
@@ -107,9 +108,13 @@ public class Jump : MonoBehaviour
     /// </summary>
     private bool _roofDetected;
     /// <summary>
-    /// Indica si debemos impedir el siguiente salto
+    /// Indica si debemos impedir el siguiente salto y ha sido llamado desde fuera del componente
     /// </summary>
     private bool _desactivated = false;
+    /// <summary>
+    /// Indica que debemos impedir el salto para no saltar doble
+    /// </summary>
+    private bool _desactivatedInside = false;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -154,7 +159,7 @@ public class Jump : MonoBehaviour
     void Update()
     {
         // De momento hacemos el salto con el movimiento en el eje y para no tocar el input action
-        if (!_desactivated && InputManager.Instance.JumpWasPressedThisFrame() && FloorDetector.Detected)
+        if (!_desactivated && !_desactivatedInside && InputManager.Instance.JumpWasPressedThisFrame() && FloorDetector.Detected)
         {
             StartJump();
         }
@@ -251,7 +256,12 @@ public class Jump : MonoBehaviour
             // ====== Permitimos el siguiente salto ======
 
             _hasJumped = false;
-            ActivateJump();
+            if (!_desactivated)
+            {
+                _desactivatedInside = false;
+
+            }
+
 
         }
         // ====== Movemos al personaje en el eje Y según la velocidad ======
@@ -281,6 +291,7 @@ public class Jump : MonoBehaviour
     public void ActivateJump()
     {
         _desactivated = false;
+        _desactivatedInside = false;
     }
     #endregion
 
@@ -313,7 +324,7 @@ public class Jump : MonoBehaviour
         _speed = _jumpSpeed;
 
         // Impedimos doble salto
-        DesactivateJump();
+        _desactivatedInside = true;
     }
     #endregion
 
