@@ -46,16 +46,19 @@ public class Movement_Player : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
-    private float _speed = .0f; // Velocidad del personaje
+    /// <summary>
+    /// Velocidad del personaje.
+    /// </summary>
+    private float _speed = .0f;
 
     SpriteRenderer _spriteRenderer;
 
     /// <summary>
-    /// Indica si has sido empujado
+    /// Indica si has sido empujado.
     /// </summary>
     private bool _empujado = false;
     /// <summary>
-    /// Velocidad actual durante el empuje
+    /// Velocidad actual durante el empuje.
     /// </summary>
     private float _velEmpuje = 0.0f;
     /// <summary>
@@ -67,12 +70,20 @@ public class Movement_Player : MonoBehaviour
     /// </summary>
     private bool _onlyWalking = true;
 
+    /// <summary>
+    /// Collider del personaje.
+    /// </summary>
     private Collider2D _playerCollider;
 
     /// <summary>
-    /// Indica si debemos impedir el siguiente movimiento
+    /// Indica si debemos impedir el siguiente movimiento.
     /// </summary>
     private bool _desactivated = false;
+
+    /// <summary>
+    /// Dirección a la que saldrá disparado el personaje al tocar un CactusMan.
+    /// </summary>
+    private Vector3 _dirEmpuje;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -188,7 +199,7 @@ public class Movement_Player : MonoBehaviour
             else
             {
 
-                this.transform.position += new Vector3(_velEmpuje, 0.0f) * Time.deltaTime;
+                this.transform.position += _dirEmpuje * _velEmpuje * Time.deltaTime;
 
                 if (_velEmpuje < 0.0f)
                 {
@@ -214,8 +225,14 @@ public class Movement_Player : MonoBehaviour
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
-    public void Empuja(int emp)
+    /// <summary>
+    /// Método encargado de configurar el estado "empujado".
+    /// </summary>
+    /// <param name="emp"></param>
+    /// <param name="dir"></param>
+    public void Empuja(float emp, Vector3 dir)
     {
+        _dirEmpuje = dir;
         if (!LeftDetector.Detected())
         {
             _velEmpuje = -emp;
@@ -233,16 +250,28 @@ public class Movement_Player : MonoBehaviour
         MaxVelocity = rlMovement;
     }
 
+    /// <summary>
+    /// Comprueba si el personaje sólo está andando.
+    /// </summary>
+    /// <param name="IsOnlyWalking"></param>
+    /// <returns></returns>
     public bool OnlyWalking(bool IsOnlyWalking)
     {
         _onlyWalking = IsOnlyWalking;
         return _onlyWalking;
     }
 
+    /// <summary>
+    /// Desactiva el movimiento del personaje.
+    /// </summary>
     public void DesactivateMovement()
     {
         _desactivated = true;
     }
+
+    /// <summary>
+    /// Activa el movimiento del personaje.
+    /// </summary>
     public void ActivateMovement()
     {
         _desactivated = false;

@@ -2320,6 +2320,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CactusMan
       objectReference: {fileID: 0}
+    - target: {fileID: 6728700807455670162, guid: 2a1002e734f9712489a8bbfe29e2818d, type: 3}
+      propertyPath: DirEmpuje.x
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2715,6 +2719,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1502815198}
+  - {fileID: 2152598685065865365}
+  - {fileID: 7578181594039529430}
   m_Father: {fileID: 1587410554}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1844756546
@@ -3191,6 +3197,130 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7300971525162851162, guid: a553c96290fa69a419c074ea8059cbd0, type: 3}
   m_PrefabInstance: {fileID: 422874541}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2152598685065865365 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7578181594805911991, guid: d6294e553dc66544b8c6b986d3958d87, type: 3}
+  m_PrefabInstance: {fileID: 3848220092024048700}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2503690358932637413
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1815059702}
+    m_Modifications:
+    - target: {fileID: 2910723512590412635, guid: 2c262d120fae9e847892138d78e1c485, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -88.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910723512590412635, guid: 2c262d120fae9e847892138d78e1c485, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5.03979
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910723512590412635, guid: 2c262d120fae9e847892138d78e1c485, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910723512590412635, guid: 2c262d120fae9e847892138d78e1c485, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910723512590412635, guid: 2c262d120fae9e847892138d78e1c485, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910723512590412635, guid: 2c262d120fae9e847892138d78e1c485, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910723512590412635, guid: 2c262d120fae9e847892138d78e1c485, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910723512590412635, guid: 2c262d120fae9e847892138d78e1c485, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910723512590412635, guid: 2c262d120fae9e847892138d78e1c485, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910723512590412635, guid: 2c262d120fae9e847892138d78e1c485, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5071201427618489144, guid: 2c262d120fae9e847892138d78e1c485, type: 3}
+      propertyPath: m_Name
+      value: CactusManDosSentidos
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2c262d120fae9e847892138d78e1c485, type: 3}
+--- !u!1001 &3848220092024048700
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1815059702}
+    m_Modifications:
+    - target: {fileID: 1858328493997905410, guid: d6294e553dc66544b8c6b986d3958d87, type: 3}
+      propertyPath: m_Name
+      value: CactusManDerecha
+      objectReference: {fileID: 0}
+    - target: {fileID: 7578181594805911991, guid: d6294e553dc66544b8c6b986d3958d87, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -88.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 7578181594805911991, guid: d6294e553dc66544b8c6b986d3958d87, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5.03979
+      objectReference: {fileID: 0}
+    - target: {fileID: 7578181594805911991, guid: d6294e553dc66544b8c6b986d3958d87, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7578181594805911991, guid: d6294e553dc66544b8c6b986d3958d87, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7578181594805911991, guid: d6294e553dc66544b8c6b986d3958d87, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7578181594805911991, guid: d6294e553dc66544b8c6b986d3958d87, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7578181594805911991, guid: d6294e553dc66544b8c6b986d3958d87, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7578181594805911991, guid: d6294e553dc66544b8c6b986d3958d87, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7578181594805911991, guid: d6294e553dc66544b8c6b986d3958d87, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7578181594805911991, guid: d6294e553dc66544b8c6b986d3958d87, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d6294e553dc66544b8c6b986d3958d87, type: 3}
+--- !u!4 &7578181594039529430 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2910723512590412635, guid: 2c262d120fae9e847892138d78e1c485, type: 3}
+  m_PrefabInstance: {fileID: 2503690358932637413}
   m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
