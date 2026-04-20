@@ -1035,7 +1035,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6079678517650480398, guid: 8e518f3f91021964490aa4c6a5d8d0d8, type: 3}
       propertyPath: JumpHeight
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6079678517650480398, guid: 8e518f3f91021964490aa4c6a5d8d0d8, type: 3}
       propertyPath: MaxFallSpeed

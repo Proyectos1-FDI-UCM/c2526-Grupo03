@@ -22,10 +22,31 @@ public class Shoot : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
+
+    /// <summary>
+    /// GameObject de la bala
+    /// </summary>
     [SerializeField] private GameObject Bullet;
-    [SerializeField] private int NumBulletsPool = 7;
-    [SerializeField] private Transform BulletsContainer;
+    /// <summary>
+    /// Máximo de balas que puedes disparar sin recargar
+    /// </summary>
     [SerializeField] private int MaxAmmo = 4;
+    /// <summary>
+    /// Controla el tiempo que debe pasar entre disparos.
+    /// </summary>
+    [SerializeField] private float Cooldown = .8f;
+    /// <summary>
+    ///  Posicion de la bala en relacion al personaje.
+    /// </summary>
+    [SerializeField] private Vector3 BulletPositionOffset = new Vector3(0.8f, 0);
+    /// <summary>
+    /// Número de balas en el "pool"
+    /// </summary>
+    [SerializeField] private int NumBulletsPool = 7;
+    /// <summary>
+    /// Contenedor del pool de balas
+    /// </summary>
+    [SerializeField] private Transform BulletsContainer;
 
     #endregion
 
@@ -44,19 +65,9 @@ public class Shoot : MonoBehaviour
     private int _ammo;
 
     /// <summary>
-    /// Controla el tiempo que debe pasar entre disparos.
+    /// Tiempo en el que se podra volver a disparar
     /// </summary>
-    private float _cooldown = .8f; // Tiempo de espera entre disparo y disparo
-
-    /// <summary>
-    /// Tiempo que ha pasado entre disparos.
-    /// </summary>
-    private float _timeToWait = .0f; // Tiempo en el que se podra volver a disparar
-
-    /// <summary>
-    ///  Posicion de la bala en relacion al personaje.
-    /// </summary>
-    private Vector3 _bulletPositionOffset = new Vector3(0.8f, 0); // Posicion de la bala en relacion al personaje
+    private float _timeToWait = .0f;
 
     /// <summary>
     /// Contiene el sprite del personaje.
@@ -126,7 +137,6 @@ public class Shoot : MonoBehaviour
             while (i < NumBulletsPool && _bulletsPool[i].activeSelf)
             {
                 i++;
-                Debug.Log("try " + i);
             }
             if (i == NumBulletsPool) return; // No se puede disparar porque todas las balas estan en uso
 
@@ -137,20 +147,19 @@ public class Shoot : MonoBehaviour
             }
             int dir = _playerSpriteRenderer.flipX ? -1 : 1; // Para saber en que direccion mira el personjae principal
 
-            Vector3 bulletOffset = gameObject.transform.position + (_bulletPositionOffset * dir);
+            Vector3 bulletOffset = gameObject.transform.position + (BulletPositionOffset * dir);
 
             _bulletsPool[i].transform.position = bulletOffset; // Coloca la bala enfrente del personaje
             _bulletsPool[i].GetComponent<SpriteRenderer>().flipX = _playerSpriteRenderer.flipX; // Rota la bala en la direccion del player
             _bulletsPool[i].SetActive(true);
 
-            Debug.Log("balas restantes: " + _ammo);
-            _ammo--;
-
-            _timeToWait = Time.time + _cooldown;
+            _timeToWait = Time.time + Cooldown;
             if(_animator)
             {
                 _animator.SetBool("ReverseShooting", true);
             }
+
+            _ammo--;
         }
     }
     #endregion
