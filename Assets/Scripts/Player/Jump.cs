@@ -149,8 +149,8 @@ public class Jump : MonoBehaviour
     private void FixedUpdate()
     {
         // ====== Detecciones del motor de físicas ======
-        _floorDetected = FloorDetector.Detected;
-        _roofDetected = RoofDetector.Detected;
+        _floorDetected = FloorDetector.Detected();
+        _roofDetected = RoofDetector.Detected();
     }
 
     /// <summary>
@@ -159,7 +159,7 @@ public class Jump : MonoBehaviour
     void Update()
     {
         // De momento hacemos el salto con el movimiento en el eje y para no tocar el input action
-        if (!_desactivated && !_desactivatedInside && InputManager.Instance.JumpWasPressedThisFrame() && FloorDetector.Detected)
+        if (!_desactivated && !_desactivatedInside && InputManager.Instance.JumpWasPressedThisFrame() && _floorDetected)
         {
             StartJump();
         }

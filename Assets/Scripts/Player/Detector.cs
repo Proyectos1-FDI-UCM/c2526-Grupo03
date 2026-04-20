@@ -23,10 +23,6 @@ public class Detector : MonoBehaviour
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
 
-    /// <summary>
-    /// True si se detecta un collider
-    /// </summary>
-    public bool Detected = false;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -38,6 +34,10 @@ public class Detector : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
+    /// <summary>
+    /// True si se detecta un collider
+    /// </summary>
+    private bool _detected = false;
     /// <summary>
     /// Guarda el collider del último objeto colisionado
     /// </summary>
@@ -77,10 +77,24 @@ public class Detector : MonoBehaviour
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
+    /// <summary>
+    /// Dice si se ha detectado un obstaculo o no
+    /// </summary>
+    /// <returns>True si se detecta un collider</returns>
+    public bool Detected()
+    {
+        return _detected;
+    }
+    /// <summary>
+    /// Devuelve el vector de la posicion del ultimo objeto detectado
+    /// </summary>
     public Vector3 GetCollisionedObjectPosition()
     {
         return _collisionedObject.gameObject.transform.position;
     }
+    /// <summary>
+    /// Devuelve el vector del tamaño del ultimo objeto detectado
+    /// </summary>
     public Vector3 GetCollisionedObjectSize()
     {
         return _collisionedObject.bounds.size;
@@ -96,13 +110,13 @@ public class Detector : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        Detected = true;
+        _detected = true;
         _collisionedObject = collision;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Detected = false;
+        _detected = false;
     }
 
     #endregion   
