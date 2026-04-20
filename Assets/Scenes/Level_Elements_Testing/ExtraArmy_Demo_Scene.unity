@@ -427,6 +427,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7674669691530021310, guid: 8e518f3f91021964490aa4c6a5d8d0d8, type: 3}
   m_PrefabInstance: {fileID: 1421149837}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1113464164 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 257530346216282606, guid: 8e518f3f91021964490aa4c6a5d8d0d8, type: 3}
+  m_PrefabInstance: {fileID: 1421149837}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1403200401
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -923,6 +928,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6972060860075040498, guid: 5edc708e29addfb4882513f1abafc082, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1113464164}
+    - target: {fileID: 6972060860075040498, guid: 5edc708e29addfb4882513f1abafc082, type: 3}
       propertyPath: XMargin
       value: 10
       objectReference: {fileID: 0}
@@ -932,11 +941,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6972060860075040498, guid: 5edc708e29addfb4882513f1abafc082, type: 3}
       propertyPath: TimeToShift
-      value: 0.5
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6972060860075040498, guid: 5edc708e29addfb4882513f1abafc082, type: 3}
+      propertyPath: XPlayerOffset
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6972060860075040498, guid: 5edc708e29addfb4882513f1abafc082, type: 3}
       propertyPath: WarningDuration
-      value: 5
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7660910421557683461, guid: 5edc708e29addfb4882513f1abafc082, type: 3}
       propertyPath: m_AnchoredPosition.x

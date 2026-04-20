@@ -308,11 +308,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WarningSign: {fileID: 8925371912294445474}
-  Player: {fileID: 257530346216282606, guid: 8e518f3f91021964490aa4c6a5d8d0d8, type: 3}
-  WarningDuration: 0
-  TimeToShift: 0
-  YMargin: 0
-  XMargin: 0
+  Player: {fileID: 0}
+  WarningDuration: 1.4
+  TimeToShift: 0.5
+  XPlayerOffset: 10
 --- !u!1 &3296966712150212385
 GameObject:
   m_ObjectHideFlags: 0
