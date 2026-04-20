@@ -1,6 +1,6 @@
 //---------------------------------------------------------
 // Componente de la señal de advertencia del extra army
-// Sergio Higuera Gil && Colaboradores:
+// Sergio Higuera Gil && Gabriel Adrian Oltean
 //      Gabriel Adrian Oltean
 // Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
@@ -30,6 +30,11 @@ public class Warning : MonoBehaviour
     [SerializeField] private GameObject WarningSign;
 
     /// <summary>
+    /// Jugador punto de referencia
+    /// </summary>
+    [SerializeField] private Transform Player;
+
+    /// <summary>
     /// Tiempo que dura la advertencia
     /// </summary>
     [SerializeField] private float WarningDuration;
@@ -38,6 +43,11 @@ public class Warning : MonoBehaviour
     /// Tiempo entre parpadeos de la señal
     /// </summary>
     [SerializeField] private float TimeToShift;
+
+    /// <summary>
+    /// Margen a dejar en X para la señal
+    /// </summary>
+    [SerializeField] private float XPlayerOffset;
 
     #endregion
 
@@ -79,6 +89,17 @@ public class Warning : MonoBehaviour
     /// Componente de vida del enemigo
     /// </summary>
     private Enemies_Health _health;
+
+    /// <summary>
+    /// Posicion de la huelga
+    /// </summary>
+    private Vector2 _armyposition;
+
+    /// <summary>
+    /// Posicion fija en X
+    /// </summary>
+    float _fixedX;
+
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -100,6 +121,7 @@ public class Warning : MonoBehaviour
         _detected = false;
         _done = false;
         _touched = false;
+        _armyposition = transform.parent.position;
         // Desactivamos la vida para que no pueda matarlo sin haber activado el warning
         if (this.gameObject.GetComponentInParent<Enemies_Health>() != null)
         {
@@ -112,7 +134,10 @@ public class Warning : MonoBehaviour
     /// Update is called every frame, if the MonoBehaviour is enabled.
     /// </summary>
     void Update()
-    {
+    { 
+        _fixedX = Player.position.x + XPlayerOffset;
+
+        WarningSign.transform.position = new Vector2(_fixedX, _armyposition.y);
         // Cuando ha empezado la advertencia
         if (_detected && !_done)
         {
