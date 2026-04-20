@@ -143,8 +143,8 @@ public class Extra_Army : MonoBehaviour
     private void FixedUpdate()
     {
         // ====== Detecciones del motor de físicas ======
-        _floorDetected = FloorDetector.Detected;
-        _roofDetected = RoofDetector.Detected;
+        _floorDetected = FloorDetector.Detected();
+        _roofDetected = RoofDetector.Detected();
     }
 
     /// <summary>
@@ -154,7 +154,7 @@ public class Extra_Army : MonoBehaviour
     {
         if (_warning.GetDone() && !_hasFinishedJump)
         {
-            if (FrontDetector.Detected && FloorDetector.Detected)
+            if (FrontDetector.Detected() && FloorDetector.Detected())
             {
                 StartJump();
             }
@@ -183,7 +183,7 @@ public class Extra_Army : MonoBehaviour
                         // ====== Terminamos la subida ======
 
                         _stopGoingUp = true;
-                        if (FrontDetector.Detected)
+                        if (FrontDetector.Detected())
                         {
                             _obstacleSorted = false;
                         }
@@ -192,7 +192,7 @@ public class Extra_Army : MonoBehaviour
                     else if (transform.position.y >= _maxPosJumped.y)
                     {
                         _stopGoingUp = true;
-                        if (FrontDetector.Detected)
+                        if (FrontDetector.Detected())
                         {
                             _obstacleSorted = false;
                         }

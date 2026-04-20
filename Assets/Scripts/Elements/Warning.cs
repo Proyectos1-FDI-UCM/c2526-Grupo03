@@ -145,7 +145,7 @@ public class Warning : MonoBehaviour
             if (Time.time >= _shiftingTime)
             {
                 // Si ya estaba activada la desactivamos
-                if (WarningSign.active)
+                if (WarningSign.activeSelf)
                 {
                     WarningSign.SetActive(false);
                 }
