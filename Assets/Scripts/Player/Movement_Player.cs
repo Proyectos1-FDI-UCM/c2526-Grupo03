@@ -104,7 +104,7 @@ public class Movement_Player : MonoBehaviour
         Vector2 dir = InputManager.Instance.MovementVector;
 
         // en caso de moverse a la derecha
-        if (dir.x > 0 && !RightDetector.Detected && !_empujado && !_desactivated)
+        if (dir.x > 0 && !RightDetector.Detected() && !_empujado && !_desactivated)
         {
             // mueve al personaje en base a la velocidad (_velocity) en el eje x
             this.transform.position += new Vector3(_speed, 0.0f) * Time.deltaTime;
@@ -121,7 +121,7 @@ public class Movement_Player : MonoBehaviour
             else _speed = MaxVelocity;
         }
         // en caso de moverse a la izquierda
-        else if (dir.x < 0 && !LeftDetector.Detected && !_desactivated)
+        else if (dir.x < 0 && !LeftDetector.Detected() && !_desactivated)
         {
             // mueve al personaje en base a la velocidad (_velocity) en el eje x
             this.transform.position += new Vector3(_speed, 0.0f) * Time.deltaTime;
@@ -148,7 +148,7 @@ public class Movement_Player : MonoBehaviour
 
         // ---- Detección de paredes ----
 
-        if (LeftDetector.Detected && (_speed < 0 || _velEmpuje < 0))
+        if (LeftDetector.Detected() && (_speed < 0 || _velEmpuje < 0))
         {
             _velEmpuje = 0;
             _speed = 0;
@@ -162,7 +162,7 @@ public class Movement_Player : MonoBehaviour
             // teletransporte
             if (transform.position.x < _posX && math.abs(_aumentoX) < 1) transform.position += new Vector3(_aumentoX, 0.0f);
         }
-        else if (RightDetector.Detected && _speed > 0 && !_empujado)
+        else if (RightDetector.Detected() && _speed > 0 && !_empujado)
         {
             _speed = 0;
             // Calculamos la posicion del Jugador justo al lado de la pared
@@ -180,7 +180,7 @@ public class Movement_Player : MonoBehaviour
 
         if (_empujado)
         {
-            if (_velEmpuje >= 0.0f || LeftDetector.Detected)
+            if (_velEmpuje >= 0.0f || LeftDetector.Detected())
             {
                 _velEmpuje = 0.0f;
                 _empujado = false;
@@ -216,7 +216,7 @@ public class Movement_Player : MonoBehaviour
 
     public void Empuja(int emp)
     {
-        if (!LeftDetector.Detected)
+        if (!LeftDetector.Detected())
         {
             _velEmpuje = -emp;
         }

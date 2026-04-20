@@ -87,7 +87,7 @@ public class Extra_Regular : MonoBehaviour
     /// </summary>
     void Update()
     {
-        _landed = FloorDetector.GetComponent<Detector>().Detected;
+        _landed = FloorDetector.GetComponent<Detector>().Detected();
         if (!_landed)
         {// cambia la direccion si no detecta suelo
             if (dir == 1)
