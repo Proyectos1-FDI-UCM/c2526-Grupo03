@@ -33,7 +33,7 @@ public class Enemies_Health : MonoBehaviour
     [SerializeField] private int DamagePerHit = 1;
 
     #endregion
-    
+
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
     // Documentar cada atributo que aparece aquí.
@@ -42,7 +42,6 @@ public class Enemies_Health : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-
     #endregion
     
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -66,12 +65,7 @@ public class Enemies_Health : MonoBehaviour
     /// </summary>
     void Update()
     {
-        // Destruimos el enemigo si ya no le queda vida
-        if (Health < 1)
-        {
-            Destroy(this.gameObject);
-            //Debug.Log($"Me he destruido con {Health} puntos de vida");
-        }
+
     }
     #endregion
 
@@ -95,9 +89,14 @@ public class Enemies_Health : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // Solo baja vida si esta en el layer de exclamación
-        if (collision.gameObject.layer == 7)
+        if (collision.gameObject.GetComponent<Bullet_Exclamation>() != null)
         {
             Health -= DamagePerHit;
+            // Destruimos el enemigo si ya no le queda vida
+            if (Health < 1)
+            {
+                Destroy(this.gameObject);
+            }
             //Debug.Log($"Me ha golpeado {collision.gameObject.name} y me queda {Health} vida");
         }
     }

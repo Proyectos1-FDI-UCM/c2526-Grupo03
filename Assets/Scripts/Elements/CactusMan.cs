@@ -24,14 +24,10 @@ public class CactusMan : MonoBehaviour
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
 
-    [SerializeField] private int Empuje = 20;
-
     /// <summary>
-    /// Trigger que detecta si cactusman detecta algo frente a él
+    /// Vsariable que determina el empuje que va a sufrir el jugador a causa de CactusMan
     /// </summary>
-
-
-
+    [SerializeField] private int Empuje = 20;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -85,11 +81,15 @@ public class CactusMan : MonoBehaviour
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
+    /// <summary>
+    /// Detecta la colisión del jugador con CactusMan
+    /// </summary>
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.GetComponent<Movement_Player>())
+        Movement_Player choque = collision.GetComponent<Movement_Player>(); //Guardamos el componente en una variable
+        if (choque)
         {
-            collision.GetComponent<Movement_Player>().Empuja(Empuje);
+            choque.Empuja(Empuje); //Si lo detecta llama a la función Empuja del MovementPlayer con el valor que tenga Empuje
         }
     }
 
