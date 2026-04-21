@@ -115,7 +115,7 @@ public class Movement_Player : MonoBehaviour
         Vector2 dir = InputManager.Instance.MovementVector;
 
         // en caso de moverse a la derecha
-        if (dir.x > 0 && !RightDetector.Detected() && !_empujado && !_desactivated)
+        if (dir.x > 0 && !RightDetector.Detected() && !_desactivated)
         {
             // mueve al personaje en base a la velocidad (_velocity) en el eje x
             this.transform.position += new Vector3(_speed, 0.0f) * Time.deltaTime;
@@ -191,19 +191,18 @@ public class Movement_Player : MonoBehaviour
 
         if (_empujado)
         {
-            if (_velEmpuje >= 0.0f || LeftDetector.Detected())
+            if (_velEmpuje <= 0.0f && ((_dirEmpuje.x > 0.0f && RightDetector.Detected()) || (_dirEmpuje.x < 0.0f && LeftDetector.Detected())))
             {
                 _velEmpuje = 0.0f;
                 _empujado = false;
             }
             else
             {
-
                 this.transform.position += _dirEmpuje * _velEmpuje * Time.deltaTime;
 
-                if (_velEmpuje < 0.0f)
+                if (_velEmpuje > 0.0f)
                 {
-                    _velEmpuje += Acceleration;
+                    _velEmpuje -= Acceleration;
                 }
                 else _velEmpuje = 0.0f;
             }
@@ -228,17 +227,14 @@ public class Movement_Player : MonoBehaviour
     /// <summary>
     /// Método encargado de configurar el estado "empujado".
     /// </summary>
-    /// <param name="emp"></param>
-    /// <param name="dir"></param>
     public void Empuja(float emp, Vector3 dir)
     {
         _dirEmpuje = dir;
-        if (!LeftDetector.Detected())
+        if ((dir.x > 0.0f && !RightDetector.Detected()) || (dir.x < 0.0f && !LeftDetector.Detected()))
         {
-            _velEmpuje = -emp;
+            _velEmpuje = emp;
+            _empujado = true;
         }
-        _empujado = true;
-
     }
 
     public float getMaxVel()

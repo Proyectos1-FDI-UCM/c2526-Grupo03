@@ -35,6 +35,7 @@ public class Finish : MonoBehaviour
     /// Objeto del player 
     /// </summary>
     [SerializeField] private GameObject Player;
+    [SerializeField] private float PorcentajeVictoria = 0f;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -147,6 +148,7 @@ public class Finish : MonoBehaviour
         {
             // Guardamos el porcentaje final
             Stars_FillAmount();
+
         }
     }
     /// <summary>
@@ -191,6 +193,7 @@ public class Finish : MonoBehaviour
         GameManager.Instance.SetFinalRating(fillAmount);
         //Cambiamos el botton para podernos mover por el menu de victoria
         LevelManager.Instance.ChangeButtonToVictory();
+        Victoria(fillAmount);
     }
     /// <summary>
     /// Convierte a diferencia dos numeros 
@@ -205,6 +208,20 @@ public class Finish : MonoBehaviour
         Diferencia = final / inicial;
         //Devolvemos la variable porcentaje
         return Diferencia;
+    }
+    /// <summary>
+    /// Metodo que se encarga de saber si has ganado o no la partida 
+    /// </summary>
+    /// <param name="puntuacion">puntuacion del jugador cuando acaba el nivel</param>
+    /// <returns></returns>
+    private bool Victoria(float puntuacion)
+    {
+        bool victoria = false;
+        if (puntuacion >= PorcentajeVictoria)
+        {
+            victoria = true;   
+        }
+        return victoria;
     }
 
     #endregion
