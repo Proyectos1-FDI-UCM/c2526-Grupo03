@@ -26,9 +26,15 @@ public class CactusMan : MonoBehaviour
     // Ejemplo: MaxHealthPoints
 
     /// <summary>
-    /// Vsariable que determina el empuje que va a sufrir el jugador a causa de CactusMan
+    /// Variable que determina el empuje que va a sufrir el jugador a causa de CactusMan.
     /// </summary>
-    [SerializeField] private int Empuje = 20;
+    [SerializeField] private float Empuje = 20f;
+
+    /// <summary>
+    /// Dirección de empuje del CactusMan.
+    /// </summary>
+    [SerializeField]
+    private Vector3 DirEmpuje;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -90,7 +96,7 @@ public class CactusMan : MonoBehaviour
         Movement_Player choque = collision.GetComponent<Movement_Player>(); //Guardamos el componente en una variable
         if (choque)
         {
-            choque.Empuja(Empuje); //Si lo detecta llama a la función Empuja del MovementPlayer con el valor que tenga Empuje
+            choque.Empuja(Empuje, DirEmpuje); //Si lo detecta llama a la función Empuja del MovementPlayer con el valor que tenga Empuje
         }
     }
 
