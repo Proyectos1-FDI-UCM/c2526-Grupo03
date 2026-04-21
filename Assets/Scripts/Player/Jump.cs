@@ -77,17 +77,13 @@ public class Jump : MonoBehaviour
     private float _objectHeight;
 
     /// <summary>
-    /// Comprueba si está en un salto
+    /// Comprueba si has saltado y aun estas subiendo
     /// </summary>
-    private bool _hasJumped = false;
+    private bool _goingUp = false;
     /// <summary>
-    /// Comprueba si ha terminado de subir
+    /// Comprueba si estas cayendo
     /// </summary>
-    private bool _stopGoingUp = false;
-    /// <summary>
-    /// Altura a la que debe llegar el salto
-    /// </summary>
-    private Vector3 _maxPosJumped;
+    private bool _falling = false;
 
     /// <summary>
     /// Contiene la información del componente Animator.
@@ -108,13 +104,9 @@ public class Jump : MonoBehaviour
     /// </summary>
     private bool _roofDetected;
     /// <summary>
-    /// Indica si debemos impedir el siguiente salto y ha sido llamado desde fuera del componente
+    /// Indica si debemos impedir el siguiente salto por componentes externos
     /// </summary>
     private bool _desactivated = false;
-    /// <summary>
-    /// Indica que debemos impedir el salto para no saltar doble
-    /// </summary>
-    private bool _desactivatedInside = false;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -148,9 +140,126 @@ public class Jump : MonoBehaviour
     /// </summary>
     private void FixedUpdate()
     {
+        // ====== Variable que guarda el tiempo ======
+        float time = Time.fixedDeltaTime;
+
         // ====== Detecciones del motor de físicas ======
         _floorDetected = FloorDetector.Detected();
         _roofDetected = RoofDetector.Detected();
+
+        // ====== Parte de caida y gravedad ======
+        if (!_floorDetected || _speed > 0.0f)
+        {
+            // Si has dejado de subir
+            if (!_goingUp)
+            {
+                _falling = true;
+                // ====== Animacion de caida ======
+                if (_animator)
+                {
+                    _animator.SetBool("IsJumpingAnim", false);
+                    _animator.SetBool("IsFalling", true);
+                    _animator.SetBool("IsWalkingAnim", false);
+                    _animator.SetBool("Landed", false);
+                    _movement_Player.OnlyWalking(false);
+                }
+            }
+            // Aplicamos gravedad a la velocidad
+            if (_speed > -MaxFallSpeed / 1.1)
+            {
+                _speed -= _gravity * time;
+            }
+            else
+            {
+                _speed -= _gravity / 2 * time;
+            }
+        }
+        // ====== Parte de aterrizaje ======
+        if (_floorDetected)
+        {
+            // ====== Si estas cayendo ======
+            if (_falling)
+            {
+                // ====== Velocidad a cero para no seguir cayendo ======
+                _speed = 0.0f;
+
+                // ====== Quitamos animacion de caida ======
+                if (_animator)
+                {
+                    _animator.SetBool("IsJumpingAnim", false);
+                    _animator.SetBool("IsFalling", false);
+                    _animator.SetBool("IsWalkingAnim", true);
+                    _animator.SetBool("Landed", true);
+                    _movement_Player.OnlyWalking(true);
+                }
+
+                // ====== Situamos al jugador encima del suelo cuando esta atravesándolo ======
+
+                // Calculamos la posicion del Jugador justo encima del suelo
+                float _posEncimaSuelo = FloorDetector.GetCollisionedObjectPosition().y + FloorDetector.GetCollisionedObjectSize().y / 2;
+                float _posY = _posEncimaSuelo + _objectHeight / 2;
+                float _aumentoY = _posY - transform.position.y;
+
+                // teletransporte si no es muy basto
+                if ((math.abs(_aumentoY) < _objectHeight) && (transform.position.y < _posY)) transform.position += new Vector3(.0f, _aumentoY);
+
+                // ====== Actualizamos variable de caida ======
+                _falling = false;
+            }
+        }
+
+        // ====== Comprobaciones de subida ======
+        if (_goingUp)
+        {
+            if (_roofDetected)
+            {
+                // Cambiamos la velocidad a 0
+                _speed = 0.0f;
+
+                // ====== Situamos al jugador debajo del techo cuando esta atravesándolo ======
+
+                // Calculamos la posicion del Jugador justo debajo del techo
+                float _posDebajoTecho = RoofDetector.GetCollisionedObjectPosition().y - RoofDetector.GetCollisionedObjectSize().y / 2;
+                float _posY = _posDebajoTecho - _objectHeight / 2;
+                float _aumentoY = _posY - transform.position.y;
+
+                // teletransporte
+                if ((math.abs(_aumentoY) < _objectHeight) && (transform.position.y > _posY)) transform.position += new Vector3(.0f, _aumentoY);
+
+                // ====== Terminamos la subida ======
+                _goingUp = false;
+                _falling = true;
+
+                // ====== Cambiamos a animación de caida ======
+                if (_animator)
+                {
+                    _animator.SetBool("IsJumpingAnim", false);
+                    _animator.SetBool("IsFalling", true);
+                    _animator.SetBool("IsWalkingAnim", false);
+                    _animator.SetBool("Landed", false);
+                    _movement_Player.OnlyWalking(false);
+                }
+            }
+            // Si has llegado al punto más alto la velocidad ya es 0 (o muy cerca)
+            else if (_speed <= 0.0f)
+            {
+                // ====== Terminamos la subida ======
+                _goingUp = false;
+                _falling = true;
+
+                // ====== Cambiamos a animación de caida ======
+                if (_animator)
+                {
+                    _animator.SetBool("IsJumpingAnim", false);
+                    _animator.SetBool("IsFalling", true);
+                    _animator.SetBool("IsWalkingAnim", false);
+                    _animator.SetBool("Landed", false);
+                    _movement_Player.OnlyWalking(false);
+                }
+            }
+        }
+        // ====== Movemos al personaje en el eje Y según la velocidad ======
+        if (_speed != 0) this.transform.position += new Vector3(0.0f, 1.0f) * _speed * time;
     }
 
     /// <summary>
@@ -159,112 +268,10 @@ public class Jump : MonoBehaviour
     void Update()
     {
         // De momento hacemos el salto con el movimiento en el eje y para no tocar el input action
-        if (!_desactivated && !_desactivatedInside && InputManager.Instance.JumpWasPressedThisFrame() && _floorDetected)
+        if (!_desactivated && InputManager.Instance.JumpWasPressedThisFrame() && _floorDetected && !_falling && !_goingUp)
         {
             StartJump();
         }
-
-        // ====== Comprobaciones de subida ======
-        if (_hasJumped)
-        {
-            // ====== Comprobaciónes terminación de subida ======
-            if (!_stopGoingUp)
-            {
-                if (_roofDetected)
-                {
-                    // ====== Situamos al jugador debajo del techo cuando esta atravesándolo ======
-
-                    // Cambiamos la velocidad a 0
-                    _speed = 0.0f;
-
-                    // Calculamos la posicion del Jugador justo debajo del techo
-                    float _posDebajoTecho = RoofDetector.GetCollisionedObjectPosition().y - RoofDetector.GetCollisionedObjectSize().y / 2;
-                    float _posY = _posDebajoTecho - _objectHeight / 2;
-                    float _aumentoY = _posY - transform.position.y;
-
-                    // teletransporte
-                    if ((math.abs(_aumentoY) < 0.8) && (transform.position.y > _posY)) transform.position += new Vector3(.0f, _aumentoY);
-
-                    // ====== Terminamos la subida ======
-
-                    _stopGoingUp = true;
-                }
-                // Si has llegado al punto más alto la velocidad ya es 0 (o muy cerca)
-                else if (transform.position.y >= _maxPosJumped.y)
-                {
-                    _stopGoingUp = true;
-                }
-            }
-        }
-        // ====== Comprobaciones de caída y aceleración ======
-        if (!_floorDetected)
-        {
-            if ((_hasJumped && _stopGoingUp) || !_hasJumped)
-            {
-                // ====== Animacion de caida ======
-                if (_animator)
-                {
-                    _animator.SetBool("IsJumpingAnim", false);
-                    _animator.SetBool("IsFalling", true);
-                    _animator.SetBool("IsWalkingAnim", false);
-                    _animator.SetBool("Landed", true);
-                    _movement_Player.OnlyWalking(false);
-                }
-            }
-
-            // Aplicamos gravedad a la velocidad
-            if (_speed > -MaxFallSpeed / 1.1)
-            {
-                _speed -= _gravity * Time.deltaTime;
-            }
-            else
-            {
-                _speed -= _gravity / 2 * Time.deltaTime;
-            }
-        }
-        // Si estabas cayendo y detectas el suelo
-        else if (_speed < 0.0f)
-        {
-            // ====== Cambiamos la velocidad a 0 para que no siga bajando ======
-
-            _speed = 0.0f;
-            // ====== Cambiamos la animación a la de idle
-            if (_animator)
-            {
-                _animator.SetBool("IsJumpingAnim", false);
-                _animator.SetBool("IsFalling", false);
-                _animator.SetBool("Landed", true);
-                _movement_Player.OnlyWalking(true);
-            }
-
-
-            // ====== Situamos al jugador encima del suelo cuando esta atravesándolo ======
-
-            // Calculamos la posicion del Jugador justo encima del suelo
-            float _posEncimaSuelo = FloorDetector.GetCollisionedObjectPosition().y + FloorDetector.GetCollisionedObjectSize().y / 2;
-            float _posY = _posEncimaSuelo + _objectHeight / 2;
-            float _aumentoY = _posY - transform.position.y;
-
-            // teletransporte si no es muy basto
-            if ((math.abs(_aumentoY) < 0.8) && (transform.position.y < _posY)) transform.position += new Vector3(.0f, _aumentoY);
-
-
-            // ====== Permitimos el siguiente salto ======
-
-
-            // ====== Permitimos el siguiente salto ======
-
-            _hasJumped = false;
-            if (!_desactivated)
-            {
-                _desactivatedInside = false;
-
-            }
-
-
-        }
-        // ====== Movemos al personaje en el eje Y según la velocidad ======
-        if (_speed != 0) this.transform.position += new Vector3(0.0f, 1.0f) * _speed * Time.deltaTime;
     }
 
     #endregion
@@ -278,19 +285,18 @@ public class Jump : MonoBehaviour
     // Ejemplo: GetPlayerController
 
     /// <summary>
-    /// Método que impide el siguiente salto
+    /// Método que impide el salto
     /// </summary>
     public void DesactivateJump()
     {
         _desactivated = true;
     }
     /// <summary>
-    /// Método que activa el siguiente salto
+    /// Método que activa el salto
     /// </summary>
     public void ActivateJump()
     {
         _desactivated = false;
-        _desactivatedInside = false;
     }
     #endregion
 
@@ -316,14 +322,9 @@ public class Jump : MonoBehaviour
             _movement_Player.OnlyWalking(false);
         }
 
-        // Iniciamos las variables necesarias
-        _maxPosJumped = transform.position + new Vector3(0.0f, 1.0f) * JumpHeight;
-        _hasJumped = true;
-        _stopGoingUp = false;
+        // Iniciamos las variables
+        _goingUp = true;
         _speed = _jumpSpeed;
-
-        // Impedimos doble salto
-        _desactivatedInside = true;
     }
     #endregion
 
