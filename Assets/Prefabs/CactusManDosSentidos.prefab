@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Empuje: 45
-  DirEmpuje: {x: -1, y: 0, z: 0}
+  DirEmpuje: {x: 1, y: 0, z: 0}
 --- !u!1 &5071201427618489144
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,4 +321,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Empuje: 45
-  DirEmpuje: {x: 1, y: 0, z: 0}
+  DirEmpuje: {x: -1, y: 0, z: 0}
