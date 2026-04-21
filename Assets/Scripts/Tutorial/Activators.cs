@@ -44,9 +44,13 @@ public class Activators : MonoBehaviour
     /// </summary>
     [SerializeField] private bool Dolly = false;
     /// <summary>
-    /// Objeto del Panel de GUI
+    /// Objeto del hud de la puntuacion
     /// </summary>
-    [SerializeField] private GameObject GUI_objeto = null;
+    [SerializeField] private GameObject Puntuacion = null;
+    /// <summary>
+    /// GameObject del hud de balas
+    /// </summary>
+    [SerializeField] private GameObject Balas = null;
    
     #endregion
     
@@ -129,7 +133,8 @@ public class Activators : MonoBehaviour
         if (disparo == true)
         {
             //Activamos componente
-            Player.gameObject.GetComponent<Shoot>().enabled = true; 
+            Player.gameObject.GetComponent<Shoot>().enabled = true;
+            Balas.SetActive(true);
         }
         //Si la recarga es true lo activamos
         if (recarga == true)
@@ -145,14 +150,14 @@ public class Activators : MonoBehaviour
         if (GUI == true)
         {
             //Revisamos que no sea null el objeto GUI_objeto
-            if (GUI_objeto != null)
+            if (Puntuacion != null)
             {
                 //Activamos componente
-                GUI_objeto.SetActive(true);
+                Puntuacion.SetActive(true);
             }
             else
             {
-                Debug.Log("GameObjet GUI no encontrado");
+                Debug.Log("GameObjet Puntuacion no encontrado");
             }
         }
 
