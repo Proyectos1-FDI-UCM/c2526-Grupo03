@@ -2,6 +2,7 @@
 // Breve descripción del contenido del archivo
 // Marcos Tedín Cueto && Aportadores:
 //      - Gabriel Adrian Oltean
+//      - Víctor Román Román
 // Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
