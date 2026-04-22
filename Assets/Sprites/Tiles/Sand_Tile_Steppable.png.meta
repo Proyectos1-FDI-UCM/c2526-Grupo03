@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 54a7762a9fc16c540ae0e6e4db513d65
+guid: 4c5c0e3d94aac3f4ba590c06b774737f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2993855748314936058
-    second: Box_Tile_0
+      213: -3147461776431113809
+    second: Sand_Tile_Steppable_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Box_Tile_0
+      name: Sand_Tile_Steppable_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: af2b213e0ff4c8920800000000000000
-      internalID: 2993855748314936058
+      spriteID: fa914b7b038f154d0800000000000000
+      internalID: -3147461776431113809
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Box_Tile_0: 2993855748314936058
+      Sand_Tile_Steppable_0: -3147461776431113809
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
