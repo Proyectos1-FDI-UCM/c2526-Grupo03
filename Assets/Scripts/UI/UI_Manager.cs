@@ -153,11 +153,6 @@ public class UI_Manager : MonoBehaviour
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
-    public void RecargaBotella()
-    {
-
-    }
-
     #endregion
     
     // ---- MÉTODOS PRIVADOS ----
@@ -191,6 +186,7 @@ public class UI_Manager : MonoBehaviour
             BarraPuntuacion.fillAmount = ConviertePorcent(_puntuacionInicial, _puntuacion);
         }
     }
+
     /// <summary>
     /// Metodo que reduce la GUI de balas a la cantidad correspondiente
     /// </summary>
