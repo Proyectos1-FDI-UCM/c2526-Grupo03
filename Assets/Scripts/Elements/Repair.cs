@@ -7,9 +7,7 @@
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
 
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
 // Añadir aquí el resto de directivas using
 
 
@@ -57,6 +55,15 @@ public class Repair : MonoBehaviour
     /// </summary>
     [SerializeField] private GameObject TeclasQTE;
 
+    /// <summary>
+    /// Cuando es true -> Obliga al objeto a realizar el ForcedQTE 
+    /// </summary>
+    [SerializeField] private bool ForceQTE;
+
+    /// <summary>
+    /// QTE obligatorio cuando ForceQTE es true
+    /// </summary>
+    [SerializeField] private int ForcedQTE;
     /// <summary>
     /// GameObject que contiene la tecla a mostrar.
     /// </summary>
@@ -186,16 +193,28 @@ public class Repair : MonoBehaviour
         {
             if (_firstOpened) //Si es la primera vez que se abre el QTE
             {
-                //Randomización del QTE que va a aparecer
-                _selectedQTE = Random.Range(0, 3);
-                _lastQTE = LevelManager.Instance.LastQTE();
-                //Si se repite el anterior se vuelve a sacar un número aleatorio
-                while (_selectedQTE == _lastQTE)
+                // ====== Forzar un QTE ======
+                if (ForceQTE)
                 {
-                    _selectedQTE = Random.Range(0, 3);
+                    // Elegimos el QTE forzado
+                    _selectedQTE = ForcedQTE;
+
+                    // Cambiamos el valor del ultimo QTE seleccionado
+                    LevelManager.Instance.CambiarValor(_selectedQTE);
                 }
-                LevelManager.Instance.CambiarValor(_selectedQTE);
-                _firstOpened = false;
+                else
+                {
+                    //Randomización del QTE que va a aparecer
+                    _selectedQTE = Random.Range(0, 3);
+                    _lastQTE = LevelManager.Instance.LastQTE();
+                    //Si se repite el anterior se vuelve a sacar un número aleatorio
+                    while (_selectedQTE == _lastQTE)
+                    {
+                        _selectedQTE = Random.Range(0, 3);
+                    }
+                    LevelManager.Instance.CambiarValor(_selectedQTE);
+                }
+                    _firstOpened = false;
             }
             //Se activa el QTE que ha salido random y se desactiva el icono del input de encima del objeto reparable.
             ActivateChosenQTE();
@@ -225,7 +244,7 @@ public class Repair : MonoBehaviour
             _spriteRenderer.sprite = SpriteRepaired;
             Key.SetActive(false);
         }
-        if (_hasFailedRepairing) 
+        if (_hasFailedRepairing)
         {
             //Si se falla el QTE se vuelven a activar todos las acciones que se habían desactivado
             _movementPlayerComponent.ActivateMovement();
