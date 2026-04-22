@@ -62,6 +62,10 @@ public class Dolly_Movement : MonoBehaviour
     void Start()
     {
         _followingObjectPositionYAxis = ObjetoASeguir.transform.position.y + OffsetY;
+        float AumentoY = _followingObjectPositionYAxis - this.gameObject.transform.position.y;
+        _followingObjectPositionXAxis = ObjetoASeguir.transform.position.x + OffsetX;
+        float AumentoX = _followingObjectPositionXAxis - this.gameObject.transform.position.x;
+        transform.position += new Vector3(AumentoX, AumentoY);
     }
 
     /// <summary>
