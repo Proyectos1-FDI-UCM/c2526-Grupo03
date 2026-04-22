@@ -140,8 +140,16 @@ public class Jump : MonoBehaviour
     /// </summary>
     private void FixedUpdate()
     {
+        
+    }
+
+    /// <summary>
+    /// Update is called every frame, if the MonoBehaviour is enabled.
+    /// </summary>
+    void Update()
+    {
         // ====== Variable que guarda el tiempo ======
-        float time = Time.fixedDeltaTime;
+        float time = Time.deltaTime;
 
         // ====== Detecciones del motor de físicas ======
         _floorDetected = FloorDetector.Detected();
@@ -260,13 +268,6 @@ public class Jump : MonoBehaviour
         }
         // ====== Movemos al personaje en el eje Y según la velocidad ======
         if (_speed != 0) this.transform.position += new Vector3(0.0f, 1.0f) * _speed * time;
-    }
-
-    /// <summary>
-    /// Update is called every frame, if the MonoBehaviour is enabled.
-    /// </summary>
-    void Update()
-    {
         // De momento hacemos el salto con el movimiento en el eje y para no tocar el input action
         if (!_desactivated && InputManager.Instance.JumpWasPressedThisFrame() && _floorDetected && !_falling && !_goingUp)
         {
