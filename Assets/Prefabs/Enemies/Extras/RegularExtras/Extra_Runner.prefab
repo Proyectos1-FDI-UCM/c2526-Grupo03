@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6983615431658739217}
   - component: {fileID: 3432397578760189166}
   - component: {fileID: 4574768789713295897}
+  - component: {fileID: 3577442916443124403}
   m_Layer: 3
   m_Name: Extra_Runner
   m_TagString: Untagged
@@ -208,6 +209,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CalidadABajar: 0
+--- !u!95 &3577442916443124403
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3933341208985946169}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3ed633defa49c8747863d07d9e537ef5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6765431830204114225
 GameObject:
   m_ObjectHideFlags: 0
@@ -299,4 +322,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a21b2cac9e0e3184797b4a958e0c4f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Detected: 0

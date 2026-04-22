@@ -47,6 +47,10 @@ public class Extra_Regular : MonoBehaviour
     // direccion del movimiento -1 para que vaya a izquierda, 1 para ir a derecha
     private int dir = -1;
     SpriteRenderer _spriteRenderer; // sprite del extra
+    /// <summary>
+    /// Contiene la información del componente Animator.
+    /// </summary>
+    private Animator _animator;
 
     /// <summary>
     /// Indica si el detector de suelo dice que estamos en el suelo
@@ -67,6 +71,7 @@ public class Extra_Regular : MonoBehaviour
     void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Animator>();
     }
     /// <summary>
     /// Start is called on the frame when a script is enabled just before 
