@@ -56,6 +56,11 @@ public class Repair : MonoBehaviour
     [SerializeField] private GameObject TeclasQTE;
 
     /// <summary>
+    /// GameObject que contiene el QTE de timing.
+    /// </summary>
+    [SerializeField] private GameObject TimingQTE;
+
+    /// <summary>
     /// Cuando es true -> Obliga al objeto a realizar el ForcedQTE 
     /// </summary>
     [SerializeField] private bool ForceQTE;
@@ -205,12 +210,12 @@ public class Repair : MonoBehaviour
                 else
                 {
                     //Randomización del QTE que va a aparecer
-                    _selectedQTE = Random.Range(0, 3);
+                    _selectedQTE = Random.Range(0, 4);
                     _lastQTE = LevelManager.Instance.LastQTE();
                     //Si se repite el anterior se vuelve a sacar un número aleatorio
                     while (_selectedQTE == _lastQTE)
                     {
-                        _selectedQTE = Random.Range(0, 3);
+                        _selectedQTE = Random.Range(0, 4);
                     }
                     LevelManager.Instance.CambiarValor(_selectedQTE);
                 }
@@ -385,6 +390,10 @@ public class Repair : MonoBehaviour
         {
             TeclasQTE.SetActive(true);
         }
+        else if (_selectedQTE == 3)
+        {
+            TimingQTE.SetActive(true);
+        }
     }
 
     /// <summary>
@@ -404,6 +413,10 @@ public class Repair : MonoBehaviour
         else if (_selectedQTE == 2)
         {
             TeclasQTE.SetActive(false);
+        }
+        else if (_selectedQTE == 3)
+        {
+            TimingQTE.SetActive(false);
         }
     }
     #endregion   
