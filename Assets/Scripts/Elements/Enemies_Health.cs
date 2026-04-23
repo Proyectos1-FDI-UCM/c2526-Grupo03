@@ -6,6 +6,7 @@
 //---------------------------------------------------------
 
 using UnityEngine;
+using UnityEngine.UI;
 // Añadir aquí el resto de directivas using
 
 
@@ -32,6 +33,10 @@ public class Enemies_Health : MonoBehaviour
     /// </summary>
     [SerializeField] private int DamagePerHit = 1;
 
+    /// <summary>
+    /// Objeto de barra de vida de la escena
+    /// </summary>
+    [SerializeField] private GameObject BarraVida;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -42,22 +47,36 @@ public class Enemies_Health : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
+
+    /// <summary>
+    /// Componente de la barra de vida
+    /// </summary>
+    private Slider _componenteBarraVida;
     #endregion
-    
+
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-    
+
     // Por defecto están los típicos (Update y Start) pero:
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
-    
+
     /// <summary>
     /// Start is called on the frame when a script is enabled just before 
     /// any of the Update methods are called the first time.
     /// </summary>
     void Start()
     {
-        
+        // Si el objeto tiene el componente lo cacheamos y le ponemos las variables necesarias
+        if (BarraVida.GetComponent<Slider>() != null)
+        {
+            _componenteBarraVida = BarraVida.GetComponent<Slider>();
+            _componenteBarraVida.maxValue = Health;
+            _componenteBarraVida.minValue = 0;
+            _componenteBarraVida.value = Health;
+            // Desactivamos el pbjeto para que aparezca en el primer golpe
+            BarraVida.SetActive(false);
+        }
     }
 
     /// <summary>
@@ -92,6 +111,17 @@ public class Enemies_Health : MonoBehaviour
         if (collision.gameObject.GetComponent<Bullet_Exclamation>() != null)
         {
             Health -= DamagePerHit;
+            // Si el objeto de barra de vida tiene el componente le modificamos el valor para mostrar la vida
+            if (BarraVida.GetComponent<Slider>() != null)
+            {
+                // Si es el primer golpe activamos el objeto
+                if (_componenteBarraVida.value == _componenteBarraVida.maxValue)
+                {
+                    BarraVida.SetActive(true);
+                }
+                // Restamos el valor del componente
+                _componenteBarraVida.value -= DamagePerHit;
+            }
             // Destruimos el enemigo si ya no le queda vida
             if (Health < 1)
             {
