@@ -138,7 +138,6 @@ public class Timing_QTE : MonoBehaviour
     /// </summary>
     public void Acierto(bool acierto)
     {
-        Debug.Log("Buenas");
         acertado = acierto;
     }
 
