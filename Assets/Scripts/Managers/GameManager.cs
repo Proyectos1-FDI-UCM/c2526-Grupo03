@@ -235,6 +235,11 @@ public class GameManager : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
     }
 
+    public void ChangeMenuTestScene()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MenuPruebas");
+    }
+
     // ---- MÉTODOS PRIVADOS ----
 
     #region Métodos Privados 

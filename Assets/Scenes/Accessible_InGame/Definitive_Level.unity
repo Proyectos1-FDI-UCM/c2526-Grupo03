@@ -678,11 +678,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &136643233 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5434182869787823529, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
-  m_PrefabInstance: {fileID: 1615342175}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &138796101 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2192584468404971339, guid: 5edc708e29addfb4882513f1abafc082, type: 3}
@@ -709,17 +704,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1825485709791816537, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
   m_PrefabInstance: {fileID: 1353685215}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &152943092 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5816951601452264090, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
-  m_PrefabInstance: {fileID: 672088218}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &166367576 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5970668542827576001, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
@@ -1036,11 +1020,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 270833225}
   m_CullTransparentMesh: 1
---- !u!1 &320354000 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5434182869787823529, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
-  m_PrefabInstance: {fileID: 1041312195}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &347981260 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6547406078629569876, guid: c07129f316da99a42a01b5facbaddf53, type: 3}
@@ -17260,7 +17239,7 @@ PrefabInstance:
     - target: {fileID: 701830946350386670, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
       propertyPath: m_TargetGraphic
       value: 
-      objectReference: {fileID: 152943092}
+      objectReference: {fileID: 0}
     - target: {fileID: 1777137451825994178, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
       propertyPath: m_TargetGraphic
       value: 
@@ -17360,11 +17339,11 @@ PrefabInstance:
     - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
       propertyPath: ManivelaQTE
       value: 
-      objectReference: {fileID: 2114949020}
+      objectReference: {fileID: 3904420632369198748, guid: 3a041978a980e4c4792861c340ab8a3a, type: 3}
     - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
       propertyPath: Manivela_QTE
       value: 
-      objectReference: {fileID: 2114949020}
+      objectReference: {fileID: 0}
     - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
       propertyPath: _levelManager
       value: 
@@ -18229,11 +18208,11 @@ PrefabInstance:
     - target: {fileID: 3664734182915351577, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
       propertyPath: ManivelaQTE
       value: 
-      objectReference: {fileID: 320354000}
+      objectReference: {fileID: 3904420632369198748, guid: 3a041978a980e4c4792861c340ab8a3a, type: 3}
     - target: {fileID: 3664734182915351577, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
       propertyPath: Manivela_QTE
       value: 
-      objectReference: {fileID: 320354000}
+      objectReference: {fileID: 0}
     - target: {fileID: 3664734182915351577, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
       propertyPath: _levelManager
       value: 
@@ -18307,11 +18286,6 @@ GameObject:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6290379841019181947, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
   m_PrefabInstance: {fileID: 1353685215}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1053057135 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5958467358280890013, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
-  m_PrefabInstance: {fileID: 1572393755}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1074474687
 GameObject:
@@ -18568,11 +18542,6 @@ RectTransform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6111324552968823520, guid: 76fa689b50e6b144abc60449cbc5593c, type: 3}
   m_PrefabInstance: {fileID: 831287912}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1206565458 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5434182869787823529, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
-  m_PrefabInstance: {fileID: 1533059619}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1305610036 stripped
 GameObject:
@@ -19146,11 +19115,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7224804389197932412, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
   m_PrefabInstance: {fileID: 1706524837}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1419674268 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5958467358280890013, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
-  m_PrefabInstance: {fileID: 2128262407}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1440320119
 GameObject:
   m_ObjectHideFlags: 0
@@ -19676,11 +19640,11 @@ PrefabInstance:
     - target: {fileID: 3664734182915351577, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
       propertyPath: ManivelaQTE
       value: 
-      objectReference: {fileID: 1206565458}
+      objectReference: {fileID: 3904420632369198748, guid: 3a041978a980e4c4792861c340ab8a3a, type: 3}
     - target: {fileID: 3664734182915351577, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
       propertyPath: Manivela_QTE
       value: 
-      objectReference: {fileID: 1206565458}
+      objectReference: {fileID: 0}
     - target: {fileID: 3664734182915351577, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
       propertyPath: _levelManager
       value: 
@@ -19852,11 +19816,11 @@ PrefabInstance:
     - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
       propertyPath: ManivelaQTE
       value: 
-      objectReference: {fileID: 1053057135}
+      objectReference: {fileID: 3904420632369198748, guid: 3a041978a980e4c4792861c340ab8a3a, type: 3}
     - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
       propertyPath: Manivela_QTE
       value: 
-      objectReference: {fileID: 1053057135}
+      objectReference: {fileID: 0}
     - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
       propertyPath: _levelManager
       value: 
@@ -20043,11 +20007,11 @@ PrefabInstance:
     - target: {fileID: 3664734182915351577, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
       propertyPath: ManivelaQTE
       value: 
-      objectReference: {fileID: 136643233}
+      objectReference: {fileID: 3904420632369198748, guid: 3a041978a980e4c4792861c340ab8a3a, type: 3}
     - target: {fileID: 3664734182915351577, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
       propertyPath: Manivela_QTE
       value: 
-      objectReference: {fileID: 136643233}
+      objectReference: {fileID: 0}
     - target: {fileID: 3664734182915351577, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
       propertyPath: _levelManager
       value: 
@@ -20368,11 +20332,11 @@ PrefabInstance:
     - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
       propertyPath: ManivelaQTE
       value: 
-      objectReference: {fileID: 2119898766}
+      objectReference: {fileID: 3904420632369198748, guid: 3a041978a980e4c4792861c340ab8a3a, type: 3}
     - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
       propertyPath: Manivela_QTE
       value: 
-      objectReference: {fileID: 2119898766}
+      objectReference: {fileID: 0}
     - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
       propertyPath: _levelManager
       value: 
@@ -21336,16 +21300,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7286601861640884965, guid: e0466a5818427bf41b8209d73d37e38d, type: 3}
   m_PrefabInstance: {fileID: 1973348169}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2114949020 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5958467358280890013, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
-  m_PrefabInstance: {fileID: 672088218}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2119898766 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5958467358280890013, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
-  m_PrefabInstance: {fileID: 1706524837}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2128262407
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21453,11 +21407,11 @@ PrefabInstance:
     - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
       propertyPath: ManivelaQTE
       value: 
-      objectReference: {fileID: 1419674268}
+      objectReference: {fileID: 3904420632369198748, guid: 3a041978a980e4c4792861c340ab8a3a, type: 3}
     - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
       propertyPath: Manivela_QTE
       value: 
-      objectReference: {fileID: 1419674268}
+      objectReference: {fileID: 0}
     - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
       propertyPath: _levelManager
       value: 
