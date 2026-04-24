@@ -26,7 +26,7 @@ public class Extra_Regular : MonoBehaviour
     /// <summary>
     /// Detector de suelo
     /// </summary>
-    [SerializeField]private Detector FloorDetector;
+    [SerializeField] private Detector FloorDetector;
     /// <summary>
     /// Distancia caminada
     /// </summary>
@@ -68,7 +68,7 @@ public class Extra_Regular : MonoBehaviour
     /// <summary>
     /// sprite del extra
     /// </summary>
-    private SpriteRenderer _spriteRenderer; 
+    private SpriteRenderer _spriteRenderer;
 
     /// <summary>
     /// Contiene la información del componente Animator.
@@ -105,11 +105,13 @@ public class Extra_Regular : MonoBehaviour
         // Establece la posicion inicial del extra a la extablecida por el editor
         _iniPos = transform.position;
         _maxPosL = transform.position;
-        _maxPosL.x -= Distance; 
+        _maxPosL.x -= Distance;
         _maxPosR = transform.position;
         _maxPosR.x += Distance;
-        _spriteRenderer.flipX = true;
-        
+        if (Speed > 0)
+        {
+            _spriteRenderer.flipX = true;
+        }
     }
     /// <summary>
     /// Update is called every frame, if the MonoBehaviour is enabled.
@@ -134,7 +136,7 @@ public class Extra_Regular : MonoBehaviour
         }
         else if (transform.position.x >= _maxPosR.x)
         {
-            dir = -1; 
+            dir = -1;
         }
         if (dir == 1)//mueve el extra hacia la derecha
         {
