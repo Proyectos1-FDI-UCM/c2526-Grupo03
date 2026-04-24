@@ -173,12 +173,18 @@ public class InputManager : MonoBehaviour
     public Vector2 MovementVector { get; private set; }
 
     /// <summary>
+    /// Propiedad para acceder al vector de movimiento.
+    /// Según está configurado el InputActionController,
+    /// es un vector normalizado 
+    /// </summary>
+    public Vector2 ManivelaQTEVector { get; private set; }
+
+    /// <summary>
     /// Propiedad para acceder al vector del QTE de flecha.
     /// Según está configurado el InputActionController,
     /// es un vector normalizado 
     /// </summary>
     public Vector2 ArrowsQTE { get; private set; }
-
     /// <summary>
     /// Método para saber si el botón de disparo (Fire) está pulsado
     /// Devolverá true en todos los frames en los que se mantenga pulsado
@@ -277,7 +283,12 @@ public class InputManager : MonoBehaviour
         // el método OnMove
         arrowsQTE.performed += OnArrowsQTE;
         arrowsQTE.canceled += OnArrowsQTE;
-        ;
+        
+        InputAction manivelaQTE = _theController.Player.ManivelaQTE;
+        // Para el movimiento, actualizamos el vector de movimiento usando
+        // el método OnMove
+        manivelaQTE.performed += OnManivelaQTE;
+        manivelaQTE.canceled += OnManivelaQTE;
 
         // Para el disparo solo cacheamos la acción de disparo.
         // El estado lo consultaremos a través de los métodos públicos que 
@@ -310,6 +321,15 @@ public class InputManager : MonoBehaviour
         ArrowsQTE = context.ReadValue<Vector2>();
     }
 
+    /// <summary>
+    /// Método que es llamado por el controlador de input cuando se producen
+    /// eventos del QTE de manivela (relacionados con la acción ManivelaQTE)
+    /// </summary>
+    /// <param name="context">Información sobre el evento del QTE de Manivela</param>
+    private void OnManivelaQTE(InputAction.CallbackContext context)
+    {
+        ManivelaQTEVector = context.ReadValue<Vector2>();
+    }
     #endregion
 } // class InputManager 
 // namespace

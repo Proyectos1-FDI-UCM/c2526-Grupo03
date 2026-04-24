@@ -7,10 +7,7 @@
 //---------------------------------------------------------
 
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.Timeline;
 using UnityEngine.UI;
-using static Unity.Burst.Intrinsics.X86.Avx;
 // Añadir aquí el resto de directivas using
 
 
@@ -119,6 +116,7 @@ public class Manivela_QTE : MonoBehaviour
     /// </summary>
     private Repair _comp;
 
+    private Vector3 _lastMousePos;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -150,32 +148,42 @@ public class Manivela_QTE : MonoBehaviour
             _sliderBarra.value = 0;
             _comp.HasPressedExit(true);
         }
-        Vector2 inputdir = InputManager.Instance.MovementVector;
+        Vector2 inputdir = InputManager.Instance.ManivelaQTEVector;
         if (_sliderBarra.value > 0)
         {
             _sliderBarra.value -= (Disminucion * Time.deltaTime);
         }
-        ClickRaton();
-        SoltarClickRaton();
+
+        _mousePos = Input.mousePosition;
+        _mousePos.z = ReferencePoint.position.z;
+        if (_mousePos != _lastMousePos)
+        {
+            _lastMousePos = _mousePos;
+            _arrastrando = true;
+        }
+        else
+        {
+            _arrastrando = false;
+        }
+
         //Si se detecta que la manivela se está arrastrando con el ratón o algún input de movimiento.
         //(Esto último es sobre todo para jugar con mando, recoge la dirección del joystick).
-        if(_arrastrando || inputdir != new Vector2(0,0))
+        if (_arrastrando || inputdir != new Vector2(0, 0))
         {
-            _mousePos = Input.mousePosition;
-            _mousePos.z = ReferencePoint.position.z;
-            Vector2 direccion = new Vector2(0,0);
+            Vector2 direccion = new Vector2(0, 0);
             //Si se está usando ratón se calcula la dirección del pto de referencia al ratón y se saca el ángulo que forma.
-            if(_arrastrando)
+            if (_arrastrando)
             {
                 direccion = _mousePos - ReferencePoint.position;
                 _ultimoAngulo = Mathf.Atan2(direccion.y, direccion.x) * Mathf.Rad2Deg;
             }
             //Si se está usando un input se calcula el ángulo que forma la dirección del input.
-            else if(InputManager.Instance.MovementVector != new Vector2(0, 0))
+            else
             {
-                direccion = InputManager.Instance.MovementVector;
+                direccion = inputdir;
                 _ultimoAngulo = Mathf.Atan2(direccion.y, direccion.x) * Mathf.Rad2Deg;
             }
+
             //Si el ángulo es negativo se normaliza.
             if (_ultimoAngulo < 0)
             {
@@ -193,9 +201,23 @@ public class Manivela_QTE : MonoBehaviour
             {
                 _anguloFinal = gameObject.transform.rotation.z;
                 //Variación del ángulo.
-                _velocidadAngular = _anguloFinal - _anguloInicial;
+                // Calculamos cuánto ha girado la manivela desde el último frame de forma limpia
+                float DifAngulo = Mathf.DeltaAngle(_anguloInicial, _anguloFinal);
+
+                // Normalizamos la velocidad angular
+                if (_arrastrando)
+                {
+                    // El ratón es más preciso pero genera deltas más pequeños que el stick.
+                    // Multiplicamos por un factor (ej. 2.5) para que cada movimiento sume más.
+                    _velocidadAngular = DifAngulo * 1.5f;
+                }
+                else
+                {
+                    // El mando es analógico y constante, no necesita multiplicador
+                    _velocidadAngular = DifAngulo;
+                }
                 //Comprobación de que la velocidad que lleva es la requerida y menor de la máxima (para evitar un bug).
-                if(Mathf.Abs(_velocidadAngular) >= VelQueDebeLlevar && Mathf.Abs(_velocidadAngular) < VelAngularMax)
+                if (Mathf.Abs(_velocidadAngular) >= VelQueDebeLlevar && Mathf.Abs(_velocidadAngular) < VelAngularMax)
                 {
                     _sliderBarra.value += CantidadSumada;
                 }
@@ -225,7 +247,7 @@ public class Manivela_QTE : MonoBehaviour
     // Ejemplo: GetPlayerController
 
     #endregion
-    
+
     // ---- MÉTODOS PRIVADOS ----
     #region Métodos Privados
     // Documentar cada método que aparece aquí
@@ -239,7 +261,7 @@ public class Manivela_QTE : MonoBehaviour
     /// <returns></returns>
     private bool ClickRaton()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             _arrastrando = true;
         }
@@ -252,7 +274,7 @@ public class Manivela_QTE : MonoBehaviour
     /// <returns></returns>
     private bool SoltarClickRaton()
     {
-        if(Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0))
         {
             _arrastrando = false;
         }
