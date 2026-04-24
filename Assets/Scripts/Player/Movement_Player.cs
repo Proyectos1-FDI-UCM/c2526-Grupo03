@@ -84,6 +84,8 @@ public class Movement_Player : MonoBehaviour
     /// Dirección a la que saldrá disparado el personaje al tocar un CactusMan.
     /// </summary>
     private Vector3 _dirEmpuje;
+    private bool _rightDetected;
+    private bool _leftDetected;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -109,16 +111,19 @@ public class Movement_Player : MonoBehaviour
     /// </summary>
     void Update()
     {
+        if (_empujado && _velEmpuje == 0.0f) _empujado = false;
         //  ---- Movimiento del Personaje ----
-
+        float time = Time.deltaTime;
+        _rightDetected = RightDetector.Detected();
+        _leftDetected = LeftDetector.Detected();
         // direccion de movimiento
         Vector2 dir = InputManager.Instance.MovementVector;
 
         // en caso de moverse a la derecha
-        if (dir.x > 0 && !RightDetector.Detected() && !_desactivated)
+        if (dir.x > 0 && !_empujado && !_rightDetected && !_desactivated)
         {
             // mueve al personaje en base a la velocidad (_velocity) en el eje x
-            this.transform.position += new Vector3(_speed, 0.0f) * Time.deltaTime;
+            this.transform.position += new Vector3(_speed, 0.0f) * time;
             _spriteRenderer.flipX = false;
             if (_animator && _onlyWalking)
             {
@@ -132,10 +137,10 @@ public class Movement_Player : MonoBehaviour
             else _speed = MaxVelocity;
         }
         // en caso de moverse a la izquierda
-        else if (dir.x < 0 && !LeftDetector.Detected() && !_desactivated)
+        else if (dir.x < 0 && !_empujado && !_leftDetected && !_desactivated)
         {
             // mueve al personaje en base a la velocidad (_velocity) en el eje x
-            this.transform.position += new Vector3(_speed, 0.0f) * Time.deltaTime;
+            this.transform.position += new Vector3(_speed, 0.0f) * time;
             _spriteRenderer.flipX = true;
             if (_animator && _onlyWalking)
             {
@@ -159,7 +164,7 @@ public class Movement_Player : MonoBehaviour
 
         // ---- Detección de paredes ----
 
-        if (LeftDetector.Detected() && (_speed < 0 || _velEmpuje < 0))
+        if (_leftDetected && (_speed < 0 || _velEmpuje < 0))
         {
             _velEmpuje = 0;
             _speed = 0;
@@ -173,7 +178,7 @@ public class Movement_Player : MonoBehaviour
             // teletransporte
             if (transform.position.x < _posX && math.abs(_aumentoX) < 1) transform.position += new Vector3(_aumentoX, 0.0f);
         }
-        else if (RightDetector.Detected() && _speed > 0 && !_empujado)
+        else if (_rightDetected && _speed > 0 && !_empujado)
         {
             _speed = 0;
             // Calculamos la posicion del Jugador justo al lado de la pared
@@ -191,14 +196,41 @@ public class Movement_Player : MonoBehaviour
 
         if (_empujado)
         {
-            if (_velEmpuje <= 0.0f && ((_dirEmpuje.x > 0.0f && RightDetector.Detected()) || (_dirEmpuje.x < 0.0f && LeftDetector.Detected())))
+            if ((_dirEmpuje.x > 0.0f && _rightDetected) || (_dirEmpuje.x < 0.0f && _leftDetected))
             {
-                _velEmpuje = 0.0f;
                 _empujado = false;
+                _velEmpuje = 0.0f;
+
+                if (_dirEmpuje.x > 0.0f)
+                {
+                    _speed = 0;
+                    // Calculamos la posicion del Jugador justo al lado de la pared
+                    float _posAlLadoPared = RightDetector.GetCollisionedObjectPosition().x - RightDetector.GetCollisionedObjectSize().x / 2;
+                    float _posX = _posAlLadoPared - _playerCollider.bounds.size.x / 2;
+                    float _aumentoX = _posX - transform.position.x;
+
+                    // Movemos al personaje justo al lado de la pared
+
+                    // teletransporte
+                    if (transform.position.x > _posX) transform.position += new Vector3(_aumentoX, 0.0f);
+                }
+                else
+                {
+                    _speed = 0;
+                    // Calculamos la posicion del Jugador justo al lado de la pared
+                    float _posAlLadoPared = LeftDetector.GetCollisionedObjectPosition().x + LeftDetector.GetCollisionedObjectSize().x / 2;
+                    float _posX = _posAlLadoPared + _playerCollider.bounds.size.x / 2;
+                    float _aumentoX = transform.position.x - _posX;
+
+                    // Movemos al personaje justo al lado de la pared
+
+                    // teletransporte
+                    if (transform.position.x < _posX) transform.position -= new Vector3(_aumentoX, 0.0f);
+                }
             }
             else
             {
-                this.transform.position += _dirEmpuje * _velEmpuje * Time.deltaTime;
+                this.transform.position += (_dirEmpuje * _velEmpuje) * time;
 
                 if (_velEmpuje > 0.0f)
                 {
