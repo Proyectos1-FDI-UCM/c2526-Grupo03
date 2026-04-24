@@ -58,7 +58,7 @@ public class Repair : MonoBehaviour
     /// <summary>
     /// GameObject que contiene el QTE de timing.
     /// </summary>
-    [SerializeField] private GameObject TimingQTE;
+    [SerializeField] private GameObject TimingQTE = null;
 
     /// <summary>
     /// Cuando es true -> Obliga al objeto a realizar el ForcedQTE 
@@ -392,7 +392,14 @@ public class Repair : MonoBehaviour
         }
         else if (_selectedQTE == 3)
         {
-            TimingQTE.SetActive(true);
+            if (TimingQTE != null)
+            {
+                TimingQTE.SetActive(true);
+            }
+            else
+            {
+                TeclasQTE.SetActive(true);
+            } 
         }
     }
 
@@ -416,7 +423,14 @@ public class Repair : MonoBehaviour
         }
         else if (_selectedQTE == 3)
         {
-            TimingQTE.SetActive(false);
+            if (TimingQTE != null)
+            {
+                TimingQTE.SetActive(false);
+            }
+            else
+            {
+                TeclasQTE.SetActive(false);
+            }
         }
     }
     #endregion   

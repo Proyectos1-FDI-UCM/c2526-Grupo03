@@ -221,7 +221,7 @@ Transform:
   m_GameObject: {fileID: 9088401248152341740}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.7, z: 1}
+  m_LocalPosition: {x: 0, y: -1.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -348,6 +348,9 @@ MonoBehaviour:
   SpamQTE: {fileID: 0}
   ManivelaQTE: {fileID: 0}
   TeclasQTE: {fileID: 0}
+  TimingQTE: {fileID: 0}
+  ForceQTE: 0
+  ForcedQTE: 0
   Key: {fileID: 1757575187598850510}
 --- !u!114 &-2690277762436398441
 MonoBehaviour:
