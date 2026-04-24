@@ -174,7 +174,7 @@ PrefabInstance:
     - target: {fileID: 4901376999175998550, guid: d76d746071728ff47840fdab0073d12e, type: 3}
       propertyPath: m_FirstSelected
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 862544334}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9282,6 +9282,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df4b60cd35a9b7c48a07e68acee9d39f, type: 3}
+--- !u!1 &697252043 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4028994730411854667, guid: c851e76814be3a045b7840455e7ed4f8, type: 3}
+  m_PrefabInstance: {fileID: 972830338}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &697372437 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4281742083118788844, guid: df4b60cd35a9b7c48a07e68acee9d39f, type: 3}
@@ -9463,6 +9468,17 @@ Transform:
   - {fileID: 1138766558}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &838000413 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5542635358130553414, guid: c851e76814be3a045b7840455e7ed4f8, type: 3}
+  m_PrefabInstance: {fileID: 972830338}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e67665ea226d403ab8b32a4b067d8f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &838182080
 GameObject:
   m_ObjectHideFlags: 0
@@ -9714,14 +9730,14 @@ PrefabInstance:
     - target: {fileID: 2004983862409285304, guid: c07129f316da99a42a01b5facbaddf53, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 964905611}
+      objectReference: {fileID: 1607381351}
     - target: {fileID: 2004983862409285304, guid: c07129f316da99a42a01b5facbaddf53, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ChangeMenuTestScene
+      value: ChangeToNextScene
       objectReference: {fileID: 0}
     - target: {fileID: 2004983862409285304, guid: c07129f316da99a42a01b5facbaddf53, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: GameManager, Assembly-CSharp
+      value: ChangeScene, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3439513988484797793, guid: c07129f316da99a42a01b5facbaddf53, type: 3}
       propertyPath: m_Pivot.x
@@ -9932,14 +9948,14 @@ PrefabInstance:
     - target: {fileID: 6416542897497551582, guid: 999616f028854d24dbb68033461fab7e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 964905611}
+      objectReference: {fileID: 1170719665}
     - target: {fileID: 6416542897497551582, guid: 999616f028854d24dbb68033461fab7e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ChangeMenuTestScene
+      value: ChangeToNextScene
       objectReference: {fileID: 0}
     - target: {fileID: 6416542897497551582, guid: 999616f028854d24dbb68033461fab7e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: GameManager, Assembly-CSharp
+      value: ChangeScene, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6951128974239869711, guid: 999616f028854d24dbb68033461fab7e, type: 3}
       propertyPath: m_Pivot.x
@@ -10178,17 +10194,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7773901301304610856, guid: ad756c137b6e1154ba13e8e8b3e5bae6, type: 3}
   m_PrefabInstance: {fileID: 964905609}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &964905611 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 31519331706352411, guid: ad756c137b6e1154ba13e8e8b3e5bae6, type: 3}
-  m_PrefabInstance: {fileID: 964905609}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3f59f329bc0b4a36bc8d02c6710a226, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &972830338
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10200,14 +10205,14 @@ PrefabInstance:
     - target: {fileID: 3737558574650096203, guid: c851e76814be3a045b7840455e7ed4f8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 964905611}
+      objectReference: {fileID: 838000413}
     - target: {fileID: 3737558574650096203, guid: c851e76814be3a045b7840455e7ed4f8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ChangeMenuTestScene
+      value: ChangeToNextScene
       objectReference: {fileID: 0}
     - target: {fileID: 3737558574650096203, guid: c851e76814be3a045b7840455e7ed4f8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: GameManager, Assembly-CSharp
+      value: ChangeScene, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5621637997893526916, guid: c851e76814be3a045b7840455e7ed4f8, type: 3}
       propertyPath: m_Name
@@ -10306,18 +10311,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7240575897375996625, guid: c851e76814be3a045b7840455e7ed4f8, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c851e76814be3a045b7840455e7ed4f8, type: 3}
 --- !u!224 &972830339 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8276986294035925495, guid: c851e76814be3a045b7840455e7ed4f8, type: 3}
-  m_PrefabInstance: {fileID: 972830338}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &972830340 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7240575897375996625, guid: c851e76814be3a045b7840455e7ed4f8, type: 3}
   m_PrefabInstance: {fileID: 972830338}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &972830341 stripped
@@ -10923,6 +10924,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77fedc11ed876a74c93424b1d630b0c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1170719665 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6410945835601196718, guid: 999616f028854d24dbb68033461fab7e, type: 3}
+  m_PrefabInstance: {fileID: 862544332}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e67665ea226d403ab8b32a4b067d8f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1175039791 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1263764809930382340, guid: 5edc708e29addfb4882513f1abafc082, type: 3}
@@ -11379,6 +11391,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1451753761}
   m_CullTransparentMesh: 1
+--- !u!114 &1607381351 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1686426846723170059, guid: c07129f316da99a42a01b5facbaddf53, type: 3}
+  m_PrefabInstance: {fileID: 843526787}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e67665ea226d403ab8b32a4b067d8f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1618019124
 GameObject:
   m_ObjectHideFlags: 0
@@ -12617,7 +12640,7 @@ PrefabInstance:
     - target: {fileID: 6772159479419885327, guid: c696ec169f46ece4390cef155afedac2, type: 3}
       propertyPath: VictoryFirstSelectedButton
       value: 
-      objectReference: {fileID: 972830340}
+      objectReference: {fileID: 697252043}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

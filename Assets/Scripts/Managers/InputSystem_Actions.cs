@@ -454,17 +454,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""48545e12-65de-49e7-84aa-ca7461cc9afe"",
-                    ""path"": ""<Keyboard>/leftAlt"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Pause"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""676c86bd-6c80-40f1-8a7a-2f38d21c1712"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
