@@ -62,13 +62,14 @@ public class Timing_QTE_Zona : MonoBehaviour
     {
         bool acierto = false;
         Timing_QTE hola = QTE.GetComponent<Timing_QTE>();
-        if (RectTransformUtility.RectangleContainsScreenPoint(Objetivo, transform.position))
+        //209 , 245
+        //Debug.Log("[QTE]" + Objetivo.position.x);
+        if(Objetivo.position.x > 209 && Objetivo.position.x < 245)
         {
             Debug.Log("hola");
-            
-            acierto=true;
+
+            acierto = true;
         }
-        
         hola.Acierto(acierto);
     }
     #endregion

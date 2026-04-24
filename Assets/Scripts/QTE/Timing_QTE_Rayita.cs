@@ -61,7 +61,7 @@ public class Timing_QTE_Rayita : MonoBehaviour
     void Start()
     {
         posActual = transform.position;
-        MaxPos.x = posActual.x + 200f;
+        MaxPos.x = posActual.x + 250f;
         MinPos.x = posActual.x - 1f;
 
     }
