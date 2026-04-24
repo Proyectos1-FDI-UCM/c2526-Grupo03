@@ -6,17 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Accessible_InGame/Menu.unity
-    guid: c0ef228e3c0b88547891702262433615
+    path: Assets/Scenes/PlanPruebas/MenuPruebas.unity
+    guid: be3888334ad4e594d92945fbda0846e3
   - enabled: 1
-    path: Assets/Scenes/Accessible_InGame/Definitive_Level.unity
-    guid: 3a4afcc48a64f5c4d95d14b56f6fda76
+    path: Assets/Scenes/PlanPruebas/PruebaCalidad.unity
+    guid: d44670177287d564384de601d2f34d19
   - enabled: 1
-    path: Assets/Scenes/Accessible_InGame/Creditos.unity
-    guid: b13e49dfc910045ba80034544cb5011b
+    path: Assets/Scenes/PlanPruebas/PruebaQTEs.unity
+    guid: 5f36ece9d5251a147a1a0b666e65e055
   - enabled: 1
-    path: Assets/Scenes/Accessible_InGame/Tutorial.unity
-    guid: a1001f7980d833243a33b81eeb1923ba
+    path: Assets/Scenes/PlanPruebas/PruebaColisiones.unity
+    guid: da8ca3f9ca30fc845b5c08202597cd81
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: b7a764e4dfe031342a2ef8852b70aa88, type: 3}
   m_UseUCBPForAssetBundles: 0
