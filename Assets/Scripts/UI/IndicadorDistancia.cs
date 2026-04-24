@@ -25,33 +25,25 @@ public class IndicadorDistancia : MonoBehaviour
     // Ejemplo: MaxHealthPoints
 
     /// <summary>
-    /// Referencia al indicador de distancia recorrida del jugador
+    /// Componente Slider del objeto de SliderPlayer cacheado
     /// </summary>
-    [SerializeField] private Image IndicadorPlayer;
+    [SerializeField] private Slider SliderPlayer;
     /// <summary>
-    /// Referencia al indicador de distancia recorrida por la bola del desierto
+    /// Componente Slider del objeto de SliderDolly cacheado
     /// </summary>
-    [SerializeField] private GameObject IndicadorBolaDesierto;
+    [SerializeField] private Slider SliderDolly;
     /// <summary>
-    /// Imagen de la bola del desierto en el indicador de distancia
+    /// Transform de la meta del nivel
     /// </summary>
-    [SerializeField] private Image ImagenBola;
+    [SerializeField] private Transform Meta;
     /// <summary>
-    /// 
+    /// Transform del jugador
     /// </summary>
-    [SerializeField] private Image IndicadorMeta;
+    [SerializeField] private Transform Player;
     /// <summary>
-    /// GameObject de la bandera del final del nivel
+    /// Transform de la camara Dolly
     /// </summary>
-    [SerializeField] private GameObject Final;
-    /// <summary>
-    /// Referencia al jugador 
-    /// </summary>
-    [SerializeField] private GameObject Player;
-    /// <summary>
-    /// Referencia a la bola del desierto
-    /// </summary>
-    [SerializeField] private GameObject BolaDelDesierto;
+    [SerializeField] private Transform Dolly;
 
     #endregion
 
@@ -64,29 +56,23 @@ public class IndicadorDistancia : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
-    // Posiciones de los prefabs del jugador y la bola del desierto en el eje x
-    private float _posPlayer, _posBola;
-    // Posicion del final e inicio del nivel en el eje x
-    private float _posFinal, _posInicio;
     /// <summary>
-    /// Posicion que se considera el inicio del indicador de distancia
+    /// Posicion de la meta en el eje X
     /// </summary>
-    private float _indicadorStart;
+    private float _posMeta;
     /// <summary>
-    /// Posicion que se considera el final del indicador de distancia
+    /// Posicion inicial de dolly en el eje X
     /// </summary>
-    private float _indicadorEnd;
+    private float _iniDollyPos;
+
     /// <summary>
-    /// Velocidad con la que rota la bola del desierto en el indicador de distancia
+    /// Posicion actual de la dolly en el eje X
     /// </summary>
-    private const float _velocidadRotacionBola = 200.0f;
+    private float _actDollyPos;
     /// <summary>
-    /// Rotacion actual de la bola del desierto en el indicador de distancia
+    /// Posicion actual del jugador en el eje X
     /// </summary>
-    private float _rotacionBola = .0f;
-    /// RectTransforms usados para mover de forma segura los elementos UI.
-    /// </summary>
-    private RectTransform _rectIndicadorPlayer, _rectIndicadorBola;
+    private float _actPlayerPos;
 
     #endregion
 
@@ -103,27 +89,28 @@ public class IndicadorDistancia : MonoBehaviour
     /// </summary>
     void Start()
     {
-        // Obtener RectTransforms de los elementos UI y sus posiciones iniciales (anchoredPosition.x)
-        if (IndicadorPlayer != null)
-            _rectIndicadorPlayer = IndicadorPlayer.GetComponent<RectTransform>();
-        if (IndicadorMeta != null)
-            _rectIndicadorBola = IndicadorBolaDesierto.GetComponent<RectTransform>();
-        if (_rectIndicadorPlayer != null)
-            _indicadorStart = _rectIndicadorPlayer.anchoredPosition.x;
-        if (_rectIndicadorBola != null)
-            _indicadorEnd = _rectIndicadorBola.anchoredPosition.x;
+        // ====== Inicializamos las variables necesarias ======
+        _iniDollyPos = Dolly.position.x;
+        _actDollyPos = Dolly.position.x;
+        _posMeta = Meta.position.x;
+        _actPlayerPos = Player.position.x;
 
-        // Posiciones en el eje x del inicio y el final del nivel (mundo)
-        if (BolaDelDesierto != null)
-            _posInicio = BolaDelDesierto.transform.position.x;
-        if (Final != null)
-            _posFinal = Final.transform.position.x;
-
-        // Si por alguna razón las referencias no están bien asignadas, evitar división por cero
-        if (Mathf.Approximately(_posFinal, _posInicio))
+        // ====== Ajustamos los valores de los sliders ======
+        // Slider del jugador
+        if (SliderPlayer !=  null)
         {
-            // Forzamos un rango válido para evitar NaN en cálculos posteriores
-            _posFinal = _posInicio + 1f;
+            // Ajustamos los valores
+            SliderPlayer.minValue = _iniDollyPos;
+            SliderPlayer.maxValue = _posMeta;
+            SliderPlayer.value = _actPlayerPos;
+        }
+        // Slider de dolly
+        if (SliderDolly != null)
+        {
+            // Ajustamos los valores
+            SliderDolly.minValue = _iniDollyPos;
+            SliderDolly.maxValue = _posMeta;
+            SliderDolly.value = _actDollyPos;
         }
     }
 
@@ -132,41 +119,21 @@ public class IndicadorDistancia : MonoBehaviour
     /// </summary>
     void Update()
     {
-        // Rotación de la imagen de la bola (indicador UI)
-        if (ImagenBola != null)
+        // ====== Actualizamos las posiciones del jugador y de dolly ======
+        _actDollyPos = Dolly.position.x;
+        _actPlayerPos = Player.position.x;
+        // ====== Cambiamos los valoeres en los sliders ======
+        // Slider del jugador
+        if (SliderPlayer != null)
         {
-            _rotacionBola = ImagenBola.transform.rotation.eulerAngles.z - _velocidadRotacionBola * Time.deltaTime;
-            ImagenBola.transform.rotation = Quaternion.Euler(0f, 0f, _rotacionBola);
+            // Cambiamos el valor
+            SliderPlayer.value = _actPlayerPos;
         }
-
-        // Posiciones en el eje x del jugador y la bola del desierto (mundo)
-        if (Player != null)
-            _posPlayer = Player.transform.position.x;
-        if (BolaDelDesierto != null)
-            _posBola = BolaDelDesierto.transform.position.x;
-
-        // Calculamos el porcentaje avanzado del jugador en el nivel (0..1)
-        float porcentajeAvanzadoPlayer = 0f;
-        if (!Mathf.Approximately(_posFinal, _posInicio))
-            porcentajeAvanzadoPlayer = Mathf.Clamp01((_posPlayer - _posInicio) / (_posFinal - _posInicio));
-
-        // Convertimos ese porcentaje a la posición X en la UI y actualizamos el indicador del player
-        if (_rectIndicadorPlayer != null)
+        // Slider de dolly
+        if (SliderDolly != null)
         {
-            float targetX = Mathf.Lerp(_indicadorStart, _indicadorEnd, porcentajeAvanzadoPlayer);
-            _rectIndicadorPlayer.anchoredPosition = new Vector2(targetX, _rectIndicadorPlayer.anchoredPosition.y);
-        }
-
-        float porcentajeAvanzadoBola = 0f;
-        if (!Mathf.Approximately(_posFinal, _posInicio))
-            porcentajeAvanzadoBola = Mathf.Clamp01((_posBola - _posInicio) / (_posFinal - _posInicio));
-
-        // Convertimos ese porcentaje a la posición X en la UI y actualizamos el indicador de la bola
-        if (_rectIndicadorBola != null)
-        {
-            float targetX = Mathf.Lerp(_indicadorStart, _indicadorEnd, porcentajeAvanzadoBola);
-            _rectIndicadorBola.anchoredPosition = new Vector2(targetX, _rectIndicadorBola.anchoredPosition.y);
-            Debug.Log($"Bola: posX={_rectIndicadorBola.anchoredPosition}, porcentaje={porcentajeAvanzadoBola}, targetX={targetX}");
+            // Cambiamos el valor
+            SliderDolly.value = _actDollyPos;
         }
     }
     #endregion
@@ -187,12 +154,6 @@ public class IndicadorDistancia : MonoBehaviour
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
-
-    private float WorldXToIndicatorX(float worldX)
-    {
-        float porcentaje = Mathf.Clamp01((worldX - _posInicio) / (_posFinal - _posInicio));
-        return Mathf.Lerp(_indicadorStart, _indicadorEnd, porcentaje);
-    }
 
     #endregion   
 
