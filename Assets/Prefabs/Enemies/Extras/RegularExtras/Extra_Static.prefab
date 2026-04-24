@@ -539,7 +539,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc424618c3d54c24092de219747020d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FloorDetector: {fileID: 3466750788234471361}
+  FloorDetector: {fileID: 8966242247968569611}
   Distance: 0
   Speed: 0
 --- !u!61 &4913307705423975386

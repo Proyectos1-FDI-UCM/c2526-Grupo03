@@ -37,7 +37,9 @@ public class Timing_QTE_Rayita : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-
+    /// <summary>
+    /// 
+    /// </summary>
     Vector3 posActual;
     Vector3 MaxPos;
     Vector3 MinPos;
@@ -59,7 +61,7 @@ public class Timing_QTE_Rayita : MonoBehaviour
     void Start()
     {
         posActual = transform.position;
-        MaxPos.x = posActual.x + 400f;
+        MaxPos.x = posActual.x + 200f;
         MinPos.x = posActual.x - 1f;
 
     }

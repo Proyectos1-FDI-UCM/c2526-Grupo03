@@ -26,10 +26,15 @@ public class Extra_Regular : MonoBehaviour
     /// <summary>
     /// Detector de suelo
     /// </summary>
-    [SerializeField] GameObject FloorDetector;
-    // Distancia que recorre hacia cada lado desde el punto inicial
+    [SerializeField]private Detector FloorDetector;
+    /// <summary>
+    /// Distancia caminada
+    /// </summary>
     [SerializeField] private int Distance = 5;
-    [SerializeField] private float Speed = 1f; // Velocidad del extra
+    /// <summary>
+    /// Velocidad del extra
+    /// </summary>
+    [SerializeField] private float Speed = 1f;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -40,13 +45,31 @@ public class Extra_Regular : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
+    /// <summary>
+    /// Posicion inicial 
+    /// </summary>
+    private Vector3 _iniPos;
 
-    private Vector3 _iniPos; // Posicion inicial del extra 
+    /// <summary>
+    /// Maxima posicion de izquierda
+    /// </summary>
     private Vector3 _maxPosL;
+
+    /// <summary>
+    /// Maxima posicion derecha
+    /// </summary>
     private Vector3 _maxPosR;
-    // direccion del movimiento -1 para que vaya a izquierda, 1 para ir a derecha
+
+    /// <summary>
+    /// Dire
+    /// </summary>
     private int dir = -1;
-    SpriteRenderer _spriteRenderer; // sprite del extra
+
+    /// <summary>
+    /// sprite del extra
+    /// </summary>
+    private SpriteRenderer _spriteRenderer; 
+
     /// <summary>
     /// Contiene la información del componente Animator.
     /// </summary>
@@ -86,13 +109,14 @@ public class Extra_Regular : MonoBehaviour
         _maxPosR = transform.position;
         _maxPosR.x += Distance;
         _spriteRenderer.flipX = true;
+        
     }
     /// <summary>
     /// Update is called every frame, if the MonoBehaviour is enabled.
     /// </summary>
     void Update()
     {
-        _landed = FloorDetector.GetComponent<Detector>().Detected();
+        _landed = FloorDetector.Detected();
         if (!_landed)
         {// cambia la direccion si no detecta suelo
             if (dir == 1)
@@ -108,7 +132,7 @@ public class Extra_Regular : MonoBehaviour
         {
             dir = 1;
         }
-        if (transform.position.x >= _maxPosR.x)
+        else if (transform.position.x >= _maxPosR.x)
         {
             dir = -1; 
         }
@@ -117,7 +141,7 @@ public class Extra_Regular : MonoBehaviour
             transform.position += new Vector3(Speed, 0, 0) * Time.deltaTime;
             _spriteRenderer.flipX = false;
         }
-        if (dir == -1)//mueve el extra hacia la izquierda
+        else if (dir == -1)//mueve el extra hacia la izquierda
         {
             transform.position -= new Vector3(Speed, 0, 0) * Time.deltaTime;
             _spriteRenderer.flipX = true;
