@@ -6,9 +6,9 @@
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
 
-using System;
+using UnityEditor.UI;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 
 /// <summary>
@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
     //pantalla de partida paerdida 
-    
+
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -63,6 +63,14 @@ public class GameManager : MonoBehaviour
     /// Guarda la puntuación final despúes de cada nivel
     /// </summary>
     private float _FinalRating;
+    /// <summary>
+    /// bool que indica si estamos usando mando
+    /// </summary>
+    private bool mando = false;
+    /// <summary>
+    /// bool que indica si estamos usando teclado
+    /// </summary>
+    private bool teclado = true;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -103,10 +111,10 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
             Init();
         } // if-else somos instancia nueva o no.
-        
+
 
     }
-    
+
     /// <summary>
     /// Método llamado cuando se destruye el componente.
     /// </summary>
@@ -185,7 +193,7 @@ public class GameManager : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(index);
         System.GC.Collect();
     } // ChangeScene
-    
+
     public void ChangeLoseScene()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Lose_Scene");
@@ -239,7 +247,39 @@ public class GameManager : MonoBehaviour
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("MenuPruebas");
     }
-
+    /// <summary>
+    /// Cambia el estado de el boleano mando
+    /// </summary>
+    public void SetMando(bool estado)
+    {
+        mando = estado;
+      
+       // Debug.Log(mando);
+    }
+    /// <summary>
+    /// Devuelve si esta usando mando
+    /// </summary>
+    /// <returns></returns>
+    public bool GetMando()
+    {
+        return mando;
+    }
+    /// <summary>
+    /// Cambia el estado de el boleano teclado
+    /// </summary>
+    public void SetTeclado(bool estado)
+    {
+        teclado = estado;
+        //Debug.Log(teclado);
+    }
+    /// <summary>
+    /// Devuelve si esta usando teclado
+    /// </summary>
+    /// <returns></returns>
+    public bool GetTeclado()
+    {
+        return teclado;
+    }
     // ---- MÉTODOS PRIVADOS ----
 
     #region Métodos Privados 
@@ -249,7 +289,7 @@ public class GameManager : MonoBehaviour
         // De momento no hay que transferir ningún setup
         // a otro manager
     }
-   
+
     private void Init()
     {
         // De momento no hay nada que inicializar
@@ -257,4 +297,4 @@ public class GameManager : MonoBehaviour
 
     #endregion
 } // class GameManager 
-// namespace
+  // namespace

@@ -127,20 +127,20 @@ public class Activators : MonoBehaviour
         if(salto == true)
         {
             //Activamos componente
-            Player.gameObject.GetComponent<Jump>().enabled = true;
+            Player.gameObject.GetComponent<Jump>().ActivateJump();
         }
         //Si el disparo es true lo activamos
         if (disparo == true)
         {
             //Activamos componente
-            Player.gameObject.GetComponent<Shoot>().enabled = true;
+            Player.gameObject.GetComponent<Shoot>().ActivateShoot();
             Balas.SetActive(true);
         }
         //Si la recarga es true lo activamos
         if (recarga == true)
         {
             //Activamos componente
-            Player.gameObject.GetComponent<Scream_Reload>().enabled = true;
+            Player.gameObject.GetComponent<Scream_Reload>().ActivateReload();
         }
         if(Dolly == true)
         {

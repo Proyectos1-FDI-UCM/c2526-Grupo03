@@ -42,6 +42,14 @@ public class Tutorial_Manager : MonoBehaviour
     /// GameObject de la puntuacion
     /// </summary>
     [SerializeField] private GameObject Puntuacion = null;
+    /// <summary>
+    /// Objeto que tiene como hijo a todas las entidades que sean una tecla
+    /// </summary>
+    [SerializeField] private GameObject Teclas = null;
+    /// <summary>
+    /// Objeto que tiene como hijo a todas las entidades que sean un boton
+    /// </summary>
+    [SerializeField] private GameObject Botones = null;
     
 
     #endregion
@@ -144,15 +152,38 @@ public class Tutorial_Manager : MonoBehaviour
     private void Init()
     {
         //Desactivamos los componentes del jugador
-        Player.GetComponent<Jump>().enabled = false;
-        Player.GetComponent<Scream_Reload>().enabled = false;
-        Player.GetComponent<Shoot>().enabled = false; 
+        Player.GetComponent<Jump>().DesactivateJump();
+        Player.GetComponent<Scream_Reload>().DesactivateReload();
+        Player.GetComponent<Shoot>().DesactivateShoot(); 
         //Desactivamos los objetos no necesareos al principo
         Desert_Ball.SetActive(false);
         Balas.SetActive(false);
         Puntuacion.SetActive(false);
         Dolly.SetActive(false);
-
+        if (Botones != null)
+        {
+            if (GameManager.Instance.GetMando() == true)
+            {
+               // Debug.Log("botones activados");
+                Botones.SetActive(true);
+            }
+            else
+            {
+                Botones.SetActive(false);
+            }
+        }
+        if (Teclas != null)
+        {
+            if (GameManager.Instance.GetTeclado()== true)
+            {
+               // Debug.Log("Teclas activados");
+                Teclas.SetActive(true);
+            }
+            else
+            {
+                Teclas.SetActive(false);
+            }
+        }
     }
 
     #endregion

@@ -36,6 +36,16 @@ public class Repair : MonoBehaviour
     [SerializeField] private Sprite SpriteRepaired;
 
     /// <summary>
+    /// Sprite de la tecla para reparar
+    /// </summary>
+    [SerializeField] private GameObject Teclas = null;
+
+    /// <summary>
+    /// Sprite del boton para reparar
+    /// </summary>
+    [SerializeField] private GameObject Botones = null;
+
+    /// <summary>
     /// GameObject que contiene el jugador de la escena.
     /// </summary>
     [SerializeField] private GameObject Player;
@@ -187,6 +197,28 @@ public class Repair : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         //SpriteBroken será el sprite roto del objeto reparable.
         _spriteRenderer.sprite = SpriteBroken;
+        if (Botones != null)
+        {
+            if (GameManager.Instance.GetMando())
+            {
+                Botones.SetActive(true);
+            }
+            else
+            {
+                Botones.SetActive(false);
+            }
+        }
+        if (Teclas != null)
+        {
+            if (GameManager.Instance.GetTeclado())
+            {
+                Teclas.SetActive(true);
+            }
+            else
+            {
+                Teclas.SetActive(false);
+            }
+        }
     }
 
     /// <summary>
