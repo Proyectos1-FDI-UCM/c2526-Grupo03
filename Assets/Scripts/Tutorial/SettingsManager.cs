@@ -24,7 +24,7 @@ public class SettingsManager : MonoBehaviour
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
     [SerializeField] private Toggle mando;
-    [SerializeField] private Toggle teclado;
+    
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -60,11 +60,6 @@ public class SettingsManager : MonoBehaviour
             ActualizaMando();
 
         }
-        if (teclado != null)
-        {
-            ActualizaTeclado();
-
-        }
 
     }
 
@@ -84,18 +79,12 @@ public class SettingsManager : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
-    public void Teclado()
-    {
-        TecladoBool = !TecladoBool;
-        mandoBool = !TecladoBool;
-        GameManager.Instance.SetTeclado(TecladoBool);
-        ActualizaTeclado();
-        //Debug.Log(teclado);
-    }
+   
     public void Mando()
     {
         mandoBool = !mandoBool;
         TecladoBool = !mandoBool;
+        GameManager.Instance.SetTeclado(TecladoBool);
         GameManager.Instance.SetMando(mandoBool);
         ActualizaMando();
 
@@ -113,10 +102,7 @@ public class SettingsManager : MonoBehaviour
     {
         mando.SetIsOnWithoutNotify(mandoBool);
     }
-    private void ActualizaTeclado()
-    {
-        teclado.SetIsOnWithoutNotify(TecladoBool);
-    }
+   
     #endregion
 
 } // class SettingsManager 
