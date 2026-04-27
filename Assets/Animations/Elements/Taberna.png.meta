@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: c021a2ee540558549912404e7f8f7ea3
+guid: 78fe95dcc2135294c80a845728e7ae43
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7427379619865500324
-    second: Taverna_Caida_0
+      213: -7349730264573344114
+    second: Taberna_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Taverna_Caida_0
+      name: Taberna_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c55e0f17695ace890800000000000000
-      internalID: -7427379619865500324
+      spriteID: e860b21d343800a90800000000000000
+      internalID: -7349730264573344114
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Taverna_Caida_0: -7427379619865500324
+      Taberna_0: -7349730264573344114
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

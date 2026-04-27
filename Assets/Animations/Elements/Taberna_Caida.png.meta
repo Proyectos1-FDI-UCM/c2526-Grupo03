@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 2cae6f0ddc060d24bb42b238503d22ca
+guid: 795f14c32fd3eab4d9f30a5b4537cb10
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6547604401115500892
-    second: Taverna_Caida_BordeBlanco_0
+      213: 3320445804649316209
+    second: Taberna_Caida_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Taverna_Caida_BordeBlanco_0
+      name: Taberna_Caida_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c51164a1383cdda50800000000000000
-      internalID: 6547604401115500892
+      spriteID: 17ffe0aedd7941e20800000000000000
+      internalID: 3320445804649316209
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Taverna_Caida_BordeBlanco_0: 6547604401115500892
+      Taberna_Caida_0: 3320445804649316209
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
