@@ -480,6 +480,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpriteBroken: {fileID: 21300000, guid: 32062112023699c4b84208739e5783dc, type: 3}
   SpriteRepaired: {fileID: 21300000, guid: 43aa481e9947cf74e8bc878833a36db1, type: 3}
+  SpriteWhiteBorder: {fileID: 21300000, guid: da62c42558fc2d645af5700b9ee591fa, type: 3}
+  Teclas: {fileID: 0}
+  Botones: {fileID: 0}
   Player: {fileID: 0}
   SpamQTE: {fileID: 1825485709791816537}
   ManivelaQTE: {fileID: 6290379841019181947}

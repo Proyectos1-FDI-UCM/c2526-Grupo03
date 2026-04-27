@@ -36,6 +36,11 @@ public class Repair : MonoBehaviour
     [SerializeField] private Sprite SpriteRepaired;
 
     /// <summary>
+    /// Sprite del objeto roto con borde blanco
+    /// </summary>
+    [SerializeField] private Sprite SpriteWhiteBorder;
+
+    /// <summary>
     /// Sprite de la tecla para reparar
     /// </summary>
     [SerializeField] private GameObject Teclas = null;
@@ -261,10 +266,7 @@ public class Repair : MonoBehaviour
         if (_isRepairing && _canRepair)
         {
             //Se desactivan todas las acciones del player para prohibirle interactuar con el nivel mientras repara
-            _movementPlayerComponent.DesactivateMovement();
-            _jumpComponent.DesactivateJump();
-            _shootComponent.DesactivateShoot();
-            _screamReloadComponent.DesactivateReload();
+            DesactivatePlayer();
 
             _canRepair = false;
             _repairIniTime = Time.time;
@@ -272,11 +274,9 @@ public class Repair : MonoBehaviour
         if (_repaired)
         {
             //Al terminar de reparar se vuelven a activar todas las acciones que se habían desactivado
-            _movementPlayerComponent.ActivateMovement();
-            _jumpComponent.ActivateJump();
-            _shootComponent.ActivateShoot();
-            _screamReloadComponent.ActivateReload();
-            _repairComponent.enabled = false; // mejor desactivarlo que destruirlo
+            ActivatePlayer();
+            // mejor desactivarlo que destruirlo
+            _repairComponent.enabled = false; 
             //Se cambia el sprite del objeto por el de su versión reparada
             _spriteRenderer.sprite = SpriteRepaired;
             Key.SetActive(false);
@@ -284,22 +284,19 @@ public class Repair : MonoBehaviour
         if (_hasFailedRepairing)
         {
             //Si se falla el QTE se vuelven a activar todos las acciones que se habían desactivado
-            _movementPlayerComponent.ActivateMovement();
-            _jumpComponent.ActivateJump();
-            _shootComponent.ActivateShoot();
-            _screamReloadComponent.ActivateReload();
-            _spriteRenderer.sprite = SpriteBroken;  //Se mantiene el sprite de roto
+            ActivatePlayer(); 
+            //Se mantiene el sprite de roto
+            _spriteRenderer.sprite = SpriteBroken; 
+            // Quitamos la tecla de reparar (por si acaso)
             Key.SetActive(false);
-            _hasFailedRepairing = false; //Se cambia a false para no volver a entrar en la siguiente vuelta del bucle
+            //Se cambia a false para no volver a entrar en la siguiente vuelta del bucle
+            _hasFailedRepairing = false; 
         }
 
         if (_hasPressedExit)
         {
             //Si se sale del QTE se vuelven a activar todos las acciones que se habían desactivado
-            _movementPlayerComponent.ActivateMovement();
-            _jumpComponent.ActivateJump();
-            _shootComponent.ActivateShoot();
-            _screamReloadComponent.ActivateReload();
+            ActivatePlayer();
             DisableChosenQTE();
             Key.SetActive(true);
             _isRepairing = false;
@@ -388,6 +385,7 @@ public class Repair : MonoBehaviour
                 //Si el objeto que colisiona coincide con el player y no está reparando su estado pasa a poder reparar
                 //y se activa la tecla superior del input para reparar
                 Player = collision.gameObject;
+                _spriteRenderer.sprite = SpriteWhiteBorder;
                 Key.SetActive(true);
                 _canRepair = true;
             }
@@ -400,6 +398,7 @@ public class Repair : MonoBehaviour
             //Si el objeto que sale del collider coincide con el player se le desactiva el estado de poder reparar
             //y se desactiva la tecla superior del input para reparar
             _canRepair = false;
+            if (!_repaired) _spriteRenderer.sprite = SpriteBroken;
             Key.SetActive(false);
         }
     }
@@ -464,6 +463,26 @@ public class Repair : MonoBehaviour
                 TeclasQTE.SetActive(false);
             }
         }
+    }
+    /// <summary>
+    /// Desactiva los componentes del jugador
+    /// </summary>
+    private void DesactivatePlayer()
+    {
+        _movementPlayerComponent.DesactivateMovement();
+        _jumpComponent.DesactivateJump();
+        _shootComponent.DesactivateShoot();
+        _screamReloadComponent.DesactivateReload();
+    }
+    /// <summary>
+    /// Activa los componentes del jugador
+    /// </summary>
+    private void ActivatePlayer()
+    {
+        _movementPlayerComponent.ActivateMovement();
+        _jumpComponent.ActivateJump();
+        _shootComponent.ActivateShoot();
+        _screamReloadComponent.ActivateReload();
     }
     #endregion   
 
