@@ -23,8 +23,15 @@ public class SettingsManager : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
+    /// <summary>
+    /// Toggle de mando
+    /// </summary>
     [SerializeField] private Toggle mando;
-    
+    /// <summary>
+    /// Bool que nos indica si esta en el tutorial
+    /// </summary>
+    [SerializeField] private bool tutorial =false;
+
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -35,28 +42,34 @@ public class SettingsManager : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
+
+    /// <summary>
+    /// Booleano que indica si usa mando
+    /// </summary>
     private bool mandoBool;
-    private bool TecladoBool;
+
 
     #endregion
-    
+
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-    
+
     // Por defecto están los típicos (Update y Start) pero:
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
-    
+
     /// <summary>
     /// Start is called on the frame when a script is enabled just before 
     /// any of the Update methods are called the first time.
     /// </summary>
     void Start()
     {
+        //inicializamos
         mandoBool = GameManager.Instance.GetMando();
-        TecladoBool = GameManager.Instance.GetTeclado();
-        if(mando != null)
+        //revisamos que no sea null
+        if (mando != null)
         {
+            //actualizamos
             ActualizaMando();
 
         }
@@ -68,7 +81,7 @@ public class SettingsManager : MonoBehaviour
     /// </summary>
     void Update()
     {
-        
+
     }
     #endregion
 
@@ -79,12 +92,10 @@ public class SettingsManager : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
-   
+
     public void Mando()
     {
         mandoBool = !mandoBool;
-        TecladoBool = !mandoBool;
-        GameManager.Instance.SetTeclado(TecladoBool);
         GameManager.Instance.SetMando(mandoBool);
         ActualizaMando();
 
@@ -101,8 +112,12 @@ public class SettingsManager : MonoBehaviour
     private void ActualizaMando()
     {
         mando.SetIsOnWithoutNotify(mandoBool);
+        if (tutorial)
+        {
+            Tutorial_Manager.Instance.ActualizaMando();
+        }
     }
-   
+
     #endregion
 
 } // class SettingsManager 

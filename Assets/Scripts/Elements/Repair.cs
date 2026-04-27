@@ -215,7 +215,7 @@ public class Repair : MonoBehaviour
         }
         if (Teclas != null)
         {
-            if (GameManager.Instance.GetTeclado())
+            if (!GameManager.Instance.GetMando())
             {
                 Teclas.SetActive(true);
             }

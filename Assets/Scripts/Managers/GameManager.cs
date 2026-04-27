@@ -272,14 +272,7 @@ public class GameManager : MonoBehaviour
         teclado = estado;
         //Debug.Log(teclado);
     }
-    /// <summary>
-    /// Devuelve si esta usando teclado
-    /// </summary>
-    /// <returns></returns>
-    public bool GetTeclado()
-    {
-        return teclado;
-    }
+    
     // ---- MÉTODOS PRIVADOS ----
 
     #region Métodos Privados 

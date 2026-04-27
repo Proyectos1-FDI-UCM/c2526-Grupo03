@@ -53,6 +53,11 @@ public class LevelManager : MonoBehaviour
     [SerializeField] GameObject VictoryFirstSelectedButton;
 
     /// <summary>
+    /// Primer botón del panel de settings
+    /// </summary>
+    [SerializeField] GameObject SettingsFirstSelectedButton;
+
+    /// <summary>
     /// Panel de pausa
     /// </summary>
     [SerializeField] private GameObject PauseScreen;
@@ -65,7 +70,12 @@ public class LevelManager : MonoBehaviour
     /// <summary>
     /// Panel de victoria
     /// </summary>
-    [SerializeField] private GameObject VictoryScreen;  
+    [SerializeField] private GameObject VictoryScreen;
+
+    /// <summary>
+    /// Panel de settings
+    /// </summary>
+    [SerializeField] private GameObject SettingsPanel;
 
     /// <summary>
     /// Calidad inicial
@@ -172,10 +182,24 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     public void ChangeButtonToPause()
     {
+        SettingsPanel.SetActive(false);
         //Cambiamos el boton selecionado al de pausa
         EventSystem.SetSelectedGameObject(PauseFirstSelectedButton);
         //Activamos el Pause Screen
         PauseScreen.SetActive(true);
+    }
+    /// <summary>
+    /// Cambia el boton seleccionado al del panel de settings y activa el panel
+    /// </summary>
+    public void ChangeButtonToSettings()
+    {
+        PauseScreen.SetActive(false);
+        //Cambiamos el boton selecionado al de settings
+        EventSystem.SetSelectedGameObject(SettingsFirstSelectedButton);
+
+        //Activamos el Settings Screen
+        SettingsPanel.SetActive(true);
+
     }
 
     /// <summary>

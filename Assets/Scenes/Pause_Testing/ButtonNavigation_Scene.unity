@@ -1775,7 +1775,7 @@ PrefabInstance:
     - target: {fileID: 6772159479419885327, guid: c696ec169f46ece4390cef155afedac2, type: 3}
       propertyPath: EventSystem
       value: 
-      objectReference: {fileID: 751061996}
+      objectReference: {fileID: 751061998}
     - target: {fileID: 6772159479419885327, guid: c696ec169f46ece4390cef155afedac2, type: 3}
       propertyPath: PauseScreen
       value: 

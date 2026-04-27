@@ -139,7 +139,33 @@ public class Tutorial_Manager : MonoBehaviour
     {
         return _instance != null;
     }
-   
+   public void ActualizaMando()
+   {
+        if (Botones != null)
+        {
+            if (GameManager.Instance.GetMando() == true)
+            {
+                // Debug.Log("botones activados");
+                Botones.SetActive(true);
+            }
+            else
+            {
+                Botones.SetActive(false);
+            }
+        }
+        if (Teclas != null)
+        {
+            if (GameManager.Instance.GetMando() != true)
+            {
+                // Debug.Log("Teclas activados");
+                Teclas.SetActive(true);
+            }
+            else
+            {
+                Teclas.SetActive(false);
+            }
+        }
+    }
 
     #endregion
 
@@ -160,30 +186,7 @@ public class Tutorial_Manager : MonoBehaviour
         Balas.SetActive(false);
         Puntuacion.SetActive(false);
         Dolly.SetActive(false);
-        if (Botones != null)
-        {
-            if (GameManager.Instance.GetMando() == true)
-            {
-               // Debug.Log("botones activados");
-                Botones.SetActive(true);
-            }
-            else
-            {
-                Botones.SetActive(false);
-            }
-        }
-        if (Teclas != null)
-        {
-            if (GameManager.Instance.GetTeclado()== true)
-            {
-               // Debug.Log("Teclas activados");
-                Teclas.SetActive(true);
-            }
-            else
-            {
-                Teclas.SetActive(false);
-            }
-        }
+        ActualizaMando();
     }
 
     #endregion
