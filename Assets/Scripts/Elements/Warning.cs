@@ -32,7 +32,7 @@ public class Warning : MonoBehaviour
     /// <summary>
     /// Jugador punto de referencia
     /// </summary>
-    [SerializeField] private Transform Player;
+    [SerializeField] private Transform MainCamera;
 
     /// <summary>
     /// Tiempo que dura la advertencia
@@ -47,7 +47,7 @@ public class Warning : MonoBehaviour
     /// <summary>
     /// Margen a dejar en X para la señal
     /// </summary>
-    [SerializeField] private float XPlayerOffset;
+    [SerializeField] private float XMainCameraOffset = 8.0f;
 
     #endregion
 
@@ -135,7 +135,7 @@ public class Warning : MonoBehaviour
     /// </summary>
     void Update()
     { 
-        _fixedX = Player.position.x + XPlayerOffset;
+        _fixedX = MainCamera.position.x + XMainCameraOffset;
 
         WarningSign.transform.position = new Vector2(_fixedX, _armyposition.y);
         // Cuando ha empezado la advertencia
