@@ -423,14 +423,7 @@ public class Repair : MonoBehaviour
         }
         else if (_selectedQTE == 3)
         {
-            if (TimingQTE != null)
-            {
-                TimingQTE.SetActive(true);
-            }
-            else
-            {
-                TeclasQTE.SetActive(true);
-            } 
+            TimingQTE.SetActive(true);
         }
     }
 
@@ -454,14 +447,7 @@ public class Repair : MonoBehaviour
         }
         else if (_selectedQTE == 3)
         {
-            if (TimingQTE != null)
-            {
-                TimingQTE.SetActive(false);
-            }
-            else
-            {
-                TeclasQTE.SetActive(false);
-            }
+            TimingQTE.SetActive(false);
         }
     }
     /// <summary>
