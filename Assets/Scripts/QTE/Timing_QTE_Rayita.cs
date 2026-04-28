@@ -27,6 +27,14 @@ public class Timing_QTE_Rayita : MonoBehaviour
     /// Velocidad de la rayita.
     /// </summary>
     [SerializeField] private float Speed = .0f;
+    /// <summary>
+    /// Límite derecho del movimiento de la rayita.
+    /// </summary>
+    [SerializeField] private RectTransform MaxPos;
+    /// <summary>
+    /// Límite izquierdo del movimiento de la rayita.
+    /// </summary>
+    [SerializeField] private RectTransform MinPos;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -38,12 +46,18 @@ public class Timing_QTE_Rayita : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
     /// <summary>
-    /// 
+    /// Vector que guarda la posición actual de la rayita.
     /// </summary>
-    Vector3 posActual;
-    Vector3 MaxPos;
-    Vector3 MinPos;
-    int signo = 1;
+    Vector3 _posActual;
+    /// <summary>
+    /// entero para cambiar la dirección en la que se mueve la rayita.
+    /// </summary>
+    int _signo = 1;
+    /// <summary>
+    /// variable que guarda el rect transform de la rayita.
+    /// </summary>
+    RectTransform _rectTransform;
+
 
     #endregion
 
@@ -60,9 +74,8 @@ public class Timing_QTE_Rayita : MonoBehaviour
     /// </summary>
     void Start()
     {
-        posActual = transform.position;
-        MaxPos.x = posActual.x + 250f;
-        MinPos.x = posActual.x - 1f;
+        _rectTransform = GetComponent<RectTransform>();
+        _posActual = _rectTransform.position;
 
     }
 
@@ -71,15 +84,15 @@ public class Timing_QTE_Rayita : MonoBehaviour
     /// </summary>
     void Update()
     {
-        transform.position += new Vector3(Speed, 0f) * Time.deltaTime * signo;
+        _rectTransform.position += new Vector3(Speed, 0f) * Time.deltaTime * _signo;
 
-        if (transform.position.x > MaxPos.x)
+        if (_rectTransform.position.x > MaxPos.position.x)
         {
-            signo = -1;
+            _signo = -1;
         }
-        else if (transform.position.x < MinPos.x)
+        else if (_rectTransform.position.x < MinPos.position.x)
         {
-            signo = 1;
+            _signo = 1;
         }
     }
     #endregion

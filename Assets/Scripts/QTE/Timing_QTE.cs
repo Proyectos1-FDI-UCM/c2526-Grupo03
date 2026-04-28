@@ -28,8 +28,19 @@ public class Timing_QTE : MonoBehaviour
     /// <summary>
     /// Cantidad que aumenta la barra por acierto
     /// </summary>
-    [SerializeField]
-    private float AumentoPorClick = 5.0f;
+    [SerializeField] private float AumentoPorClick = 5.0f;
+    /// <summary>
+    /// GameObject que engloba el timing
+    /// </summary>
+    [SerializeField] private GameObject Timing;
+    /// <summary>
+    /// Script de la zona del QTE
+    /// </summary>
+    [SerializeField] private Timing_QTE_Zona Zona;
+    /// <summary>
+    /// Duración de la reparación automática
+    /// </summary>
+    [SerializeField] private float AumentoAutomático = 2.22f;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -45,26 +56,18 @@ public class Timing_QTE : MonoBehaviour
     /// Componente de la barra
     /// </summary>
     private Slider _componenteBarra;
-
     /// <summary>
-    /// Contiene la información del componente Repair.
+    /// Contiene la información del componente Repair
     /// </summary>
     private Repair _comp;
-
     /// <summary>
-    /// Valor máximo de la barra
+    /// Valor mínimo de la barra
     /// </summary>
     float _minValue;
     /// <summary>
     /// Valor de la barra
     /// </summary>
     float _value;
-    /// <summary>
-    /// booleano que detecta si la rayita está en la zona verde
-    /// </summary>
-    bool acertado = false;
-
-
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -80,6 +83,10 @@ public class Timing_QTE : MonoBehaviour
     /// </summary>
     void Awake()
     {
+        if (Zona == null)
+        {
+            Zona = GetComponent<Timing_QTE_Zona>();
+        }
         _comp = this.gameObject.GetComponentInParent<Repair>();
         if (_componenteBarra == null)
         {
@@ -104,17 +111,24 @@ public class Timing_QTE : MonoBehaviour
     /// </summary>
     void Update()
     {
+        // Parte de reparación automática
+        _componenteBarra.value += AumentoAutomático * Time.deltaTime;
         //Si está reparando y se pulsa el botón de reparar
         if (_comp.IsRepairing() && InputManager.Instance.RepairWasPressedThisFrame() && Time.time >= _comp.RepairIniTime() + _comp.ExitTime())
         {
+            Timing.SetActive(true);
             _componenteBarra.value = 0;
             _comp.HasPressedExit(true);
         }
-        //Si se pulsa el botón de salto (el que se usa como botón de spam) la barra sube.
-        if (InputManager.Instance.JumpWasPressedThisFrame() && acertado)
+        //Si se pulsa el botón de salto (el que se usa como botón de timing) dentro de la zona la barra sube.
+        if (InputManager.Instance.JumpWasPressedThisFrame() && Zona.CheckAcierto())
         {
-            //Debug.Log("Spam");
             _componenteBarra.value += AumentoPorClick;
+        }
+        //Si se pulsa el botón fuera de la zona.
+        else if (InputManager.Instance.JumpWasPressedThisFrame() && !Zona.CheckAcierto())
+        {
+            Timing.SetActive(false);
         }
         //Si la barra se llena se da el objeto como reparado y acaba el QTE.
         if (_componenteBarra.value >= _componenteBarra.maxValue)
@@ -133,13 +147,6 @@ public class Timing_QTE : MonoBehaviour
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
-    /// <summary>
-    /// Método encargado de cambiar el bool acertado
-    /// </summary>
-    public void Acierto(bool acierto)
-    {
-        acertado = acierto;
-    }
 
     #endregion
 

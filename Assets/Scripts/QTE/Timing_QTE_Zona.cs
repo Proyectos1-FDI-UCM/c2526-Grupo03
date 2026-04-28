@@ -5,6 +5,7 @@
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
 
+using UnityEditor.Searcher;
 using UnityEngine;
 // Añadir aquí el resto de directivas using
 
@@ -22,10 +23,18 @@ public class Timing_QTE_Zona : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
-
-    [SerializeField] RectTransform Objetivo;
-
-    [SerializeField] GameObject QTE;
+    /// <summary>
+    /// Variable que guarda el rect transform de la rayita.
+    /// </summary>
+    [SerializeField] private RectTransform Objetivo;
+    /// <summary>
+    /// Límite derecho de la zona.
+    /// </summary>
+    [SerializeField] private RectTransform MaxPos;
+    /// <summary>
+    /// Límite izquierdo de la zona.
+    /// </summary>
+    [SerializeField] private RectTransform MinPos;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -36,7 +45,10 @@ public class Timing_QTE_Zona : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-
+    /// <summary>
+    /// Booleano para comprobar cuando la rayita está en la zona
+    /// </summary>
+    bool _acierto = false;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -52,7 +64,7 @@ public class Timing_QTE_Zona : MonoBehaviour
     /// </summary>
     void Start()
     {
-        
+
     }
 
     /// <summary>
@@ -60,17 +72,7 @@ public class Timing_QTE_Zona : MonoBehaviour
     /// </summary>
     void Update()
     {
-        bool acierto = false;
-        Timing_QTE hola = QTE.GetComponent<Timing_QTE>();
-        //209 , 245
-        //Debug.Log("[QTE]" + Objetivo.position.x);
-        if(Objetivo.position.x > 209 && Objetivo.position.x < 245)
-        {
-            Debug.Log("hola");
-
-            acierto = true;
-        }
-        hola.Acierto(acierto);
+       
     }
     #endregion
 
@@ -81,7 +83,21 @@ public class Timing_QTE_Zona : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
-
+    /// <summary>
+    /// Método público que devuelve true si la rayita está dentro de la zona y false en el caso contrario
+    /// </summary>
+    public bool CheckAcierto()
+    {
+        if (Objetivo.position.x > MinPos.position.x && Objetivo.position.x < MaxPos.position.x)
+        {
+            _acierto = true;
+        }
+        else
+        {
+            _acierto = false;
+        }
+        return _acierto;
+    }
     #endregion
 
     // ---- MÉTODOS PRIVADOS ----
