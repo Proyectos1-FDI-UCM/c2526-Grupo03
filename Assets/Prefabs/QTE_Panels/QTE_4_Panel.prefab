@@ -180,7 +180,6 @@ MonoBehaviour:
   AumentoPorClick: 20
   Timing: {fileID: 2573171209839117210}
   Zona: {fileID: 8770575427106018688}
-  ZonaPos: {fileID: 4445463433662900061}
   "AumentoAutom\xE1tico": 2.22
 --- !u!1 &2573171209839117210
 GameObject:
@@ -705,7 +704,7 @@ RectTransform:
   m_Father: {fileID: 964017463809642990}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: -235, y: 25}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
