@@ -155,8 +155,8 @@ public class Extra_Army : MonoBehaviour
         Vector2 dir = InputManager.Instance.MovementVector;
         if (_warning.GetDone() && !_hasFinishedJump)
         {
-            //Si el front detector detecta el player y no se pulsa ni salto ni moverse hacia la izquierda.
-            if(FrontDetector.Detected() && FrontDetector.CollisionIsPlayer() && Player != null && !InputManager.Instance.JumpIsPressed() && dir.x >= 0)
+            //Si el front detector detecta el player y no se pulsa ni salto ni moverse hacia la izquierda y además no se detecta una pared a la izquierda.
+            if(FrontDetector.Detected() && FrontDetector.CollisionIsPlayer() && Player != null && !InputManager.Instance.JumpIsPressed() && dir.x >= 0 && !_playerMovement.LeftDetect())
             {
                 float NuevaPosX = transform.position.x - OffsetEmpujePlayer;
                 Player.transform.position = new Vector3(NuevaPosX, Player.transform.position.y);

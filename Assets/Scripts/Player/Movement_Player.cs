@@ -308,15 +308,29 @@ public class Movement_Player : MonoBehaviour
     {
         _desactivated = false;
     }
-
+    /// <summary>
+    /// Cambia el estado del player a empujado o no empujado
+    /// </summary>
+    /// <param name="EstaEmpujando"></param>
     public void ExtraArmyEstaEmpujando(bool EstaEmpujando)
     {
         _extraArmyEmpujando = EstaEmpujando;
     }
-
+    /// <summary>
+    /// Controla si el player está siendo empujado por un extra army
+    /// </summary>
+    /// <returns></returns>
     public bool EstaSiendoEmpujado()
     {
         return _extraArmyEmpujando;
+    }
+    /// <summary>
+    /// Devuelve si detecta algo el detector izquierdo del player
+    /// </summary>
+    /// <returns></returns>
+    public bool LeftDetect()
+    {
+        return _leftDetected;
     }
     #endregion
 
