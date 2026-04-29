@@ -267,7 +267,11 @@ MonoBehaviour:
   JumpHeight: 2
   TimeToReachMaxHeight: 0.2
   MaxFallSpeed: 2
+<<<<<<< HEAD
   Player: {fileID: 0}
+=======
+  Player: {fileID: 7674669691530021310, guid: 8e518f3f91021964490aa4c6a5d8d0d8, type: 3}
+>>>>>>> origin/main
   OffsetEmpujePlayer: 0
 --- !u!114 &1307713130924949139
 MonoBehaviour:
