@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a21b2cac9e0e3184797b4a958e0c4f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Detected: 0
 --- !u!61 &6429445505505047486
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -137,7 +136,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a21b2cac9e0e3184797b4a958e0c4f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Detected: 0
 --- !u!61 &3068380121422736427
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -275,7 +273,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a21b2cac9e0e3184797b4a958e0c4f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Detected: 0
 --- !u!1 &3017378370926611458
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,7 +364,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a21b2cac9e0e3184797b4a958e0c4f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Detected: 0
 --- !u!1 &7313585925935412670
 GameObject:
   m_ObjectHideFlags: 0
@@ -420,7 +416,7 @@ GameObject:
   - component: {fileID: -2117695415589528348}
   - component: {fileID: 2964731405231165147}
   - component: {fileID: 1280265252030319030}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -620,7 +616,6 @@ MonoBehaviour:
   ReloadMovement: 3
   ReloadDuration: 1.5
   ReloadCD: 5
-  Reloading: 0
 --- !u!114 &2964731405231165147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -634,9 +629,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bullet: {fileID: 2590580355582167740, guid: c41fea627a4cadb4db77192638c429cf, type: 3}
+  MaxAmmo: 4
+  Cooldown: 0.8
+  BulletPositionOffset: {x: 0.8, y: 0, z: 0}
   NumBulletsPool: 7
   BulletsContainer: {fileID: 0}
-  MaxAmmo: 4
 --- !u!95 &1280265252030319030
 Animator:
   serializedVersion: 7

@@ -99,6 +99,16 @@ public class Detector : MonoBehaviour
     {
         return _collisionedObject.bounds.size;
     }
+
+    public bool CollisionIsPlayer()
+    {
+        bool player = false;
+        if(_collisionedObject.GetComponent<Movement_Player>() != null)
+        {
+            player = true;
+        }
+        return player;
+    }
     #endregion
 
     // ---- MÉTODOS PRIVADOS ----

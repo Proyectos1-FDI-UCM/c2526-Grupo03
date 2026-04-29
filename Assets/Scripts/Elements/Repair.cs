@@ -303,6 +303,16 @@ public class Repair : MonoBehaviour
             _canRepair = true;
             _hasPressedExit = false; //Se cambia a false para no volver a entrar en la siguiente vuelta del bucle
         }
+
+        if(_movementPlayerComponent.EstaSiendoEmpujado())
+        {
+            //Si el extra army empuja al player se vuelven a activar todos las acciones que se habían desactivado
+            ActivatePlayer();
+            DisableChosenQTE();
+            Key.SetActive(true);
+            _isRepairing = false;
+            _canRepair = true;
+        }
     }
     #endregion
 

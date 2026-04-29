@@ -86,6 +86,10 @@ public class Movement_Player : MonoBehaviour
     private Vector3 _dirEmpuje;
     private bool _rightDetected;
     private bool _leftDetected;
+    /// <summary>
+    /// Determina si el player está siendo empujado por el extra army.
+    /// </summary>
+    private bool _extraArmyEmpujando = false;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -303,6 +307,16 @@ public class Movement_Player : MonoBehaviour
     public void ActivateMovement()
     {
         _desactivated = false;
+    }
+
+    public void ExtraArmyEstaEmpujando(bool EstaEmpujando)
+    {
+        _extraArmyEmpujando = EstaEmpujando;
+    }
+
+    public bool EstaSiendoEmpujado()
+    {
+        return _extraArmyEmpujando;
     }
     #endregion
 
