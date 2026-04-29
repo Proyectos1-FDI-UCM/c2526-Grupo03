@@ -37,6 +37,10 @@ public class Enemies_Health : MonoBehaviour
     /// Objeto de barra de vida de la escena
     /// </summary>
     [SerializeField] private GameObject BarraVida;
+    /// <summary>
+    /// Componente de la barra de vida
+    /// </summary>
+    [SerializeField] private AudioSource Sonido;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -52,6 +56,27 @@ public class Enemies_Health : MonoBehaviour
     /// Componente de la barra de vida
     /// </summary>
     private Slider _componenteBarraVida;
+
+    /// <summary>
+    /// Variable de si está muerto o no
+    /// </summary>
+    private bool _dead;
+
+    /// <summary>
+    /// Componente renderer
+    /// </summary>
+    private SpriteRenderer _spriteRenderer;
+    /// <summary>
+    /// Componente Collider
+    /// </summary>
+    private BoxCollider2D _boxCollider;
+    /// <summary>
+    /// Componente Detectable
+    /// </summary>
+    private DetectableObject _detectableObject;
+
+
+
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -70,6 +95,9 @@ public class Enemies_Health : MonoBehaviour
         // Si el objeto tiene el componente lo cacheamos y le ponemos las variables necesarias
         if (BarraVida.GetComponent<Slider>() != null)
         {
+            _spriteRenderer = this.GetComponent<SpriteRenderer>();
+            _boxCollider = this.GetComponent <BoxCollider2D>();
+            _detectableObject = this.GetComponent<DetectableObject>();
             _componenteBarraVida = BarraVida.GetComponent<Slider>();
             _componenteBarraVida.maxValue = Health;
             _componenteBarraVida.minValue = 0;
@@ -79,12 +107,13 @@ public class Enemies_Health : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Update is called every frame, if the MonoBehaviour is enabled.
-    /// </summary>
-    void Update()
+    private void Update()
     {
-
+        if (_dead && !Sonido.isPlaying)
+        {
+            this.gameObject.SetActive(false);
+            Destroy(this.gameObject);
+        }
     }
     #endregion
 
@@ -111,6 +140,8 @@ public class Enemies_Health : MonoBehaviour
         if (collision.gameObject.GetComponent<Bullet_Exclamation>() != null)
         {
             Health -= DamagePerHit;
+            Sonido.Play();
+            
             // Si el objeto de barra de vida tiene el componente le modificamos el valor para mostrar la vida
             if (BarraVida.GetComponent<Slider>() != null)
             {
@@ -125,7 +156,10 @@ public class Enemies_Health : MonoBehaviour
             // Destruimos el enemigo si ya no le queda vida
             if (Health < 1)
             {
-                Destroy(this.gameObject);
+                _dead = true;
+                _detectableObject.enabled = false;
+                _boxCollider.enabled = false;
+                _spriteRenderer.enabled = false;
             }
             //Debug.Log($"Me ha golpeado {collision.gameObject.name} y me queda {Health} vida");
         }

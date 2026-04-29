@@ -116,7 +116,7 @@ public class Scream_Reload : MonoBehaviour
     void Update()
     {
         // Comprobamos si puedes recargar
-        if (InputManager.Instance.RelaodWasPressedThisFrame() && !_desactivated && Time.time >= _timePassed)
+        if (InputManager.Instance.RelaodWasPressedThisFrame() && !_desactivated && Time.time >= _timePassed && _playerShoot.GetAmmo() != _playerShoot.GetMaxAmmo())
         {
             // Cambiamos la velocidad de movimiento a la de recarga
             _playerMovement.setMaxVel(ReloadMovement);
@@ -148,7 +148,7 @@ public class Scream_Reload : MonoBehaviour
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
-    public bool IsReloading()
+    public bool GetReloading()
     {
         return _reloading;
     }

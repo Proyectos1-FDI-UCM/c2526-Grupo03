@@ -47,6 +47,12 @@ public class Jump : MonoBehaviour
     /// Velocidad máxima de caíad
     /// </summary>
     [SerializeField] private float MaxFallSpeed;
+
+    /// <summary>
+    /// Sonidos de salto
+    /// </summary>
+    [SerializeField] private AudioSource JumpSound;
+    [SerializeField] private AudioSource LandSound;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -219,6 +225,8 @@ public class Jump : MonoBehaviour
 
                 // ====== Actualizamos variable de caida ======
                 _falling = false;
+
+                LandSound.Play();
             }
         }
 
@@ -323,6 +331,7 @@ public class Jump : MonoBehaviour
         // Iniciamos las variables
         _goingUp = true;
         _speed = _jumpSpeed;
+        JumpSound.Play();
     }
     #endregion
 
