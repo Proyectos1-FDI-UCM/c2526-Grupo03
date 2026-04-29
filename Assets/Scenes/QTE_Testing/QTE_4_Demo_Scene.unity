@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!224 &69914860 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4445463433662900061, guid: 7d243bc1bdcb5914e8ae757499a8b3dd, type: 3}
+  m_PrefabInstance: {fileID: 2693728303262104226}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &126813000
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -854,6 +859,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1688798215694959752, guid: 7d243bc1bdcb5914e8ae757499a8b3dd, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -1.4000015
+      objectReference: {fileID: 0}
     - target: {fileID: 3894564373656774352, guid: 7d243bc1bdcb5914e8ae757499a8b3dd, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -864,7 +873,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4777015511211143461, guid: 7d243bc1bdcb5914e8ae757499a8b3dd, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5613370853606829688, guid: 7d243bc1bdcb5914e8ae757499a8b3dd, type: 3}
+      propertyPath: m_Color.b
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5613370853606829688, guid: 7d243bc1bdcb5914e8ae757499a8b3dd, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5613370853606829688, guid: 7d243bc1bdcb5914e8ae757499a8b3dd, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5613370853606829688, guid: 7d243bc1bdcb5914e8ae757499a8b3dd, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5613370853606829688, guid: 7d243bc1bdcb5914e8ae757499a8b3dd, type: 3}
+      propertyPath: m_UseSpriteMesh
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5613370853606829688, guid: 7d243bc1bdcb5914e8ae757499a8b3dd, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9100400870869879462, guid: 7d243bc1bdcb5914e8ae757499a8b3dd, type: 3}
+      propertyPath: ZonaPos
+      value: 
+      objectReference: {fileID: 69914860}
+    - target: {fileID: 9100400870869879462, guid: 7d243bc1bdcb5914e8ae757499a8b3dd, type: 3}
+      propertyPath: AumentoPorClick
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 9100400870869879462, guid: 7d243bc1bdcb5914e8ae757499a8b3dd, type: 3}
+      propertyPath: "AumentoAutom\xE1tico"
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -1,7 +1,7 @@
-//---------------------------------------------------------
+﻿//---------------------------------------------------------
 // Script que se encarga de llenar la barra cuando pulsas la tecla asignada y de reducirla cada
 // x segundos. Este QTE no acaba si la barra se vacía completamente.
-// Víctor Román Román
+// Víctor Román Román, Alejandro Garcia
 // Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
@@ -38,6 +38,10 @@ public class Timing_QTE : MonoBehaviour
     /// </summary>
     [SerializeField] private Timing_QTE_Zona Zona;
     /// <summary>
+    /// Posicion del a zona a clicar para aumentar la barra
+    /// </summary>
+    [SerializeField] private RectTransform ZonaPos;
+    /// <summary>
     /// Duración de la reparación automática
     /// </summary>
     [SerializeField] private float AumentoAutomático = 2.22f;
@@ -68,6 +72,16 @@ public class Timing_QTE : MonoBehaviour
     /// Valor de la barra
     /// </summary>
     float _value;
+
+    /// <summary>
+    /// El punto maximo que puede alcanzar la zona para que el click sea considerado un acierto, teniendo en cuenta el tamaño de la imagen de la zona.
+    /// </summary>
+    private float _maxZonaPos;
+    /// <summary>
+    /// Tamaño de la imagen de la zona
+    /// </summary>
+    private int _imageSize = 23;
+
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -106,6 +120,11 @@ public class Timing_QTE : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        _maxZonaPos = ZonaPos.anchoredPosition.x * 2 - _imageSize;
+    }
+
     /// <summary>
     /// Update is called every frame, if the MonoBehaviour is enabled.
     /// </summary>
@@ -124,6 +143,9 @@ public class Timing_QTE : MonoBehaviour
         if (InputManager.Instance.JumpWasPressedThisFrame() && Zona.CheckAcierto())
         {
             _componenteBarra.value += AumentoPorClick;
+            // Cada vez que se pulsa el botón de salto dentro de la zona, esta se mueve a una posición aleatoria dentro del rango permitido.
+            float rndPos = Random.Range(5, _maxZonaPos + _imageSize - 3);
+            ZonaPos.anchoredPosition = new Vector2(rndPos, ZonaPos.anchoredPosition.y);
         }
         //Si se pulsa el botón fuera de la zona.
         else if (InputManager.Instance.JumpWasPressedThisFrame() && !Zona.CheckAcierto())
