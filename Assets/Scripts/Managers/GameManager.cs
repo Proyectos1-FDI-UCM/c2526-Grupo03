@@ -6,10 +6,7 @@
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
 
-using UnityEditor.UI;
 using UnityEngine;
-using UnityEngine.UI;
-
 
 /// <summary>
 /// Componente responsable de la gestión global del juego. Es un singleton
