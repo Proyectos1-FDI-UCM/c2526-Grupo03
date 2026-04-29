@@ -51,6 +51,14 @@ public class Extra_Army : MonoBehaviour
     /// Velocidad máxima de caíad
     /// </summary>
     [SerializeField] private float MaxFallSpeed;
+    /// <summary>
+    /// Objeto del jugador
+    /// </summary>
+    [SerializeField] private GameObject Player;
+    /// <summary>
+    /// Distancia del centro del extra army al sitio donde va a quedar el player cuando le empuje
+    /// </summary>
+    [SerializeField] private float OffsetEmpujePlayer = 0f;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -106,6 +114,10 @@ public class Extra_Army : MonoBehaviour
     /// Se sacará si se puede mover extra_army o no desde aquí
     /// </summary>
     private Warning _warning;
+    /// <summary>
+    /// Contiene la información del script Movement_Player
+    /// </summary>
+    private Movement_Player _playerMovement;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -127,6 +139,7 @@ public class Extra_Army : MonoBehaviour
         _jumpSpeed = _gravity * TimeToReachMaxHeight;
         _obstacleSorted = true;
         _hasFinishedJump = false;
+        _playerMovement = Player.GetComponent<Movement_Player>();
 
         // ====== Guardamos la altura del extra ======
         _objectHeight = GetComponent<Collider2D>().bounds.size.y;
@@ -138,10 +151,18 @@ public class Extra_Army : MonoBehaviour
     /// </summary>
     void Update()
     {
-
+        //Se guarda la dirección del input para poder salir del empuje del extra army.
+        Vector2 dir = InputManager.Instance.MovementVector;
         if (_warning.GetDone() && !_hasFinishedJump)
         {
-            if (FrontDetector.Detected() && FloorDetector.Detected())
+            //Si el front detector detecta el player y no se pulsa ni salto ni moverse hacia la izquierda y además no se detecta una pared a la izquierda.
+            if(FrontDetector.Detected() && FrontDetector.CollisionIsPlayer() && Player != null && !InputManager.Instance.JumpIsPressed() && dir.x >= 0 && !_playerMovement.LeftDetect())
+            {
+                float NuevaPosX = transform.position.x - OffsetEmpujePlayer;
+                Player.transform.position = new Vector3(NuevaPosX, Player.transform.position.y);
+                _playerMovement.ExtraArmyEstaEmpujando(true);
+            }
+            else if (FrontDetector.Detected() && FloorDetector.Detected() && !FrontDetector.CollisionIsPlayer())
             {
                 _obstacleSorted = false;
                 StartJump();
@@ -149,6 +170,10 @@ public class Extra_Army : MonoBehaviour
             else if (!FrontDetector.Detected() && !_obstacleSorted)
             {
                 _obstacleSorted = true;
+                if(Player != null)
+                {
+                    _playerMovement.ExtraArmyEstaEmpujando(false);
+                }
             }
 
             // ====== Variable que guarda el tiempo ======

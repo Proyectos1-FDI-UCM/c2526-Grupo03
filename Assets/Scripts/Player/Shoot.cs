@@ -47,6 +47,12 @@ public class Shoot : MonoBehaviour
     /// Contenedor del pool de balas
     /// </summary>
     [SerializeField] private Transform BulletsContainer;
+    /// <summary>
+    /// Sonidos de grito
+    /// </summary>
+    [SerializeField] private AudioSource Scream1;
+    [SerializeField] private AudioSource Scream2;
+    [SerializeField] private AudioSource Scream3;
 
     #endregion
 
@@ -83,6 +89,15 @@ public class Shoot : MonoBehaviour
     /// Indica si debemos impedir el siguiente disparo
     /// </summary>
     private bool _desactivated = false;
+
+    /// <summary>
+    /// Randomizador
+    /// </summary>
+    private int _rnd;
+
+    /// <summary>
+    /// Componente 
+    /// </summary>
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -132,16 +147,18 @@ public class Shoot : MonoBehaviour
         }
         if (InputManager.Instance.FireWasPressedThisFrame() && !_desactivated && Time.time >= _timeToWait && _ammo > 0)
         {
-            // -- Comprueba si hay balas usables --
+            // -- Comprueba si hay balas usables o hay balas que recargar --
             int i = 0;
             while (i < NumBulletsPool && _bulletsPool[i].activeSelf)
             {
                 i++;
             }
             if (i == NumBulletsPool) return; // No se puede disparar porque todas las balas estan en uso
+           
 
             // -- Si hay balas usables --
-            if(_animator)
+            _rnd = Random.Range(0, 3);
+            if (_animator)
             {
                 _animator.SetBool("IsShootingAnim", true);
             }
@@ -158,7 +175,12 @@ public class Shoot : MonoBehaviour
             {
                 _animator.SetBool("ReverseShooting", true);
             }
-
+            switch (_rnd)
+            {
+                case 0: Scream1.Play(); break;
+                case 1: Scream2.Play(); break;
+                case 2: Scream3.Play(); break;
+            }
             _ammo--;
         }
     }
@@ -189,6 +211,10 @@ public class Shoot : MonoBehaviour
     public void ActivateShoot()
     {
         _desactivated = false;
+    }
+    public int GetMaxAmmo()
+    {
+        return MaxAmmo;
     }
     #endregion
 
