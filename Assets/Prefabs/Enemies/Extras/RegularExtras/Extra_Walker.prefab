@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 239511556833873032}
   - component: {fileID: 2777626089189084546}
   - component: {fileID: 4335798872592084888}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: Floor_Detector
   m_TagString: Untagged
   m_Icon: {fileID: 0}

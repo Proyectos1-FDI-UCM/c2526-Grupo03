@@ -145,6 +145,14 @@ public class Repair : MonoBehaviour
     private bool _repaired = false;
 
     /// <summary>
+    /// Nos indica si es la primera vez que se abre el QTE
+    /// </summary>
+    private bool _firstOpen = true;
+    /// <summary>
+    /// Nos indica si ya se a elegido el QTE la primera vez que entras a reparar
+    /// </summary>
+    private bool _QTEWasSelected = false;
+    /// <summary>
     /// Variable que nos indicara si ya has cambiado el estado a reparado
     /// </summary>
     private bool _changedToRepaired = false;
@@ -181,28 +189,6 @@ public class Repair : MonoBehaviour
                 Botones.SetActive(false);
             }
         }
-
-        // ====== Forzar un QTE ======
-        if (ForceQTE)
-        {
-            // Elegimos el QTE forzado
-            _selectedQTE = ForcedQTE;
-        }
-        // ====== Seleccionar uno aleatorio ======
-        else
-        {
-            //Randomización del QTE que va a aparecer
-            _selectedQTE = Random.Range(0, 4);
-            int _lastQTE = LevelManager.Instance.LastQTE();
-            //Si se repite el anterior se vuelve a sacar un número aleatorio
-            while (_selectedQTE == _lastQTE)
-            {
-                //Randomización del QTE que va a aparecer
-                _selectedQTE = Random.Range(0, 4);
-            }
-        }
-        // Cambiamos el valor del ultimo QTE seleccionado
-        LevelManager.Instance.CambiarValor(_selectedQTE);
     }
 
     /// <summary>
@@ -210,12 +196,40 @@ public class Repair : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (_canRepair && InputManager.Instance.RepairWasPressedThisFrame()) //Si el objeto es reparable y se ha pulsado la tecla de reparación
+        //Si el objeto es reparable y se ha pulsado la tecla de reparación
+        if (_canRepair && InputManager.Instance.RepairWasPressedThisFrame()) 
         {
+            // Se elige el QTE la primera vez que abres el reparable para que no te toque el mismo QTE que el que acabas de hacer
+            if (_firstOpen && !_QTEWasSelected)
+            {
+                // ====== Forzar un QTE ======
+                if (ForceQTE)
+                {
+                    // Elegimos el QTE forzado
+                    _selectedQTE = ForcedQTE;
+                }
+                // ====== Seleccionar uno aleatorio ======
+                else
+                {
+                    //Randomización del QTE que va a aparecer
+                    _selectedQTE = Random.Range(0, 4);
+                    int _lastQTE = LevelManager.Instance.LastQTE();
+                    //Si se repite el anterior se vuelve a sacar un número aleatorio
+                    while (_selectedQTE == _lastQTE)
+                    {
+                        //Randomización del QTE que va a aparecer
+                        _selectedQTE = Random.Range(0, 4);
+                    }
+                }
+                // Cambiamos el valor del ultimo QTE seleccionado
+                LevelManager.Instance.CambiarValor(_selectedQTE);
+                // Marcamos que ya se ha elegido el QTE para que no se repita esta parte
+                _QTEWasSelected = true;
+            }
             //Se activa el QTE que ha salido random y se desactiva el icono del input de encima del objeto reparable.
             ActivateChosenQTE();
-            Debug.Log($"Activado {_selectedQTE}");
 
+            // Ocultamos las teclas de reparación
             Key.SetActive(false);
 
             //Se desactivan todas las acciones del player para prohibirle interactuar con el nivel mientras repara
@@ -237,7 +251,7 @@ public class Repair : MonoBehaviour
             _changedToRepaired = true;
         }
 
-        if (_hasPressedExit || _movementPlayerComponent.EstaSiendoEmpujado())
+        if (_isRepairing && (_hasPressedExit || _movementPlayerComponent.EstaSiendoEmpujado()))
         {
             //Si se sale del QTE se vuelven a activar todos las acciones que se habían desactivado
             _movementPlayerComponent.ActivatePlayer();
