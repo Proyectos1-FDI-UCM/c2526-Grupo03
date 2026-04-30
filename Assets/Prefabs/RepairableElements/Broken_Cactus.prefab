@@ -956,6 +956,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9100400870869879462, guid: 7d243bc1bdcb5914e8ae757499a8b3dd, type: 3}
+      propertyPath: ZonaPos
+      value: 
+      objectReference: {fileID: 8915555298583752076}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -969,6 +973,11 @@ GameObject:
 --- !u!224 &5423930950547922424 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 958900894437431081, guid: 7d243bc1bdcb5914e8ae757499a8b3dd, type: 3}
+  m_PrefabInstance: {fileID: 5047162159253457617}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &8915555298583752076 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4445463433662900061, guid: 7d243bc1bdcb5914e8ae757499a8b3dd, type: 3}
   m_PrefabInstance: {fileID: 5047162159253457617}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6699537679942471451

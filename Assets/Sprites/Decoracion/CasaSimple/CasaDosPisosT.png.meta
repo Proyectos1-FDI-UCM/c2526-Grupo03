@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: a6a744d1d9f6ef545aaa2a09e222c273
+guid: 39b7c0b4e4b4ca44eb6cbf03786562f2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5921323294370533767
-    second: pixil-frame-0 (23)_0
+      213: -3079056622569544389
+    second: CasaDosPisosT_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 45
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pixil-frame-0 (23)_0
+      name: CasaDosPisosT_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 74
-        height: 45
+        width: 78
+        height: 95
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7819339e924cc2250800000000000000
-      internalID: 5921323294370533767
+      spriteID: b35ad68b05ef445d0800000000000000
+      internalID: -3079056622569544389
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      pixil-frame-0 (23)_0: 5921323294370533767
+      CasaDosPisosT_0: -3079056622569544389
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
