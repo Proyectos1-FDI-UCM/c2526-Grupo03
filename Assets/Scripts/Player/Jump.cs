@@ -146,7 +146,7 @@ public class Jump : MonoBehaviour
     /// </summary>
     private void FixedUpdate()
     {
-        
+
     }
 
     /// <summary>
@@ -154,12 +154,6 @@ public class Jump : MonoBehaviour
     /// </summary>
     void Update()
     {
-        // Comprobamos si quiere y puede saltar
-        if (!_desactivated && InputManager.Instance.JumpIsPressed() && _floorDetected && !_falling && !_goingUp)
-        {
-            StartJump();
-        }
-
         // ====== Variable que guarda el tiempo ======
         float time = Time.deltaTime;
 
@@ -175,7 +169,7 @@ public class Jump : MonoBehaviour
             {
                 _falling = true;
                 // ====== Animacion de caida ======
-                if (_animator)
+                if (_animator && _movement_Player != null)
                 {
                     _animator.SetBool("IsJumpingAnim", true);
                     _animator.SetBool("IsFalling", true);
@@ -204,7 +198,7 @@ public class Jump : MonoBehaviour
                 _speed = 0.0f;
 
                 // ====== Quitamos animacion de caida ======
-                if (_animator)
+                if (_animator && _movement_Player != null)
                 {
                     _animator.SetBool("IsFalling", false);
                     _animator.SetBool("IsWalkingAnim", true);
@@ -226,7 +220,7 @@ public class Jump : MonoBehaviour
                 // ====== Actualizamos variable de caida ======
                 _falling = false;
 
-                LandSound.Play();
+                if (LandSound != null) LandSound.Play();
             }
         }
 
@@ -253,7 +247,7 @@ public class Jump : MonoBehaviour
                 _falling = true;
 
                 // ====== Cambiamos a animación de caida ======
-                if (_animator)
+                if (_animator && _movement_Player != null)
                 {
                     _animator.SetBool("IsFalling", true);
                     _animator.SetBool("Landed", false);
@@ -268,7 +262,7 @@ public class Jump : MonoBehaviour
                 _falling = true;
 
                 // ====== Cambiamos a animación de caida ======
-                if (_animator)
+                if (_animator && _movement_Player != null)
                 {
                     _animator.SetBool("IsFalling", true);
                     _animator.SetBool("Landed", false);
@@ -314,24 +308,28 @@ public class Jump : MonoBehaviour
     // mayúscula, incluida la primera letra)
 
     /// <summary>
-    /// Cambia la velocidad actual a la velocidad de impulso calculada mediante los atributos del inspector
+    /// Comprueba si puede iniciar el salto y lo inicia en caso afirmativo
     /// </summary>
-    private void StartJump()
+    public void TryStartJump()
     {
-        //Animacion de salto empieza
-        if (_animator)
+        // Comprobamos si quiere y puede saltar
+        if (!_desactivated && _floorDetected && !_falling && !_goingUp)
         {
-            _animator.SetBool("IsJumpingAnim", true);
-            _animator.SetBool("IsFalling", false);
-            _animator.SetBool("IsWalkingAnim", false);
-            _animator.SetBool("Landed", false);
-            _movement_Player.OnlyWalking(false);
-        }
+            //Animacion de salto empieza
+            if (_animator && _movement_Player != null)
+            {
+                _animator.SetBool("IsJumpingAnim", true);
+                _animator.SetBool("IsFalling", false);
+                _animator.SetBool("IsWalkingAnim", false);
+                _animator.SetBool("Landed", false);
+                _movement_Player.OnlyWalking(false);
+            }
 
-        // Iniciamos las variables
-        _goingUp = true;
-        _speed = _jumpSpeed;
-        JumpSound.Play();
+            // Iniciamos las variables
+            _goingUp = true;
+            _speed = _jumpSpeed;
+            if (JumpSound != null) JumpSound.Play();
+        }
     }
     #endregion
 

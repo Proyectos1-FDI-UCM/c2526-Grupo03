@@ -28,29 +28,9 @@ public class Extra_Army : MonoBehaviour
     /// </summary>
     [SerializeField] private float SpeedExtra = 2f;
     /// <summary>
-    /// Trigger que detecta si estás en el suelo
-    /// </summary>
-    [SerializeField] private Detector FloorDetector;
-    /// <summary>
-    /// Trigger que detecta si has tocado el techo
-    /// </summary>
-    [SerializeField] private Detector RoofDetector;
-    /// <summary>
     /// Trigger que detecta si tiene un bloque delante para saltar
     /// </summary>
     [SerializeField] private Detector FrontDetector;
-    /// <summary>
-    /// Distancia vertical del salto
-    /// </summary>
-    [SerializeField] private float JumpHeight = 2.0f;
-    /// <summary>
-    /// Tiempo necesario para alcanzar la altura máxima
-    /// </summary>
-    [SerializeField] private float TimeToReachMaxHeight = 0.5f;
-    /// <summary>
-    /// Velocidad máxima de caíad
-    /// </summary>
-    [SerializeField] private float MaxFallSpeed;
     /// <summary>
     /// Objeto del jugador
     /// </summary>
@@ -69,39 +49,7 @@ public class Extra_Army : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-    /// <summary>
-    /// Simula la velocidad afectada por la gravedad
-    /// </summary>
-    private float _speed = 0.0f;
-    /// <summary>
-    /// Aceleración negativa con la que simulamos gravedad
-    /// </summary>
-    private float _gravity = 0.0f;
-    /// <summary>
-    /// Velocidad inicial del salto
-    /// </summary>
-    private float _jumpSpeed;
-    /// <summary>
-    /// Altura del Objeto asignado
-    /// </summary>
-    private float _objectHeight;
 
-    /// <summary>
-    /// Comprueba si has saltado y aun estas subiendo
-    /// </summary>
-    private bool _goingUp = false;
-    /// <summary>
-    /// Comprueba si estas cayendo
-    /// </summary>
-    private bool _falling = false;
-    /// <summary>
-    /// Dice si se esta detectando suelo (Detectamos en el fixed)
-    /// </summary>
-    private bool _floorDetected;
-    /// <summary>
-    /// Dice si se está detectando techo (Detectamos en el fixed)
-    /// </summary>
-    private bool _roofDetected;
     /// <summary>
     /// Booleano que detecta si ha conseguido saltar el obstáculo
     /// </summary>
@@ -118,6 +66,10 @@ public class Extra_Army : MonoBehaviour
     /// Contiene la información del script Movement_Player
     /// </summary>
     private Movement_Player _playerMovement;
+    /// <summary>
+    /// Componente del salto del extra army
+    /// </summary>
+    private Jump _jumpComponent;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -135,14 +87,10 @@ public class Extra_Army : MonoBehaviour
     void Start()
     {
         _warning = GetComponentInChildren<Warning>();
-        _gravity = (2 * JumpHeight) / math.pow(TimeToReachMaxHeight, 2);
-        _jumpSpeed = _gravity * TimeToReachMaxHeight;
         _obstacleSorted = true;
-        _hasFinishedJump = false;
         _playerMovement = Player.GetComponent<Movement_Player>();
-
+        _jumpComponent = this.gameObject.GetComponent<Jump>();
         // ====== Guardamos la altura del extra ======
-        _objectHeight = GetComponent<Collider2D>().bounds.size.y;
 
     }
 
@@ -155,130 +103,35 @@ public class Extra_Army : MonoBehaviour
         Vector2 dir = InputManager.Instance.MovementVector;
         if (_warning.GetDone() && !_hasFinishedJump)
         {
-            //Si el front detector detecta el player y no se pulsa ni salto ni moverse hacia la izquierda y además no se detecta una pared a la izquierda.
-            if(FrontDetector.Detected() && FrontDetector.CollisionIsPlayer() && Player != null && !InputManager.Instance.JumpIsPressed() && dir.x >= 0 && !_playerMovement.LeftDetect())
+            // ====== Empuje al Jugador ======
+
+            // Si el front detector detecta el player y no se pulsa ni salto ni moverse hacia la izquierda y además no se detecta una pared a la izquierda.
+            if (FrontDetector.Detected() && FrontDetector.CollisionIsPlayer() && Player != null && !InputManager.Instance.JumpIsPressed() && dir.x >= 0 && !_playerMovement.LeftDetect())
             {
-                float NuevaPosX = transform.position.x - OffsetEmpujePlayer;
-                Player.transform.position = new Vector3(NuevaPosX, Player.transform.position.y);
+                Player.transform.position += new Vector3(-1f, 0f) * SpeedExtra * Time.deltaTime;
                 _playerMovement.ExtraArmyEstaEmpujando(true);
             }
-            else if (FrontDetector.Detected() && FloorDetector.Detected() && !FrontDetector.CollisionIsPlayer())
+
+            else if (!FrontDetector.Detected() || (FrontDetector.Detected() && !FrontDetector.CollisionIsPlayer()))
             {
+                _playerMovement.ExtraArmyEstaEmpujando(false);
+            }
+
+            // ====== Salto del extra army ======
+            if (FrontDetector.Detected() && !FrontDetector.CollisionIsPlayer())
+            {
+                if (_jumpComponent != null)
+                {
+                    _jumpComponent.TryStartJump();
+                }
                 _obstacleSorted = false;
-                StartJump();
             }
             else if (!FrontDetector.Detected() && !_obstacleSorted)
             {
                 _obstacleSorted = true;
-                if(Player != null)
-                {
-                    _playerMovement.ExtraArmyEstaEmpujando(false);
-                }
             }
-
-            // ====== Variable que guarda el tiempo ======
-            float time = Time.deltaTime;
-
-            // ====== Detecciones del motor de físicas ======
-            _floorDetected = FloorDetector.Detected();
-            _roofDetected = RoofDetector.Detected();
-
-            // ====== Parte de caida y gravedad ======
-            if (!_floorDetected || _speed > 0.0f)
-            {
-                // Si has dejado de subir
-                if (!_goingUp)
-                {
-                    _falling = true;
-                }
-                // Aplicamos gravedad a la velocidad
-                if (_speed > -MaxFallSpeed / 1.1)
-                {
-                    _speed -= _gravity * time;
-                }
-                else
-                {
-                    _speed -= _gravity / 2 * time;
-                }
-            }
-            // ====== Parte de aterrizaje ======
-            if (_floorDetected)
-            {
-                // ====== Si estas cayendo ======
-                if (_falling)
-                {
-                    // ====== Velocidad a cero para no seguir cayendo ======
-                    _speed = 0.0f;
-
-                    // ====== Situamos al jugador encima del suelo cuando esta atravesándolo ======
-
-                    // Calculamos la posicion del Jugador justo encima del suelo
-                    float _posEncimaSuelo = FloorDetector.GetCollisionedObjectPosition().y + FloorDetector.GetCollisionedObjectSize().y / 2;
-                    float _posY = _posEncimaSuelo + _objectHeight / 2;
-                    float _aumentoY = _posY - transform.position.y;
-
-                    // teletransporte si no es muy basto
-                    if ((math.abs(_aumentoY) < _objectHeight) && (transform.position.y < _posY)) transform.position += new Vector3(.0f, _aumentoY);
-
-                    if (!_obstacleSorted && !FrontDetector.Detected())
-                    {
-                        _obstacleSorted = true;
-                    }
-                    // ====== Actualizamos variable de caida ======
-                    _falling = false;
-
-
-                    if (!_goingUp && !_obstacleSorted)
-                    {
-                        _hasFinishedJump = true;
-                    }
-                }
-            }
-
-            // ====== Comprobaciones de subida ======
-            if (_goingUp)
-            {
-                if (_roofDetected)
-                {
-                    // Cambiamos la velocidad a 0
-                    _speed = 0.0f;
-
-                    // ====== Situamos al jugador debajo del techo cuando esta atravesándolo ======
-
-                    // Calculamos la posicion del Jugador justo debajo del techo
-                    float _posDebajoTecho = RoofDetector.GetCollisionedObjectPosition().y - RoofDetector.GetCollisionedObjectSize().y / 2;
-                    float _posY = _posDebajoTecho - _objectHeight / 2;
-                    float _aumentoY = _posY - transform.position.y;
-
-                    // teletransporte
-                    if ((math.abs(_aumentoY) < _objectHeight) && (transform.position.y > _posY)) transform.position += new Vector3(.0f, _aumentoY);
-
-                    // ====== Terminamos la subida ======
-                    _goingUp = false;
-                    _falling = true;
-                    if (!FrontDetector.Detected())
-                    {
-                        _obstacleSorted = true;
-                    }
-                }
-                // Si has llegado al punto más alto la velocidad ya es 0 (o muy cerca)
-                else if (_speed <= 0.0f)
-                {
-                    // ====== Terminamos la subida ======
-                    _goingUp = false;
-                    _falling = true;
-                    if (!FrontDetector.Detected())
-                    {
-                        _obstacleSorted = true;
-                    }
-                }
-            }
-
-            // ====== Movemos al personaje en el eje Y según la velocidad ======
-            if (_speed != 0) this.transform.position += new Vector3(0.0f, 1.0f) * _speed * Time.deltaTime;
             if (_obstacleSorted) transform.position += new Vector3(-1f, 0f) * SpeedExtra * Time.deltaTime;
         }
-
     }
 
 
@@ -301,19 +154,6 @@ public class Extra_Army : MonoBehaviour
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
-    /// <summary>
-    /// Cambia la velocidad actual a la velocidad de impulso calculada mediante los atributos del inspector
-    /// </summary>
-    private void StartJump()
-    {
-        if (!_goingUp)
-        {
-            // Iniciamos las variables
-            _goingUp = true;
-            _speed = _jumpSpeed;
-        }
-
-    }
     #endregion
 
     // class Extra_Army 

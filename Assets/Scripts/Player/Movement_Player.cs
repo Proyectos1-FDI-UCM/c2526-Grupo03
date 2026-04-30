@@ -146,7 +146,7 @@ public class Movement_Player : MonoBehaviour
         Vector2 dir = InputManager.Instance.MovementVector;
 
         // en caso de moverse a la derecha
-        if (dir.x > 0 && !_empujado && !_rightDetected && !_desactivated)
+        if (dir.x > 0 && !_extraArmyEmpujando && !_empujado && !_rightDetected && !_desactivated)
         {
             // mueve al personaje en base a la velocidad (_velocity) en el eje x
             this.transform.position += new Vector3(_speed, 0.0f) * time;
@@ -265,6 +265,13 @@ public class Movement_Player : MonoBehaviour
                 else _velEmpuje = 0.0f;
             }
         }
+
+        // ====== Salto del personaje ======
+        if (InputManager.Instance.JumpIsPressed())
+        {
+            _jumpComponent.TryStartJump();
+        }
+
         // --- Menu de pausa activacion ---
         if (InputManager.Instance.PauseWasPressedThisFrame())
         {
