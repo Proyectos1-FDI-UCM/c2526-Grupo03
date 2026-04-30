@@ -119,6 +119,10 @@ public class Jump : MonoBehaviour
     /// Indica si debemos impedir el siguiente salto por componentes externos
     /// </summary>
     private bool _desactivated = false;
+    /// <summary>
+    /// Comprueba si el jugador está saltando
+    /// </summary>
+    private bool _isJumping = false;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -220,6 +224,7 @@ public class Jump : MonoBehaviour
                 _falling = false;
 
                 if (LandSound != null) LandSound.Play();
+                _isJumping = false;
             }
         }
 
@@ -297,6 +302,11 @@ public class Jump : MonoBehaviour
     {
         _desactivated = false;
     }
+
+    public bool IsJumping()
+    {
+        return _isJumping;
+    }
     #endregion
 
     // ---- MÉTODOS PRIVADOS ----
@@ -326,6 +336,7 @@ public class Jump : MonoBehaviour
 
             // Iniciamos las variables
             _goingUp = true;
+            _isJumping = true;
             _speed = _jumpSpeed;
             if (JumpSound != null) JumpSound.Play();
         }

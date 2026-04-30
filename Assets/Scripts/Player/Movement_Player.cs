@@ -87,7 +87,10 @@ public class Movement_Player : MonoBehaviour
     /// Controla si sólo está andando para mostrar la animación correcta.
     /// </summary>
     private bool _onlyWalking = true;
-
+    /// <summary>
+    /// Controla si el player está caminando.
+    /// </summary>
+    private bool _isWalking = false;
     /// <summary>
     /// Collider del personaje.
     /// </summary>
@@ -185,6 +188,7 @@ public class Movement_Player : MonoBehaviour
                 _speed += Acceleration;
             }
             else _speed = MaxVelocity;
+            _isWalking = true;
         }
         // en caso de moverse a la izquierda
         else if (dir.x < 0 && !_empujado && !_leftDetected && !_desactivated)
@@ -202,6 +206,7 @@ public class Movement_Player : MonoBehaviour
                 _speed -= Acceleration;
             }
             else _speed = -MaxVelocity;
+            _isWalking = true;
         }
         else
         {
@@ -391,6 +396,14 @@ public class Movement_Player : MonoBehaviour
         _shootComponent.ActivateShoot();
         _screamReloadComponent.ActivateReload();
         _desactivated = false;
+    }
+    /// <summary>
+    /// Devuelve si el jugador está andando o no
+    /// </summary>
+    /// <returns></returns>
+    public bool IsWalking()
+    {
+        return _isWalking;
     }
     #endregion
 

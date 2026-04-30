@@ -96,8 +96,14 @@ public class Shoot : MonoBehaviour
     private int _rnd;
 
     /// <summary>
-    /// Componente 
+    /// Contiene la información del componente Player
     /// </summary>
+    private Movement_Player _player;
+
+    /// <summary>
+    /// Contiene la información del componente Jump
+    /// </summary>
+    private Jump _jump;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -112,6 +118,8 @@ public class Shoot : MonoBehaviour
         _animator = GetComponent<Animator>();
         _ammo = MaxAmmo;
         _playerSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        _player = gameObject.GetComponent<Movement_Player>();
+        _jump = gameObject.GetComponent<Jump>();
     }
 
     /// <summary>
@@ -144,6 +152,8 @@ public class Shoot : MonoBehaviour
         if(_animator)
         {
             _animator.SetBool("IsShootingAnim", false);
+            _animator.SetBool("IsWalkingAndAttacking", false);
+            _animator.SetBool("IsJumpingAndAttacking", false);
         }
         if (InputManager.Instance.FireWasPressedThisFrame() && !_desactivated && Time.time >= _timeToWait && _ammo > 0)
         {
@@ -158,7 +168,15 @@ public class Shoot : MonoBehaviour
 
             // -- Si hay balas usables --
             _rnd = Random.Range(0, 3);
-            if (_animator)
+            if (_animator && (_jump.IsJumping() || (_jump.IsJumping() && _player.IsWalking())) && _ammo > 0)
+            {
+                _animator.SetBool("IsJumpingAndAttacking", true);
+            }
+            else if (_animator && _player.IsWalking() && _ammo > 0)
+            {
+                _animator.SetBool("IsWalkingAndAttacking", true);
+            }
+            else if(_animator)
             {
                 _animator.SetBool("IsShootingAnim", true);
             }
