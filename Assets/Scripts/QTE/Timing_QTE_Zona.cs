@@ -47,7 +47,7 @@ public class Timing_QTE_Zona : MonoBehaviour
     /// <summary>
     /// Booleano para comprobar cuando la rayita está en la zona
     /// </summary>
-    bool _acierto = false;
+    private bool _acierto = false;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -56,23 +56,6 @@ public class Timing_QTE_Zona : MonoBehaviour
     // Por defecto están los típicos (Update y Start) pero:
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
-
-    /// <summary>
-    /// Start is called on the frame when a script is enabled just before 
-    /// any of the Update methods are called the first time.
-    /// </summary>
-    void Start()
-    {
-
-    }
-
-    /// <summary>
-    /// Update is called every frame, if the MonoBehaviour is enabled.
-    /// </summary>
-    void Update()
-    {
-       
-    }
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -87,7 +70,8 @@ public class Timing_QTE_Zona : MonoBehaviour
     /// </summary>
     public bool CheckAcierto()
     {
-        if (Objetivo.position.x > MinPos.position.x && Objetivo.position.x < MaxPos.position.x)
+        //Chequeamos si esta entre la posicion 
+        if (Objetivo.anchoredPosition.x > MinPos.anchoredPosition.x && Objetivo.anchoredPosition.x < MaxPos.anchoredPosition.x)
         {
             _acierto = true;
         }
@@ -95,6 +79,7 @@ public class Timing_QTE_Zona : MonoBehaviour
         {
             _acierto = false;
         }
+        //Devolvemos si hemos acertado
         return _acierto;
     }
     #endregion

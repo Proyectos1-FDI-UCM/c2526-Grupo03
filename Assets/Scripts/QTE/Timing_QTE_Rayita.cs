@@ -27,10 +27,12 @@ public class Timing_QTE_Rayita : MonoBehaviour
     /// Velocidad de la rayita.
     /// </summary>
     [SerializeField] private float Speed = .0f;
+
     /// <summary>
     /// Límite derecho del movimiento de la rayita.
     /// </summary>
     [SerializeField] private RectTransform MaxPos;
+
     /// <summary>
     /// Límite izquierdo del movimiento de la rayita.
     /// </summary>
@@ -45,14 +47,12 @@ public class Timing_QTE_Rayita : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-    /// <summary>
-    /// Vector que guarda la posición actual de la rayita.
-    /// </summary>
-    Vector3 _posActual;
+
     /// <summary>
     /// entero para cambiar la dirección en la que se mueve la rayita.
     /// </summary>
     int _signo = 1;
+
     /// <summary>
     /// variable que guarda el rect transform de la rayita.
     /// </summary>
@@ -74,9 +74,9 @@ public class Timing_QTE_Rayita : MonoBehaviour
     /// </summary>
     void Start()
     {
+        //Sacamos el componente RectTranform
         _rectTransform = GetComponent<RectTransform>();
-        _posActual = _rectTransform.position;
-
+       
     }
 
     /// <summary>
@@ -84,13 +84,14 @@ public class Timing_QTE_Rayita : MonoBehaviour
     /// </summary>
     void Update()
     {
-        _rectTransform.position += new Vector3(Speed, 0f) * Time.deltaTime * _signo;
-
-        if (_rectTransform.position.x > MaxPos.position.x)
+        //Usamos el rectTransform.anchoredPosition porque al ser un canvas 
+        _rectTransform.anchoredPosition += new Vector2(Speed, 0f) * Time.deltaTime * _signo ;
+        //Miramos si se ha pasado de los limites para cambiar de direccion
+        if (_rectTransform.anchoredPosition.x > MaxPos.anchoredPosition.x)
         {
             _signo = -1;
         }
-        else if (_rectTransform.position.x < MinPos.position.x)
+        else if (_rectTransform.anchoredPosition.x < MinPos.anchoredPosition.x)
         {
             _signo = 1;
         }
