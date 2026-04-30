@@ -899,6 +899,10 @@ PrefabInstance:
       propertyPath: m_PreserveAspect
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6579483575846416668, guid: 7d243bc1bdcb5914e8ae757499a8b3dd, type: 3}
+      propertyPath: Speed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 9100400870869879462, guid: 7d243bc1bdcb5914e8ae757499a8b3dd, type: 3}
       propertyPath: ZonaPos
       value: 

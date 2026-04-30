@@ -67,21 +67,18 @@ public class Timing_QTE : MonoBehaviour
     /// <summary>
     /// Valor mínimo de la barra
     /// </summary>
-    float _minValue;
+    private float _minValue;
     /// <summary>
     /// Valor de la barra
     /// </summary>
-    float _value;
+    private float _value;
 
     /// <summary>
     /// El punto maximo que puede alcanzar la zona para que el click sea considerado un acierto, teniendo en cuenta el tamaño de la imagen de la zona.
     /// </summary>
     private float _maxZonaPos;
-    /// <summary>
-    /// Tamaño de la imagen de la zona
-    /// </summary>
-    private int _imageSize = 23;
-
+    //
+    private int _limitesLat = 5;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -122,7 +119,7 @@ public class Timing_QTE : MonoBehaviour
 
     private void Start()
     {
-        _maxZonaPos = ZonaPos.anchoredPosition.x * 2 - _imageSize;
+        _maxZonaPos = ZonaPos.anchoredPosition.x * 2;
     }
 
     /// <summary>
@@ -144,18 +141,21 @@ public class Timing_QTE : MonoBehaviour
         {
             _componenteBarra.value += AumentoPorClick;
             // Cada vez que se pulsa el botón de salto dentro de la zona, esta se mueve a una posición aleatoria dentro del rango permitido.
-            float rndPos = Random.Range(5, _maxZonaPos + _imageSize - 3);
+            float rndPos = Random.Range(_limitesLat, _maxZonaPos-_limitesLat);
             ZonaPos.anchoredPosition = new Vector2(rndPos, ZonaPos.anchoredPosition.y);
         }
         //Si se pulsa el botón fuera de la zona.
         else if (InputManager.Instance.JumpWasPressedThisFrame() && !Zona.CheckAcierto())
         {
+            //Desactivamos el timing
             Timing.SetActive(false);
         }
         //Si la barra se llena se da el objeto como reparado y acaba el QTE.
         if (_componenteBarra.value >= _componenteBarra.maxValue)
         {
+            //desactivamos al padre
             transform.parent.gameObject.SetActive(false);
+            //Y decimos que esta reparado
             _comp.Repaired(true);
         }
     }
