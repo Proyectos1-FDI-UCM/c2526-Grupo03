@@ -1,8 +1,8 @@
 ﻿//---------------------------------------------------------
 // Script encargado del manejo del movimiento del personaje jugable.
-// Alejandro Garcia && Aportadores:
-//      - Gabriel Adrian Oltean
-//      - Víctor Román Román
+// Alejandro Garcia && Colaboradores:
+//      Gabriel Adrian Oltean
+//      Víctor Román Román
 // Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
@@ -26,12 +26,27 @@ public class Movement_Player : MonoBehaviour
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
 
+    /// <summary>
+    /// Velocidad máxima horizontal
+    /// </summary>
     [SerializeField] private float MaxVelocity = 5.0f;
+    /// <summary>
+    /// Aceleración horizontal
+    /// </summary>
     [SerializeField] private float Acceleration = 1.0f;
 
+    /// <summary>
+    /// Prefab de la bala
+    /// </summary>
     [SerializeField] private GameObject Exclamation;
 
+    /// <summary>
+    /// Detector derecho
+    /// </summary>
     [SerializeField] private Detector RightDetector;
+    /// <summary>
+    /// Detector izquierdo
+    /// </summary>
     [SerializeField] private Detector LeftDetector;
 
 
@@ -51,6 +66,9 @@ public class Movement_Player : MonoBehaviour
     /// </summary>
     private float _speed = .0f;
 
+    /// <summary>
+    /// Componente SpriteRenderer cacheado
+    /// </summary>
     SpriteRenderer _spriteRenderer;
 
     /// <summary>
@@ -84,13 +102,19 @@ public class Movement_Player : MonoBehaviour
     /// Dirección a la que saldrá disparado el personaje al tocar un CactusMan.
     /// </summary>
     private Vector3 _dirEmpuje;
+    /// <summary>
+    /// Guarda el booleano detected del detector derecho
+    /// </summary>
     private bool _rightDetected;
+    /// <summary>
+    /// Guarda el booleano detected del detector izquierdo
+    /// </summary>
     private bool _leftDetected;
+
     /// <summary>
     /// Determina si el player está siendo empujado por el extra army.
     /// </summary>
     private bool _extraArmyEmpujando = false;
-
 
     /// <summary>
     /// Variable que contiene la información del componente Jump
@@ -127,6 +151,7 @@ public class Movement_Player : MonoBehaviour
         _shootComponent = this.gameObject.GetComponent<Shoot>();
         _screamReloadComponent = this.gameObject.GetComponent<Scream_Reload>();
 
+        // Cacheamos el resto de componentes
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
         _playerCollider = GetComponent<Collider2D>();
@@ -137,7 +162,6 @@ public class Movement_Player : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (_empujado && _velEmpuje == 0.0f) _empujado = false;
         //  ---- Movimiento del Personaje ----
         float time = Time.deltaTime;
         _rightDetected = RightDetector.Detected();
@@ -222,14 +246,15 @@ public class Movement_Player : MonoBehaviour
 
         if (_empujado)
         {
+            // Fin del empuje por colisiones
             if ((_dirEmpuje.x > 0.0f && _rightDetected) || (_dirEmpuje.x < 0.0f && _leftDetected))
             {
                 _empujado = false;
                 _velEmpuje = 0.0f;
+                _speed = 0;
 
                 if (_dirEmpuje.x > 0.0f)
                 {
-                    _speed = 0;
                     // Calculamos la posicion del Jugador justo al lado de la pared
                     float _posAlLadoPared = RightDetector.GetCollisionedObjectPosition().x - RightDetector.GetCollisionedObjectSize().x / 2;
                     float _posX = _posAlLadoPared - _playerCollider.bounds.size.x / 2;
@@ -242,7 +267,6 @@ public class Movement_Player : MonoBehaviour
                 }
                 else
                 {
-                    _speed = 0;
                     // Calculamos la posicion del Jugador justo al lado de la pared
                     float _posAlLadoPared = LeftDetector.GetCollisionedObjectPosition().x + LeftDetector.GetCollisionedObjectSize().x / 2;
                     float _posX = _posAlLadoPared + _playerCollider.bounds.size.x / 2;
@@ -254,15 +278,21 @@ public class Movement_Player : MonoBehaviour
                     if (transform.position.x < _posX) transform.position -= new Vector3(_aumentoX, 0.0f);
                 }
             }
+            // Fin del empuje por velocidad
             else
             {
+                // Movemos al personaje en base a la velocidad y la direccion de empuje
                 this.transform.position += (_dirEmpuje * _velEmpuje) * time;
 
+                // Aplicamos aceleración a la velocidad de empuje
                 if (_velEmpuje > 0.0f)
                 {
                     _velEmpuje -= Acceleration;
                 }
                 else _velEmpuje = 0.0f;
+
+                // Indicamos que ya no estás siendo empujado si la velocidad es cero
+                if (_velEmpuje == 0.0f) _empujado = false;
             }
         }
 
@@ -290,7 +320,7 @@ public class Movement_Player : MonoBehaviour
     // Ejemplo: GetPlayerController
 
     /// <summary>
-    /// Método encargado de configurar el estado "empujado".
+    /// Método que inicia el empuje de CactusMAN
     /// </summary>
     public void Empuja(float emp, Vector3 dir)
     {
@@ -314,8 +344,6 @@ public class Movement_Player : MonoBehaviour
     /// <summary>
     /// Comprueba si el personaje sólo está andando.
     /// </summary>
-    /// <param name="IsOnlyWalking"></param>
-    /// <returns></returns>
     public bool OnlyWalking(bool IsOnlyWalking)
     {
         _onlyWalking = IsOnlyWalking;
@@ -325,7 +353,6 @@ public class Movement_Player : MonoBehaviour
     /// <summary>
     /// Cambia el estado del player a empujado o no empujado
     /// </summary>
-    /// <param name="EstaEmpujando"></param>
     public void ExtraArmyEstaEmpujando(bool EstaEmpujando)
     {
         _extraArmyEmpujando = EstaEmpujando;
@@ -333,7 +360,6 @@ public class Movement_Player : MonoBehaviour
     /// <summary>
     /// Controla si el player está siendo empujado por un extra army
     /// </summary>
-    /// <returns></returns>
     public bool EstaSiendoEmpujado()
     {
         return _extraArmyEmpujando;
@@ -341,12 +367,13 @@ public class Movement_Player : MonoBehaviour
     /// <summary>
     /// Devuelve si detecta algo el detector izquierdo del player
     /// </summary>
-    /// <returns></returns>
     public bool LeftDetect()
     {
         return _leftDetected;
     }
-
+    /// <summary>
+    /// Desactiva el movimiento, el salto, el disparo y la recarga
+    /// </summary>
     public void DisablePlayer()
     {
         _jumpComponent.DesactivateJump();
@@ -354,6 +381,9 @@ public class Movement_Player : MonoBehaviour
         _screamReloadComponent.DesactivateReload();
         _desactivated = true;
     }
+    /// <summary>
+    /// Activa el movimiento, el salto, el disparo y la recarga
+    /// </summary>
     public void ActivatePlayer()
     {
 

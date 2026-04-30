@@ -1,6 +1,8 @@
 //---------------------------------------------------------
-// Componente encargado del salto del personaje jugable.
-// Gabriel Adrian Oltean, Alejandro Garcia Diaz y Víctor Román Román
+// Componente encargado del salto de cualquier personaje.
+// Gabriel Adrian Oltean && Colaboradores:
+//      Alejandro Garcia Diaz
+//      Víctor Román Román
 // && Colaboradores: Tristán Sánchez López 
 // Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
@@ -33,6 +35,7 @@ public class Jump : MonoBehaviour
     /// Trigger que detecta si has tocado el techo
     /// </summary>
     [SerializeField] private Detector RoofDetector;
+
     /// <summary>
     /// Distancia vertical del salto
     /// </summary>
@@ -44,14 +47,17 @@ public class Jump : MonoBehaviour
     [SerializeField] private float TimeToReachMaxHeight;
 
     /// <summary>
-    /// Velocidad máxima de caíad
+    /// Velocidad máxima de caída
     /// </summary>
     [SerializeField] private float MaxFallSpeed;
 
     /// <summary>
-    /// Sonidos de salto
+    /// Sonido de salto
     /// </summary>
     [SerializeField] private AudioSource JumpSound;
+    /// <summary>
+    /// Sonido de aterrizaje
+    /// </summary>
     [SerializeField] private AudioSource LandSound;
     #endregion
 
@@ -140,13 +146,6 @@ public class Jump : MonoBehaviour
         _animator = GetComponent<Animator>();
 
         _movement_Player = GetComponent<Movement_Player>();
-    }
-    /// <summary>
-    /// FixedUpdate is called many times every frame, if the MonoBehaviour is enabled.
-    /// </summary>
-    private void FixedUpdate()
-    {
-
     }
 
     /// <summary>
