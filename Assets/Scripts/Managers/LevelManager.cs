@@ -118,7 +118,7 @@ public class LevelManager : MonoBehaviour
     /// <summary>
     /// Variable que guarda el último QTE
     /// </summary>
-    private int _lastQte = -1;
+    private int _lastQte = 0;
 
     #endregion
 

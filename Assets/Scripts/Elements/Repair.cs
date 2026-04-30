@@ -110,39 +110,9 @@ public class Repair : MonoBehaviour
     private int _selectedQTE;
 
     /// <summary>
-    /// Número que guarda el QTE anterior
-    /// </summary>
-    private int _lastQTE;
-
-    /// <summary>
-    /// Booleano que detecta si es la primera vez que se entra al QTE
-    /// </summary>
-    private bool _firstOpened = true;
-
-    /// <summary>
-    /// Variable que contiene la información del componente Repair
-    /// </summary>
-    private Repair _repairComponent;
-
-    /// <summary>
     /// Variable que contiene la información del componente Movement_Player
     /// </summary>
     private Movement_Player _movementPlayerComponent;
-
-    /// <summary>
-    /// Variable que contiene la información del componente Jump
-    /// </summary>
-    private Jump _jumpComponent;
-
-    /// <summary>
-    /// Variable que contiene la información del componente Shoot
-    /// </summary>
-    private Shoot _shootComponent;
-
-    /// <summary>
-    /// Variable que contiene la información del componente Scream_Reload
-    /// </summary>
-    private Scream_Reload _screamReloadComponent;
 
     /// <summary>
     /// Momento en el que se ha empezado a reparar
@@ -175,9 +145,9 @@ public class Repair : MonoBehaviour
     private bool _repaired = false;
 
     /// <summary>
-    /// Variable que nos indicara si has fallado el QTE
+    /// Variable que nos indicara si ya has cambiado el estado a reparado
     /// </summary>
-    private bool _hasFailedRepairing = false;
+    private bool _changedToRepaired = false;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -194,36 +164,45 @@ public class Repair : MonoBehaviour
     void Start()
     {
         //Se cachean todos los componentes que se van a usar en variables.
-        _repairComponent = this.GetComponent<Repair>();
         _movementPlayerComponent = Player.GetComponent<Movement_Player>();
-        _jumpComponent = Player.GetComponent<Jump>();
-        _shootComponent = Player.GetComponent<Shoot>();
-        _screamReloadComponent = Player.GetComponent<Scream_Reload>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         //SpriteBroken será el sprite roto del objeto reparable.
         _spriteRenderer.sprite = SpriteBroken;
-        if (Botones != null)
+        if (Botones != null && Teclas != null)
         {
             if (GameManager.Instance.GetMando())
             {
+                Teclas.SetActive(false);
                 Botones.SetActive(true);
             }
             else
             {
+                Teclas.SetActive(true);
                 Botones.SetActive(false);
             }
         }
-        if (Teclas != null)
+
+        // ====== Forzar un QTE ======
+        if (ForceQTE)
         {
-            if (!GameManager.Instance.GetMando())
+            // Elegimos el QTE forzado
+            _selectedQTE = ForcedQTE;
+        }
+        // ====== Seleccionar uno aleatorio ======
+        else
+        {
+            //Randomización del QTE que va a aparecer
+            _selectedQTE = Random.Range(0, 4);
+            int _lastQTE = LevelManager.Instance.LastQTE();
+            //Si se repite el anterior se vuelve a sacar un número aleatorio
+            while (_selectedQTE == _lastQTE)
             {
-                Teclas.SetActive(true);
-            }
-            else
-            {
-                Teclas.SetActive(false);
+                //Randomización del QTE que va a aparecer
+                _selectedQTE = Random.Range(0, 4);
             }
         }
+        // Cambiamos el valor del ultimo QTE seleccionado
+        LevelManager.Instance.CambiarValor(_selectedQTE);
     }
 
     /// <summary>
@@ -233,85 +212,40 @@ public class Repair : MonoBehaviour
     {
         if (_canRepair && InputManager.Instance.RepairWasPressedThisFrame()) //Si el objeto es reparable y se ha pulsado la tecla de reparación
         {
-            if (_firstOpened) //Si es la primera vez que se abre el QTE
-            {
-                // ====== Forzar un QTE ======
-                if (ForceQTE)
-                {
-                    // Elegimos el QTE forzado
-                    _selectedQTE = ForcedQTE;
-
-                    // Cambiamos el valor del ultimo QTE seleccionado
-                    LevelManager.Instance.CambiarValor(_selectedQTE);
-                }
-                else
-                {
-                    //Randomización del QTE que va a aparecer
-                    _selectedQTE = Random.Range(0, 4);
-                    _lastQTE = LevelManager.Instance.LastQTE();
-                    //Si se repite el anterior se vuelve a sacar un número aleatorio
-                    while (_selectedQTE == _lastQTE)
-                    {
-                        _selectedQTE = Random.Range(0, 4);
-                    }
-                    LevelManager.Instance.CambiarValor(_selectedQTE);
-                }
-                    _firstOpened = false;
-            }
             //Se activa el QTE que ha salido random y se desactiva el icono del input de encima del objeto reparable.
             ActivateChosenQTE();
-            Key.SetActive(false);
-            _isRepairing = true;
-        }
-        if (_isRepairing && _canRepair)
-        {
-            //Se desactivan todas las acciones del player para prohibirle interactuar con el nivel mientras repara
-            DesactivatePlayer();
+            Debug.Log($"Activado {_selectedQTE}");
 
+            Key.SetActive(false);
+
+            //Se desactivan todas las acciones del player para prohibirle interactuar con el nivel mientras repara
+            _movementPlayerComponent.DisablePlayer();
+
+            _isRepairing = true;
             _canRepair = false;
             _repairIniTime = Time.time;
         }
-        if (_repaired)
+        if (_repaired && !_changedToRepaired)
         {
             //Al terminar de reparar se vuelven a activar todas las acciones que se habían desactivado
-            ActivatePlayer();
+            _movementPlayerComponent.ActivatePlayer();
             // mejor desactivarlo que destruirlo
-            _repairComponent.enabled = false; 
+            this.enabled = false;
             //Se cambia el sprite del objeto por el de su versión reparada
             _spriteRenderer.sprite = SpriteRepaired;
             Key.SetActive(false);
-        }
-        if (_hasFailedRepairing)
-        {
-            //Si se falla el QTE se vuelven a activar todos las acciones que se habían desactivado
-            ActivatePlayer(); 
-            //Se mantiene el sprite de roto
-            _spriteRenderer.sprite = SpriteBroken; 
-            // Quitamos la tecla de reparar (por si acaso)
-            Key.SetActive(false);
-            //Se cambia a false para no volver a entrar en la siguiente vuelta del bucle
-            _hasFailedRepairing = false; 
+            _changedToRepaired = true;
         }
 
-        if (_hasPressedExit)
+        if (_hasPressedExit || _movementPlayerComponent.EstaSiendoEmpujado())
         {
             //Si se sale del QTE se vuelven a activar todos las acciones que se habían desactivado
-            ActivatePlayer();
+            _movementPlayerComponent.ActivatePlayer();
             DisableChosenQTE();
             Key.SetActive(true);
             _isRepairing = false;
             _canRepair = true;
-            _hasPressedExit = false; //Se cambia a false para no volver a entrar en la siguiente vuelta del bucle
-        }
-
-        if(_movementPlayerComponent.EstaSiendoEmpujado())
-        {
-            //Si el extra army empuja al player se vuelven a activar todos las acciones que se habían desactivado
-            ActivatePlayer();
-            DisableChosenQTE();
-            Key.SetActive(true);
-            _isRepairing = false;
-            _canRepair = true;
+            if (_hasPressedExit) _hasPressedExit = false; //Se cambia a false para no volver a entrar en el siguiente frame
         }
     }
     #endregion
@@ -419,11 +353,11 @@ public class Repair : MonoBehaviour
     private void ActivateChosenQTE()
     {
         //Dependiendo del número que resulta la elección aleatoria anterior se activa un QTE u otro.
-        if(_selectedQTE == 0)
+        if (_selectedQTE == 0)
         {
             SpamQTE.SetActive(true);
         }
-        else if( _selectedQTE == 1)
+        else if (_selectedQTE == 1)
         {
             ManivelaQTE.SetActive(true);
         }
@@ -459,26 +393,6 @@ public class Repair : MonoBehaviour
         {
             TimingQTE.SetActive(false);
         }
-    }
-    /// <summary>
-    /// Desactiva los componentes del jugador
-    /// </summary>
-    private void DesactivatePlayer()
-    {
-        _movementPlayerComponent.DesactivateMovement();
-        _jumpComponent.DesactivateJump();
-        _shootComponent.DesactivateShoot();
-        _screamReloadComponent.DesactivateReload();
-    }
-    /// <summary>
-    /// Activa los componentes del jugador
-    /// </summary>
-    private void ActivatePlayer()
-    {
-        _movementPlayerComponent.ActivateMovement();
-        _jumpComponent.ActivateJump();
-        _shootComponent.ActivateShoot();
-        _screamReloadComponent.ActivateReload();
     }
     #endregion   
 

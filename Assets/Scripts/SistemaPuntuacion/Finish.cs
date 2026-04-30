@@ -132,10 +132,8 @@ public class Finish : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<Movement_Player>() != null)
         {
-            //Pausar el movimiento del jugador
-            Player = collision.gameObject;
             //Pausamos el jugador
-            PausePlayer();
+            _movimientoJugador.DisablePlayer();
             //Hacer que ignore la deteccion del jugador
             _jugadorPausado = Player_ignore();
             //Accelerar el movimiento de la camara
@@ -150,17 +148,6 @@ public class Finish : MonoBehaviour
             Stars_FillAmount();
 
         }
-    }
-    /// <summary>
-    /// Metodo que pausa los componentes del jugador para que no se pueda mover 
-    /// </summary>
-    private void PausePlayer()
-    {
-        //desactivamos cada componente
-        _disparoJugador.DesactivateShoot();
-        _saltoJugador.DesactivateJump();
-        _recargaJugador.DesactivateReload();
-        _movimientoJugador.DesactivateMovement();
     }
     /// <summary>
     /// Metodo que modifica la veloccidad de la camara 

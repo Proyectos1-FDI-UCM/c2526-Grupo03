@@ -90,6 +90,22 @@ public class Movement_Player : MonoBehaviour
     /// Determina si el player está siendo empujado por el extra army.
     /// </summary>
     private bool _extraArmyEmpujando = false;
+
+
+    /// <summary>
+    /// Variable que contiene la información del componente Jump
+    /// </summary>
+    private Jump _jumpComponent;
+
+    /// <summary>
+    /// Variable que contiene la información del componente Shoot
+    /// </summary>
+    private Shoot _shootComponent;
+
+    /// <summary>
+    /// Variable que contiene la información del componente Scream_Reload
+    /// </summary>
+    private Scream_Reload _screamReloadComponent;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -105,6 +121,12 @@ public class Movement_Player : MonoBehaviour
     /// </summary>
     void Awake()
     {
+
+        // Cacheamos componentes a desactivar cuando queramos detener al jugador
+        _jumpComponent = this.gameObject.GetComponent<Jump>();
+        _shootComponent = this.gameObject.GetComponent<Shoot>();
+        _screamReloadComponent = this.gameObject.GetComponent<Scream_Reload>();
+
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
         _playerCollider = GetComponent<Collider2D>();
@@ -294,21 +316,6 @@ public class Movement_Player : MonoBehaviour
     }
 
     /// <summary>
-    /// Desactiva el movimiento del personaje.
-    /// </summary>
-    public void DesactivateMovement()
-    {
-        _desactivated = true;
-    }
-
-    /// <summary>
-    /// Activa el movimiento del personaje.
-    /// </summary>
-    public void ActivateMovement()
-    {
-        _desactivated = false;
-    }
-    /// <summary>
     /// Cambia el estado del player a empujado o no empujado
     /// </summary>
     /// <param name="EstaEmpujando"></param>
@@ -331,6 +338,22 @@ public class Movement_Player : MonoBehaviour
     public bool LeftDetect()
     {
         return _leftDetected;
+    }
+
+    public void DisablePlayer()
+    {
+        _jumpComponent.DesactivateJump();
+        _shootComponent.DesactivateShoot();
+        _screamReloadComponent.DesactivateReload();
+        _desactivated = true;
+    }
+    public void ActivatePlayer()
+    {
+
+        _jumpComponent.ActivateJump();
+        _shootComponent.ActivateShoot();
+        _screamReloadComponent.ActivateReload();
+        _desactivated = false;
     }
     #endregion
 
