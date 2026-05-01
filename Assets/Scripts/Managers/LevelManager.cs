@@ -120,6 +120,8 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     private int _lastQte = 0;
 
+    private VictoryPanel _panelVictoria;
+
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -135,6 +137,7 @@ public class LevelManager : MonoBehaviour
             EventSystem.SetSelectedGameObject(PauseFirstSelectedButton);
         }
         GameManager.Instance.SetLevelToRestart(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+        _panelVictoria = VictoryScreen.GetComponent<VictoryPanel>();
     }
     protected void Awake()
     {
@@ -164,6 +167,8 @@ public class LevelManager : MonoBehaviour
         EventSystem.SetSelectedGameObject(VictoryFirstSelectedButton);
         //Activamos el panel de victoria 
         VictoryScreen.SetActive(true);
+        _panelVictoria.PonEstrellas();
+
     }
     /// <summary>
     /// Pausa el juego, cambia el boton seleccionado al del panel de muerte y activa el panel
@@ -201,12 +206,6 @@ public class LevelManager : MonoBehaviour
         SettingsPanel.SetActive(true);
 
     }
-
-    /// <summary>
-    /// Método que sube la calidad de la película
-    /// </summary>
-
-
     /// <summary>
     /// Método que sube la calidad de la película en la cantidad que le digas
     /// </summary>
@@ -235,12 +234,15 @@ public class LevelManager : MonoBehaviour
         }
     }
     /// <summary>
-    /// Método que devuelve la puntuación actual de la película
+    /// Método que devuelve el intervalo para subir de la película
     /// </summary>
     public float GetIntervaloParaSubir()
     {
         return TimeToStartAdding;
     }
+    /// <summary>
+    /// Método que devuelve la puntuacion actual de la película
+    /// </summary>
     public float GetcurrentScore()
     {
         return _quality;

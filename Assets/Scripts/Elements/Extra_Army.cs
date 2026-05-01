@@ -28,14 +28,17 @@ public class Extra_Army : MonoBehaviour
     /// Velocidad del extra army
     /// </summary>
     [SerializeField] private float SpeedExtra = 2f;
+
     /// <summary>
     /// Trigger que detecta si tiene un bloque delante para saltar
     /// </summary>
     [SerializeField] private Detector FrontDetector;
+
     /// <summary>
     /// Objeto del jugador
     /// </summary>
     [SerializeField] private GameObject Player;
+
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -51,18 +54,22 @@ public class Extra_Army : MonoBehaviour
     /// Booleano que detecta si ha conseguido saltar el obstáculo
     /// </summary>
     private bool _obstacleSorted = true;
+
     /// <summary>
     /// Se sacará si se puede mover extra_army o no desde aquí
     /// </summary>
     private Warning _warning;
+
     /// <summary>
     /// Contiene la información del script Movement_Player
     /// </summary>
     private Movement_Player _playerMovement;
+
     /// <summary>
     /// Componente del salto del extra army
     /// </summary>
     private Jump _jumpComponent;
+
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----

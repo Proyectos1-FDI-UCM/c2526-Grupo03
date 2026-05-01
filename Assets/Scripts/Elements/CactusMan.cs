@@ -33,8 +33,7 @@ public class CactusMan : MonoBehaviour
     /// <summary>
     /// Dirección de empuje del CactusMan.
     /// </summary>
-    [SerializeField]
-    private Vector3 DirEmpuje;
+    [SerializeField] private Vector3 DirEmpuje;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -53,23 +52,6 @@ public class CactusMan : MonoBehaviour
     // Por defecto están los típicos (Update y Start) pero:
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
-
-    /// <summary>
-    /// Start is called on the frame when a script is enabled just before 
-    /// any of the Update methods are called the first time.
-    /// </summary>
-    void Start()
-    {
-        
-    }
-
-    /// <summary>
-    /// Update is called every frame, if the MonoBehaviour is enabled.
-    /// </summary>
-    void Update()
-    {
-        
-    }
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----

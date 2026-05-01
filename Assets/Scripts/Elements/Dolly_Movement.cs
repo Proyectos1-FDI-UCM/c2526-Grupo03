@@ -22,12 +22,18 @@ public class Dolly_Movement : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
-    [SerializeField]
-    private GameObject ObjetoASeguir;
-    [SerializeField]
-    private float OffsetX = 1f;
-    [SerializeField]
-    private float OffsetY = 1f;
+    /// <summary>
+    /// Objeto que sigue la camara en todo momento
+    /// </summary>
+    [SerializeField] private GameObject ObjetoASeguir;
+    /// <summary>
+    /// Offset de la camara en X
+    /// </summary>
+    [SerializeField] private float OffsetX = 1f;
+    /// <summary>
+    /// Offset de la camara en Y
+    /// </summary>
+    [SerializeField] private float OffsetY = 1f;
 
     #endregion
 
@@ -41,9 +47,12 @@ public class Dolly_Movement : MonoBehaviour
     // Ejemplo: _maxHealthPoints
 
     /// <summary>
-    /// Vatiables de seguimiento
+    /// Variable de seguimiento en X
     /// </summary>
     private float _followingObjectPositionXAxis;
+    /// <summary>
+    /// Variable de seguimiento en Y
+    /// </summary>
     private float _followingObjectPositionYAxis;
 
     #endregion
@@ -61,10 +70,15 @@ public class Dolly_Movement : MonoBehaviour
     /// </summary>
     void Start()
     {
+        //Calculamos la posicion seguida en Y
         _followingObjectPositionYAxis = ObjetoASeguir.transform.position.y + OffsetY;
+        //Calcualamos el aumento en Y
         float AumentoY = _followingObjectPositionYAxis - this.gameObject.transform.position.y;
+        //Calcualamos la posicion seguida en X
         _followingObjectPositionXAxis = ObjetoASeguir.transform.position.x + OffsetX;
+        //Calculamos el aumento en Y
         float AumentoX = _followingObjectPositionXAxis - this.gameObject.transform.position.x;
+        //Establecemos la posicion 
         transform.position += new Vector3(AumentoX, AumentoY);
     }
 
@@ -73,8 +87,11 @@ public class Dolly_Movement : MonoBehaviour
     /// </summary>
     void Update()
     {
+        //Volvemos a calcular la posicion seguida en X
         _followingObjectPositionXAxis = ObjetoASeguir.transform.position.x + OffsetX;
+        // Y el aumento en X
         float AumentoX = _followingObjectPositionXAxis - this.gameObject.transform.position.x;
+        //Actualizamos la posicion
         transform.position += new Vector3(AumentoX, 0.0f);
     }
     #endregion

@@ -63,7 +63,7 @@ public class Extra_Regular : MonoBehaviour
     /// <summary>
     /// Dire
     /// </summary>
-    private int dir = -1;
+    private int _dir = -1;
 
     /// <summary>
     /// sprite del extra
@@ -93,6 +93,7 @@ public class Extra_Regular : MonoBehaviour
     /// </summary>
     void Awake()
     {
+        //Acedemos al sprite y a las animaciones
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
     }
@@ -102,14 +103,18 @@ public class Extra_Regular : MonoBehaviour
     /// </summary>
     void Start()
     {
-        // Establece la posicion inicial del extra a la extablecida por el editor
+        // Guardamos la posicion inicial del extra a la extablecida por el editor
         _iniPos = transform.position;
+        //Calculamos la posicion maxima de la izquierda
         _maxPosL = transform.position;
         _maxPosL.x -= Distance;
+        //Calculamos la posicion maxima de la derecha
         _maxPosR = transform.position;
         _maxPosR.x += Distance;
+        //Miramos si la velocidad es mayor que 0 para que empieze hacia la izquierda
         if (Speed > 0)
         {
+            //Giramos el sprite
             _spriteRenderer.flipX = true;
         }
     }
@@ -118,32 +123,33 @@ public class Extra_Regular : MonoBehaviour
     /// </summary>
     void Update()
     {
+        //Miramos si ha detectado el suelo
         _landed = FloorDetector.Detected();
         if (!_landed)
         {// cambia la direccion si no detecta suelo
-            if (dir == 1)
+            if (_dir == 1)
             {
-                dir = -1;
+                _dir = -1;
             }
-            else if (dir == -1)
+            else if (_dir == -1)
             {
-                dir = 1;
+                _dir = 1;
             }
         }//Mira si se pasa de la distancia que recorre para volver 
         if (transform.position.x <= _maxPosL.x)
         {
-            dir = 1;
+            _dir = 1;
         }
         else if (transform.position.x >= _maxPosR.x)
         {
-            dir = -1;
+            _dir = -1;
         }
-        if (dir == 1)//mueve el extra hacia la derecha
+        if (_dir == 1)//mueve el extra hacia la derecha
         {
             transform.position += new Vector3(Speed, 0, 0) * Time.deltaTime;
             _spriteRenderer.flipX = false;
         }
-        else if (dir == -1)//mueve el extra hacia la izquierda
+        else if (_dir == -1)//mueve el extra hacia la izquierda
         {
             transform.position -= new Vector3(Speed, 0, 0) * Time.deltaTime;
             _spriteRenderer.flipX = true;

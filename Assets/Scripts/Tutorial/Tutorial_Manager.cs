@@ -62,6 +62,9 @@ public class Tutorial_Manager : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
+    /// <summary>
+    /// Instance del tutorial 
+    /// </summary>
     private static Tutorial_Manager _instance;
     #endregion
 
@@ -71,23 +74,6 @@ public class Tutorial_Manager : MonoBehaviour
     // Por defecto están los típicos (Update y Start) pero:
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
-
-    /// <summary>
-    /// Start is called on the frame when a script is enabled just before 
-    /// any of the Update methods are called the first time.
-    /// </summary>
-    void Start()
-    {
-        
-    }
-
-    /// <summary>
-    /// Update is called every frame, if the MonoBehaviour is enabled.
-    /// </summary>
-    void Update()
-    {
-        
-    }
 
     protected void Awake()
     {
@@ -139,7 +125,10 @@ public class Tutorial_Manager : MonoBehaviour
     {
         return _instance != null;
     }
-   public void ActualizaMando()
+    /// <summary>
+    /// Metodo que actualiza las instruciones para mando o teclado
+    /// </summary>
+   public void ActualizaInst()
    {
         if (Botones != null)
         {
@@ -186,7 +175,7 @@ public class Tutorial_Manager : MonoBehaviour
         Balas.SetActive(false);
         Puntuacion.SetActive(false);
         Dolly.SetActive(false);
-        ActualizaMando();
+        ActualizaInst();
     }
 
     #endregion

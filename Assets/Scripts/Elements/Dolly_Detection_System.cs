@@ -6,9 +6,7 @@
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
 
-using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 // Añadir aquí el resto de directivas using
 
 
@@ -25,14 +23,16 @@ public class Dolly_Detection_System : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
+
     /// <summary>
     /// Intervalo para subir la puntuacion
     /// </summary>
     [SerializeField] private float IntervaloParaSubir = 0f;
+
     /// <summary>
     /// Objeto de la meta
     /// </summary>
-    [SerializeField] private Finish _Finish = null;
+    [SerializeField] private Finish Meta = null;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -53,8 +53,8 @@ public class Dolly_Detection_System : MonoBehaviour
     /// Variable que determina si se ha encontrado un objeto interactuable o no
     ///</summary>
     private bool _detected;
-    
-    
+
+
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -65,12 +65,13 @@ public class Dolly_Detection_System : MonoBehaviour
     // - Hay que borrar los que no se usen 
 
     /// <summary>
-    /// Start is called on the frame when a script is enabled just before 
+    ///Awake is called on the frame when a script is enabled just before 
     /// any of the Update methods are called the first time.
     /// </summary>
     void Awake()
     {
-        _detected = true;  
+        //Ponemos detecte en true
+        _detected = true;
     }
 
     /// <summary>
@@ -78,13 +79,17 @@ public class Dolly_Detection_System : MonoBehaviour
     /// </summary>
     void FixedUpdate()
     {
+        //Si ha detectado un objeto
         if (_detected)
         {
+            //calcualamos el tiempo que ha pasado
             _timepassed = Time.time + IntervaloParaSubir;
+            //Y ponemos el detected a false
             _detected = false;
-        }
+        } //Y si no hemos detectado
         else if (!_detected && Time.time >= _timepassed)
         {
+            //Subimos la calidad
             LevelManager.Instance.QualityUp();
         }
     }
@@ -102,37 +107,33 @@ public class Dolly_Detection_System : MonoBehaviour
         //Miramos si es un objeto detectable 
         if (collision.gameObject.GetComponent<DetectableObject>() != null)
         {
-            //Miramos si es reparable 
-            if (collision.gameObject.GetComponent<Repair>() != null && collision.gameObject.GetComponent<Repair>().IsRepaired())
+            //Miramos si no es reparable para restar puntuacion
+            if (collision.gameObject.GetComponent<Repair>() == null || collision.gameObject.GetComponent<Repair>().IsRepaired() == false)
             {
-                return;
+                //Cambiamos a detectado para resetear la subida de puntos sola
+                _detected = true;
+                //Bajamos la calidad
+                LevelManager.Instance.QualityDown(collision.gameObject.GetComponent<DetectableObject>().GetQualityDown());
             }
-            //Miramos si no es reparable para sumar puntuacion 
-            _detected = true;
-            LevelManager.Instance.QualityDown(collision.gameObject.GetComponent<DetectableObject>().GetQualityDown());
-            
         }
         //Miramos si es el jugador  
-        else if (collision.gameObject.GetComponent<Movement_Player>() != null){
+        else if (collision.gameObject.GetComponent<Movement_Player>() != null)
+        {
             //revisamos si existe una meta
-
-            if( _Finish != null)
+            if (Meta != null)
             {
-                //Si existe la meta miramos si tiene el componente finish y si has ganado 
-                if (!_Finish.GetComponent<Finish>().HasWin())
+                //Si existe la meta miramos no has ganado 
+                if (!Meta.HasWin())
                 {
                     //Restamos puntuacion para perder
                     LevelManager.Instance.QualityDown(LevelManager.Instance.GetcurrentScore());
                 }
-                
             }
             else
             {
                 //sino hay meta perdemos directamente
                 LevelManager.Instance.QualityDown(LevelManager.Instance.GetcurrentScore());
             }
-        
-           
         }
     }
     #endregion

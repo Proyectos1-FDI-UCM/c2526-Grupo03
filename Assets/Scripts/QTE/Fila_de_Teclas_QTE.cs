@@ -9,8 +9,6 @@
 
 using UnityEngine;
 using UnityEngine.UI;
-using static Unity.Burst.Intrinsics.X86.Avx;
-using static UnityEngine.Rendering.DebugUI;
 // Añadir aquí el resto de directivas using
 
 
@@ -123,7 +121,7 @@ public class Fila_de_Teclas_QTE : MonoBehaviour
     /// <summary>
     /// Objeto de la flecha que vamos a cambiar en cada momento.
     /// </summary>
-    private GameObject _ArrowToManipulate;
+    private GameObject _arrowToManipulate;
 
     /// <summary>
     /// Momento en que se hizo la última pulsación.
@@ -133,9 +131,11 @@ public class Fila_de_Teclas_QTE : MonoBehaviour
     /// <summary>
     /// Contiene la información de la variable Repair.
     /// </summary>
-    Repair _comp;
-
-    private enum _arrowDirection {ARRIBA, ABAJO, IZQUIERDA, DERECHA};
+    private Repair _comp;
+    /// <summary>
+    /// Enumerado con las direciones de las flechas
+    /// </summary>
+    private enum _arrowDirection { ARRIBA, ABAJO, IZQUIERDA, DERECHA };
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -148,6 +148,7 @@ public class Fila_de_Teclas_QTE : MonoBehaviour
 
     void Awake()
     {
+        //Cacheamos los componentes
         _comp = this.gameObject.GetComponentInParent<Repair>();
         _componenteBarra = GetComponent<Slider>();
         if (_componenteBarra == null)
@@ -168,7 +169,7 @@ public class Fila_de_Teclas_QTE : MonoBehaviour
 
         // Calculo aumento por acierto
         _aumentoAcierto = 100 / NumFlechas_Max6;
-        
+
         // Elegimos la última flecha a activar
         _indiceUltimaFlecha = NumFlechas_Max6 - 1;
 
@@ -180,7 +181,7 @@ public class Fila_de_Teclas_QTE : MonoBehaviour
         while (i <= _indiceUltimaFlecha)
         {
             // Escogemos la flecha a activar
-            _ArrowToManipulate = ObjetosDeFlechas[i];
+            _arrowToManipulate = ObjetosDeFlechas[i];
 
             // Escogemos direccion aleatoria para la flecha actual
             int[] rnd = new int[ObjetosDeFlechas.Length];
@@ -189,28 +190,28 @@ public class Fila_de_Teclas_QTE : MonoBehaviour
             switch (rnd[i])
             {
                 case 1:
-                    _ArrowToManipulate.GetComponent<Image>().sprite = ArrowUp;
+                    _arrowToManipulate.GetComponent<Image>().sprite = ArrowUp;
                     _dirFlechas[i] = _arrowDirection.ARRIBA;
                     break;
-                case 2: 
-                    _ArrowToManipulate.GetComponent<Image>().sprite = ArrowDown;
+                case 2:
+                    _arrowToManipulate.GetComponent<Image>().sprite = ArrowDown;
                     _dirFlechas[i] = _arrowDirection.ABAJO;
                     break;
-                case 3: 
-                    _ArrowToManipulate.GetComponent<Image>().sprite = ArrowLeft;
+                case 3:
+                    _arrowToManipulate.GetComponent<Image>().sprite = ArrowLeft;
                     _dirFlechas[i] = _arrowDirection.IZQUIERDA;
                     break;
                 case 4:
-                    _ArrowToManipulate.GetComponent<Image>().sprite = ArrowRight;
+                    _arrowToManipulate.GetComponent<Image>().sprite = ArrowRight;
                     _dirFlechas[i] = _arrowDirection.DERECHA;
                     break;
             }
             // Activamos la flecha
-            _ArrowToManipulate.SetActive(true);
+            _arrowToManipulate.SetActive(true);
             // Pasamos a la siguiente flecha
             i++;
         }
-        _ArrowToManipulate = ObjetosDeFlechas[0];
+        _arrowToManipulate = ObjetosDeFlechas[0];
 
         // Seleccionamos la dirección de la flecha inicial
         _dirFlechaActual = _dirFlechas[0];
@@ -230,13 +231,13 @@ public class Fila_de_Teclas_QTE : MonoBehaviour
             while (i <= _indiceUltimaFlecha)
             {
                 // Escogemos la flecha a activar
-                _ArrowToManipulate = ObjetosDeFlechas[i];
+                _arrowToManipulate = ObjetosDeFlechas[i];
                 // Activamos la flecha
-                _ArrowToManipulate.SetActive(true);
+                _arrowToManipulate.SetActive(true);
                 // Pasamos a la siguiente flecha
                 i++;
             }
-            _ArrowToManipulate = ObjetosDeFlechas[0];
+            _arrowToManipulate = ObjetosDeFlechas[0];
             _indiceFlechaActual = 0;
             _dirFlechaActual = _dirFlechas[_indiceFlechaActual];
 
@@ -325,9 +326,9 @@ public class Fila_de_Teclas_QTE : MonoBehaviour
                     while (i <= _indiceUltimaFlecha)
                     {
                         // Escogemos la flecha a desactivar
-                        _ArrowToManipulate = ObjetosDeFlechas[i];
+                        _arrowToManipulate = ObjetosDeFlechas[i];
                         // Desactivamos la flecha
-                        _ArrowToManipulate.SetActive(false);
+                        _arrowToManipulate.SetActive(false);
                         // Pasamos a la siguiente flecha
                         i++;
                     }
@@ -336,7 +337,7 @@ public class Fila_de_Teclas_QTE : MonoBehaviour
                 _hasPressed = false;
             }
         }
-        
+
         // Si el valor del slider es el máximo
         if (_componenteBarra.value >= _componenteBarra.maxValue)
         {

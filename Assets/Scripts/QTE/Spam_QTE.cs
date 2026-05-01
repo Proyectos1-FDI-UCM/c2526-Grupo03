@@ -28,14 +28,12 @@ public class Spam_QTE : MonoBehaviour
     /// <summary>
     /// Cantidad que aumenta la barra por click del botón asignado.
     /// </summary>
-    [SerializeField]
-    private float AumentoPorClick = 5.0f;
+    [SerializeField] private float AumentoPorClick = 5.0f;
 
     /// <summary>
     /// Cantidad que dispinuye la barra por unidad de tiempo.
     /// </summary>
-    [SerializeField]
-    private float Disminucion = 0.5f;
+    [SerializeField] private float Disminucion = 0.5f;
     
     #endregion
 
@@ -82,6 +80,7 @@ public class Spam_QTE : MonoBehaviour
     /// </summary>
     void Awake()
     {
+        //Cacheamos los componentes
         _comp = this.gameObject.GetComponentInParent<Repair>();
         if (_componenteBarra == null)
         {

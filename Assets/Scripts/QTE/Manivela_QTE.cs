@@ -28,38 +28,32 @@ public class Manivela_QTE : MonoBehaviour
     /// <summary>
     /// Objeto que contiene la barra de reparación.
     /// </summary>
-    [SerializeField]
-    private GameObject BarraReperacion;
+    [SerializeField] private GameObject BarraReperacion;
 
     /// <summary>
     /// Punto de referencia para el cálculo del ángulo que forma la dirección del ratón/input, es el centro de la manivela.
     /// </summary>
-    [SerializeField]
-    private Transform ReferencePoint;
+    [SerializeField] private Transform ReferencePoint;
 
     /// <summary>
     /// Cantidad que se suma por unidad de tiempo a la barra de reparación.
     /// </summary>
-    [SerializeField]
-    private float CantidadSumada;
+    [SerializeField] private float CantidadSumada;
 
     /// <summary>
     /// Cantidad que se resta por unidad de tiempo de la barra de reparación.
     /// </summary>
-    [SerializeField]
-    private float Disminucion;
+    [SerializeField] private float Disminucion;
 
     /// <summary>
     /// Velocidad mínima que debe tener la manivela para empezar a subir.
     /// </summary>
-    [SerializeField]
-    private float VelQueDebeLlevar;
+    [SerializeField] private float VelQueDebeLlevar;
 
     /// <summary>
     /// Velocidad angular máxima que puede llevar la manivela.
     /// </summary>
-    [SerializeField]
-    private float VelAngularMax;
+    [SerializeField] private float VelAngularMax;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -115,7 +109,9 @@ public class Manivela_QTE : MonoBehaviour
     /// Contiene la información de la variable Repair.
     /// </summary>
     private Repair _comp;
-
+    /// <summary>
+    /// Ultima posicion del mouse
+    /// </summary>
     private Vector3 _lastMousePos;
     #endregion
 
@@ -156,6 +152,7 @@ public class Manivela_QTE : MonoBehaviour
 
         _mousePos = Input.mousePosition;
         _mousePos.z = ReferencePoint.position.z;
+        //Actualizamos la posicion del mouse si se mueve
         if (_mousePos != _lastMousePos)
         {
             _lastMousePos = _mousePos;

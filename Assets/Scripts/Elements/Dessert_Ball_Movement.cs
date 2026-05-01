@@ -43,14 +43,17 @@ public class Dessert_Ball_Movement : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-
     /// <summary>
-    /// Posicion inicial de la bola
+    /// Posicion actual del eje X de la bola
     /// </summary>
-    private Vector3 _iniPos;
-
     private float _posX;
+    /// <summary>
+    /// Posicion inicial del eje Y 
+    /// </summary>
     private float _posIniY;
+    /// <summary>
+    /// Angulo de rotacion que toma la bola
+    /// </summary>
     private float _anguloEjeZ;
     #endregion
     
@@ -80,10 +83,12 @@ public class Dessert_Ball_Movement : MonoBehaviour
         // Basicamente recrea la ecuacion y = |sin(k*x)|
         float posY = math.abs(Mathf.Sin(_posX + Speed * Time.deltaTime)) + _posIniY;
         _posX += Speed * Time.deltaTime;
+        //Cambiamos la posicion con la calculada
         transform.position = new Vector3(_posX, posY);
 
         // Rotación 
         _anguloEjeZ = transform.rotation.eulerAngles.z - RotationSpeed*Time.deltaTime;
+       //Establecemos la rotacion al objeto
         transform.rotation = Quaternion.Euler(0f, 0f, _anguloEjeZ);
     }
     #endregion

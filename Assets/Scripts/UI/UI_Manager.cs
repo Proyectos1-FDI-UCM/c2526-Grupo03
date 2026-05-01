@@ -62,6 +62,10 @@ public class UI_Manager : MonoBehaviour
     /// Almacena la puntuacion inicial de el nivel
     /// </summary>
     private float _puntuacionInicial;
+    /// <summary>
+    /// Referencia al script de shoot
+    /// </summary>
+    private Shoot _shoot;
 
     /// <summary>
     /// Referencia al script de recarga del jugador
@@ -106,6 +110,7 @@ public class UI_Manager : MonoBehaviour
         _puntuacionInicial = LevelManager.Instance.GetcurrentScore();
         //Obtenemos el Scream Reload
         _playerReload = Player.GetComponent<Scream_Reload>();
+        _shoot = Player.GetComponent<Shoot>();
         //Actualizamos el GUI de la bala para poner el valor inical
         Update_Bala();
         //Actualizamos la barra de puntuación para establecer el valor inical
@@ -167,7 +172,7 @@ public class UI_Manager : MonoBehaviour
     private void Update_Bala()
     { 
         //miramos las balas que tiene el jugador para representarlas  
-        _balas = Player.GetComponent<Shoot>().GetAmmo();
+        _balas = _shoot.GetAmmo();
         // Y reducimos el grafico si ha bajado
         Reduce_Grito(_balas);
     }

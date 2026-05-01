@@ -129,12 +129,16 @@ public class Scream_Reload : MonoBehaviour
             // Modificamos el tiempo para volver a recargar
             _timePassed = Time.time + ReloadCD;
         }
-
+        //Miramos si esta realentizado y si ha terminado el tiempo de recarga
         if (_slowActive && Time.time >= _enOfModification)
         {
+            //Quitamos el modo recargar
             _reloading = false;
+            //Establecemos todas las balas
             _playerShoot.ReloadAmmo();
+            //Devolvemos la velocidad normal
             _playerMovement.setMaxVel(_maxOriginalSpeed);
+            //Quitamos modo realentizado
             _slowActive = false;
         }
     }
@@ -147,15 +151,23 @@ public class Scream_Reload : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
-
+    /// <summary>
+    /// Metodo que devuelve si esta recargando
+    /// </summary>
     public bool GetReloading()
     {
         return _reloading;
     }
+    /// <summary>
+    /// Metodo que desactiva la recarga
+    /// </summary>
     public void DesactivateReload()
     {
         _desactivated = true;
     }
+    /// <summary>
+    /// Metodo que activa la recarga
+    /// </summary>
     public void ActivateReload()
     {
         _desactivated = false;

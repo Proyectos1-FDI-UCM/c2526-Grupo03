@@ -63,11 +63,11 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// bool que indica si estamos usando mando
     /// </summary>
-    private bool mando = false;
+    private bool _mando = false;
     /// <summary>
     /// bool que indica si estamos usando teclado
     /// </summary>
-    private bool teclado = true;
+    private bool _teclado = true;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -190,12 +190,6 @@ public class GameManager : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(index);
         System.GC.Collect();
     } // ChangeScene
-
-    public void ChangeLoseScene()
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Lose_Scene");
-    }
-
     /// <summary>
     /// Guarda el indice de la escena a reiniciar en caso necesario
     /// </summary>
@@ -249,7 +243,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void SetMando(bool estado)
     {
-        mando = estado;
+        _mando = estado;
       
        // Debug.Log(mando);
     }
@@ -259,14 +253,14 @@ public class GameManager : MonoBehaviour
     /// <returns></returns>
     public bool GetMando()
     {
-        return mando;
+        return _mando;
     }
     /// <summary>
     /// Cambia el estado de el boleano teclado
     /// </summary>
     public void SetTeclado(bool estado)
     {
-        teclado = estado;
+        _teclado = estado;
         //Debug.Log(teclado);
     }
     

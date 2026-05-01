@@ -48,10 +48,16 @@ public class Shoot : MonoBehaviour
     /// </summary>
     [SerializeField] private Transform BulletsContainer;
     /// <summary>
-    /// Sonidos de grito
+    /// Sonido de grito 1
     /// </summary>
     [SerializeField] private AudioSource Scream1;
+    /// <summary>
+    /// Sonido de grito 2
+    /// </summary>
     [SerializeField] private AudioSource Scream2;
+    /// <summary>
+    /// Sonido de grito 3
+    /// </summary>
     [SerializeField] private AudioSource Scream3;
 
     #endregion
@@ -115,6 +121,7 @@ public class Shoot : MonoBehaviour
 
     private void Awake()
     {
+        //Cachemos los componentes a los objetos
         _animator = GetComponent<Animator>();
         _ammo = MaxAmmo;
         _playerSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -133,9 +140,11 @@ public class Shoot : MonoBehaviour
     /// </summary>
     void Start()
     {
+        //Creamos el array de balas
         _bulletsPool = new GameObject[NumBulletsPool]; // Reserva el espacio en el array
         for (int i = 0; i < NumBulletsPool; i++) // Por cada hueco genera una bala
         {
+            //Istanciamos la bala
             GameObject bullet = Instantiate(Bullet);
             bullet.transform.SetParent(BulletsContainer, true);
             _bulletsPool[i] = bullet; // Guarda la bala en la pool
@@ -169,13 +178,15 @@ public class Shoot : MonoBehaviour
             // -- Si hay balas usables --
             _rnd = Random.Range(0, 3);
             if (_animator && (_jump.IsJumping() || (_jump.IsJumping() && _player.IsWalking())) && _ammo > 0)
-            {
+            {//Animacion disparo y salto
                 _animator.SetBool("IsJumpingAndAttacking", true);
             }
             else if (_animator && _player.IsWalking() && _ammo > 0)
             {
+                //Animacion disparo y Andar
                 _animator.SetBool("IsWalkingAndAttacking", true);
             }
+            //Animacion disparo
             else if(_animator)
             {
                 _animator.SetBool("IsShootingAnim", true);
@@ -189,10 +200,12 @@ public class Shoot : MonoBehaviour
             _bulletsPool[i].SetActive(true);
 
             _timeToWait = Time.time + Cooldown;
+            //animacion de disparo
             if(_animator)
             {
                 _animator.SetBool("ReverseShooting", true);
             }
+            //Random de sonidos de disparos
             switch (_rnd)
             {
                 case 0: Scream1.Play(); break;
@@ -211,25 +224,38 @@ public class Shoot : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
-
-    public int GetAmmo() // Devuelve la cantidad de disparos restantes
+    /// <summary>
+    /// Devuelve la cantidad de disparos restantes
+    /// </summary>
+    public int GetAmmo() 
     {
         //Debug.Log("balas restantes: " + _ammo);
         return _ammo;
     }
-    public void ReloadAmmo() // Recarga las balas al maximo
+    /// <summary>
+    /// Metodo que recarga las balas al maximo
+    /// </summary>
+    public void ReloadAmmo()
     {
         _ammo = MaxAmmo;
     }
-
+    /// <summary>
+    /// Metodo que desactiva el disparo
+    /// </summary>
     public void DesactivateShoot()
     {
         _desactivated = true;
     }
+    /// <summary>
+    /// Metodo que activa el disparo
+    /// </summary>
     public void ActivateShoot()
     {
         _desactivated = false;
     }
+    /// <summary>
+    /// Metodo que devuelve el numero de balas maximo
+    /// </summary>
     public int GetMaxAmmo()
     {
         return MaxAmmo;

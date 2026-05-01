@@ -71,7 +71,7 @@ public class Timing_QTE_Zona : MonoBehaviour
     public bool CheckAcierto()
     {
         //Chequeamos si esta entre la posicion 
-        if (Objetivo.anchoredPosition.x > MinPos.anchoredPosition.x && Objetivo.anchoredPosition.x < MaxPos.anchoredPosition.x)
+        if (Objetivo.position.x > MinPos.position.x && Objetivo.position.x < MaxPos.position.x)
         {
             _acierto = true;
         }

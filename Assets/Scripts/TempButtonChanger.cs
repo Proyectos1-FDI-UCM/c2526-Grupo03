@@ -22,11 +22,21 @@ public class TempButtonScript : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
-
+    /// <summary>
+    /// Panel 1
+    /// </summary>
     [SerializeField] private GameObject Panel1;
+    /// <summary>
+    /// Panel 2
+    /// </summary>
     [SerializeField] private GameObject Panel2;
+    /// <summary>
+    /// Panel 3
+    /// </summary>
     [SerializeField] private GameObject Panel3;
-
+    /// <summary>
+    ///Segundos para cambiar
+    /// </summary>
     [SerializeField] private float SecondsToChange;
     #endregion
 
@@ -38,7 +48,13 @@ public class TempButtonScript : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-    private int _CurrentState = 0;
+    /// <summary>
+    ///Panel en el que estamos
+    /// </summary>
+    private int _currentState = 0;
+    /// <summary>
+    /// Tiempo para cambiar
+    /// </summary>
     private float _timetochange = 0;
     #endregion
     
@@ -54,13 +70,15 @@ public class TempButtonScript : MonoBehaviour
     /// </summary>
     void Update()
     {
+       //Mira si el tiemopo es mayor para el tiempo a cambiar
         if (Time.time >= _timetochange)
         {
-            switch (_CurrentState)
+            //cambia dependiendo del caso
+            switch (_currentState)
             {
-                case 0: Panel1.SetActive(false); Panel2.SetActive(true); LevelManager.Instance.ChangeButtonToDead(); _CurrentState = 1; break;
-                case 1: Panel2.SetActive(false); Panel3.SetActive(true); LevelManager.Instance.ChangeButtonToVictory(); _CurrentState = 2; break;
-                case 2: Panel3.SetActive(false); Panel1.SetActive(true); LevelManager.Instance.ChangeButtonToPause(); _CurrentState = 0; break;
+                case 0: Panel1.SetActive(false); Panel2.SetActive(true); LevelManager.Instance.ChangeButtonToDead(); _currentState = 1; break;
+                case 1: Panel2.SetActive(false); Panel3.SetActive(true); LevelManager.Instance.ChangeButtonToVictory(); _currentState = 2; break;
+                case 2: Panel3.SetActive(false); Panel1.SetActive(true); LevelManager.Instance.ChangeButtonToPause(); _currentState = 0; break;
             }
             _timetochange = Time.time + SecondsToChange;
         }

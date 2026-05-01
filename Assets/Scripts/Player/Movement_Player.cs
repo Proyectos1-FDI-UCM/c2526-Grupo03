@@ -306,13 +306,6 @@ public class Movement_Player : MonoBehaviour
         {
             _jumpComponent.TryStartJump();
         }
-
-        // --- Menu de pausa activacion ---
-        if (InputManager.Instance.PauseWasPressedThisFrame())
-        {
-            // Debug.Log("Pausando");
-            LevelManager.Instance.Pausa();
-        }
     }
     #endregion
 
@@ -336,11 +329,18 @@ public class Movement_Player : MonoBehaviour
             _empujado = true;
         }
     }
-
+    /// <summary>
+    /// Metodo que devuelve la velocidad maxima
+    /// </summary>
+    /// <returns></returns>
     public float getMaxVel()
     {
         return MaxVelocity;
     }
+    /// <summary>
+    /// Metodo que cambia la velocidad maxima
+    /// </summary>
+    /// <param name="rlMovement">Nueva velocidad maxima</param>
     public void setMaxVel(float rlMovement)
     {
         MaxVelocity = rlMovement;

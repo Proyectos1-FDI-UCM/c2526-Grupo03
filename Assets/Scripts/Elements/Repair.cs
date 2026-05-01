@@ -180,13 +180,11 @@ public class Repair : MonoBehaviour
         {
             if (GameManager.Instance.GetMando())
             {
-                Teclas.SetActive(false);
                 Botones.SetActive(true);
             }
             else
             {
                 Teclas.SetActive(true);
-                Botones.SetActive(false);
             }
         }
     }
@@ -197,7 +195,7 @@ public class Repair : MonoBehaviour
     void Update()
     {
         //Si el objeto es reparable y se ha pulsado la tecla de reparación
-        if (_canRepair && InputManager.Instance.RepairWasPressedThisFrame()) 
+        if (_canRepair && InputManager.Instance.RepairWasPressedThisFrame())
         {
             // Se elige el QTE la primera vez que abres el reparable para que no te toque el mismo QTE que el que acabas de hacer
             if (_firstOpen && !_QTEWasSelected)
@@ -338,6 +336,7 @@ public class Repair : MonoBehaviour
     {
         if (!_isRepairing)
         {
+            //Miramos si es el player
             if (collision.gameObject.GetComponent<Movement_Player>() != null)
             {
                 //Si el objeto que colisiona coincide con el player y no está reparando su estado pasa a poder reparar
@@ -351,6 +350,7 @@ public class Repair : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
+        //Miramos si es el player
         if (collision.gameObject.GetComponent<Movement_Player>() != null)
         {
             //Si el objeto que sale del collider coincide con el player se le desactiva el estado de poder reparar
@@ -367,21 +367,12 @@ public class Repair : MonoBehaviour
     private void ActivateChosenQTE()
     {
         //Dependiendo del número que resulta la elección aleatoria anterior se activa un QTE u otro.
-        if (_selectedQTE == 0)
+        switch (_selectedQTE)
         {
-            SpamQTE.SetActive(true);
-        }
-        else if (_selectedQTE == 1)
-        {
-            ManivelaQTE.SetActive(true);
-        }
-        else if (_selectedQTE == 2)
-        {
-            TeclasQTE.SetActive(true);
-        }
-        else if (_selectedQTE == 3)
-        {
-            TimingQTE.SetActive(true);
+            case 0: SpamQTE.SetActive(true); break;
+            case 1: ManivelaQTE.SetActive(true); break;
+            case 2: TeclasQTE.SetActive(true); break;
+            case 3: TimingQTE.SetActive(true); break;
         }
     }
 
@@ -391,21 +382,12 @@ public class Repair : MonoBehaviour
     private void DisableChosenQTE()
     {
         //Dependiendo del número que resulta la elección aleatoria anterior se desactiva un QTE u otro.
-        if (_selectedQTE == 0)
+        switch (_selectedQTE)
         {
-            SpamQTE.SetActive(false);
-        }
-        else if (_selectedQTE == 1)
-        {
-            ManivelaQTE.SetActive(false);
-        }
-        else if (_selectedQTE == 2)
-        {
-            TeclasQTE.SetActive(false);
-        }
-        else if (_selectedQTE == 3)
-        {
-            TimingQTE.SetActive(false);
+            case 0: SpamQTE.SetActive(false); break;
+            case 1: ManivelaQTE.SetActive(false); break;
+            case 2: TeclasQTE.SetActive(false); break;
+            case 3: TimingQTE.SetActive(false); break;
         }
     }
     #endregion   

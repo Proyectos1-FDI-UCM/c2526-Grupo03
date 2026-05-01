@@ -24,8 +24,7 @@ public class ChangeScene : MonoBehaviour
     /// Índice de la escena (en el build settings)
     /// que se cargará. 
     /// </summary>
-    [SerializeField]
-    private int nextScene;
+    [SerializeField]private int NextScene;
 
     #endregion
     
@@ -56,7 +55,7 @@ public class ChangeScene : MonoBehaviour
     /// </summary>
     public void ChangeToNextScene()
     {
-        GameManager.Instance.ChangeScene(nextScene);
+        GameManager.Instance.ChangeScene(NextScene);
     }
 
     #endregion

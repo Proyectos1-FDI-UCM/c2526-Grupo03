@@ -26,11 +26,11 @@ public class Activators : MonoBehaviour
     /// <summary>
     /// Booleano que indica si queremos activar el salto
     /// </summary>
-    [SerializeField] private bool salto = false;
+    [SerializeField] private bool Salto = false;
     /// <summary>
     /// Booleano que indica si queremos activar el disparo
     /// </summary>
-    [SerializeField] private bool disparo = false;
+    [SerializeField] private bool Disparo = false;
     /// <summary>
     /// Booleano que indica si queremos activar el GUI
     /// </summary>
@@ -38,7 +38,7 @@ public class Activators : MonoBehaviour
     /// <summary>
     /// Booleano que indica si queremos activar la recarga
     /// </summary>
-    [SerializeField] private bool recarga = false;
+    [SerializeField] private bool Recarga = false;
     /// <summary>
     /// Booleano que indica si queremos activar a Dolly
     /// </summary>
@@ -72,22 +72,6 @@ public class Activators : MonoBehaviour
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
     
-    /// <summary>
-    /// Start is called on the frame when a script is enabled just before 
-    /// any of the Update methods are called the first time.
-    /// </summary>
-    void Start()
-    {
-        
-    }
-
-    /// <summary>
-    /// Update is called every frame, if the MonoBehaviour is enabled.
-    /// </summary>
-    void Update()
-    {
-        
-    }
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -124,20 +108,20 @@ public class Activators : MonoBehaviour
     private void Componente_Activar(GameObject Player)
     {
         //Si el salto es true lo activamos
-        if(salto == true)
+        if(Salto == true)
         {
             //Activamos componente
             Player.gameObject.GetComponent<Jump>().ActivateJump();
         }
         //Si el disparo es true lo activamos
-        if (disparo == true)
+        if (Disparo == true)
         {
             //Activamos componente
             Player.gameObject.GetComponent<Shoot>().ActivateShoot();
             Balas.SetActive(true);
         }
         //Si la recarga es true lo activamos
-        if (recarga == true)
+        if (Recarga == true)
         {
             //Activamos componente
             Player.gameObject.GetComponent<Scream_Reload>().ActivateReload();

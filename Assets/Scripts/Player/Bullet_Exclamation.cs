@@ -22,7 +22,9 @@ public class Bullet_Exclamation : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
-
+    /// <summary>
+    /// Velociada de las balas
+    /// </summary>
     [SerializeField] private float Speed = 7.0f;
 
     #endregion
@@ -35,9 +37,14 @@ public class Bullet_Exclamation : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-
+    /// <summary>
+    /// SpriteRenderer del objeto
+    /// </summary>
     private SpriteRenderer _spriteRenderer;
-
+    /// <summary>
+    /// Direcion de la bala
+    /// </summary>
+    private int _direction = 0;
     #endregion
     
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -53,7 +60,9 @@ public class Bullet_Exclamation : MonoBehaviour
     /// </summary>
     void Awake()
     {
+        //Obtenemos el sprite render del objeto
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        
     }
 
     /// <summary>
@@ -61,8 +70,10 @@ public class Bullet_Exclamation : MonoBehaviour
     /// </summary>
     void Update()
     {
-        int direction = _spriteRenderer.flipX ? -1 : 1;
-        transform.position += new Vector3(Speed * direction, .0f) * Time.deltaTime;
+        //Miramos la direcion hacia la que apunta el sprite para dispara al mismo lado
+        _direction = _spriteRenderer.flipX ? -1 : 1;
+        //Cambiamos su posicion 
+        transform.position += new Vector3(Speed * _direction, .0f) * Time.deltaTime;
     }
     #endregion
 
@@ -82,14 +93,16 @@ public class Bullet_Exclamation : MonoBehaviour
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
-
     private void OnTriggerEnter2D(Collider2D col)
     {
         this.gameObject.SetActive(false);
     }
-
+    /// <summary>
+    /// Metodo que detecta si se ha salido de la vison de la camara 
+    /// </summary>
     private void OnBecameInvisible()
     {
+        //Desactivamos el objeto
         this.gameObject.SetActive(false);
     }
 

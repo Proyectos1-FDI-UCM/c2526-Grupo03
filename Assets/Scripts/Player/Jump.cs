@@ -148,7 +148,7 @@ public class Jump : MonoBehaviour
 
         // ====== Guardamos el componente del animator ======
         _animator = GetComponent<Animator>();
-
+        //====== Guardamos el componente del MovementPlayer ======
         _movement_Player = GetComponent<Movement_Player>();
     }
 
@@ -302,7 +302,10 @@ public class Jump : MonoBehaviour
     {
         _desactivated = false;
     }
-
+    /// <summary>
+    /// Metodo que devuelve si esta saltando
+    /// </summary>
+    /// <returns></returns>
     public bool IsJumping()
     {
         return _isJumping;

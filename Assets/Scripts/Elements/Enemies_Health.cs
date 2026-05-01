@@ -28,6 +28,7 @@ public class Enemies_Health : MonoBehaviour
     /// Cantidad de vida que le queda al enemigo
     /// </summary>
     [SerializeField] private int Health = 1;
+
     /// <summary>
     /// Cantidad de vida que le quita al enemigo cada golpe
     /// </summary>
@@ -37,6 +38,7 @@ public class Enemies_Health : MonoBehaviour
     /// Objeto de barra de vida de la escena
     /// </summary>
     [SerializeField] private GameObject BarraVida;
+
     /// <summary>
     /// Componente de la barra de vida
     /// </summary>
@@ -66,10 +68,12 @@ public class Enemies_Health : MonoBehaviour
     /// Componente renderer
     /// </summary>
     private SpriteRenderer _spriteRenderer;
+
     /// <summary>
     /// Componente Collider
     /// </summary>
     private BoxCollider2D _boxCollider;
+
     /// <summary>
     /// Componente Detectable
     /// </summary>
@@ -94,11 +98,13 @@ public class Enemies_Health : MonoBehaviour
     {
         // Si el objeto tiene el componente lo cacheamos y le ponemos las variables necesarias
         if (BarraVida.GetComponent<Slider>() != null)
-        {
+        { 
+            //Ponemos todos los componentes a las variables
             _spriteRenderer = this.GetComponent<SpriteRenderer>();
             _boxCollider = this.GetComponent <BoxCollider2D>();
             _detectableObject = this.GetComponent<DetectableObject>();
             _componenteBarraVida = BarraVida.GetComponent<Slider>();
+            //Establecemos el maximo, minimo y valor actual de la barra de vida
             _componenteBarraVida.maxValue = Health;
             _componenteBarraVida.minValue = 0;
             _componenteBarraVida.value = Health;
@@ -109,9 +115,12 @@ public class Enemies_Health : MonoBehaviour
 
     private void Update()
     {
+        //Miramos si ha muerto y ya no hay sonidos activos
         if (_dead && !Sonido.isPlaying)
         {
+            //Desactivamos este objeto
             this.gameObject.SetActive(false);
+            //Y lo destruimos
             Destroy(this.gameObject);
         }
     }
@@ -139,6 +148,7 @@ public class Enemies_Health : MonoBehaviour
         // Solo baja vida si esta en el layer de exclamación
         if (collision.gameObject.GetComponent<Bullet_Exclamation>() != null)
         {
+            //Bajamos la vida y ponemos el sonido
             Health -= DamagePerHit;
             Sonido.Play();
             

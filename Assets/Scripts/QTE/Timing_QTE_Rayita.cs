@@ -51,12 +51,12 @@ public class Timing_QTE_Rayita : MonoBehaviour
     /// <summary>
     /// entero para cambiar la dirección en la que se mueve la rayita.
     /// </summary>
-    int _signo = 1;
+    private int _signo = 1;
 
     /// <summary>
     /// variable que guarda el rect transform de la rayita.
     /// </summary>
-    RectTransform _rectTransform;
+     private RectTransform _rectTransform;
 
 
     #endregion

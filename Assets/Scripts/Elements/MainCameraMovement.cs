@@ -5,9 +5,7 @@
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
 
-using TMPro;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 // Añadir aquí el resto de directivas using
 
 
@@ -24,17 +22,25 @@ public class MainCameraMovement : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
-
+    /// <summary>
+    /// GameObject del Player
+    /// </summary>
     [SerializeField] private GameObject Player;
 
-    /// <summary> Suavizado del movimiento de la camara </summary>
+    /// <summary>
+    /// Suavizado del movimiento de la camara
+    /// </summary>
     [SerializeField] float SmoothSpeed = 5f;
 
-    /// <summary> Distancia maxima a la que se adelanta la camara </summary>
+    /// <summary> 
+    /// Distancia maxima a la que se adelanta la camara 
+    /// </summary>
     [SerializeField] float LookAheadDistance = 2f;
 
-    /// <summary> Altura fija de la camara </summary>
-    [SerializeField] float VerticalOffset = 1f; // Altura fija de la cámara
+    /// <summary>
+    /// Altura fija de la camara
+    /// </summary>
+    [SerializeField] float VerticalOffset = 1f;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -46,26 +52,38 @@ public class MainCameraMovement : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
+    /// <summary>
+    /// Como de lejos vamos mirando delante
+    /// </summary>
     private float _currentLookAhead = 0f;
+    /// <summary>
+    /// Posicin adelantada a la que hay que llegar
+    /// </summary>
     private float _targetLookAhead = 0f;
+    /// <summary>
+    /// Velocidad que mira hacia delante 
+    /// </summary>
     private float _lookAheadVelocity = 0f;
-
+    /// <summary>
+    /// Posicion en X de el objeto que suigue
+    /// </summary>
     private float _lastTargetX;
     #endregion
-    
+
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-    
+
     // Por defecto están los típicos (Update y Start) pero:
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
-    
+
     /// <summary>
     /// Start is called on the frame when a script is enabled just before 
     /// any of the Update methods are called the first time.
     /// </summary>
     void Start()
     {
+        //Calculamos donde esta el player en X
         _lastTargetX = Player.transform.position.x;
     }
 
@@ -74,6 +92,7 @@ public class MainCameraMovement : MonoBehaviour
     /// </summary>
     void Update()
     {
+        //Direcion de movimiento del player
         float moveDirection = Player.transform.position.x - _lastTargetX;
 
         // Detectar dirección del movimiento
@@ -103,7 +122,7 @@ public class MainCameraMovement : MonoBehaviour
             targetPosition,
             SmoothSpeed * Time.deltaTime
         );
-
+        //establecemos la ultima posicion de seguimento en X donde esta el player
         _lastTargetX = Player.transform.position.x;
     }
 
@@ -118,7 +137,7 @@ public class MainCameraMovement : MonoBehaviour
     // Ejemplo: GetPlayerController
 
     #endregion
-    
+
     // ---- MÉTODOS PRIVADOS ----
     #region Métodos Privados
     // Documentar cada método que aparece aquí
@@ -126,7 +145,7 @@ public class MainCameraMovement : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
 
-    #endregion   
+    #endregion
 
 } // class MainCameraMovement 
 // namespace

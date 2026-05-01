@@ -225,7 +225,7 @@ public class InputManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Método para saber si el botón de disparo (Fire) ha dejado de pulsarse
+    /// Método para saber si el botón de Recarga (reload) ha dejado de pulsarse
     /// durante este frame
     /// <returns>Devuelve true, si el botón se ha dejado de pulsar en
     /// este frame; y false, en otro caso.
@@ -236,24 +236,49 @@ public class InputManager : MonoBehaviour
         return _reload.WasReleasedThisFrame();
     }
 
+    /// <summary>
+    ///  Método para saber si el botón de disparo (Fire) ha dejado de pulsarse
+    /// durante este frame
+    /// </summary>
+    /// <returns>Devuelve true, si el botón se ha dejado de pulsar en
+    /// este frame; y false, en otro caso. </returns>
     public bool FireWasReleasedThisFrame()
     {
         return _fire.WasReleasedThisFrame();
     }
+    /// <summary>
+    /// Método para saber si el botón de salto (Jump) se ha pulsado en este frame
+    /// </summary>
+    /// <returns>Devuelve true, si el botón se ha dejado de pulsar en
+    /// este frame; y false, en otro caso. </returns>
 
     public bool JumpWasPressedThisFrame()
     {
         return _jump.WasPressedThisFrame();
     }
-
+    /// <summary>
+    /// Método para saber si el botón de salto (Jump) está pulsado
+    /// Devolverá true en todos los frames en los que se mantenga pulsado
+    /// </summary>
+    /// <returns>True, si el botón está pulsado</returns>
     public bool JumpIsPressed()
     {
         return _jump.IsPressed();
     }
+    /// <summary>
+    /// Método para saber si el botón de Reparar (repair) se ha pulsado en este frame
+    /// </summary>
+    /// <returns>Devuelve true, si el botón se ha dejado de pulsar en
+    /// este frame; y false, en otro caso.</returns>
     public bool RepairWasPressedThisFrame()
     {
         return _repair.WasPressedThisFrame();
     }
+    /// <summary>
+    /// Método para saber si el botón de Pausar (pause) se ha pulsado en este frame
+    /// </summary>
+    /// <returns>Devuelve true, si el botón se ha dejado de pulsar en
+    /// este frame; y false, en otro caso.</returns>
     public bool PauseWasPressedThisFrame()
     {
         return _pause.WasPressedThisFrame();

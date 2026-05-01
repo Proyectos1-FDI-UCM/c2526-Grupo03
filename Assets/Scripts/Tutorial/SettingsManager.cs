@@ -26,11 +26,11 @@ public class SettingsManager : MonoBehaviour
     /// <summary>
     /// Toggle de mando
     /// </summary>
-    [SerializeField] private Toggle mando;
+    [SerializeField] private Toggle Mando;
     /// <summary>
     /// Bool que nos indica si esta en el tutorial
     /// </summary>
-    [SerializeField] private bool tutorial =false;
+    [SerializeField] private bool Tutorial =false;
 
     #endregion
 
@@ -46,7 +46,7 @@ public class SettingsManager : MonoBehaviour
     /// <summary>
     /// Booleano que indica si usa mando
     /// </summary>
-    private bool mandoBool;
+    private bool _mandoBool;
 
 
     #endregion
@@ -65,22 +65,14 @@ public class SettingsManager : MonoBehaviour
     void Start()
     {
         //inicializamos
-        mandoBool = GameManager.Instance.GetMando();
+        _mandoBool = GameManager.Instance.GetMando();
         //revisamos que no sea null
-        if (mando != null)
+        if (Mando != null)
         {
             //actualizamos
             ActualizaMando();
 
         }
-
-    }
-
-    /// <summary>
-    /// Update is called every frame, if the MonoBehaviour is enabled.
-    /// </summary>
-    void Update()
-    {
 
     }
     #endregion
@@ -92,11 +84,13 @@ public class SettingsManager : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
-
-    public void Mando()
+    /// <summary>
+    /// Cambia entre si usas mando o no
+    /// </summary>
+    public void CambiaMando()
     {
-        mandoBool = !mandoBool;
-        GameManager.Instance.SetMando(mandoBool);
+        _mandoBool = !_mandoBool;
+        GameManager.Instance.SetMando(_mandoBool);
         ActualizaMando();
 
         // Debug.Log(mando);
@@ -109,12 +103,17 @@ public class SettingsManager : MonoBehaviour
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
+    /// <summary>
+    /// actualiza el boton para si se esta usando mando
+    /// </summary>
     private void ActualizaMando()
     {
-        mando.SetIsOnWithoutNotify(mandoBool);
-        if (tutorial)
+        //Cambiamos el boton del toggle del mando
+        Mando.SetIsOnWithoutNotify(_mandoBool);
+        //Miramos si estamos en el tutorial para volver a poner las instruciones
+        if (Tutorial)
         {
-            Tutorial_Manager.Instance.ActualizaMando();
+            Tutorial_Manager.Instance.ActualizaInst();
         }
     }
 

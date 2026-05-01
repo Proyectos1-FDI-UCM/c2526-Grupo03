@@ -35,6 +35,9 @@ public class Finish : MonoBehaviour
     /// Objeto del player 
     /// </summary>
     [SerializeField] private GameObject Player;
+    /// <summary>
+    /// Float que lleva el porcentaje de victoria
+    /// </summary>
     [SerializeField] private float PorcentajeVictoria = 0f;
     #endregion
 
@@ -181,6 +184,15 @@ public class Finish : MonoBehaviour
         //Cambiamos el botton para podernos mover por el menu de victoria
         LevelManager.Instance.ChangeButtonToVictory();
         Victoria(fillAmount);
+        /* if (Victoria(fillAmount))
+         {  //Cambiamos el botton para podernos mover por el menu de victoria
+
+         }
+         else
+         {
+             LevelManager.Instance.ChangeButtonToDead();
+         }*/
+
     }
     /// <summary>
     /// Convierte a diferencia dos numeros 

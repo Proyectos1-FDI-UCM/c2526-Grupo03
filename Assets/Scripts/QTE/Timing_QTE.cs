@@ -94,6 +94,7 @@ public class Timing_QTE : MonoBehaviour
     /// </summary>
     void Awake()
     {
+        //Cacheamos los conponentes
         if (Zona == null)
         {
             Zona = GetComponent<Timing_QTE_Zona>();
@@ -119,6 +120,7 @@ public class Timing_QTE : MonoBehaviour
 
     private void Start()
     {
+        //Calcualamos la maxima posicion
         _maxZonaPos = ZonaPos.anchoredPosition.x * 2;
     }
 
