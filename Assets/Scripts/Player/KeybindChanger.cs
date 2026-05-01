@@ -11,6 +11,7 @@
 
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 // Añadir aquí el resto de directivas using
 
 
@@ -38,6 +39,10 @@ public class KeybindChanger : MonoBehaviour
     /// </summary>
     [SerializeField] private Sprite Boton = null;
 
+    /// <summary>
+    /// Indica si debemos cambiar el sprite del componente imagen en vez del de spriterenderer
+    /// </summary>
+    [SerializeField] private bool Imagen = false;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -58,8 +63,11 @@ public class KeybindChanger : MonoBehaviour
     /// <summary>
     /// Componente spriterenderer cacheado
     /// </summary>
-    private SpriteRenderer _component;
-
+    private SpriteRenderer _spriteRenderer;
+    /// <summary>
+    /// Componente image cacheado
+    /// </summary>
+    private Image _image;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -76,17 +84,35 @@ public class KeybindChanger : MonoBehaviour
     void Start()
     {
         // Cacheamos el componente
-        _component = GetComponent<SpriteRenderer>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _image = GetComponent<Image>();
+
         if (Boton != null && Tecla != null)
         {
             // Iniciamos la primera tecla
             if (GameManager.Instance.GetMando())
             {
-                _component.sprite = Boton;
+                // Cambiamos el objeto de la tecla
+                if (!Imagen)
+                {
+                    _spriteRenderer.sprite = Boton;
+                }
+                else
+                {
+                    _image.sprite = Boton;
+                }
             }
             else
             {
-                _component.sprite = Tecla;
+                // Cambiamos el objeto de la tecla
+                if (!Imagen)
+                {
+                    _spriteRenderer.sprite = Tecla;
+                }
+                else
+                {
+                    _image.sprite = Tecla;
+                }
             }
         }
     }
@@ -111,7 +137,14 @@ public class KeybindChanger : MonoBehaviour
                 }
 
                 // Cambiamos el objeto de la tecla
-                _component.sprite = Boton;
+                if (!Imagen)
+                {
+                    _spriteRenderer.sprite = Boton;
+                }
+                else
+                {
+                    _image.sprite = Boton;
+                }
 
                 // Si la tecla estaba activa y ha cambiado
                 if (_keyChangedActive)
@@ -133,7 +166,14 @@ public class KeybindChanger : MonoBehaviour
                 }
 
                 // Cambiamos el objeto de la tecla
-                _component.sprite = Tecla;
+                if (!Imagen)
+                {
+                    _spriteRenderer.sprite = Tecla;
+                }
+                else
+                {
+                    _image.sprite = Tecla;
+                }
 
                 // Si la tecla estaba activa y ha cambiado
                 if (_keyChangedActive)

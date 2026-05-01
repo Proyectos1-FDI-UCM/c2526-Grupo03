@@ -337,6 +337,7 @@ public class InputManager : MonoBehaviour
     /// <param name="context">Información sobre el evento de movimiento</param>
     private void OnMove(InputAction.CallbackContext context)
     {
+        // Cambio de dispositivo si no es el mismo de antes
         var device = context.control.device;
 
         if (device is Gamepad && !GameManager.Instance.GetMando())
@@ -353,6 +354,8 @@ public class InputManager : MonoBehaviour
         {
             GameManager.Instance.SetDeviceChanged(false);
         }
+
+
         MovementVector = context.ReadValue<Vector2>();
     }
 
@@ -363,6 +366,25 @@ public class InputManager : MonoBehaviour
     /// <param name="context">Información sobre el evento del QTE de flechas</param>
     private void OnArrowsQTE(InputAction.CallbackContext context)
     {
+        // Cambio de dispositivo si no es el mismo de antes
+        var device = context.control.device;
+
+        if (device is Gamepad && !GameManager.Instance.GetMando())
+        {
+            GameManager.Instance.SetMando(true);
+            GameManager.Instance.SetDeviceChanged(true);
+        }
+        else if (!(device is Gamepad) && GameManager.Instance.GetMando())
+        {
+            GameManager.Instance.SetMando(false);
+            GameManager.Instance.SetDeviceChanged(true);
+        }
+        else
+        {
+            GameManager.Instance.SetDeviceChanged(false);
+        }
+
+
         ArrowsQTE = context.ReadValue<Vector2>();
     }
 
@@ -373,6 +395,25 @@ public class InputManager : MonoBehaviour
     /// <param name="context">Información sobre el evento del QTE de Manivela</param>
     private void OnManivelaQTE(InputAction.CallbackContext context)
     {
+        // Cambio de dispositivo si no es el mismo de antes
+        var device = context.control.device;
+
+        if (device is Gamepad && !GameManager.Instance.GetMando())
+        {
+            GameManager.Instance.SetMando(true);
+            GameManager.Instance.SetDeviceChanged(true);
+        }
+        else if (!(device is Gamepad) && GameManager.Instance.GetMando())
+        {
+            GameManager.Instance.SetMando(false);
+            GameManager.Instance.SetDeviceChanged(true);
+        }
+        else
+        {
+            GameManager.Instance.SetDeviceChanged(false);
+        }
+
+
         ManivelaQTEVector = context.ReadValue<Vector2>();
     }
     #endregion
