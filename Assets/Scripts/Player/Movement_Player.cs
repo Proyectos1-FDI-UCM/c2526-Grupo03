@@ -306,6 +306,14 @@ public class Movement_Player : MonoBehaviour
         {
             _jumpComponent.TryStartJump();
         }
+
+        // --- Menu de pausa activacion ---
+        if (InputManager.Instance.PauseWasPressedThisFrame())
+        {
+            // Debug.Log("Pausando");
+            LevelManager.Instance.Pausa();
+        }
+
     }
     #endregion
 

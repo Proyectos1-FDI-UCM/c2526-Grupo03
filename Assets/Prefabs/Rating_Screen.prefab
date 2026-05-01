@@ -375,7 +375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e67665ea226d403ab8b32a4b067d8f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextScene: 0
+  NextScene: 0
 --- !u!1 &4028994730411854667
 GameObject:
   m_ObjectHideFlags: 0
@@ -657,6 +657,7 @@ GameObject:
   - component: {fileID: 3759538728599156618}
   - component: {fileID: 1810870055319331866}
   - component: {fileID: 6722534772603896902}
+  - component: {fileID: 4544561816724671915}
   m_Layer: 5
   m_Name: Rating_Screen
   m_TagString: Untagged
@@ -747,6 +748,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &4544561816724671915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5621637997893526916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e3ee1fa38cc01341a7420282e1156e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Stars: {fileID: 552677370444366203}
 --- !u!1 &5673300770005459956
 GameObject:
   m_ObjectHideFlags: 0
