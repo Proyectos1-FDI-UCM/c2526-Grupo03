@@ -65,9 +65,9 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private bool _mando = false;
     /// <summary>
-    /// bool que indica si estamos usando teclado
+    /// bool que indica si ehemos cambiado de dispositivo utilizado
     /// </summary>
-    private bool _teclado = true;
+    private bool _deviceChanged = false;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -256,12 +256,19 @@ public class GameManager : MonoBehaviour
         return _mando;
     }
     /// <summary>
-    /// Cambia el estado de el boleano teclado
+    /// Cambia el valor del booleano que indica si se ha cambiado de dispositivo
     /// </summary>
-    public void SetTeclado(bool estado)
+    public void SetDeviceChanged(bool changed)
     {
-        _teclado = estado;
-        //Debug.Log(teclado);
+        _deviceChanged = changed;
+    }
+    /// <summary>
+    /// Indica si se ha cambiado el dispositivo utilizado
+    /// </summary>
+    /// <returns>True cuando se ha cambiado</returns>
+    public bool DeviceChanged()
+    {
+        return _deviceChanged;
     }
     
     // ---- MÉTODOS PRIVADOS ----

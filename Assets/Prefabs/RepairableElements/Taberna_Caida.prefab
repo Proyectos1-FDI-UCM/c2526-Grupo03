@@ -85,6 +85,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6839620482530576191}
   - component: {fileID: 8263852032163106545}
+  - component: {fileID: 9135682724769579198}
   m_Layer: 8
   m_Name: Repair_Keybinds
   m_TagString: Untagged
@@ -162,6 +163,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &9135682724769579198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1757575187598850510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff413bb0275eeeb45a441359f5983b9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Tecla: {fileID: 21300000, guid: 2f2a664e1eadabf4c8180df5db7eb62c, type: 3}
+  Boton: {fileID: 21300000, guid: 07bbacaf046db774b976708a62b4ed70, type: 3}
 --- !u!1 &3647925901899788627
 GameObject:
   m_ObjectHideFlags: 0
@@ -558,8 +573,6 @@ MonoBehaviour:
   SpriteBroken: {fileID: 21300000, guid: 3fc9bb16e638ecf48b69923c901b76ba, type: 3}
   SpriteRepaired: {fileID: 21300000, guid: f86d8ed36c6315f48bf37f5436c59590, type: 3}
   SpriteWhiteBorder: {fileID: 21300000, guid: fa0d6d9f88c4de946a1636fbae98274d, type: 3}
-  Teclas: {fileID: 0}
-  Botones: {fileID: 0}
   Player: {fileID: 0}
   SpamQTE: {fileID: 4543134035533410752}
   ManivelaQTE: {fileID: 3715860873721573283}
@@ -567,7 +580,7 @@ MonoBehaviour:
   TimingQTE: {fileID: 3630848140884390042}
   ForceQTE: 0
   ForcedQTE: 0
-  Key: {fileID: 1757575187598850510}
+  Keybind: {fileID: 1757575187598850510}
 --- !u!114 &-2690277762436398441
 MonoBehaviour:
   m_ObjectHideFlags: 0

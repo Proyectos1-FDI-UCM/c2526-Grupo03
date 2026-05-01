@@ -41,16 +41,6 @@ public class Repair : MonoBehaviour
     [SerializeField] private Sprite SpriteWhiteBorder;
 
     /// <summary>
-    /// Sprite de la tecla para reparar
-    /// </summary>
-    [SerializeField] private GameObject Teclas = null;
-
-    /// <summary>
-    /// Sprite del boton para reparar
-    /// </summary>
-    [SerializeField] private GameObject Botones = null;
-
-    /// <summary>
     /// GameObject que contiene el jugador de la escena.
     /// </summary>
     [SerializeField] private GameObject Player;
@@ -87,7 +77,7 @@ public class Repair : MonoBehaviour
     /// <summary>
     /// GameObject que contiene la tecla a mostrar.
     /// </summary>
-    [SerializeField] GameObject Key;
+    [SerializeField] GameObject Keybind;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -157,7 +147,6 @@ public class Repair : MonoBehaviour
     /// </summary>
     private bool _changedToRepaired = false;
     #endregion
-
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
 
@@ -176,17 +165,6 @@ public class Repair : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         //SpriteBroken será el sprite roto del objeto reparable.
         _spriteRenderer.sprite = SpriteBroken;
-        if (Botones != null && Teclas != null)
-        {
-            if (GameManager.Instance.GetMando())
-            {
-                Botones.SetActive(true);
-            }
-            else
-            {
-                Teclas.SetActive(true);
-            }
-        }
     }
 
     /// <summary>
@@ -228,7 +206,7 @@ public class Repair : MonoBehaviour
             ActivateChosenQTE();
 
             // Ocultamos las teclas de reparación
-            Key.SetActive(false);
+            Keybind.SetActive(false);
 
             //Se desactivan todas las acciones del player para prohibirle interactuar con el nivel mientras repara
             _movementPlayerComponent.DisablePlayer();
@@ -245,7 +223,7 @@ public class Repair : MonoBehaviour
             this.enabled = false;
             //Se cambia el sprite del objeto por el de su versión reparada
             _spriteRenderer.sprite = SpriteRepaired;
-            Key.SetActive(false);
+            Keybind.SetActive(false);
             _changedToRepaired = true;
         }
 
@@ -254,7 +232,7 @@ public class Repair : MonoBehaviour
             //Si se sale del QTE se vuelven a activar todos las acciones que se habían desactivado
             _movementPlayerComponent.ActivatePlayer();
             DisableChosenQTE();
-            Key.SetActive(true);
+            Keybind.SetActive(true);
             _isRepairing = false;
             _canRepair = true;
             if (_hasPressedExit) _hasPressedExit = false; //Se cambia a false para no volver a entrar en el siguiente frame
@@ -343,7 +321,7 @@ public class Repair : MonoBehaviour
                 //y se activa la tecla superior del input para reparar
                 Player = collision.gameObject;
                 _spriteRenderer.sprite = SpriteWhiteBorder;
-                Key.SetActive(true);
+                Keybind.SetActive(true);
                 _canRepair = true;
             }
         }
@@ -357,7 +335,7 @@ public class Repair : MonoBehaviour
             //y se desactiva la tecla superior del input para reparar
             _canRepair = false;
             if (!_repaired) _spriteRenderer.sprite = SpriteBroken;
-            Key.SetActive(false);
+            Keybind.SetActive(false);
         }
     }
 

@@ -146,6 +146,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6722268731824216868}
   - component: {fileID: 6425029656354238917}
+  - component: {fileID: 2465504340683882752}
   m_Layer: 8
   m_Name: Repair_Keybinds
   m_TagString: Untagged
@@ -223,6 +224,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2465504340683882752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755438909191651767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff413bb0275eeeb45a441359f5983b9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Tecla: {fileID: 21300000, guid: 2f2a664e1eadabf4c8180df5db7eb62c, type: 3}
+  Boton: {fileID: 21300000, guid: 07bbacaf046db774b976708a62b4ed70, type: 3}
 --- !u!1 &2056489252486571767
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,8 +355,8 @@ GameObject:
   - component: {fileID: 3111309595925088110}
   - component: {fileID: 6995340703425060767}
   - component: {fileID: 413155140336329087}
-  - component: {fileID: 4136663462779264504}
   - component: {fileID: 6581341946746749385}
+  - component: {fileID: 4136663462779264504}
   - component: {fileID: 389106558738125692}
   m_Layer: 8
   m_Name: Broken_Cactus
@@ -483,8 +498,6 @@ MonoBehaviour:
   SpriteBroken: {fileID: 21300000, guid: 32062112023699c4b84208739e5783dc, type: 3}
   SpriteRepaired: {fileID: 21300000, guid: 43aa481e9947cf74e8bc878833a36db1, type: 3}
   SpriteWhiteBorder: {fileID: 21300000, guid: da62c42558fc2d645af5700b9ee591fa, type: 3}
-  Teclas: {fileID: 0}
-  Botones: {fileID: 0}
   Player: {fileID: 0}
   SpamQTE: {fileID: 1825485709791816537}
   ManivelaQTE: {fileID: 6290379841019181947}
@@ -492,7 +505,20 @@ MonoBehaviour:
   TimingQTE: {fileID: 306316732851420148}
   ForceQTE: 0
   ForcedQTE: 0
-  Key: {fileID: 1755438909191651767}
+  Keybind: {fileID: 1755438909191651767}
+--- !u!114 &6581341946746749385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2975639880203098413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef928c09c57fe22469f3f3a11f26ea43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CalidadABajar: 0
 --- !u!50 &4136663462779264504
 Rigidbody2D:
   serializedVersion: 5
@@ -520,19 +546,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &6581341946746749385
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2975639880203098413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef928c09c57fe22469f3f3a11f26ea43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CalidadABajar: 0
 --- !u!82 &389106558738125692
 AudioSource:
   m_ObjectHideFlags: 0
