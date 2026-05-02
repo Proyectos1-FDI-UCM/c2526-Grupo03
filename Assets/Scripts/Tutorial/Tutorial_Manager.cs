@@ -42,14 +42,6 @@ public class Tutorial_Manager : MonoBehaviour
     /// GameObject de la puntuacion
     /// </summary>
     [SerializeField] private GameObject Puntuacion = null;
-    /// <summary>
-    /// Objeto que tiene como hijo a todas las entidades que sean una tecla
-    /// </summary>
-    [SerializeField] private GameObject Teclas = null;
-    /// <summary>
-    /// Objeto que tiene como hijo a todas las entidades que sean un boton
-    /// </summary>
-    [SerializeField] private GameObject Botones = null;
     
 
     #endregion
@@ -62,10 +54,12 @@ public class Tutorial_Manager : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
+
     /// <summary>
     /// Instance del tutorial 
     /// </summary>
     private static Tutorial_Manager _instance;
+
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -93,6 +87,7 @@ public class Tutorial_Manager : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
+
     /// <summary>
     /// Activa a dolly a la Dessert_Ball cuando se llame al metodo
     /// </summary>
@@ -125,36 +120,6 @@ public class Tutorial_Manager : MonoBehaviour
     {
         return _instance != null;
     }
-    /// <summary>
-    /// Metodo que actualiza las instruciones para mando o teclado
-    /// </summary>
-   public void ActualizaInst()
-   {
-        if (Botones != null)
-        {
-            if (GameManager.Instance.GetMando() == true)
-            {
-                // Debug.Log("botones activados");
-                Botones.SetActive(true);
-            }
-            else
-            {
-                Botones.SetActive(false);
-            }
-        }
-        if (Teclas != null)
-        {
-            if (GameManager.Instance.GetMando() != true)
-            {
-                // Debug.Log("Teclas activados");
-                Teclas.SetActive(true);
-            }
-            else
-            {
-                Teclas.SetActive(false);
-            }
-        }
-    }
 
     #endregion
 
@@ -175,7 +140,6 @@ public class Tutorial_Manager : MonoBehaviour
         Balas.SetActive(false);
         Puntuacion.SetActive(false);
         Dolly.SetActive(false);
-        ActualizaInst();
     }
 
     #endregion

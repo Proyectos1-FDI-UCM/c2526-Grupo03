@@ -84,8 +84,8 @@ public class KeybindChanger : MonoBehaviour
     void Start()
     {
         // Cacheamos el componente
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _image = GetComponent<Image>();
+        _spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
+        _image = this.gameObject.GetComponent<Image>();
 
         if (Boton != null && Tecla != null)
         {
@@ -183,7 +183,6 @@ public class KeybindChanger : MonoBehaviour
                     _keyChangedActive = false;
                 }
             }
-            GameManager.Instance.SetDeviceChanged(false);
         }
 
     }

@@ -23,10 +23,7 @@ public class SettingsManager : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
-    /// <summary>
-    /// Toggle de mando
-    /// </summary>
-    [SerializeField] private Toggle Mando;
+
     /// <summary>
     /// Bool que nos indica si esta en el tutorial
     /// </summary>
@@ -56,10 +53,6 @@ public class SettingsManager : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
-    /// <summary>
-    /// Booleano que indica si usa mando
-    /// </summary>
-    private bool _mandoBool;
     //------Cheats-------
     /// <summary>
     /// Bool que lleva si esta activo la NoMuerte
@@ -91,17 +84,10 @@ public class SettingsManager : MonoBehaviour
     void Start()
     {
         //inicializamos
-        _mandoBool = GameManager.Instance.GetMando();
         _autoRepairBool = GameManager.Instance.GetAutoRepair();
         _noCalidadBool = GameManager.Instance.GetNoCalidad();
         _noMuerteBool = GameManager.Instance.GetNoMuerte();
         //revisamos que no sea null
-        if (Mando != null)
-        {
-            //actualizamos
-            ActualizaMando();
-
-        }
         if (AutoRepair != null)
         {
             //actualizamos
@@ -129,17 +115,7 @@ public class SettingsManager : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
-    /// <summary>
-    /// Cambia entre si usas mando o no
-    /// </summary>
-    public void CambiaMando()
-    {
-        _mandoBool = !_mandoBool;
-        GameManager.Instance.SetMando(_mandoBool);
-        ActualizaMando();
 
-        //Debug.Log(Mando);
-    }
     /// <summary>
     /// Cambia entre si usas autoRepair o no
     /// </summary>
@@ -175,19 +151,7 @@ public class SettingsManager : MonoBehaviour
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
-    /// <summary>
-    /// actualiza el boton para si se esta usando mando
-    /// </summary>
-    private void ActualizaMando()
-    {
-        //Cambiamos el boton del toggle del mando
-        Mando.SetIsOnWithoutNotify(_mandoBool);
-        //Miramos si estamos en el tutorial para volver a poner las instruciones
-        if (Tutorial)
-        {
-            Tutorial_Manager.Instance.ActualizaInst();
-        }
-    }
+
     /// <summary>
     /// actualiza el boton para si se esta usando el autoRepair
     /// </summary>
