@@ -112,6 +112,7 @@ public class Dolly_Detection_System : MonoBehaviour
         //Miramos si es un objeto detectable 
         if (collision.gameObject.GetComponent<DetectableObject>() != null)
         {
+            ActualizaCheatsNoCalidad();
             //Miramos si no es reparable para restar puntuacion
             if (collision.gameObject.GetComponent<Repair>() == null || collision.gameObject.GetComponent<Repair>().IsRepaired() == false)
             {
@@ -127,6 +128,7 @@ public class Dolly_Detection_System : MonoBehaviour
         //Miramos si es el jugador  
         else if (collision.gameObject.GetComponent<Movement_Player>() != null)
         {
+            ActualizaCheatsNoMuerte();
             //revisamos si existe una meta
             if (Meta != null)
             {
@@ -159,6 +161,14 @@ public class Dolly_Detection_System : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
 
+    private void ActualizaCheatsNoMuerte()
+    {
+        _cheatsNoMuerte = GameManager.Instance.GetNoMuerte();
+    }
+    private void ActualizaCheatsNoCalidad()
+    {
+        _cheatsNoCalidad = GameManager.Instance.GetNoCalidad();
+    }
     #endregion
 
 } // class Dolly_Detection_System1 

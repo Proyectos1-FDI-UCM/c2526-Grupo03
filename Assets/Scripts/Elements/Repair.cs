@@ -325,11 +325,14 @@ public class Repair : MonoBehaviour
     // mayúscula, incluida la primera letra)
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //actualiza para ver si se han activado los cheats
+        ActualizaCheats();
         if (!_isRepairing)
         {
             //Miramos si es el player
             if (collision.gameObject.GetComponent<Movement_Player>() != null)
             {
+                
                 //Si el objeto que colisiona coincide con el player y no está reparando su estado pasa a poder reparar
                 //y se activa la tecla superior del input para reparar
                 Player = collision.gameObject;
@@ -380,6 +383,13 @@ public class Repair : MonoBehaviour
             case 2: TeclasQTE.SetActive(false); break;
             case 3: TimingQTE.SetActive(false); break;
         }
+    }
+    /// <summary>
+    /// Metodo que actualiza los cheats
+    /// </summary>
+    private void ActualizaCheats()
+    {
+        _cheats = GameManager.Instance.GetAutoRepair();
     }
     #endregion   
 
