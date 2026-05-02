@@ -25,11 +25,6 @@ public class Dolly_Detection_System : MonoBehaviour
     // Ejemplo: MaxHealthPoints
 
     /// <summary>
-    /// Intervalo para subir la puntuacion
-    /// </summary>
-    [SerializeField] private float IntervaloParaSubir = 0f;
-
-    /// <summary>
     /// Objeto de la meta
     /// </summary>
     [SerializeField] private Finish Meta = null;
@@ -93,7 +88,7 @@ public class Dolly_Detection_System : MonoBehaviour
         if (_detected)
         {
             //calcualamos el tiempo que ha pasado
-            _timepassed = Time.time + IntervaloParaSubir;
+            _timepassed = Time.time + LevelManager.Instance.GetIntervaloParaSubir();
             //Y ponemos el detected a false
             _detected = false;
         } //Y si no hemos detectado
