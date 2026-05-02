@@ -2606,11 +2606,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!4 &202562053 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7773901301304610856, guid: ad756c137b6e1154ba13e8e8b3e5bae6, type: 3}
-  m_PrefabInstance: {fileID: 379288345}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &203427319
 GameObject:
   m_ObjectHideFlags: 0
@@ -18066,7 +18061,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1332765640}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 31519331706352411, guid: ad756c137b6e1154ba13e8e8b3e5bae6, type: 3}
       propertyPath: LoseScreen
@@ -19387,11 +19382,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 526626495}
   m_CullTransparentMesh: 1
---- !u!4 &531725386 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7775909251169774736, guid: 3eeeaccf46f684f6da400b898bbc2f73, type: 3}
-  m_PrefabInstance: {fileID: 1389804825}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &538456234
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28341,8 +28331,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 202562053}
-  - {fileID: 531725386}
   - {fileID: 2075658538}
   - {fileID: 7474941655432789449}
   - {fileID: 962021713}
@@ -29133,7 +29121,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1332765640}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2079412889787991827, guid: 3eeeaccf46f684f6da400b898bbc2f73, type: 3}
       propertyPath: m_Name
@@ -38122,6 +38110,8 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 379288345}
+  - {fileID: 1389804825}
   - {fileID: 1332765640}
   - {fileID: 1760331368}
   - {fileID: 718833057}

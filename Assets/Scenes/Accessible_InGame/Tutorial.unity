@@ -869,7 +869,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 2094761955}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 31519331706352411, guid: ad756c137b6e1154ba13e8e8b3e5bae6, type: 3}
       propertyPath: LoseScreen
@@ -924,11 +924,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad756c137b6e1154ba13e8e8b3e5bae6, type: 3}
---- !u!4 &76983744 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7773901301304610856, guid: ad756c137b6e1154ba13e8e8b3e5bae6, type: 3}
-  m_PrefabInstance: {fileID: 76983743}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &77851319
 GameObject:
   m_ObjectHideFlags: 0
@@ -2877,7 +2872,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 2094761955}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2079412889787991827, guid: 3eeeaccf46f684f6da400b898bbc2f73, type: 3}
       propertyPath: m_Name
@@ -2928,11 +2923,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3eeeaccf46f684f6da400b898bbc2f73, type: 3}
---- !u!4 &532426015 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7775909251169774736, guid: 3eeeaccf46f684f6da400b898bbc2f73, type: 3}
-  m_PrefabInstance: {fileID: 532426014}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &537206292
 GameObject:
   m_ObjectHideFlags: 0
@@ -19408,8 +19398,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 76983744}
-  - {fileID: 532426015}
   - {fileID: 1100809176}
   - {fileID: 900568263}
   - {fileID: 478652212}
@@ -19601,6 +19589,8 @@ SpriteRenderer:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 76983743}
+  - {fileID: 532426014}
   - {fileID: 2094761955}
   - {fileID: 614423596}
   - {fileID: 621358114}
