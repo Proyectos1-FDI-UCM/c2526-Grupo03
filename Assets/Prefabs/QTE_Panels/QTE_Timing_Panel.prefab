@@ -330,7 +330,7 @@ MonoBehaviour:
   AumentoPorClick: 20
   Timing: {fileID: 2573171209839117210}
   Zona: {fileID: 8770575427106018688}
-  ZonaPos: {fileID: 0}
+  ZonaPos: {fileID: 4445463433662900061}
   "AumentoAutom\xE1tico": 2.22
 --- !u!1 &2573171209839117210
 GameObject:

@@ -1306,6 +1306,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grafiti
       objectReference: {fileID: 0}
+    - target: {fileID: 5992958224214010914, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+      propertyPath: CalidadABajar
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
       propertyPath: Player
       value: 
@@ -1315,10 +1319,10 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
---- !u!1 &102739715 stripped
+--- !u!1 &120752096 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 6290379841019181947, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
-  m_PrefabInstance: {fileID: 749085351}
+  m_CorrespondingSourceObject: {fileID: 6868769685970764751, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+  m_PrefabInstance: {fileID: 961926843}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &126417180
 GameObject:
@@ -1778,16 +1782,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a21b2cac9e0e3184797b4a958e0c4f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &139800223 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1269227182867427392, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
-  m_PrefabInstance: {fileID: 1825196251}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &146095235 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1825485709791816537, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
-  m_PrefabInstance: {fileID: 1353685215}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &149672900 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 351183677720056003, guid: 1d86ef47c2f0b9540a524b0b8f3f1b96, type: 3}
@@ -2464,6 +2458,10 @@ PrefabInstance:
     - target: {fileID: 5011662305757098312, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
       propertyPath: m_Name
       value: Grafiti
+      objectReference: {fileID: 0}
+    - target: {fileID: 5992958224214010914, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+      propertyPath: CalidadABajar
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
       propertyPath: Player
@@ -17734,6 +17732,11 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &296562451 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8426631371736418946, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+  m_PrefabInstance: {fileID: 749085351}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &321631263 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3898764378425669985, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
@@ -18576,6 +18579,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &404662534 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2949762868699962798, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+  m_PrefabInstance: {fileID: 1825196251}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &429091129
 GameObject:
   m_ObjectHideFlags: 0
@@ -18790,11 +18798,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &435330416 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1825485709791816537, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
-  m_PrefabInstance: {fileID: 749085351}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &438594497
 GameObject:
   m_ObjectHideFlags: 0
@@ -20287,11 +20290,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &604176258 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1269227182867427392, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
-  m_PrefabInstance: {fileID: 961926843}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &613100216
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21789,6 +21787,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &712358326 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6868769685970764751, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+  m_PrefabInstance: {fileID: 749085351}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &718833056
 GameObject:
   m_ObjectHideFlags: 0
@@ -22154,7 +22157,7 @@ PrefabInstance:
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: SpamQTE
       value: 
-      objectReference: {fileID: 435330416}
+      objectReference: {fileID: 296562451}
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: _player
       value: 
@@ -22162,23 +22165,23 @@ PrefabInstance:
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: Spam_QTE
       value: 
-      objectReference: {fileID: 435330416}
+      objectReference: {fileID: 0}
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: TeclasQTE
       value: 
-      objectReference: {fileID: 1050154066}
+      objectReference: {fileID: 712358326}
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: Teclas_QTE
       value: 
-      objectReference: {fileID: 1050154066}
+      objectReference: {fileID: 0}
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: ManivelaQTE
       value: 
-      objectReference: {fileID: 102739715}
+      objectReference: {fileID: 1645260443}
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: Manivela_QTE
       value: 
-      objectReference: {fileID: 102739715}
+      objectReference: {fileID: 0}
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: _levelManager
       value: 
@@ -22251,9 +22254,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6271680240244622701, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6581341946746749385, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: CalidadABajar
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426631371736418946, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8563148862737352111, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: m_AnchorMax.y
@@ -22336,6 +22347,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 961e9fc7adb51464b93dba98da1f246a, type: 3}
+--- !u!1 &776360305 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8426631371736418946, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+  m_PrefabInstance: {fileID: 961926843}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &796814407
 GameObject:
   m_ObjectHideFlags: 0
@@ -23392,6 +23408,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1125481650}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &901972581 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8426631371736418946, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+  m_PrefabInstance: {fileID: 1825196251}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &902143835
 GameObject:
   m_ObjectHideFlags: 0
@@ -24346,7 +24367,7 @@ PrefabInstance:
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: SpamQTE
       value: 
-      objectReference: {fileID: 2033497156}
+      objectReference: {fileID: 776360305}
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: _player
       value: 
@@ -24354,23 +24375,23 @@ PrefabInstance:
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: Spam_QTE
       value: 
-      objectReference: {fileID: 2033497156}
+      objectReference: {fileID: 0}
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: TeclasQTE
       value: 
-      objectReference: {fileID: 604176258}
+      objectReference: {fileID: 120752096}
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: Teclas_QTE
       value: 
-      objectReference: {fileID: 604176258}
+      objectReference: {fileID: 0}
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: ManivelaQTE
       value: 
-      objectReference: {fileID: 1339390924}
+      objectReference: {fileID: 1724586265}
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: Manivela_QTE
       value: 
-      objectReference: {fileID: 1339390924}
+      objectReference: {fileID: 0}
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: _levelManager
       value: 
@@ -25583,16 +25604,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7674669691530021310, guid: 8e518f3f91021964490aa4c6a5d8d0d8, type: 3}
   m_PrefabInstance: {fileID: 1700443988}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1050154066 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1269227182867427392, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
-  m_PrefabInstance: {fileID: 749085351}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1051940818 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6290379841019181947, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
-  m_PrefabInstance: {fileID: 1353685215}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1063459530
 GameObject:
   m_ObjectHideFlags: 0
@@ -26305,6 +26316,10 @@ PrefabInstance:
     - target: {fileID: 5011662305757098312, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
       propertyPath: m_Name
       value: Grafiti
+      objectReference: {fileID: 0}
+    - target: {fileID: 5992958224214010914, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+      propertyPath: CalidadABajar
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
       propertyPath: Player
@@ -28484,11 +28499,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 999616f028854d24dbb68033461fab7e, type: 3}
---- !u!1 &1339390924 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6290379841019181947, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
-  m_PrefabInstance: {fileID: 961926843}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1344706930
 GameObject:
   m_ObjectHideFlags: 0
@@ -28638,7 +28648,7 @@ PrefabInstance:
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: SpamQTE
       value: 
-      objectReference: {fileID: 146095235}
+      objectReference: {fileID: 1377161662}
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: _player
       value: 
@@ -28646,23 +28656,23 @@ PrefabInstance:
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: Spam_QTE
       value: 
-      objectReference: {fileID: 146095235}
+      objectReference: {fileID: 0}
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: TeclasQTE
       value: 
-      objectReference: {fileID: 1652959087}
+      objectReference: {fileID: 1901261732}
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: Teclas_QTE
       value: 
-      objectReference: {fileID: 1652959087}
+      objectReference: {fileID: 0}
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: ManivelaQTE
       value: 
-      objectReference: {fileID: 1051940818}
+      objectReference: {fileID: 1591661638}
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: Manivela_QTE
       value: 
-      objectReference: {fileID: 1051940818}
+      objectReference: {fileID: 0}
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: _levelManager
       value: 
@@ -29112,6 +29122,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1377161662 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8426631371736418946, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+  m_PrefabInstance: {fileID: 1353685215}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1389804825
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29372,11 +29387,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1403427828 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6290379841019181947, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
-  m_PrefabInstance: {fileID: 1825196251}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1408413209
 GameObject:
   m_ObjectHideFlags: 0
@@ -31510,6 +31520,11 @@ Transform:
   - {fileID: 57095878}
   m_Father: {fileID: 872103174}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1591661638 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2949762868699962798, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+  m_PrefabInstance: {fileID: 1353685215}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1597013886
 GameObject:
   m_ObjectHideFlags: 0
@@ -32166,10 +32181,10 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1652959087 stripped
+--- !u!1 &1645260443 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 1269227182867427392, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
-  m_PrefabInstance: {fileID: 1353685215}
+  m_CorrespondingSourceObject: {fileID: 2949762868699962798, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+  m_PrefabInstance: {fileID: 749085351}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1655561288
 GameObject:
@@ -32474,6 +32489,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1332765640}
     m_Modifications:
+    - target: {fileID: 2324202672548925618, guid: ae1a9226cccf11c49b990e01bcf05101, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -113.21802
+      objectReference: {fileID: 0}
+    - target: {fileID: 2324202672548925618, guid: ae1a9226cccf11c49b990e01bcf05101, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -31.28894
+      objectReference: {fileID: 0}
     - target: {fileID: 2613398142267486895, guid: ae1a9226cccf11c49b990e01bcf05101, type: 3}
       propertyPath: Final
       value: 
@@ -32497,6 +32520,14 @@ PrefabInstance:
     - target: {fileID: 3046589496851891855, guid: ae1a9226cccf11c49b990e01bcf05101, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4269273537639019359, guid: ae1a9226cccf11c49b990e01bcf05101, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 66.242676
+      objectReference: {fileID: 0}
+    - target: {fileID: 4269273537639019359, guid: ae1a9226cccf11c49b990e01bcf05101, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 60.80005
       objectReference: {fileID: 0}
     - target: {fileID: 4306164689981147991, guid: ae1a9226cccf11c49b990e01bcf05101, type: 3}
       propertyPath: m_Name
@@ -32657,6 +32688,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e518f3f91021964490aa4c6a5d8d0d8, type: 3}
+--- !u!1 &1724586265 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2949762868699962798, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+  m_PrefabInstance: {fileID: 961926843}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1729498394
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32708,6 +32744,10 @@ PrefabInstance:
     - target: {fileID: 5011662305757098312, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
       propertyPath: m_Name
       value: Grafiti
+      objectReference: {fileID: 0}
+    - target: {fileID: 5992958224214010914, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
+      propertyPath: CalidadABajar
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5999592212315120117, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
       propertyPath: Player
@@ -32790,6 +32830,11 @@ Transform:
   - {fileID: 1992156798}
   m_Father: {fileID: 1673293511}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1737611369 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6868769685970764751, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+  m_PrefabInstance: {fileID: 1825196251}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1737861020
 GameObject:
   m_ObjectHideFlags: 0
@@ -33679,7 +33724,7 @@ PrefabInstance:
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: SpamQTE
       value: 
-      objectReference: {fileID: 2030097818}
+      objectReference: {fileID: 901972581}
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: _player
       value: 
@@ -33687,23 +33732,23 @@ PrefabInstance:
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: Spam_QTE
       value: 
-      objectReference: {fileID: 2030097818}
+      objectReference: {fileID: 0}
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: TeclasQTE
       value: 
-      objectReference: {fileID: 139800223}
+      objectReference: {fileID: 1737611369}
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: Teclas_QTE
       value: 
-      objectReference: {fileID: 139800223}
+      objectReference: {fileID: 0}
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: ManivelaQTE
       value: 
-      objectReference: {fileID: 1403427828}
+      objectReference: {fileID: 404662534}
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: Manivela_QTE
       value: 
-      objectReference: {fileID: 1403427828}
+      objectReference: {fileID: 0}
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: _levelManager
       value: 
@@ -34632,6 +34677,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1901261732 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6868769685970764751, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+  m_PrefabInstance: {fileID: 1353685215}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1901675182
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36793,16 +36843,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ed54c3cdb60d8b448114796a7468975, type: 3}
---- !u!1 &2030097818 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1825485709791816537, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
-  m_PrefabInstance: {fileID: 1825196251}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2033497156 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1825485709791816537, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
-  m_PrefabInstance: {fileID: 961926843}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2050855252
 GameObject:
   m_ObjectHideFlags: 0

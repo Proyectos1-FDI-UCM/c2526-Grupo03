@@ -30,7 +30,20 @@ public class SettingsManager : MonoBehaviour
     /// <summary>
     /// Bool que nos indica si esta en el tutorial
     /// </summary>
-    [SerializeField] private bool Tutorial =false;
+    [SerializeField] private bool Tutorial = false;
+    //-------- Cheats------------
+    /// <summary>
+    /// Toggle que nos indica si esta activo la NoMuerte
+    /// </summary>
+    [SerializeField] private Toggle NoMuerte;
+    /// <summary>
+    /// Toggle que nos indica si esta activo el AutoRepair
+    /// </summary>
+    [SerializeField] private Toggle AutoRepair;
+    /// <summary>
+    /// Toggle que nos indica si esta activo la NoCalidad
+    /// </summary>
+    [SerializeField] private Toggle NoCalidad;
 
     #endregion
 
@@ -47,6 +60,19 @@ public class SettingsManager : MonoBehaviour
     /// Booleano que indica si usa mando
     /// </summary>
     private bool _mandoBool;
+    //------Cheats-------
+    /// <summary>
+    /// Bool que lleva si esta activo la NoMuerte
+    /// </summary>
+    private bool _noMuerteBool;
+    /// <summary>
+    /// Bool que lleva si esta activo el AutoRepair
+    /// </summary>
+    private bool _autoRepairBool;
+    /// <summary>
+    /// Bool que lleva si esta activo la NoCalidad
+    /// </summary>
+    private bool _noCalidadBool;
 
 
     #endregion
@@ -66,6 +92,9 @@ public class SettingsManager : MonoBehaviour
     {
         //inicializamos
         _mandoBool = GameManager.Instance.GetMando();
+        _autoRepairBool = GameManager.Instance.GetAutoRepair();
+        _noCalidadBool = GameManager.Instance.GetNoCalidad();
+        _noMuerteBool = GameManager.Instance.GetNoMuerte();
         //revisamos que no sea null
         if (Mando != null)
         {
@@ -73,6 +102,22 @@ public class SettingsManager : MonoBehaviour
             ActualizaMando();
 
         }
+        if (AutoRepair != null)
+        {
+            //actualizamos
+            ActualizaAutoRepair();
+        }
+        if (NoCalidad != null)
+        {
+            //actualizamos
+            ActualizaNoCalidad();
+        }
+        if (NoMuerte != null)
+        {
+            //actualizamos
+            ActualizaNoMuerte();
+        }
+
 
     }
     #endregion
@@ -93,7 +138,34 @@ public class SettingsManager : MonoBehaviour
         GameManager.Instance.SetMando(_mandoBool);
         ActualizaMando();
 
-        // Debug.Log(mando);
+        //Debug.Log(Mando);
+    }
+    /// <summary>
+    /// Cambia entre si usas autoRepair o no
+    /// </summary>
+    public void CambiaAutoRepair()
+    {
+        _autoRepairBool = !_autoRepairBool;
+        GameManager.Instance.SetAutoRepair(_autoRepairBool);
+        ActualizaAutoRepair();
+    }
+    /// <summary>
+    /// Cambia entre si usas el noCalidad o no
+    /// </summary>
+    public void CambiaNoCalidad()
+    {
+        _noCalidadBool = !_noCalidadBool;
+        GameManager.Instance.SetNoCalidad(_noCalidadBool);
+        ActualizaNoCalidad();
+    }
+    /// <summary>
+    /// Cambia entre si usas el noMuerte o no
+    /// </summary>
+    public void CambiaNoMuerte()
+    {
+        _noMuerteBool = !_noMuerteBool;
+        GameManager.Instance.SetNoMuerte(_noMuerteBool);
+        ActualizaNoMuerte();
     }
     #endregion
 
@@ -115,6 +187,31 @@ public class SettingsManager : MonoBehaviour
         {
             Tutorial_Manager.Instance.ActualizaInst();
         }
+    }
+    /// <summary>
+    /// actualiza el boton para si se esta usando el autoRepair
+    /// </summary>
+    private void ActualizaAutoRepair()
+    {
+        //Cambiamos el boton del toggle del autoRepair
+        AutoRepair.SetIsOnWithoutNotify(_autoRepairBool);
+
+    }
+    /// <summary>
+    /// actualiza el boton para si se esta usando el noMuerte
+    /// </summary>
+    private void ActualizaNoMuerte()
+    {
+        //Cambiamos el boton del toggle del noMuerte
+        NoMuerte.SetIsOnWithoutNotify(_noMuerteBool);
+    }
+    /// <summary>
+    /// actualiza el boton para si se esta usando la noCalidad
+    /// </summary>
+    private void ActualizaNoCalidad()
+    {
+        //Cambiamos el boton del toggle del noCalidad
+        NoCalidad.SetIsOnWithoutNotify(_noCalidadBool);
     }
 
     #endregion

@@ -146,6 +146,10 @@ public class Repair : MonoBehaviour
     /// Variable que nos indicara si ya has cambiado el estado a reparado
     /// </summary>
     private bool _changedToRepaired = false;
+    /// <summary>
+    /// Variable que nos indica si estamos usando cheats o no
+    /// </summary>
+    private bool _cheats = false;
     #endregion
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
@@ -163,6 +167,7 @@ public class Repair : MonoBehaviour
         //Se cachean todos los componentes que se van a usar en variables.
         _movementPlayerComponent = Player.GetComponent<Movement_Player>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _cheats = GameManager.Instance.GetAutoRepair();
         //SpriteBroken será el sprite roto del objeto reparable.
         _spriteRenderer.sprite = SpriteBroken;
     }
@@ -202,18 +207,27 @@ public class Repair : MonoBehaviour
                 // Marcamos que ya se ha elegido el QTE para que no se repita esta parte
                 _QTEWasSelected = true;
             }
-            //Se activa el QTE que ha salido random y se desactiva el icono del input de encima del objeto reparable.
-            ActivateChosenQTE();
+            if (_cheats) // parte de la autoreparacion
+            {
+                _repaired = true;
+                _isRepairing = true;
+            }
+            else
+            {
+                //Se activa el QTE que ha salido random y se desactiva el icono del input de encima del objeto reparable.
+                ActivateChosenQTE();
 
-            // Ocultamos las teclas de reparación
-            Keybind.SetActive(false);
+                // Ocultamos las teclas de reparación
+                Keybind.SetActive(false);
 
-            //Se desactivan todas las acciones del player para prohibirle interactuar con el nivel mientras repara
-            _movementPlayerComponent.DisablePlayer();
+                //Se desactivan todas las acciones del player para prohibirle interactuar con el nivel mientras repara
+                _movementPlayerComponent.DisablePlayer();
 
-            _isRepairing = true;
-            _canRepair = false;
-            _repairIniTime = Time.time;
+                _isRepairing = true;
+                _canRepair = false;
+                _repairIniTime = Time.time;
+            }
+            
         }
         if (_repaired && !_changedToRepaired)
         {
@@ -301,7 +315,6 @@ public class Repair : MonoBehaviour
     {
         return _repaired;
     }
-
     #endregion
 
     // ---- MÉTODOS PRIVADOS ----

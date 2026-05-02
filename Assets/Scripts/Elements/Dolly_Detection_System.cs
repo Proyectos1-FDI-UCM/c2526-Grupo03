@@ -53,7 +53,14 @@ public class Dolly_Detection_System : MonoBehaviour
     /// Variable que determina si se ha encontrado un objeto interactuable o no
     ///</summary>
     private bool _detected;
-
+    /// <summary>
+    /// variable que dertemina si los cheats de no muerte estan activos
+    /// </summary>
+    private bool _cheatsNoMuerte;
+    /// <summary>
+    ///  variable que dertemina si los cheats de no calidad estan activos
+    /// </summary>
+    private bool _cheatsNoCalidad;
 
     #endregion
 
@@ -79,6 +86,9 @@ public class Dolly_Detection_System : MonoBehaviour
     /// </summary>
     void FixedUpdate()
     {
+        //Inicializamos para ver si estan los cheats
+        _cheatsNoMuerte = GameManager.Instance.GetNoMuerte();
+        _cheatsNoCalidad = GameManager.Instance.GetNoCalidad();
         //Si ha detectado un objeto
         if (_detected)
         {
@@ -113,7 +123,10 @@ public class Dolly_Detection_System : MonoBehaviour
                 //Cambiamos a detectado para resetear la subida de puntos sola
                 _detected = true;
                 //Bajamos la calidad
-                LevelManager.Instance.QualityDown(collision.gameObject.GetComponent<DetectableObject>().GetQualityDown());
+                if (!_cheatsNoCalidad)
+                {
+                    LevelManager.Instance.QualityDown(collision.gameObject.GetComponent<DetectableObject>().GetQualityDown());
+                }
             }
         }
         //Miramos si es el jugador  
@@ -125,14 +138,20 @@ public class Dolly_Detection_System : MonoBehaviour
                 //Si existe la meta miramos no has ganado 
                 if (!Meta.HasWin())
                 {
-                    //Restamos puntuacion para perder
-                    LevelManager.Instance.QualityDown(LevelManager.Instance.GetcurrentScore());
+                    if (!_cheatsNoMuerte)
+                    {
+                        //Restamos puntuacion para perder
+                        LevelManager.Instance.QualityDown(LevelManager.Instance.GetcurrentScore());
+                    }
                 }
             }
             else
             {
-                //sino hay meta perdemos directamente
-                LevelManager.Instance.QualityDown(LevelManager.Instance.GetcurrentScore());
+                if (!_cheatsNoMuerte)
+                {
+                    //sino hay meta perdemos directamente
+                    LevelManager.Instance.QualityDown(LevelManager.Instance.GetcurrentScore());
+                }
             }
         }
     }

@@ -68,6 +68,18 @@ public class GameManager : MonoBehaviour
     /// bool que indica si ehemos cambiado de dispositivo utilizado
     /// </summary>
     private bool _deviceChanged = false;
+    /// <summary>
+    ///  bool que indica si estamos usando la no muerte
+    /// </summary>
+    private bool _noMuerte = false;
+    /// <summary>
+    ///  bool que indica si estamos usando el auto repair
+    /// </summary>
+    private bool _autoRepair = false;
+    /// <summary>
+    ///  bool que indica si estamos usando la no calidad
+    /// </summary>
+    private bool _noCalidad = false;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -254,6 +266,48 @@ public class GameManager : MonoBehaviour
     public bool GetMando()
     {
         return _mando;
+    }
+    /// <summary>
+    /// Cambia el estado de el boleano autoRepair
+    /// </summary>
+    public void SetAutoRepair(bool estado)
+    {
+        _autoRepair = estado;
+    }
+    /// <summary>
+    /// Devuelve si esta usando autoRepair
+    /// </summary>
+    public bool GetAutoRepair()
+    {
+        return _autoRepair;
+    }
+    /// <summary>
+    /// Cambia el estado de el boleano noCalidad
+    /// </summary>
+    public void SetNoCalidad(bool estado)
+    {
+        _noCalidad = estado;
+    }
+    /// <summary>
+    /// Devuelve si esta usando noCalidad
+    /// </summary>
+    public bool GetNoCalidad()
+    {
+        return _noCalidad;
+    }
+    /// <summary>
+    /// Cambia el estado de el boleano noMuerte
+    /// </summary>
+    public void SetNoMuerte(bool estado)
+    {
+        _noMuerte = estado;
+    }
+    /// <summary>
+    /// Devuelve si esta usando noMuerte
+    /// </summary>
+    public bool GetNoMuerte()
+    {
+        return _noMuerte;
     }
     /// <summary>
     /// Cambia el valor del booleano que indica si se ha cambiado de dispositivo
