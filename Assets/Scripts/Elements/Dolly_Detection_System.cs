@@ -2,6 +2,7 @@
 // Componente que detecta cuándo un objeto entra dentro del campo de visión de la cámara Dolly.
 // Sergio Higuera Gil && Colaboradores:
 //      Víctor Román Román
+//      Gabriel Adrian Oltean
 // Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
@@ -24,10 +25,6 @@ public class Dolly_Detection_System : MonoBehaviour
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
 
-    /// <summary>
-    /// Objeto de la meta
-    /// </summary>
-    [SerializeField] private Finish Meta = null;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -74,6 +71,9 @@ public class Dolly_Detection_System : MonoBehaviour
     {
         //Ponemos detecte en true
         _detected = true;
+        //Inicializamos para ver si estan los cheats
+        _cheatsNoMuerte = GameManager.Instance.GetNoMuerte();
+        _cheatsNoCalidad = GameManager.Instance.GetNoCalidad();
     }
 
     /// <summary>
@@ -81,9 +81,6 @@ public class Dolly_Detection_System : MonoBehaviour
     /// </summary>
     void FixedUpdate()
     {
-        //Inicializamos para ver si estan los cheats
-        _cheatsNoMuerte = GameManager.Instance.GetNoMuerte();
-        _cheatsNoCalidad = GameManager.Instance.GetNoCalidad();
         //Si ha detectado un objeto
         if (_detected)
         {
@@ -107,12 +104,21 @@ public class Dolly_Detection_System : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
-    public void OnTriggerEnter2D(Collider2D collision)
+
+    #endregion
+
+    // ---- MÉTODOS PRIVADOS ----
+    #region Métodos Privados
+    // Documentar cada método que aparece aquí
+    // El convenio de nombres de Unity recomienda que estos métodos
+    // se nombren en formato PascalCase (palabras con primera letra
+    // mayúscula, incluida la primera letra)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         //Miramos si es un objeto detectable 
         if (collision.gameObject.GetComponent<DetectableObject>() != null)
         {
-            ActualizaCheatsNoCalidad();
+            ActualizaCheats();
             //Miramos si no es reparable para restar puntuacion
             if (collision.gameObject.GetComponent<Repair>() == null || collision.gameObject.GetComponent<Repair>().IsRepaired() == false)
             {
@@ -128,45 +134,21 @@ public class Dolly_Detection_System : MonoBehaviour
         //Miramos si es el jugador  
         else if (collision.gameObject.GetComponent<Movement_Player>() != null)
         {
-            ActualizaCheatsNoMuerte();
-            //revisamos si existe una meta
-            if (Meta != null)
+            ActualizaCheats();
+            // Si no tienes los cheats activados y no has llegado a la meta
+            if (!_cheatsNoMuerte && !LevelManager.Instance.GetPlayerFinished())
             {
-                //Si existe la meta miramos no has ganado 
-                if (!Meta.HasWin())
-                {
-                    if (!_cheatsNoMuerte)
-                    {
-                        //Restamos puntuacion para perder
-                        LevelManager.Instance.QualityDown(LevelManager.Instance.GetcurrentScore());
-                    }
-                }
-            }
-            else
-            {
-                if (!_cheatsNoMuerte)
-                {
-                    //sino hay meta perdemos directamente
-                    LevelManager.Instance.QualityDown(LevelManager.Instance.GetcurrentScore());
-                }
+                //Restamos puntuacion para perder
+                LevelManager.Instance.QualityDown(LevelManager.Instance.GetcurrentScore());
             }
         }
     }
-    #endregion
-
-    // ---- MÉTODOS PRIVADOS ----
-    #region Métodos Privados
-    // Documentar cada método que aparece aquí
-    // El convenio de nombres de Unity recomienda que estos métodos
-    // se nombren en formato PascalCase (palabras con primera letra
-    // mayúscula, incluida la primera letra)
-
-    private void ActualizaCheatsNoMuerte()
+    /// <summary>
+    /// Actualiza los booleanos internos de los cheats con los del gameManager
+    /// </summary>
+    private void ActualizaCheats()
     {
         _cheatsNoMuerte = GameManager.Instance.GetNoMuerte();
-    }
-    private void ActualizaCheatsNoCalidad()
-    {
         _cheatsNoCalidad = GameManager.Instance.GetNoCalidad();
     }
     #endregion

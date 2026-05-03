@@ -65,18 +65,6 @@ public class Finish : MonoBehaviour
     /// Script del movement player
     /// </summary>
     private Movement_Player _movimientoJugador;
-    /// <summary>
-    /// Script del salto del jugador
-    /// </summary>
-    private Jump _saltoJugador;
-    /// <summary>
-    /// Script de la recarga del jugador
-    /// </summary>
-    private Scream_Reload _recargaJugador;
-    /// <summary>
-    /// Script del disparo del jugador
-    /// </summary>
-    private Shoot _disparoJugador;
 
     #endregion
 
@@ -97,9 +85,6 @@ public class Finish : MonoBehaviour
         _puntuacionInicial = LevelManager.Instance.GetcurrentScore();
         //hacemos el GetComponent de todos los scripts del jugador
         _movimientoJugador = Player.GetComponent<Movement_Player>();
-        _saltoJugador = Player.GetComponent<Jump>();
-        _disparoJugador = Player.GetComponent<Shoot>();
-        _recargaJugador = Player.GetComponent<Scream_Reload>();
     }
     #endregion
 
@@ -138,11 +123,11 @@ public class Finish : MonoBehaviour
             //Pausamos el jugador
             _movimientoJugador.DisablePlayer();
             //Hacer que ignore la deteccion del jugador
-            _jugadorPausado = Player_ignore();
+            _jugadorPausado = true;
+            // Indicamos al level manager que el jugador ha llegado a la meta
+            LevelManager.Instance.SetPlayerFinished(_jugadorPausado);
             //Accelerar el movimiento de la camara
             Accelera_Dolly();
-
-
         }
         //Si ya se ha realizado la collision del jugador buscamos que nos choque la camara también
         if (_jugadorPausado && collision.gameObject.GetComponent<Dolly_Movement>() != null)
@@ -159,16 +144,6 @@ public class Finish : MonoBehaviour
     {
         //cambiamos la velocidad de la bola del desierto para que viaje mas rapido y no aburrir al usuario
         DesertBall.SetSpeed(SpeedBost);
-    }
-    /// <summary>
-    /// Metodo que hace que el jugador no sea detectable con la camara y por tanto al llegar a la meta no muera cuandp pase la camara
-    /// </summary>
-    /// <returns></returns>
-    private bool Player_ignore()
-    {
-        bool jugador_pausado = true;
-        //_player.gameObject.GetComponent<DetectableObject>().enabled = false;
-        return jugador_pausado;
     }
     /// <summary>
     /// Metodo que establece el porcentaje de las estrellas que has conseguido

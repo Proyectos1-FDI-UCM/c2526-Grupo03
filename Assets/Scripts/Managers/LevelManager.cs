@@ -120,6 +120,11 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     private int _lastQte = 0;
 
+    /// <summary>
+    /// Indica si el jugador ha llegado a la meta
+    /// </summary>
+    private bool _playerFinished = false;
+
     private VictoryPanel _panelVictoria;
 
     #endregion
@@ -219,6 +224,14 @@ public class LevelManager : MonoBehaviour
         }
     }
     /// <summary>
+    /// Cambia el bool que indica si el jugador ha llegado a la meta 
+    /// </summary>
+    /// <param name="finished">Bool por el que cambiar</param>
+    public void SetPlayerFinished(bool finished)
+    {
+        _playerFinished = finished;
+    }
+    /// <summary>
     /// Método que baja la calidad de la película dependiendo de con que objeto collisione
     /// </summary>
     /// <param name="cant">Cantidad a bajar</param>
@@ -247,7 +260,14 @@ public class LevelManager : MonoBehaviour
     {
         return _quality;
     }
-
+    /// <summary>
+    /// Indica si el jugador ha llegado a la meta
+    /// </summary>
+    /// <returns>True cuando ha llegado y false cuando no ha llegado</returns>
+    public bool GetPlayerFinished()
+    {
+        return _playerFinished;
+    }
     /// <summary>
     /// Propiedad para acceder a la única instancia de la clase.
     /// </summary>
