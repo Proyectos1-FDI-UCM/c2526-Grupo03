@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2327754916111609254}
   - component: {fileID: 4334751777863430505}
   - component: {fileID: 5426743865585603417}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Meta
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,9 +120,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77fedc11ed876a74c93424b1d630b0c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _desertBall: {fileID: 0}
+  DesertBall: {fileID: 0}
   SpeedBost: 5
-  Porcentaje_victoria: 0.66
+  Player: {fileID: 0}
+  PorcentajeVictoria: 0
 --- !u!1 &2149599799108242134
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,7 +134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1251627206322513187}
   - component: {fileID: 3076547231728723794}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
