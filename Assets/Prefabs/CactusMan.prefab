@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8728327659063940811}
   - component: {fileID: 5020177118165647599}
   - component: {fileID: 6728700807455670162}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: CactusDetector
   m_TagString: Untagged
   m_Icon: {fileID: 0}

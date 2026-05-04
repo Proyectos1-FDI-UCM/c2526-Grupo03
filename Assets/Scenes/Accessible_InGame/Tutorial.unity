@@ -2180,11 +2180,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3439513988484797793, guid: c07129f316da99a42a01b5facbaddf53, type: 3}
   m_PrefabInstance: {fileID: 373997288}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &384177400 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1661223601966698938, guid: 1d86ef47c2f0b9540a524b0b8f3f1b96, type: 3}
-  m_PrefabInstance: {fileID: 664628049}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &400754050
 GameObject:
   m_ObjectHideFlags: 0
@@ -5482,7 +5477,7 @@ PrefabInstance:
     - target: {fileID: 6772159479419885327, guid: c696ec169f46ece4390cef155afedac2, type: 3}
       propertyPath: VictoryFirstSelectedButton
       value: 
-      objectReference: {fileID: 384177400}
+      objectReference: {fileID: 1817762939}
     - target: {fileID: 6772159479419885327, guid: c696ec169f46ece4390cef155afedac2, type: 3}
       propertyPath: SettingsFirstSelectedButton
       value: 
@@ -18745,6 +18740,11 @@ PrefabInstance:
 --- !u!224 &1817762938 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8276986294035925495, guid: c851e76814be3a045b7840455e7ed4f8, type: 3}
+  m_PrefabInstance: {fileID: 1817762937}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1817762939 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2970415540404760438, guid: c851e76814be3a045b7840455e7ed4f8, type: 3}
   m_PrefabInstance: {fileID: 1817762937}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1817762940 stripped
