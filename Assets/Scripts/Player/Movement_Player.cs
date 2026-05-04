@@ -302,7 +302,7 @@ public class Movement_Player : MonoBehaviour
         }
 
         // ====== Salto del personaje ======
-        if (InputManager.Instance.JumpIsPressed())
+        if (InputManager.Instance.JumpWasPressedThisFrame())
         {
             _jumpComponent.TryStartJump();
         }

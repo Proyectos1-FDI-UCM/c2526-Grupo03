@@ -50,6 +50,10 @@ public class Jump : MonoBehaviour
     /// Velocidad máxima de caída
     /// </summary>
     [SerializeField] private float MaxFallSpeed;
+    /// <summary>
+    /// Tiempo desde que dejas de estar en el suelo hasta que empiezas a caer
+    /// </summary>
+    [SerializeField] private float CoyoteTime = 0.075f;
 
     /// <summary>
     /// Sonido de salto
@@ -70,6 +74,14 @@ public class Jump : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
+    /// <summary>
+    /// Momento en el que ya se puede caer después del coyote time
+    /// </summary>
+    private float _coyoteFallTime;
+    /// <summary>
+    /// Indica si ha iniciado el coyoteTime
+    /// </summary>
+    private bool _coyoteStarted;
     /// <summary>
     /// Velocidad inicial del salto
     /// </summary>
@@ -161,7 +173,32 @@ public class Jump : MonoBehaviour
         float time = Time.deltaTime;
 
         // ====== Detecciones del motor de físicas ======
-        _floorDetected = FloorDetector.Detected();
+        // ---Coyote Time
+        if (!FloorDetector.Detected())
+        {
+            // Si acabamos de dejar de detectar el suelo
+            if (!_coyoteStarted)
+            {
+                // Calculamos el momento de caida
+                _coyoteFallTime = Time.time + CoyoteTime;
+                // Indicamos que ha iniciado el coyote time
+                _coyoteStarted = true;
+            }
+            // Si ya empezó el coyote time pero aún no ha terminado
+            else if (Time.time < _coyoteFallTime)
+            {
+                // Fingimos que aún estas en el suelo
+                _floorDetected = true;
+            }
+            else
+            {
+                _floorDetected = false;
+            }
+        }
+        else
+        {
+            _floorDetected = true;
+        }
         _roofDetected = RoofDetector.Detected();
 
         // ====== Parte de caida y gravedad ======
@@ -194,6 +231,10 @@ public class Jump : MonoBehaviour
         // ====== Parte de aterrizaje ======
         if (_floorDetected)
         {
+            // Si ya ha empezado y acabado el coyote time y estamos detectando suelo
+            // Significa que ha acabado el coyote time y has caido de un salto
+            if (_coyoteStarted && Time.time >= _coyoteFallTime) _coyoteStarted = false;
+
             // ====== Si estas cayendo ======
             if (_falling)
             {
