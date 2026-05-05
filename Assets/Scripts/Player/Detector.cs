@@ -68,6 +68,11 @@ public class Detector : MonoBehaviour
     {
         return _detected;
     }
+
+    public bool HasCollisionedAtStart()
+    {
+        return _collisionedObject != null;
+    }
     /// <summary>
     /// Devuelve el vector de la posicion del ultimo objeto detectado
     /// </summary>

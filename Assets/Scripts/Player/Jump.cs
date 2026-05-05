@@ -75,6 +75,10 @@ public class Jump : MonoBehaviour
     // Ejemplo: _maxHealthPoints
 
     /// <summary>
+    /// Indica si ya se ha detectado el suelo en el start
+    /// </summary>
+    private bool _collisionDetectorStarted = false;
+    /// <summary>
     /// Momento en el que ya se puede caer después del coyote time
     /// </summary>
     private float _coyoteFallTime;
@@ -169,6 +173,12 @@ public class Jump : MonoBehaviour
     /// </summary>
     void Update()
     {
+        // Comprobamos que el detector de suelo haya acabado de inicializarse
+        // Sin esto la animación del salto aparece congelada cuando se activa y desactiva el gameObject
+        if (!_collisionDetectorStarted)
+        {
+            _collisionDetectorStarted = FloorDetector.HasCollisionedAtStart();
+        }
         // ====== Variable que guarda el tiempo ======
         float time = Time.deltaTime;
 
@@ -190,6 +200,7 @@ public class Jump : MonoBehaviour
                 // Fingimos que aún estas en el suelo
                 _floorDetected = true;
             }
+            // Cuando ya se a acabado el coyote time
             else
             {
                 _floorDetected = false;
@@ -202,7 +213,7 @@ public class Jump : MonoBehaviour
         _roofDetected = RoofDetector.Detected();
 
         // ====== Parte de caida y gravedad ======
-        if (!_floorDetected || _speed > 0.0f)
+        if (_collisionDetectorStarted && (!_floorDetected || _speed > 0.0f ))
         {
             // Si has dejado de subir
             if (!_goingUp)
@@ -252,7 +263,6 @@ public class Jump : MonoBehaviour
                 }
 
                 // ====== Situamos al jugador encima del suelo cuando esta atravesándolo ======
-
                 // Calculamos la posicion del Jugador justo encima del suelo
                 float _posEncimaSuelo = FloorDetector.GetCollisionedObjectPosition().y + FloorDetector.GetCollisionedObjectSize().y / 2;
                 float _posY = _posEncimaSuelo + _objectHeight / 2;
