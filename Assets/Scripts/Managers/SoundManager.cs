@@ -35,6 +35,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource SFX_ReloadRegular;
     [SerializeField] private AudioSource SFX_ReloadSpecial;
     [SerializeField] private AudioSource SFX_HasPerdiiido;
+    [SerializeField] private AudioSource SFX_CualityDown;
+    [SerializeField] private AudioSource SFX_SandStep;
     [SerializeField] private AudioSource MUSIC_WiiDessertIntro;
     [SerializeField] private AudioSource MUSIC_WiiDessertLoop;
     [SerializeField] private AudioSource MUSIC_WiiCourseClear;
@@ -94,7 +96,6 @@ public class SoundManager : MonoBehaviour
         else
         {
             _instance = this;
-            DontDestroyOnLoad(this.gameObject);
         } // if-else somos instancia nueva o no.
     }
     private void Start()
@@ -141,6 +142,12 @@ public class SoundManager : MonoBehaviour
         SFX_Damage.Play();
     }
 
+    // Esto es para quitar al enemigo una vez que el efecto ha acabado
+    public bool GetDmgPlaying()
+    {
+        return SFX_Damage.isPlaying;
+    }
+
     public void PlaySFXScreamOne()
     {
         SFX_ScreamOne.Play();
@@ -169,6 +176,16 @@ public class SoundManager : MonoBehaviour
     public void PlaySFXHasPerdiido()
     {
         SFX_HasPerdiiido.Play();
+    }
+
+    public void PlaySFXCualityDown()
+    {
+        SFX_CualityDown.Play();
+    }
+
+    public void PlaySFXSandStep()
+    {
+        SFX_SandStep.Play();
     }
 
     // Reproducción de música independiente de la escena

@@ -127,6 +127,7 @@ public class Dolly_Detection_System : MonoBehaviour
                 //Bajamos la calidad
                 if (!_cheatsNoCalidad)
                 {
+                    SoundManager.Instance.PlaySFXCualityDown();
                     LevelManager.Instance.QualityDown(collision.gameObject.GetComponent<DetectableObject>().GetQualityDown());
                 }
             }

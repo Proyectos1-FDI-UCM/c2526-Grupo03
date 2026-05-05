@@ -102,11 +102,6 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     [SerializeField] private int ChanceForSpecialSound;
 
-    /// <summary>
-    /// SoundManager de la escena para reiniciar el sistema de música cada vez que se reinicie la escena
-    /// </summary>
-    [SerializeField] private SoundManager SoundManager;
-
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -351,14 +346,10 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     public void Restart()
     {
-        // Se destruye el soundmanager para provocar que el restart se reinicie
-        Destroy(SoundManager);
         // Restablece el nivel al inicio
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
         // Desactiva el panel de pausa
         PauseScreen.SetActive(false);
-        // Una vez cargada la escena, se reinstancia el soundmanager para que el sistema de sonido vuelva a funcionar
-        Instantiate(SoundManager);
     }
     /// <summary>
     /// Metodo que carga la escena del menu

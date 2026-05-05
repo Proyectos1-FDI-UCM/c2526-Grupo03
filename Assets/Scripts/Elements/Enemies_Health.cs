@@ -39,10 +39,6 @@ public class Enemies_Health : MonoBehaviour
     /// </summary>
     [SerializeField] private GameObject BarraVida;
 
-    /// <summary>
-    /// Componente de la barra de vida
-    /// </summary>
-    [SerializeField] private AudioSource Sonido;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -116,7 +112,7 @@ public class Enemies_Health : MonoBehaviour
     private void Update()
     {
         //Miramos si ha muerto y ya no hay sonidos activos
-        if (_dead && !Sonido.isPlaying)
+        if (_dead && !SoundManager.Instance.GetDmgPlaying())
         {
             //Desactivamos este objeto
             this.gameObject.SetActive(false);
@@ -150,7 +146,7 @@ public class Enemies_Health : MonoBehaviour
         {
             //Bajamos la vida y ponemos el sonido
             Health -= DamagePerHit;
-            Sonido.Play();
+            SoundManager.Instance.PlaySFXDamage();
             
             // Si el objeto de barra de vida tiene el componente le modificamos el valor para mostrar la vida
             if (BarraVida.GetComponent<Slider>() != null)
