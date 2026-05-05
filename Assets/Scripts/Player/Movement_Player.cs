@@ -215,6 +215,7 @@ public class Movement_Player : MonoBehaviour
         else
         {
             _speed = .0f;
+            _isWalking = false;
             if (_animator)
             {
                 _animator.SetBool("IsWalkingAnim", false);

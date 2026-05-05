@@ -145,13 +145,8 @@ public class Shoot : MonoBehaviour
     /// </summary>
     void Update()
     {
+        bool soloDispara = false;
         // ---- DISPARO ----
-        if(_animator)
-        {
-            _animator.SetBool("IsShootingAnim", false);
-            _animator.SetBool("IsWalkingAndAttacking", false);
-            _animator.SetBool("IsJumpingAndAttacking", false);
-        }
         if (InputManager.Instance.FireWasPressedThisFrame() && !_desactivated && Time.time >= _timeToWait && _ammo > 0)
         {
             // -- Comprueba si hay balas usables o hay balas que recargar --
@@ -167,17 +162,18 @@ public class Shoot : MonoBehaviour
             _rnd = Random.Range(0, 3);
             if (_animator && (_jump.IsJumping() || (_jump.IsJumping() && _player.IsWalking())) && _ammo > 0)
             {//Animacion disparo y salto
-                _animator.SetBool("IsJumpingAndAttacking", true);
+                _animator.SetTrigger("JumpingAndAttacking");
             }
             else if (_animator && _player.IsWalking() && _ammo > 0)
             {
                 //Animacion disparo y Andar
-                _animator.SetBool("IsWalkingAndAttacking", true);
+                _animator.SetTrigger("WalkingAndAttacking");
             }
             //Animacion disparo
             else if(_animator)
             {
-                _animator.SetBool("IsShootingAnim", true);
+                soloDispara = true;
+                _animator.SetTrigger("ShootingAnim");
             }
             int dir = _playerSpriteRenderer.flipX ? -1 : 1; // Para saber en que direccion mira el personjae principal
 
@@ -189,9 +185,9 @@ public class Shoot : MonoBehaviour
 
             _timeToWait = Time.time + Cooldown;
             //animacion de disparo
-            if(_animator)
+            if(_animator && soloDispara)
             {
-                _animator.SetBool("ReverseShooting", true);
+                _animator.SetTrigger("ReverseShootingAnim");
             }
             //Random de sonidos de disparos
             switch (_rnd)
