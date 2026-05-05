@@ -34,6 +34,10 @@ public class Movement_Player : MonoBehaviour
     /// Aceleración horizontal
     /// </summary>
     [SerializeField] private float Acceleration = 1.0f;
+    /// <summary>
+    /// Deadzone del mando
+    /// </summary>
+    [SerializeField] private float DeadZone = 0.01f;
 
     /// <summary>
     /// Prefab de la bala
@@ -173,7 +177,7 @@ public class Movement_Player : MonoBehaviour
         Vector2 dir = InputManager.Instance.MovementVector;
 
         // en caso de moverse a la derecha
-        if (dir.x > 0 && !_extraArmyEmpujando && !_empujado && !_rightDetected && !_desactivated)
+        if (dir.x > (0 + math.abs(DeadZone)) && !_extraArmyEmpujando && !_empujado && !_rightDetected && !_desactivated)
         {
             // mueve al personaje en base a la velocidad (_velocity) en el eje x
             this.transform.position += new Vector3(_speed, 0.0f) * time;
@@ -191,7 +195,7 @@ public class Movement_Player : MonoBehaviour
             _isWalking = true;
         }
         // en caso de moverse a la izquierda
-        else if (dir.x < 0 && !_empujado && !_leftDetected && !_desactivated)
+        else if (dir.x < (0 - math.abs(DeadZone)) && !_empujado && !_leftDetected && !_desactivated)
         {
             // mueve al personaje en base a la velocidad (_velocity) en el eje x
             this.transform.position += new Vector3(_speed, 0.0f) * time;
@@ -219,32 +223,31 @@ public class Movement_Player : MonoBehaviour
 
         // ---- Detección de paredes ----
 
-        if (_leftDetected && (_speed < 0 || _velEmpuje < 0))
+        if (_leftDetected)
         {
-            _velEmpuje = 0;
-            _speed = 0;
+            // Detenemos el movimiento
+            if (_speed < 0) _speed = 0;
+
             // Calculamos la posicion del Jugador justo al lado de la pared
             float _posAlLadoPared = LeftDetector.GetCollisionedObjectPosition().x + LeftDetector.GetCollisionedObjectSize().x / 2;
             float _posX = _posAlLadoPared + _playerCollider.bounds.size.x / 2;
             float _aumentoX = _posX - transform.position.x;
 
             // Movemos al personaje justo al lado de la pared
-
-            // teletransporte
-            if (transform.position.x < _posX && math.abs(_aumentoX) < 1) transform.position += new Vector3(_aumentoX, 0.0f);
+            if (transform.position.x < _posX) transform.position += new Vector3(_aumentoX, 0.0f);
         }
-        else if (_rightDetected && _speed > 0 && !_empujado)
+        else if (_rightDetected)
         {
-            _speed = 0;
+            // Detenemos el movimiento
+            if (_speed > 0) _speed = 0;
+
             // Calculamos la posicion del Jugador justo al lado de la pared
             float _posAlLadoPared = RightDetector.GetCollisionedObjectPosition().x - RightDetector.GetCollisionedObjectSize().x / 2;
             float _posX = _posAlLadoPared - _playerCollider.bounds.size.x / 2;
             float _aumentoX = _posX - transform.position.x;
 
             // Movemos al personaje justo al lado de la pared
-
-            // teletransporte
-            if (transform.position.x > _posX && math.abs(_aumentoX) < 1) transform.position += new Vector3(_aumentoX, 0.0f);
+            if (transform.position.x > _posX) transform.position += new Vector3(_aumentoX, 0.0f);
         }
 
         // ---- Empuje del personaje ----
@@ -266,8 +269,6 @@ public class Movement_Player : MonoBehaviour
                     float _aumentoX = _posX - transform.position.x;
 
                     // Movemos al personaje justo al lado de la pared
-
-                    // teletransporte
                     if (transform.position.x > _posX) transform.position += new Vector3(_aumentoX, 0.0f);
                 }
                 else
@@ -278,8 +279,6 @@ public class Movement_Player : MonoBehaviour
                     float _aumentoX = transform.position.x - _posX;
 
                     // Movemos al personaje justo al lado de la pared
-
-                    // teletransporte
                     if (transform.position.x < _posX) transform.position -= new Vector3(_aumentoX, 0.0f);
                 }
             }
