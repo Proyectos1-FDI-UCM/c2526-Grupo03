@@ -67,7 +67,7 @@ public class Dolly_Detection_System : MonoBehaviour
     ///Awake is called on the frame when a script is enabled just before 
     /// any of the Update methods are called the first time.
     /// </summary>
-    void Awake()
+    void Start()
     {
         //Ponemos detecte en true
         _detected = true;
