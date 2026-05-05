@@ -135,6 +135,7 @@ public class Finish : MonoBehaviour
             // Guardamos el porcentaje final
             Stars_FillAmount();
 
+
         }
     }
     /// <summary>

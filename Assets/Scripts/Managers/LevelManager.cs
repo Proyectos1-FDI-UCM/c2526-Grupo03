@@ -97,7 +97,15 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     [SerializeField] private GameObject ObjetosPausados =  null;
 
-    // Cantidad de puntuación aumentada cada "pulso" (frecuencia del pulso definida en la cámara)
+    /// <summary>
+    /// Posibilidades de que salga sonido de derrota especial
+    /// </summary>
+    [SerializeField] private int ChanceForSpecialSound;
+
+    /// <summary>
+    /// SoundManager de la escena para reiniciar el sistema de música cada vez que se reinicie la escena
+    /// </summary>
+    [SerializeField] private SoundManager SoundManager;
 
     #endregion
 
@@ -126,6 +134,11 @@ public class LevelManager : MonoBehaviour
     private bool _playerFinished = false;
 
     private VictoryPanel _panelVictoria;
+
+    /// <summary>
+    /// Variable aleatoria
+    /// </summary>
+    private int _rnd;
 
     #endregion
 
@@ -173,6 +186,8 @@ public class LevelManager : MonoBehaviour
         //Activamos el panel de victoria 
         VictoryScreen.SetActive(true);
         _panelVictoria.PonEstrellas();
+        SoundManager.Instance.PauseLevelMusic();
+        SoundManager.Instance.PlayMusicCourseClear();
 
     }
     /// <summary>
@@ -186,6 +201,10 @@ public class LevelManager : MonoBehaviour
         EventSystem.SetSelectedGameObject(DeadFirstSelectedButton);
         //Activamos la Lose Screen
         LoseScreen.SetActive(true);
+        SoundManager.Instance.PauseLevelMusic();
+        _rnd = Random.Range(0, ChanceForSpecialSound);
+        if (_rnd == ChanceForSpecialSound - 1) SoundManager.Instance.PlayMusicWaaWaaWaaa();
+        else SoundManager.Instance.PlaySFXHasPerdiido();
     }
     /// <summary>
     /// Cambia el boton seleccionado al del panel de pausa y activa el panel
@@ -197,6 +216,8 @@ public class LevelManager : MonoBehaviour
         EventSystem.SetSelectedGameObject(PauseFirstSelectedButton);
         //Activamos el Pause Screen
         PauseScreen.SetActive(true);
+        //Pausamos múisca correspondiente
+        SoundManager.Instance.PauseLevelMusic();
     }
     /// <summary>
     /// Cambia el boton seleccionado al del panel de settings y activa el panel
@@ -323,15 +344,21 @@ public class LevelManager : MonoBehaviour
         ObjetosPausados.SetActive(true);
         //Desactiva el panel de pausa
         PauseScreen.SetActive(false);
+        SoundManager.Instance.PlayLevelMusic();
     }
     /// <summary>
     /// Metodo que Resetea la escena
     /// </summary>
     public void Restart()
-    {  //Restablece el nivel al inicio
+    {
+        // Se destruye el soundmanager para provocar que el restart se reinicie
+        Destroy(SoundManager);
+        // Restablece el nivel al inicio
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
-        //Desactiva el panel de pausa
+        // Desactiva el panel de pausa
         PauseScreen.SetActive(false);
+        // Una vez cargada la escena, se reinstancia el soundmanager para que el sistema de sonido vuelva a funcionar
+        Instantiate(SoundManager);
     }
     /// <summary>
     /// Metodo que carga la escena del menu

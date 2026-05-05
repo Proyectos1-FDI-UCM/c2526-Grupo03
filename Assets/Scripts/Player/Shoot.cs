@@ -47,18 +47,6 @@ public class Shoot : MonoBehaviour
     /// Contenedor del pool de balas
     /// </summary>
     [SerializeField] private Transform BulletsContainer;
-    /// <summary>
-    /// Sonido de grito 1
-    /// </summary>
-    [SerializeField] private AudioSource Scream1;
-    /// <summary>
-    /// Sonido de grito 2
-    /// </summary>
-    [SerializeField] private AudioSource Scream2;
-    /// <summary>
-    /// Sonido de grito 3
-    /// </summary>
-    [SerializeField] private AudioSource Scream3;
 
     #endregion
 
@@ -208,9 +196,9 @@ public class Shoot : MonoBehaviour
             //Random de sonidos de disparos
             switch (_rnd)
             {
-                case 0: Scream1.Play(); break;
-                case 1: Scream2.Play(); break;
-                case 2: Scream3.Play(); break;
+                case 0: SoundManager.Instance.PlaySFXScreamOne(); break;
+                case 1: SoundManager.Instance.PlaySFXScreamTwo(); break;
+                case 2: SoundManager.Instance.PlaySFXScreamThree(); break;
             }
             _ammo--;
         }

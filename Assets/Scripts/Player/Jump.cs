@@ -50,15 +50,6 @@ public class Jump : MonoBehaviour
     /// Velocidad máxima de caída
     /// </summary>
     [SerializeField] private float MaxFallSpeed;
-
-    /// <summary>
-    /// Sonido de salto
-    /// </summary>
-    [SerializeField] private AudioSource JumpSound;
-    /// <summary>
-    /// Sonido de aterrizaje
-    /// </summary>
-    [SerializeField] private AudioSource LandSound;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -222,8 +213,7 @@ public class Jump : MonoBehaviour
 
                 // ====== Actualizamos variable de caida ======
                 _falling = false;
-
-                if (LandSound != null) LandSound.Play();
+                SoundManager.Instance.PlaySFXLand();
                 _isJumping = false;
             }
         }
@@ -341,7 +331,7 @@ public class Jump : MonoBehaviour
             _goingUp = true;
             _isJumping = true;
             _speed = _jumpSpeed;
-            if (JumpSound != null) JumpSound.Play();
+            SoundManager.Instance.PlaySFXJump();
         }
     }
     #endregion

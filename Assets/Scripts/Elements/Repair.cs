@@ -1,7 +1,7 @@
 ﻿//---------------------------------------------------------
 // Componente del comportamiento de los objetos reparables. En él se establecen las condiciones para que un elemento pueda
 // ser reparado y cuando pasa a estarlo.
-// Gabriel Adrian Oltean && Colaboradores:
+// Gabriel Adrian Oltean && Colaboradores: Sergio Higuera
 //      Víctor Román Román
 // Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
@@ -150,6 +150,10 @@ public class Repair : MonoBehaviour
     /// Variable que nos indica si estamos usando cheats o no
     /// </summary>
     private bool _cheats = false;
+    /// <summary>
+    /// Variable aleatoria para musica
+    /// </summary>
+    private int _rnd;
     #endregion
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
@@ -214,6 +218,8 @@ public class Repair : MonoBehaviour
             }
             else
             {
+                // Se pausa la música el nivel y se reproduce una canción de QTE al azar
+                SoundManager.Instance.PauseLevelMusic();
                 //Se activa el QTE que ha salido random y se desactiva el icono del input de encima del objeto reparable.
                 ActivateChosenQTE();
 
@@ -231,6 +237,9 @@ public class Repair : MonoBehaviour
         }
         if (_repaired && !_changedToRepaired)
         {
+            // Se pausa la música del QTE y se continua la música del nivel
+            SoundManager.Instance.PauseQTEMusic();
+            SoundManager.Instance.PlayLevelMusic();
             //Al terminar de reparar se vuelven a activar todas las acciones que se habían desactivado
             _movementPlayerComponent.ActivatePlayer();
             // mejor desactivarlo que destruirlo
@@ -245,6 +254,9 @@ public class Repair : MonoBehaviour
         {
             //Si se sale del QTE se vuelven a activar todos las acciones que se habían desactivado
             _movementPlayerComponent.ActivatePlayer();
+            // Se pausa la música del QTE y se continua la música del nivel
+            SoundManager.Instance.PauseQTEMusic();
+            SoundManager.Instance.PlayLevelMusic();
             DisableChosenQTE();
             Keybind.SetActive(true);
             _isRepairing = false;
@@ -368,6 +380,9 @@ public class Repair : MonoBehaviour
             case 2: TeclasQTE.SetActive(true); break;
             case 3: TimingQTE.SetActive(true); break;
         }
+        _rnd = Random.Range(0, 2);
+        if (_rnd == 0) SoundManager.Instance.PlayMusicWarioWareOne();
+        else SoundManager.Instance.PlayMusicWarioWare2();
     }
 
     /// <summary>
