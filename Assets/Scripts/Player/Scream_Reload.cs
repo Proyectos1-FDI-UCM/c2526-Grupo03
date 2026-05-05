@@ -39,6 +39,10 @@ public class Scream_Reload : MonoBehaviour
     /// Tiempo de espera entre recargas (para que no se sature de agua el pobre)
     /// </summary>
     [SerializeField] private float ReloadCD = 5.0f;
+    /// <summary>
+    /// Chances para que salga el efecto especial
+    /// </summary>
+    [SerializeField] private int ChanceForSpecial;
 
 
     #endregion
@@ -89,6 +93,10 @@ public class Scream_Reload : MonoBehaviour
     /// Indica si debemos impedir la siguiente recarga
     /// </summary>
     private bool _desactivated = false;
+    /// <summary>
+    /// Variable aleatoria
+    /// </summary>
+    private int _rnd;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -118,8 +126,13 @@ public class Scream_Reload : MonoBehaviour
         // Comprobamos si puedes recargar
         if (InputManager.Instance.RelaodWasPressedThisFrame() && !_desactivated && Time.time >= _timePassed && _playerShoot.GetAmmo() != _playerShoot.GetMaxAmmo())
         {
-            // Cambiamos la velocidad de movimiento a la de recarga
-            _playerMovement.setMaxVel(ReloadMovement);
+            //Selección y ejecución del sonido
+            _rnd = Random.Range(0, ChanceForSpecial);
+            if (_rnd == ChanceForSpecial - 1) SoundManager.Instance.PlaySFXReloadSpec();
+            else SoundManager.Instance.PlaySFXReloadReg();
+
+                // Cambiamos la velocidad de movimiento a la de recarga
+                _playerMovement.setMaxVel(ReloadMovement);
             // Indicamos que estamos recargando
             _reloading = true;
             // Cambiamos el tiempo de fin de recarga
