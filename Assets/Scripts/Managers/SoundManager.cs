@@ -57,26 +57,48 @@ public class SoundManager : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
-    // Creación de Instancia
+    /// <summary>
+    /// Creación de Instancia
+    /// </summary>
     private static SoundManager _instance;
 
-    // Variable que saca el tiempo dsp
+    /// <summary>
+    /// Variable que saca el tiempo dsp
+    /// </summary>
     private double _audiotimer;
 
-    // Variable diferenciadora de escenas
+    /// <summary>
+    /// Variable diferenciadora de escenas
+    /// </summary>
     private Scene _scene;
 
-    // Variable que determina si es la primera vez que se llama a la ejecucion de música o no
+    /// <summary>
+    /// Variable que determina si es la primera vez que se llama a la ejecucion de música o no
+    /// </summary>
     private bool _firsttime;
 
-    // Variable que guarda la longitud del clip de audio
+    /// <summary>
+    /// Variable que guarda la longitud del clip de audio
+    /// </summary>
     private double _cliplength;
 
-    // Variable de volumen máximo
+    /// <summary>
+    /// Variable de volumen máximo
+    /// </summary>
     private float _maxvolume = 1f;
 
-    // Variable que inicia la secuencia (se usará para evitar errores al reiniciar la escena)
+    /// <summary>
+    /// Variable que inicia la secuencia (se usará para evitar errores al reiniciar la escena)
+    /// </summary>
     private bool _start = true;
+    /// <summary>
+    /// Volumen actual de la music
+    /// </summary>
+    private float _volumenActualMusic = 1f;
+    /// <summary>
+    /// 
+    /// </summary>
+    private float _volumenActualEfects = 1f;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -96,7 +118,10 @@ public class SoundManager : MonoBehaviour
         else
         {
             _instance = this;
-        } // if-else somos instancia nueva o no.
+            // Queremos sobrevivir a cambios de escena.
+            DontDestroyOnLoad(this.gameObject);
+            Init();
+        }
     }
     private void Start()
     {
@@ -126,109 +151,153 @@ public class SoundManager : MonoBehaviour
     }
 
     // Todos los métodos que reproducen un audio
-    //Efectos de sonido
+    /// <summary>
+    /// Efectos de sonido de salto
+    /// </summary>
     public void PlaySFXJump()
     {
         SFX_Jump.Play();
     }
-
+    /// <summary>
+    /// Efectos de sonido de Caida
+    /// </summary>
     public void PlaySFXLand()
     {
         SFX_Land.Play();
     }
+    /// <summary>
+    /// Efectos de sonido de Daño
+    /// </summary>
 
     public void PlaySFXDamage()
     {
         SFX_Damage.Play();
     }
 
-    // Esto es para quitar al enemigo una vez que el efecto ha acabado
+    /// <summary>
+    /// Este metodo es para quitar al enemigo una vez que el efecto ha acabado
+    /// </summary>
+    /// <returns></returns>
     public bool GetDmgPlaying()
     {
         return SFX_Damage.isPlaying;
     }
-
+    /// <summary>
+    /// Efectos de sonido de Grito 1
+    /// </summary>
     public void PlaySFXScreamOne()
     {
         SFX_ScreamOne.Play();
     }
-
+    /// <summary>
+    /// Efectos de sonido de Grito 2
+    /// </summary>
     public void PlaySFXScreamTwo()
     {
         SFX_ScreamTwo.Play();
     }
-
+    /// <summary>
+    /// Efectos de sonido de Grito 3
+    /// </summary>
     public void PlaySFXScreamThree()
     {
         SFX_ScreamThree.Play();
     }
-
+    /// <summary>
+    /// Efectos de sonido de Recarga
+    /// </summary>
     public void PlaySFXReloadReg()
     {
         SFX_ReloadRegular.Play();
     }
-
+    /// <summary>
+    /// Efectos de sonido de recarga
+    /// </summary>
     public void PlaySFXReloadSpec()
     {
         SFX_ReloadSpecial.Play();
     }
-
+    /// <summary>
+    /// Efectos de sonido de perdido
+    /// </summary>
     public void PlaySFXHasPerdiido()
     {
         SFX_HasPerdiiido.Play();
     }
-
+    /// <summary>
+    /// Efectos de sonido de bajada de calidad
+    /// </summary>
     public void PlaySFXCualityDown()
     {
         SFX_CualityDown.Play();
     }
-
+    /// <summary>
+    /// Efecto de sonido de andar (sin uso)
+    /// </summary>
     public void PlaySFXSandStep()
     {
         SFX_SandStep.Play();
     }
 
-    // Reproducción de música independiente de la escena
+    //----- Reproducción de música independiente de la escena ----
+
+    /// <summary>
+    /// Efectos de sonido QTE 1
+    /// </summary>
     public void PlayMusicWarioWareOne()
     {
         MUSIC_WarioWareOne.Play();
     }
-
+    /// <summary>
+    /// Efectos del qte 2
+    /// </summary>
     public void PlayMusicWarioWare2()
     {
         MUSIC_WaroWareTwo.Play();
     }
-
+    /// <summary>
+    /// Musica de derrota
+    /// </summary>
     public void PlayMusicWaaWaaWaaa()
     {
         MUSIC_WaaWaaaWaaa.Play();
     }
-
+    /// <summary>
+    ///Musica de ganar
+    /// </summary>
     public void PlayMusicCourseClear()
     {
         MUSIC_WiiCourseClear.Play();
     }
 
-    // Método que pausa la música de nivel
+    /// <summary>
+    /// Método que pausa la música de nivel
+    /// </summary>
     public void PauseLevelMusic()
     {
-        if (MUSIC_WiiDessertIntro.isPlaying || MUSIC_WiiDessertLoop.isPlaying) ChangeLevelMusicVol(0f);
-        else if (MUSIC_WildWestIntro.isPlaying || MUSIC_WildWestLoop.isPlaying) ChangeTutoMusicVol(0f);
+        if (MUSIC_WiiDessertIntro.isPlaying || MUSIC_WiiDessertLoop.isPlaying)
+        {
+            MUSIC_WiiDessertLoop.volume = 0;
+            MUSIC_WiiDessertIntro.volume = 0;
+        }
+        else if (MUSIC_WildWestIntro.isPlaying || MUSIC_WildWestLoop.isPlaying)
+        {
+            MUSIC_WildWestLoop.volume = 0;
+            MUSIC_WiiDessertIntro.volume = 0;
+        }
     }
 
-    public void ReduceLevelMusic()
-    {
-        if (MUSIC_WiiDessertIntro.isPlaying || MUSIC_WiiDessertLoop.isPlaying) ChangeLevelMusicVol(_maxvolume / 2);
-        else if (MUSIC_WildWestIntro.isPlaying || MUSIC_WildWestLoop.isPlaying) ChangeTutoMusicVol(_maxvolume / 2);
-    }
-
-    // Método que pausa la música del QTE
+    /// <summary>
+    /// Método que pausa la música del QTE
+    /// </summary>
     public void PauseQTEMusic()
     {
         if (MUSIC_WarioWareOne.isPlaying || MUSIC_WaroWareTwo.isPlaying) PauseMusicWarioWare();
     }
 
-    // Método que permite reproducir música desde cualquier script
+    /// <summary>
+    /// Método que permite reproducir música desde cualquier script
+    /// </summary>
     public void PlayLevelMusic()
     {
         switch (_scene.buildIndex)
@@ -242,13 +311,49 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // Diferenciar entre música de QTE y de nivel
+    /// <summary>
+    /// Diferenciar entre música de QTE y de nivel
+    /// </summary>
+    /// <returns></returns>
     public bool GetWiiMusicPlaying()
     {
         if (MUSIC_WiiDessertIntro.isPlaying || MUSIC_WiiDessertLoop.isPlaying) return true;
         else return false;
     }
-
+    /// <summary>
+    /// Cambia el volumen al establecido
+    /// </summary>
+    /// <returns></returns>
+    public void CambiaVolumenMusic(float vol)
+    {
+        ChangeMusicVolume(vol);
+        _volumenActualMusic = vol;
+    }
+    /// <summary>
+    /// Metodo que devuelve el volumen de la musica
+    /// </summary>
+    /// <returns></returns>
+    public float GetVolumenMusic()
+    {
+        return _volumenActualMusic;
+    }
+    /// <summary>
+    /// Cambia volumen efects
+    /// </summary>
+    /// <param name="vol"></param>
+    public void CambiaVolumenEfects(float vol)
+    {
+        ChangeEfectsVolume(vol);
+        _volumenActualEfects = vol;
+    }
+    /// <summary>
+    /// Metodo que devuelve
+    /// </summary>
+    /// <returns></returns>
+    public float GetVolumenEfects()
+    {
+        return _volumenActualEfects;
+    }
     #endregion
 
     // ---- MÉTODOS PRIVADOS ----
@@ -258,19 +363,23 @@ public class SoundManager : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
 
-    // Cambio de volumen de música
-    private void ChangeLevelMusicVol(float vol)
+    /// <summary>
+    /// Cambio de volumen de música
+    /// </summary>
+    /// <param name="vol"></param>
+    private void ChangeMusicVolume(float vol)
     {
-        if (MUSIC_WiiDessertIntro.isPlaying) MUSIC_WiiDessertIntro.volume = vol;
-        else if (MUSIC_WiiDessertLoop.isPlaying) MUSIC_WiiDessertLoop.volume = vol;
-    }
-    private void ChangeTutoMusicVol(float vol)
-    {
-        if (MUSIC_WildWestLoop.isPlaying) MUSIC_WildWestLoop.volume = vol;
-        else if (MUSIC_WildWestIntro.isPlaying) MUSIC_WildWestIntro.volume = vol;
+        MUSIC_WiiDessertIntro.volume = vol;
+        MUSIC_WiiDessertLoop.volume = vol;
+        MUSIC_WildWestLoop.volume = vol;
+        MUSIC_WildWestIntro.volume = vol;
+        _volumenActualMusic = vol;
     }
 
-    // Pausa de mñusica de QTE
+
+    /// <summary>
+    /// Pausa de musica de QTE
+    /// </summary>
     private void PauseMusicWarioWare()
     {
         if (MUSIC_WarioWareOne.isPlaying) MUSIC_WarioWareOne.Stop();
@@ -290,13 +399,10 @@ public class SoundManager : MonoBehaviour
 
             _firsttime = false;
         }
-        else
-        {
-            MUSIC_WiiDessertIntro.volume = _maxvolume;
-            MUSIC_WiiDessertLoop.volume = _maxvolume;
-        }
     }
-
+    /// <summary>
+    /// Musica de wild west
+    /// </summary>
     private void PlayMusicWildWest()
     {
         if (_firsttime)
@@ -306,16 +412,35 @@ public class SoundManager : MonoBehaviour
             MUSIC_WildWestLoop.PlayScheduled(_audiotimer + _cliplength);
             _firsttime = false;
         }
-        else
-        {
-            MUSIC_WildWestIntro.volume = _maxvolume;
-            MUSIC_WildWestLoop.volume = _maxvolume;
-        }
+        
     }
-
+    /// <summary>
+    /// Musica duelo
+    /// </summary>
     private void PlayMusicDuel()
     {
         MUSIC_Duel.Play();
+    }
+    /// <summary>
+    /// Metodo que inicializa
+    /// </summary>
+    private void ChangeEfectsVolume(float vol)
+    {
+        SFX_Jump.volume = vol;
+        SFX_Land.volume = vol;
+        SFX_Damage.volume = vol;
+        SFX_ScreamOne.volume = vol;
+        SFX_ScreamTwo.volume = vol;
+        SFX_ScreamThree.volume = vol;
+        SFX_ReloadRegular.volume = vol;
+        SFX_ReloadSpecial.volume = vol;
+        SFX_HasPerdiiido.volume = vol;
+        SFX_CualityDown.volume = vol;
+        SFX_SandStep.volume = vol;
+    }
+    private void Init()
+    {
+
     }
     #endregion
 
