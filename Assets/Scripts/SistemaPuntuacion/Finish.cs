@@ -157,18 +157,16 @@ public class Finish : MonoBehaviour
         float fillAmount = Conviertefloat(_puntuacionInicial, _puntiacionActual);
         //Ponemos el rating final de las estrellas
         GameManager.Instance.SetFinalRating(fillAmount);
-        //Cambiamos el botton para podernos mover por el menu de victoria
-        LevelManager.Instance.ChangeButtonToVictory();
-        Victoria(fillAmount);
-        /* if (Victoria(fillAmount))
-         {  //Cambiamos el botton para podernos mover por el menu de victoria
-
-         }
-         else
-         {
-             LevelManager.Instance.ChangeButtonToDead();
-         }*/
-
+        bool ganado = Victoria(fillAmount);
+        if (!ganado)
+        {  //Cambiamos el botton para podernos mover por el menu de victoria
+            LevelManager.Instance.ChangeButtonToDead();
+        }
+        else
+        {
+            //Cambiamos el botton para podernos mover por el menu de victoria
+            LevelManager.Instance.ChangeButtonToVictory();
+        }  
     }
     /// <summary>
     /// Convierte a diferencia dos numeros 

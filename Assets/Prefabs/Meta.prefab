@@ -123,7 +123,7 @@ MonoBehaviour:
   DesertBall: {fileID: 0}
   SpeedBost: 5
   Player: {fileID: 0}
-  PorcentajeVictoria: 0
+  PorcentajeVictoria: 0.5
 --- !u!1 &2149599799108242134
 GameObject:
   m_ObjectHideFlags: 0

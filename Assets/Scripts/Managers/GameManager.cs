@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Guarda el volumen de Musica entre escenas
     /// </summary>
-    private float _volumenActMusica = 1f;
+    private float _volumenActMusica = 0.5f;
     /// <summary>
     /// Guarda el volumen de efectos entre escenas
     /// </summary>

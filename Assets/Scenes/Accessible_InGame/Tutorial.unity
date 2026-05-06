@@ -1138,6 +1138,10 @@ PrefabInstance:
       propertyPath: _desertBall
       value: 
       objectReference: {fileID: 998112621}
+    - target: {fileID: 5426743865585603417, guid: 3d7448f5b32c0e64383cc0702c5584f2, type: 3}
+      propertyPath: PorcentajeVictoria
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1473,7 +1477,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5970668542827576001, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.11928224
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5970668542827576001, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2790,7 +2794,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3934147962142244895, guid: d9ce33507831bda45af508dbfc0ee919, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.17
+      value: -0.29
       objectReference: {fileID: 0}
     - target: {fileID: 3934147962142244895, guid: d9ce33507831bda45af508dbfc0ee919, type: 3}
       propertyPath: m_LocalPosition.z
