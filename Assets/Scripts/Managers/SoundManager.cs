@@ -119,8 +119,6 @@ public class SoundManager : MonoBehaviour
         else
         {
             _instance = this;
-            // Queremos sobrevivir a cambios de escena.
-            DontDestroyOnLoad(this.gameObject);
             Init();
         }
     }
@@ -284,11 +282,12 @@ public class SoundManager : MonoBehaviour
             MUSIC_WiiDessertIntro.volume = 0;
         }
     }
-    public void ResumeLevelMusic()
+    public void ResumeMusic()
     {
         if (MUSIC_WarioWareOne.isPlaying || MUSIC_WaroWareTwo.isPlaying)
         {
             MUSIC_WarioWareOne.volume = _volumenActualMusic;
+
             MUSIC_WaroWareTwo.volume = _volumenActualMusic;
 
         }
@@ -311,7 +310,14 @@ public class SoundManager : MonoBehaviour
     /// </summary>
     public void PauseQTEMusic()
     {
-        if (MUSIC_WarioWareOne.isPlaying || MUSIC_WaroWareTwo.isPlaying) PauseMusicWarioWare();
+        if (MUSIC_WarioWareOne.isPlaying) MUSIC_WarioWareOne.volume = 0;
+        else if (MUSIC_WaroWareTwo.isPlaying) MUSIC_WaroWareTwo.volume = 0;
+    }
+    public void StopMusicQTE()
+    {
+
+        if (MUSIC_WarioWareOne.isPlaying) MUSIC_WarioWareOne.Stop();
+        else if (MUSIC_WaroWareTwo.isPlaying) MUSIC_WaroWareTwo.Stop();
     }
 
     /// <summary>
@@ -401,15 +407,8 @@ public class SoundManager : MonoBehaviour
     }
 
 
-    /// <summary>
-    /// Pausa de musica de QTE
-    /// </summary>
-    private void PauseMusicWarioWare()
-    {
-        if (MUSIC_WarioWareOne.isPlaying) MUSIC_WarioWareOne.Stop();
-        else if (MUSIC_WaroWareTwo.isPlaying) MUSIC_WaroWareTwo.Stop();
-    }
-
+   
+    
     /// <summary>
     /// Reproducción de música dependiente de escena
     /// </summary>

@@ -313,6 +313,7 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     public void Pausa()
     {
+        SoundManager.Instance.PauseQTEMusic();
         /*Se manda un mensaje a todos los objetos que sean hijos de este para
         que activen el metodo "UnPause" */
         PausaSinPanel();
@@ -339,7 +340,7 @@ public class LevelManager : MonoBehaviour
         ObjetosPausados.SetActive(true);
         //Desactiva el panel de pausa
         PauseScreen.SetActive(false);
-        SoundManager.Instance.ResumeLevelMusic();
+        SoundManager.Instance.ResumeMusic();
     }
     /// <summary>
     /// Metodo que Resetea la escena
