@@ -1,4 +1,6 @@
-<p align="center"> <img src="Assets/Sprites/Backgrounds/Menu_Background.png" width="500"> </p>
+<h1 align = "center">Rodaje Rodante<h1/>
+
+<p align="center"> <img src="Assets/Sprites/UI/Icono_Hito3.png" width="500"> </p>
 
 <h1 align="center"> Indice </h1>
 
@@ -60,7 +62,7 @@ Que controles se usan en cada QTE:
 Que controles se usan en cada QTE:
 
 - QTE Flechas: Dpad
-- QTE Manivela: Joystick izq
+- QTE Manivela: Joystick dcho
 - QTE Spam: A
 - QTE Timing: A
 
