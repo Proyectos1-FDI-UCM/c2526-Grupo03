@@ -158,7 +158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.1}
   m_SizeDelta: {x: 4.5, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &12361425
@@ -181,7 +181,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Los elementos que dejes sin reparar tambien te bajan la puntuacion
+  m_text: 'Si te dejas un elemento sin reparar
+
+
+    tambien bajara la puntuacion'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 04677f75d20a631449eeb142042f1429, type: 2}
   m_sharedMaterial: {fileID: -8186338268154379495, guid: 04677f75d20a631449eeb142042f1429, type: 2}
@@ -578,9 +581,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'La  barra de la derecha  es tu puntuacion
+  m_text: 'Las estrellas son tu puntuacion
 
-    cuidala'
+    Evita que baje
+
+    echando a los
+    enemigos y reparando el set'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 04677f75d20a631449eeb142042f1429, type: 2}
   m_sharedMaterial: {fileID: -8186338268154379495, guid: 04677f75d20a631449eeb142042f1429, type: 2}
@@ -1420,6 +1426,10 @@ PrefabInstance:
       propertyPath: WarningDuration
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7597571102397938924, guid: 5edc708e29addfb4882513f1abafc082, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4129107930184591654, guid: 5edc708e29addfb4882513f1abafc082, type: 3}
     m_RemovedGameObjects: []
@@ -1772,7 +1782,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.13}
   m_SizeDelta: {x: 4.5, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &307736585
@@ -1795,7 +1805,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Ten cuidado con la \nhuelga de extras"
+  m_text: "\xA1Ten cuidado!\n\nLa huelga de extras quiere empujarte"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 04677f75d20a631449eeb142042f1429, type: 2}
   m_sharedMaterial: {fileID: -8186338268154379495, guid: 04677f75d20a631449eeb142042f1429, type: 2}
@@ -2264,7 +2274,7 @@ Transform:
   m_GameObject: {fileID: 409207379}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 145.76, y: 3.8611412, z: 0}
+  m_LocalPosition: {x: 143.6, y: 3.8611412, z: 0}
   m_LocalScale: {x: 2.5, y: 1.8503, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4027,7 +4037,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.06, y: 0.06}
   m_SizeDelta: {x: 4.5, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &712296829
@@ -4050,7 +4060,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SI llevas mucho sin perder puntuacion te sube sola
+  m_text: "La puntuacion aumenta poco a poco \n\nEn caso de no fallar durante cierto
+    tiempo"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 04677f75d20a631449eeb142042f1429, type: 2}
   m_sharedMaterial: {fileID: -8186338268154379495, guid: 04677f75d20a631449eeb142042f1429, type: 2}
@@ -4115,7 +4126,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0.31401157, y: 0.48083004, z: 0.365196, w: 0.24346435}
+  m_margin: {x: 0.31401157, y: 0.48083004, z: 0.21407294, w: 0.24346435}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -5842,7 +5853,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.08}
   m_SizeDelta: {x: 4.5, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1179258102
@@ -5865,7 +5876,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: EL objetivo de los enemigos es bajarte la puntuacion
+  m_text: 'Si un enemigo entra en la camara
+
+
+    te bajara la puntuacion'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 04677f75d20a631449eeb142042f1429, type: 2}
   m_sharedMaterial: {fileID: -8186338268154379495, guid: 04677f75d20a631449eeb142042f1429, type: 2}
@@ -5982,7 +5996,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4874310030850002653, guid: 5edc708e29addfb4882513f1abafc082, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.3
+      value: -0.29
       objectReference: {fileID: 0}
     - target: {fileID: 4874310030850002653, guid: 5edc708e29addfb4882513f1abafc082, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6031,6 +6045,10 @@ PrefabInstance:
     - target: {fileID: 6972060860075040498, guid: 5edc708e29addfb4882513f1abafc082, type: 3}
       propertyPath: WarningDuration
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7597571102397938924, guid: 5edc708e29addfb4882513f1abafc082, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4129107930184591654, guid: 5edc708e29addfb4882513f1abafc082, type: 3}
@@ -6094,6 +6112,14 @@ PrefabInstance:
     - target: {fileID: 4243161309761330997, guid: 2a1002e734f9712489a8bbfe29e2818d, type: 3}
       propertyPath: m_Name
       value: CactusMan
+      objectReference: {fileID: 0}
+    - target: {fileID: 6728700807455670162, guid: 2a1002e734f9712489a8bbfe29e2818d, type: 3}
+      propertyPath: Empuje
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6728700807455670162, guid: 2a1002e734f9712489a8bbfe29e2818d, type: 3}
+      propertyPath: AceleracionEmpuje
+      value: 35
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6222,7 +6248,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.16}
   m_SizeDelta: {x: 4.5, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1367339789
@@ -6245,7 +6271,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Toca la meta para ganar
+  m_text: Toca la meta para terminar el nivel
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 04677f75d20a631449eeb142042f1429, type: 2}
   m_sharedMaterial: {fileID: -8186338268154379495, guid: 04677f75d20a631449eeb142042f1429, type: 2}
@@ -6419,8 +6445,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.22}
-  m_SizeDelta: {x: 4.5, y: 2}
+  m_AnchoredPosition: {x: 0, y: -0.2}
+  m_SizeDelta: {x: 4, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1445214078
 MonoBehaviour:
@@ -6442,7 +6468,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Los enemigos no te pueden herir\n\nNo tienes vida \n\n\n"
+  m_text: "No tienes vida \n&\nLos enemigos no te pueden herir\n\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 04677f75d20a631449eeb142042f1429, type: 2}
   m_sharedMaterial: {fileID: -8186338268154379495, guid: 04677f75d20a631449eeb142042f1429, type: 2}
@@ -6477,7 +6503,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 1
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 1024
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -6507,7 +6533,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0.31401157, y: 0.48083004, z: 0.365196, w: 0.24346435}
+  m_margin: {x: 0.31401157, y: 0.20529285, z: 0.365196, w: 0.22305396}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -21809,7 +21835,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Evita que te toque la camara o perderas la partida
+  m_text: 'Si entras en el marco de la camara
+
+
+    Se acabara toda la puntuacion
+    y perderas'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 04677f75d20a631449eeb142042f1429, type: 2}
   m_sharedMaterial: {fileID: -8186338268154379495, guid: 04677f75d20a631449eeb142042f1429, type: 2}
@@ -22072,7 +22102,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.12}
   m_SizeDelta: {x: 4.5, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2061998306
@@ -22095,7 +22125,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ten cuidado con el cactus que si te chocas con el te empujara
+  m_text: 'Este enemigo No baja la puntuacion
+
+
+    No te choques con el o seras
+    empujado'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 04677f75d20a631449eeb142042f1429, type: 2}
   m_sharedMaterial: {fileID: -8186338268154379495, guid: 04677f75d20a631449eeb142042f1429, type: 2}
@@ -22200,7 +22234,7 @@ Transform:
   m_GameObject: {fileID: 2064257220}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 117.52, y: 3.8611412, z: 0}
+  m_LocalPosition: {x: 115.88, y: 3.8611412, z: 0}
   m_LocalScale: {x: 2.5, y: 1.8503, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -22416,7 +22450,7 @@ Transform:
   m_GameObject: {fileID: 2138895363}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 169.41, y: 3.8611412, z: 0}
+  m_LocalPosition: {x: 169.57, y: 3.8611412, z: 0}
   m_LocalScale: {x: 2.5, y: 1.8503, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

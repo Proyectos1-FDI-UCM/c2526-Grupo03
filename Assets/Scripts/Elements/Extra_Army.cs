@@ -160,6 +160,10 @@ public class Extra_Army : MonoBehaviour
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
+    private void OnDisable()
+    {
+        _playerMovement.ExtraArmyEstaEmpujando(false);
+    }
     #endregion
 
     // class Extra_Army 

@@ -279,7 +279,6 @@ MonoBehaviour:
   Health: 5
   DamagePerHit: 1
   BarraVida: {fileID: 7740173911586897889}
-  Sonido: {fileID: -725766105011861197}
 --- !u!114 &954175882631175618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -429,6 +428,7 @@ MonoBehaviour:
   JumpHeight: 2
   TimeToReachMaxHeight: 0.5
   MaxFallSpeed: 5
+  CoyoteTime: 0.075
   JumpSound: {fileID: 0}
   LandSound: {fileID: 0}
 --- !u!1 &2947772191000159583
@@ -795,7 +795,7 @@ GameObject:
   - component: {fileID: 2719763197742270648}
   - component: {fileID: 8941890414146022982}
   - component: {fileID: 5339615733073637316}
-  m_Layer: 9
+  m_Layer: 13
   m_Name: FrontDetector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
