@@ -59,7 +59,7 @@ Que controles se usan en cada QTE:
 
 Que controles se usan en cada QTE:
 
-- QTE Flechas: Joystick izq / Dpad
+- QTE Flechas: Dpad
 - QTE Manivela: Joystick izq
 - QTE Spam: A
 - QTE Timing: A
