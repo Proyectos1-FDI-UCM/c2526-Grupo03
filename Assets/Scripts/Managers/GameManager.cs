@@ -80,6 +80,14 @@ public class GameManager : MonoBehaviour
     ///  bool que indica si estamos usando la no calidad
     /// </summary>
     private bool _noCalidad = false;
+    /// <summary>
+    /// Guarda el volumen de Musica entre escenas
+    /// </summary>
+    private float _volumenActMusica = 1f;
+    /// <summary>
+    /// Guarda el volumen de efectos entre escenas
+    /// </summary>
+    private float _volumenActEfects = 1f;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -256,8 +264,8 @@ public class GameManager : MonoBehaviour
     public void SetMando(bool estado)
     {
         _mando = estado;
-      
-       // Debug.Log(mando);
+
+        // Debug.Log(mando);
     }
     /// <summary>
     /// Devuelve si esta usando mando
@@ -324,7 +332,37 @@ public class GameManager : MonoBehaviour
     {
         return _deviceChanged;
     }
-    
+    /// <summary>
+    /// Guarda el volumen de la musica
+    /// </summary>
+    /// <param name="vol">porcentaje de volumen</param>
+    public void SetCurrentMusicVolume(float vol)
+    {
+        _volumenActMusica = vol;
+    }
+    /// <summary>
+    /// Guarda el volumen actual de los efectos
+    /// </summary>
+    /// <param name="vol">porcentaje de volumen </param>
+    public void SetCurrentEffectsVolume(float vol)
+    {
+        _volumenActEfects = vol;
+    }
+    /// <summary>
+    /// Metodo que devuelve el volumen de la musica actual
+    /// </summary>
+    public float GetCurrentMusicVolume()
+    {
+        return _volumenActMusica;
+    }
+    /// <summary>
+    /// Metodo que devuelve el volumen de los efectos actual
+    /// </summary>
+    public float GetCurrentEfectsVolume()
+    {
+        return _volumenActEfects;
+    }
+
     // ---- MÉTODOS PRIVADOS ----
 
     #region Métodos Privados 

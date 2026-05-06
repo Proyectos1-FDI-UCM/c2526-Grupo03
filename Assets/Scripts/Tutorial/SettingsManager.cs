@@ -94,8 +94,9 @@ public class SettingsManager : MonoBehaviour
         _autoRepairBool = GameManager.Instance.GetAutoRepair();
         _noCalidadBool = GameManager.Instance.GetNoCalidad();
         _noMuerteBool = GameManager.Instance.GetNoMuerte();
-        Music.value = SoundManager.Instance.GetVolumenMusic();
-        Efects.value = SoundManager.Instance.GetVolumenEfects();
+        //Guardamos el volumen que usa el jugador
+        Music.value = GameManager.Instance.GetCurrentMusicVolume();
+        Efects.value = GameManager.Instance.GetCurrentEfectsVolume();
         //revisamos que no sea null
         if (AutoRepair != null)
         {
@@ -152,13 +153,25 @@ public class SettingsManager : MonoBehaviour
         GameManager.Instance.SetNoMuerte(_noMuerteBool);
         ActualizaNoMuerte();
     }
+    /// <summary>
+    /// MEtodo que cambia el volumen de la musica
+    /// </summary>
     public void CambiaMusicVolume()
     {
+        //Cambiamos el volumen en el sound manager (asi el jugador lo nota)
         SoundManager.Instance.CambiaVolumenMusic(Music.value);
+        //Guardamos el valor para usarlo entre escenas
+        GameManager.Instance.SetCurrentMusicVolume(Music.value);
     }
+    /// <summary>
+    /// Metodo que cambia el volumen de los efectos
+    /// </summary>
     public void CambiaEfectsVolume()
     {
+        //Cambiamos el volumen en el sound manager (asi el jugador lo nota)
         SoundManager.Instance.CambiaVolumenEfects(Efects.value);
+        //Guardamos el valor para usarlo entre escenas
+        GameManager.Instance.SetCurrentEffectsVolume(Efects.value);
     }
     #endregion
 
