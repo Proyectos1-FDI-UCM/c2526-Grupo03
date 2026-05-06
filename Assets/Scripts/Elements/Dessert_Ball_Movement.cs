@@ -98,7 +98,6 @@ public class Dessert_Ball_Movement : MonoBehaviour
     {
         float distanciaPlayer = this.gameObject.transform.position.x - Player.position.x;
         distanciaPlayer = math.abs(distanciaPlayer);
-        Debug.Log("Distancia al jugador: " + distanciaPlayer);
 
         if (distanciaPlayer >= DistanceForSpeedBoost)
         {
