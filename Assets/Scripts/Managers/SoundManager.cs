@@ -23,29 +23,90 @@ public class SoundManager : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
-    ///<summary>
-    ///Aplicación de todos los sonidos
-    ///</summary>
+    #region Audio Source Efects
+    /// <summary>
+    /// Audio source Jump
+    /// </summary>
     [SerializeField] private AudioSource SFX_Jump;
+    /// <summary>
+    /// Audio source aterrizaje
+    /// </summary>
     [SerializeField] private AudioSource SFX_Land;
+    /// <summary>
+    /// Audio source recibir golpe
+    /// </summary>
     [SerializeField] private AudioSource SFX_Damage;
+    /// <summary>
+    /// Audio source grito 1
+    /// </summary>
     [SerializeField] private AudioSource SFX_ScreamOne;
+    /// <summary>
+    /// Audio source grito 2
+    /// </summary>
     [SerializeField] private AudioSource SFX_ScreamTwo;
+    /// <summary>
+    /// Audio source grito 3
+    /// </summary>
     [SerializeField] private AudioSource SFX_ScreamThree;
+    /// <summary>
+    /// Audio source recarga regular
+    /// </summary>
     [SerializeField] private AudioSource SFX_ReloadRegular;
+    /// <summary>
+    /// Audio source recarga especial
+    /// </summary>
     [SerializeField] private AudioSource SFX_ReloadSpecial;
+    /// <summary>
+    /// Audio source has perdido
+    /// </summary>
     [SerializeField] private AudioSource SFX_HasPerdiiido;
+    /// <summary>
+    /// Audio source bajada calidad
+    /// </summary>
     [SerializeField] private AudioSource SFX_CualityDown;
+    /// <summary>
+    /// Audio source pasos
+    /// </summary>
     [SerializeField] private AudioSource SFX_SandStep;
+    #endregion
+    #region Audio Source musica
+    /// <summary>
+    /// Audio source musica nivel 1 y 2 intro
+    /// </summary>
     [SerializeField] private AudioSource MUSIC_WiiDessertIntro;
+    /// <summary>
+    /// Audio source  musica nivel 1 y 2
+    /// </summary>
     [SerializeField] private AudioSource MUSIC_WiiDessertLoop;
+    /// <summary>
+    /// Audio source musica nivel completado
+    /// </summary>
     [SerializeField] private AudioSource MUSIC_WiiCourseClear;
+    /// <summary>
+    /// Audio source  musica tutorial intro
+    /// </summary>
     [SerializeField] private AudioSource MUSIC_WildWestIntro;
+    /// <summary>
+    /// Audio source  musica tutorial 
+    /// </summary>
     [SerializeField] private AudioSource MUSIC_WildWestLoop;
+    /// <summary>
+    /// Audio source musica QTE pista 2
+    /// </summary>
     [SerializeField] private AudioSource MUSIC_WarioWareOne;
+    /// <summary>
+    /// Audio source musica QTE pista  2 
+    /// </summary>
     [SerializeField] private AudioSource MUSIC_WaroWareTwo;
+    /// <summary>
+    /// Audio source musica settings
+    /// </summary>
     [SerializeField] private AudioSource MUSIC_Duel;
+    /// <summary>
+    /// Audio source musica menu
+    /// </summary>
     [SerializeField] private AudioSource MUSIC_WaaWaaaWaaa;
+    #endregion
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -114,12 +175,11 @@ public class SoundManager : MonoBehaviour
         if (_instance != null)
         {
             DestroyImmediate(this.gameObject);
-            Init();
         }
         else
         {
             _instance = this;
-            Init();
+
         }
     }
     private void Start()
@@ -147,6 +207,7 @@ public class SoundManager : MonoBehaviour
     }
 
     // Todos los métodos que reproducen un audio
+    #region Metodos Play Sonidos
     /// <summary>
     /// Efectos de sonido de salto
     /// </summary>
@@ -168,15 +229,6 @@ public class SoundManager : MonoBehaviour
     public void PlaySFXDamage()
     {
         SFX_Damage.Play();
-    }
-
-    /// <summary>
-    /// Este metodo es para quitar al enemigo una vez que el efecto ha acabado
-    /// </summary>
-    /// <returns></returns>
-    public bool GetDmgPlaying()
-    {
-        return SFX_Damage.isPlaying;
     }
     /// <summary>
     /// Efectos de sonido de Grito 1
@@ -234,7 +286,6 @@ public class SoundManager : MonoBehaviour
     {
         SFX_SandStep.Play();
     }
-
     //----- Reproducción de música independiente de la escena ----
 
     /// <summary>
@@ -265,6 +316,44 @@ public class SoundManager : MonoBehaviour
     {
         MUSIC_WiiCourseClear.Play();
     }
+    /// <summary>
+    /// Método que permite reproducir música desde cualquier script
+    /// </summary>
+    public void PlayLevelMusic()
+    {
+        switch (_scene.buildIndex)
+        {
+            case 0: PlayMusicDuel(); break;
+            case 1: PlayMusicWii(); break;
+            case 2: PlayMusicWii(); break;
+            case 3: PlayMusicDuel(); break;
+            case 4: PlayMusicWildWest(); break;
+            case 5: PlayMusicDuel(); break;
+        }
+        SetVolumeToCurrent();
+    }
+    #endregion
+
+    #region Metodos GetIsPlaying
+
+    /// <summary>
+    /// Este metodo es para quitar al enemigo una vez que el efecto ha acabado
+    /// </summary>
+    /// <returns></returns>
+    public bool GetDmgPlaying()
+    {
+        return SFX_Damage.isPlaying;
+    }
+    /// <summary>
+    /// Diferenciar entre música de QTE y de nivel
+    /// </summary>
+    /// <returns></returns>
+    public bool GetWiiMusicPlaying()
+    {
+        if (MUSIC_WiiDessertIntro.isPlaying || MUSIC_WiiDessertLoop.isPlaying) return true;
+        else return false;
+    }
+    #endregion
 
     /// <summary>
     /// Método que pausa la música de nivel
@@ -282,27 +371,37 @@ public class SoundManager : MonoBehaviour
             MUSIC_WiiDessertIntro.volume = 0;
         }
     }
+    /// <summary>
+    /// Metodo para volver a poner la musica
+    /// </summary>
     public void ResumeMusic()
     {
-        if (MUSIC_WarioWareOne.isPlaying || MUSIC_WaroWareTwo.isPlaying)
+        if (MUSIC_WarioWareOne.isPlaying)
         {
             MUSIC_WarioWareOne.volume = _volumenActualMusic;
-
-            MUSIC_WaroWareTwo.volume = _volumenActualMusic;
-
         }
-        else if (MUSIC_WildWestIntro.isPlaying || MUSIC_WildWestLoop.isPlaying)
+        else if (MUSIC_WaroWareTwo.isPlaying)
+        {
+            MUSIC_WaroWareTwo.volume = _volumenActualMusic;
+        }
+        else if (MUSIC_WildWestIntro.isPlaying)
+        {
+            MUSIC_WiiDessertIntro.volume = _volumenActualMusic;
+        }
+        else if (MUSIC_WildWestLoop.isPlaying)
         {
             MUSIC_WildWestLoop.volume = _volumenActualMusic;
+        }
+        else if (MUSIC_WiiDessertIntro.isPlaying) 
+        {
             MUSIC_WiiDessertIntro.volume = _volumenActualMusic;
         }
-        else if (MUSIC_WiiDessertIntro.isPlaying || MUSIC_WiiDessertLoop.isPlaying)
+        else  if( MUSIC_WiiDessertLoop.isPlaying)
         {
             MUSIC_WiiDessertLoop.volume = _volumenActualMusic;
-            MUSIC_WiiDessertIntro.volume = _volumenActualMusic;
         }
-       
-        
+
+
     }
 
     /// <summary>
@@ -313,73 +412,38 @@ public class SoundManager : MonoBehaviour
         if (MUSIC_WarioWareOne.isPlaying) MUSIC_WarioWareOne.volume = 0;
         else if (MUSIC_WaroWareTwo.isPlaying) MUSIC_WaroWareTwo.volume = 0;
     }
+    /// <summary>
+    /// Metodo que para parar la musica 
+    /// </summary>
     public void StopMusicQTE()
     {
 
         if (MUSIC_WarioWareOne.isPlaying) MUSIC_WarioWareOne.Stop();
         else if (MUSIC_WaroWareTwo.isPlaying) MUSIC_WaroWareTwo.Stop();
     }
-
     /// <summary>
-    /// Método que permite reproducir música desde cualquier script
+    /// Cambia volumen Music
     /// </summary>
-    public void PlayLevelMusic()
-    {
-        switch (_scene.buildIndex)
-        {
-            case 0: PlayMusicDuel(); break;
-            case 1: PlayMusicWii(); break;
-            case 2: PlayMusicWii(); break;
-            case 3: PlayMusicDuel(); break;
-            case 4: PlayMusicWildWest(); break;
-            case 5: PlayMusicDuel(); break;
-        }
-        SetVolumeToCurrent();
-    }
-
-    /// <summary>
-    /// Diferenciar entre música de QTE y de nivel
-    /// </summary>
-    /// <returns></returns>
-    public bool GetWiiMusicPlaying()
-    {
-        if (MUSIC_WiiDessertIntro.isPlaying || MUSIC_WiiDessertLoop.isPlaying) return true;
-        else return false;
-    }
-    /// <summary>
-    /// Cambia el volumen al establecido
-    /// </summary>
-    /// <returns></returns>
+    /// <param name="vol">volumen</param>
     public void CambiaVolumenMusic(float vol)
     {
         ChangeMusicVolume(vol);
         _volumenActualMusic = vol;
-    }
-    /// <summary>
-    /// Metodo que devuelve el volumen de la musica
-    /// </summary>
-    /// <returns></returns>
-    public float GetVolumenMusic()
-    {
-        return _volumenActualMusic;
+        GameManager.Instance.SetCurrentMusicVolume(vol);
     }
     /// <summary>
     /// Cambia volumen efects
     /// </summary>
-    /// <param name="vol"></param>
+    /// <param name="vol">volumen</param>
     public void CambiaVolumenEfects(float vol)
     {
         ChangeEfectsVolume(vol);
         _volumenActualEfects = vol;
+        GameManager.Instance.SetCurrentEffectsVolume(vol);
     }
     /// <summary>
-    /// Metodo que devuelve
+    /// Sube el volumen al establecido
     /// </summary>
-    /// <returns></returns>
-    public float GetVolumenEfects()
-    {
-        return _volumenActualEfects;
-    }
     public void SetVolumeToCurrent()
     {
         ChangeMusicVolume(_volumenActualMusic);
@@ -396,19 +460,21 @@ public class SoundManager : MonoBehaviour
     /// <summary>
     /// Cambio de volumen de música
     /// </summary>
-    /// <param name="vol"></param>
+    /// <param name="vol">volumen</param>
     private void ChangeMusicVolume(float vol)
     {
         MUSIC_WiiDessertIntro.volume = vol;
         MUSIC_WiiDessertLoop.volume = vol;
         MUSIC_WildWestLoop.volume = vol;
         MUSIC_WildWestIntro.volume = vol;
+        MUSIC_WarioWareOne.volume = vol;
+        MUSIC_WaroWareTwo.volume = vol;
+        MUSIC_Duel.volume = vol;
+        MUSIC_WiiCourseClear.volume = vol;
+        MUSIC_WaaWaaaWaaa.volume = vol;
         _volumenActualMusic = vol;
+
     }
-
-
-   
-    
     /// <summary>
     /// Reproducción de música dependiente de escena
     /// </summary>
@@ -435,13 +501,14 @@ public class SoundManager : MonoBehaviour
             MUSIC_WildWestLoop.PlayScheduled(_audiotimer + _cliplength);
             _firsttime = false;
         }
-        
+
     }
     /// <summary>
     /// Musica duelo
     /// </summary>
     private void PlayMusicDuel()
     {
+
         MUSIC_Duel.Play();
     }
     /// <summary>
@@ -461,12 +528,21 @@ public class SoundManager : MonoBehaviour
         SFX_CualityDown.volume = vol;
         SFX_SandStep.volume = vol;
     }
-    
+
     private void Init()
     {
+        //Cogemos el volumen del GameManager
+        _volumenActualEfects = GameManager.Instance.GetCurrentEfectsVolume();
+        _volumenActualMusic = GameManager.Instance.GetCurrentMusicVolume();
+        //ponemos tiempo y primera vez
         _audiotimer = AudioSettings.dspTime;
         _firsttime = true;
+        //Miramos la escena
         _scene = SceneManager.GetActiveScene();
+        //Cambiamos volumen 
+        ChangeMusicVolume(_volumenActualMusic);
+        ChangeEfectsVolume(_volumenActualMusic);
+        //Lo ponemos Play
         PlayLevelMusic();
     }
     #endregion
