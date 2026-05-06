@@ -23,7 +23,14 @@ public class SettingsManager : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
-
+    /// <summary>
+    /// Slider del volumen de musica
+    /// </summary>
+    [SerializeField] private Slider Music;
+    /// <summary>
+    /// Slider del volumen de efects
+    /// </summary>
+    [SerializeField] private Slider Efects;
     /// <summary>
     /// Bool que nos indica si esta en el tutorial
     /// </summary>
@@ -87,6 +94,8 @@ public class SettingsManager : MonoBehaviour
         _autoRepairBool = GameManager.Instance.GetAutoRepair();
         _noCalidadBool = GameManager.Instance.GetNoCalidad();
         _noMuerteBool = GameManager.Instance.GetNoMuerte();
+        Music.value = SoundManager.Instance.GetVolumenMusic();
+        Efects.value = SoundManager.Instance.GetVolumenEfects();
         //revisamos que no sea null
         if (AutoRepair != null)
         {
@@ -142,6 +151,14 @@ public class SettingsManager : MonoBehaviour
         _noMuerteBool = !_noMuerteBool;
         GameManager.Instance.SetNoMuerte(_noMuerteBool);
         ActualizaNoMuerte();
+    }
+    public void CambiaMusicVolume()
+    {
+        SoundManager.Instance.CambiaVolumenMusic(Music.value);
+    }
+    public void CambiaEfectsVolume()
+    {
+        SoundManager.Instance.CambiaVolumenEfects(Efects.value);
     }
     #endregion
 
