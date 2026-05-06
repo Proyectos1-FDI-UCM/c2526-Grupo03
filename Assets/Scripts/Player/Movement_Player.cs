@@ -235,7 +235,7 @@ public class Movement_Player : MonoBehaviour
             float _aumentoX = _posX - transform.position.x;
 
             // Movemos al personaje justo al lado de la pared
-            if (transform.position.x < _posX) transform.position += new Vector3(_aumentoX, 0.0f);
+            if (transform.position.x < _posX && math.abs(_aumentoX) < 3) transform.position += new Vector3(_aumentoX, 0.0f);
         }
         else if (_rightDetected)
         {
@@ -248,7 +248,7 @@ public class Movement_Player : MonoBehaviour
             float _aumentoX = _posX - transform.position.x;
 
             // Movemos al personaje justo al lado de la pared
-            if (transform.position.x > _posX) transform.position += new Vector3(_aumentoX, 0.0f);
+            if (transform.position.x > _posX && math.abs(_aumentoX) < 3) transform.position += new Vector3(_aumentoX, 0.0f);
         }
 
         // ---- Empuje del personaje ----

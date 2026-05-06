@@ -144,6 +144,10 @@ public class Dolly_Detection_System : MonoBehaviour
             }
         }
     }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<Movement_Player>() == null || (collision.gameObject.GetComponent<Movement_Player>() != null && !_cheatsNoMuerte)) Destroy(collision.gameObject);
+    }
     /// <summary>
     /// Actualiza los booleanos internos de los cheats con los del gameManager
     /// </summary>
