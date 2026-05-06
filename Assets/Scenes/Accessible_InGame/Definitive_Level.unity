@@ -1173,11 +1173,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a21b2cac9e0e3184797b4a958e0c4f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &149672900 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 351183677720056003, guid: 1d86ef47c2f0b9540a524b0b8f3f1b96, type: 3}
-  m_PrefabInstance: {fileID: 43270482}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &155064579
 GameObject:
   m_ObjectHideFlags: 0
@@ -18774,6 +18769,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6772159479419885327, guid: c696ec169f46ece4390cef155afedac2, type: 3}
+      propertyPath: ChanceForSpecialSound
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6772159479419885327, guid: c696ec169f46ece4390cef155afedac2, type: 3}
       propertyPath: DeadFirstSelectedButton
       value: 
       objectReference: {fileID: 1512755527}
@@ -18788,7 +18787,7 @@ PrefabInstance:
     - target: {fileID: 6772159479419885327, guid: c696ec169f46ece4390cef155afedac2, type: 3}
       propertyPath: SettingsFirstSelectedButton
       value: 
-      objectReference: {fileID: 149672900}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

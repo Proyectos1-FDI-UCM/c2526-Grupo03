@@ -28243,6 +28243,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6772159479419885327, guid: c696ec169f46ece4390cef155afedac2, type: 3}
+      propertyPath: ChanceForSpecialSound
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6772159479419885327, guid: c696ec169f46ece4390cef155afedac2, type: 3}
       propertyPath: DeadFirstSelectedButton
       value: 
       objectReference: {fileID: 1406686140}
