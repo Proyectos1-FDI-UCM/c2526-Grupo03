@@ -236,17 +236,6 @@
                 },
                 {
                     "name": "",
-                    "id": "8e9f144c-36ed-48ed-b9e1-0c33c5873b7f",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "c4be7c9b-43b6-4845-a970-aa916f7d366b",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",

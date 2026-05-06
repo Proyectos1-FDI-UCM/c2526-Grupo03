@@ -19478,6 +19478,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8426631371736418946, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
   m_PrefabInstance: {fileID: 749085351}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &317783641 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4250693619818519744, guid: 1d86ef47c2f0b9540a524b0b8f3f1b96, type: 3}
+  m_PrefabInstance: {fileID: 43270482}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &321631263 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3898764378425669985, guid: 0f9ef541730126340ac304ca039e89fc, type: 3}
@@ -20493,6 +20498,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 347981260}
     - target: {fileID: 6772159479419885327, guid: c696ec169f46ece4390cef155afedac2, type: 3}
+      propertyPath: QualityAdd
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 6772159479419885327, guid: c696ec169f46ece4390cef155afedac2, type: 3}
       propertyPath: EventSystem
       value: 
       objectReference: {fileID: 1143994159}
@@ -20547,7 +20556,7 @@ PrefabInstance:
     - target: {fileID: 6772159479419885327, guid: c696ec169f46ece4390cef155afedac2, type: 3}
       propertyPath: SettingsFirstSelectedButton
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 317783641}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

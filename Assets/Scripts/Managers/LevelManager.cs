@@ -83,16 +83,6 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private float StartingQuality = 100;
 
     /// <summary>
-    /// Tiempo que tiene que pasar para que la puntuación empiece a subir
-    /// </summary>
-    [SerializeField] private float TimeToStartAdding = 0f;
-
-    /// <summary>
-    /// Cantidad que sube la película
-    /// </summary>
-    [SerializeField] private float QualityAdd = 0;
-
-    /// <summary>
     /// Objeto padre en el que se encuentran todos los objetos a pausar
     /// </summary>
     [SerializeField] private GameObject ObjetosPausados =  null;
@@ -228,18 +218,6 @@ public class LevelManager : MonoBehaviour
 
     }
     /// <summary>
-    /// Método que sube la calidad de la película en la cantidad que le digas
-    /// </summary>
-    public void QualityUp()
-    {
-        //Chequeamos que la calidad es mayor que cero y que sea menor que la inicial
-        if (_quality > 0 && _quality < StartingQuality)
-        {
-         //Añadimos la calidad a subir
-            _quality += QualityAdd;
-        }
-    }
-    /// <summary>
     /// Cambia el bool que indica si el jugador ha llegado a la meta 
     /// </summary>
     /// <param name="finished">Bool por el que cambiar</param>
@@ -261,13 +239,6 @@ public class LevelManager : MonoBehaviour
             //Cambiamos al boton de muerte
             ChangeButtonToDead(); 
         }
-    }
-    /// <summary>
-    /// Método que devuelve el intervalo para subir de la película
-    /// </summary>
-    public float GetIntervaloParaSubir()
-    {
-        return TimeToStartAdding;
     }
     /// <summary>
     /// Método que devuelve la puntuacion actual de la película

@@ -36,15 +36,6 @@ public class Dolly_Detection_System : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
-    ///<summary>
-    /// Variable que cuenta el tiempo pasado
-    ///</summary>
-    private float _timepassed;
-
-    ///<summary>
-    /// Variable que determina si se ha encontrado un objeto interactuable o no
-    ///</summary>
-    private bool _detected;
     /// <summary>
     /// variable que dertemina si los cheats de no muerte estan activos
     /// </summary>
@@ -69,31 +60,9 @@ public class Dolly_Detection_System : MonoBehaviour
     /// </summary>
     void Start()
     {
-        //Ponemos detecte en true
-        _detected = true;
         //Inicializamos para ver si estan los cheats
         _cheatsNoMuerte = GameManager.Instance.GetNoMuerte();
         _cheatsNoCalidad = GameManager.Instance.GetNoCalidad();
-    }
-
-    /// <summary>
-    /// Update is called every frame the monovehaviour is active
-    /// </summary>
-    void FixedUpdate()
-    {
-        //Si ha detectado un objeto
-        if (_detected)
-        {
-            //calcualamos el tiempo que ha pasado
-            _timepassed = Time.time + LevelManager.Instance.GetIntervaloParaSubir();
-            //Y ponemos el detected a false
-            _detected = false;
-        } //Y si no hemos detectado
-        else if (!_detected && Time.time >= _timepassed)
-        {
-            //Subimos la calidad
-            LevelManager.Instance.QualityUp();
-        }
     }
     #endregion
 
@@ -122,8 +91,6 @@ public class Dolly_Detection_System : MonoBehaviour
             //Miramos si no es reparable para restar puntuacion
             if (collision.gameObject.GetComponent<Repair>() == null || collision.gameObject.GetComponent<Repair>().IsRepaired() == false)
             {
-                //Cambiamos a detectado para resetear la subida de puntos sola
-                _detected = true;
                 //Bajamos la calidad
                 if (!_cheatsNoCalidad)
                 {
