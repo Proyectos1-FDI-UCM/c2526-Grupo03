@@ -33,6 +33,21 @@ public class Dessert_Ball_Movement : MonoBehaviour
     /// Velocidad de rotación de la bola
     /// </summary>
     [SerializeField] private float RotationSpeed = 100.0f;
+
+    /// <summary>
+    /// Multiplicador de velocidad cuando el player esta lejos
+    /// </summary>
+    [SerializeField] private float SpeedBoost = 2;
+
+    /// <summary>
+    /// Distancia con el jugador a la que se multiplica la velocidad
+    /// </summary>
+    [SerializeField] private float DistanceForSpeedBoost;
+
+    /// <summary>
+    /// Jugador de la escena
+    /// </summary>
+    [SerializeField] private Transform Player;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -55,15 +70,16 @@ public class Dessert_Ball_Movement : MonoBehaviour
     /// Angulo de rotacion que toma la bola
     /// </summary>
     private float _anguloEjeZ;
+    private float _currentSpeed;
     #endregion
-    
+
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-    
+
     // Por defecto están los típicos (Update y Start) pero:
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
-    
+
     /// <summary>
     /// Start is called on the frame when a script is enabled just before 
     /// any of the Update methods are called the first time.
@@ -80,15 +96,27 @@ public class Dessert_Ball_Movement : MonoBehaviour
     /// </summary>
     void Update()
     {
+        float distanciaPlayer = this.gameObject.transform.position.x - Player.position.x;
+        distanciaPlayer = math.abs(distanciaPlayer);
+        Debug.Log("Distancia al jugador: " + distanciaPlayer);
+
+        if (distanciaPlayer >= DistanceForSpeedBoost)
+        {
+            _currentSpeed = Speed * SpeedBoost;
+        }
+        else
+        {
+            _currentSpeed = Speed;
+        }
         // Basicamente recrea la ecuacion y = |sin(k*x)|
-        float posY = math.abs(Mathf.Sin(_posX + Speed * Time.deltaTime)) + _posIniY;
-        _posX += Speed * Time.deltaTime;
+        float posY = math.abs(Mathf.Sin(_posX + _currentSpeed * Time.deltaTime)) + _posIniY;
+        _posX += _currentSpeed * Time.deltaTime;
         //Cambiamos la posicion con la calculada
         transform.position = new Vector3(_posX, posY);
 
         // Rotación 
-        _anguloEjeZ = transform.rotation.eulerAngles.z - RotationSpeed*Time.deltaTime;
-       //Establecemos la rotacion al objeto
+        _anguloEjeZ = transform.rotation.eulerAngles.z - RotationSpeed * Time.deltaTime;
+        //Establecemos la rotacion al objeto
         transform.rotation = Quaternion.Euler(0f, 0f, _anguloEjeZ);
     }
     #endregion
@@ -109,7 +137,7 @@ public class Dessert_Ball_Movement : MonoBehaviour
         Speed = num;
     }
     #endregion
-    
+
     // ---- MÉTODOS PRIVADOS ----
     #region Métodos Privados
     // Documentar cada método que aparece aquí
@@ -117,7 +145,7 @@ public class Dessert_Ball_Movement : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
 
-    #endregion   
+    #endregion
 
 } // class Dessert_Ball_Movement 
 // namespace

@@ -1258,7 +1258,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8903729408501158321, guid: c984a8118069062468b08ccd41a5f8ba, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.25
+      value: -4.3
       objectReference: {fileID: 0}
     - target: {fileID: 8903729408501158321, guid: c984a8118069062468b08ccd41a5f8ba, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1659,6 +1659,10 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 1539324308}
+    - target: {fileID: 5426743865585603417, guid: 3d7448f5b32c0e64383cc0702c5584f2, type: 3}
+      propertyPath: SpeedBost
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 5426743865585603417, guid: 3d7448f5b32c0e64383cc0702c5584f2, type: 3}
       propertyPath: DesertBall
       value: 
@@ -26660,7 +26664,7 @@ PrefabInstance:
     - target: {fileID: 6772159479419885327, guid: c696ec169f46ece4390cef155afedac2, type: 3}
       propertyPath: DeadFirstSelectedButton
       value: 
-      objectReference: {fileID: 917161711}
+      objectReference: {fileID: 1406686140}
     - target: {fileID: 6772159479419885327, guid: c696ec169f46ece4390cef155afedac2, type: 3}
       propertyPath: PauseFirstSelectedButton
       value: 
@@ -29251,11 +29255,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6951128974239869711, guid: 999616f028854d24dbb68033461fab7e, type: 3}
   m_PrefabInstance: {fileID: 917161709}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &917161711 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8318678940711872770, guid: 999616f028854d24dbb68033461fab7e, type: 3}
-  m_PrefabInstance: {fileID: 917161709}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &917161712 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5659521580523066734, guid: 999616f028854d24dbb68033461fab7e, type: 3}
@@ -29545,7 +29544,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5970668542827576001, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.875042
+      value: -2.95
       objectReference: {fileID: 0}
     - target: {fileID: 5970668542827576001, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: m_LocalPosition.z
@@ -30717,6 +30716,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4782971975926133299, guid: 51f172daaeafbbf48ba2b1bf2aac3553, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 626144201}
+    - target: {fileID: 4782971975926133299, guid: 51f172daaeafbbf48ba2b1bf2aac3553, type: 3}
+      propertyPath: SpeedBoost
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4782971975926133299, guid: 51f172daaeafbbf48ba2b1bf2aac3553, type: 3}
+      propertyPath: DistanceForSpeedBoost
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 7006812373667949431, guid: 51f172daaeafbbf48ba2b1bf2aac3553, type: 3}
       propertyPath: m_Name
       value: Dessert_Ball
@@ -31667,6 +31678,11 @@ RectTransform:
 --- !u!1 &1406686139 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6547406078629569876, guid: c07129f316da99a42a01b5facbaddf53, type: 3}
+  m_PrefabInstance: {fileID: 1406686137}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1406686140 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7954309947520724518, guid: c07129f316da99a42a01b5facbaddf53, type: 3}
   m_PrefabInstance: {fileID: 1406686137}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1418284542
@@ -35030,7 +35046,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5970668542827576001, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.02598
+      value: -3.2
       objectReference: {fileID: 0}
     - target: {fileID: 5970668542827576001, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: m_LocalPosition.z
@@ -37054,7 +37070,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5970668542827576001, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.86504173
+      value: -0.95
       objectReference: {fileID: 0}
     - target: {fileID: 5970668542827576001, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: m_LocalPosition.z

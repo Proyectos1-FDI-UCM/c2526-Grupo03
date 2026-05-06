@@ -28114,8 +28114,20 @@ PrefabInstance:
       value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 4782971975926133299, guid: 51f172daaeafbbf48ba2b1bf2aac3553, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1029003512}
+    - target: {fileID: 4782971975926133299, guid: 51f172daaeafbbf48ba2b1bf2aac3553, type: 3}
+      propertyPath: SpeedBoost
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4782971975926133299, guid: 51f172daaeafbbf48ba2b1bf2aac3553, type: 3}
       propertyPath: RotationSpeed
       value: 105
+      objectReference: {fileID: 0}
+    - target: {fileID: 4782971975926133299, guid: 51f172daaeafbbf48ba2b1bf2aac3553, type: 3}
+      propertyPath: DistanceForSpeedBoost
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 7006812373667949431, guid: 51f172daaeafbbf48ba2b1bf2aac3553, type: 3}
       propertyPath: m_Name
