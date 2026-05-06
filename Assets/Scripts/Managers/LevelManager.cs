@@ -339,7 +339,7 @@ public class LevelManager : MonoBehaviour
         ObjetosPausados.SetActive(true);
         //Desactiva el panel de pausa
         PauseScreen.SetActive(false);
-        SoundManager.Instance.PlayLevelMusic();
+        SoundManager.Instance.ResumeLevelMusic();
     }
     /// <summary>
     /// Metodo que Resetea la escena
@@ -388,6 +388,7 @@ public class LevelManager : MonoBehaviour
     private void Init()
     {
         _quality = StartingQuality;
+        SoundManager.Instance.SetVolumeToCurrent();
     }
 
     /// <summary>

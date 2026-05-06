@@ -114,6 +114,7 @@ public class SoundManager : MonoBehaviour
         if (_instance != null)
         {
             DestroyImmediate(this.gameObject);
+            Init();
         }
         else
         {
@@ -125,7 +126,7 @@ public class SoundManager : MonoBehaviour
     }
     private void Start()
     {
-        
+        Init();
     }
     #endregion
 
@@ -285,16 +286,24 @@ public class SoundManager : MonoBehaviour
     }
     public void ResumeLevelMusic()
     {
-        if (MUSIC_WiiDessertIntro.isPlaying || MUSIC_WiiDessertLoop.isPlaying)
+        if (MUSIC_WarioWareOne.isPlaying || MUSIC_WaroWareTwo.isPlaying)
         {
-            MUSIC_WiiDessertLoop.volume = _volumenActualMusic;
-            MUSIC_WiiDessertIntro.volume = _volumenActualMusic;
+            MUSIC_WarioWareOne.volume = _volumenActualMusic;
+            MUSIC_WaroWareTwo.volume = _volumenActualMusic;
+
         }
         else if (MUSIC_WildWestIntro.isPlaying || MUSIC_WildWestLoop.isPlaying)
         {
             MUSIC_WildWestLoop.volume = _volumenActualMusic;
             MUSIC_WiiDessertIntro.volume = _volumenActualMusic;
         }
+        else if (MUSIC_WiiDessertIntro.isPlaying || MUSIC_WiiDessertLoop.isPlaying)
+        {
+            MUSIC_WiiDessertLoop.volume = _volumenActualMusic;
+            MUSIC_WiiDessertIntro.volume = _volumenActualMusic;
+        }
+       
+        
     }
 
     /// <summary>
@@ -319,6 +328,7 @@ public class SoundManager : MonoBehaviour
             case 4: PlayMusicWildWest(); break;
             case 5: PlayMusicDuel(); break;
         }
+        SetVolumeToCurrent();
     }
 
     /// <summary>
@@ -363,6 +373,10 @@ public class SoundManager : MonoBehaviour
     public float GetVolumenEfects()
     {
         return _volumenActualEfects;
+    }
+    public void SetVolumeToCurrent()
+    {
+        ChangeMusicVolume(_volumenActualMusic);
     }
     #endregion
 
@@ -448,6 +462,7 @@ public class SoundManager : MonoBehaviour
         SFX_CualityDown.volume = vol;
         SFX_SandStep.volume = vol;
     }
+    
     private void Init()
     {
         _audiotimer = AudioSettings.dspTime;
