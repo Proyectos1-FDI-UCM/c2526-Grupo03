@@ -368,7 +368,7 @@ public class SoundManager : MonoBehaviour
         else if (MUSIC_WildWestIntro.isPlaying || MUSIC_WildWestLoop.isPlaying)
         {
             MUSIC_WildWestLoop.volume = 0;
-            MUSIC_WiiDessertIntro.volume = 0;
+            MUSIC_WildWestIntro.volume = 0;
         }
     }
     /// <summary>
