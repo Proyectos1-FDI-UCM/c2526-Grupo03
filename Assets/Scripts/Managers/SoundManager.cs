@@ -94,7 +94,7 @@ public class SoundManager : MonoBehaviour
     /// <summary>
     /// Volumen actual de la music
     /// </summary>
-    private float _volumenActualMusic = 1f;
+    private float _volumenActualMusic = 0.75f;
     /// <summary>
     /// 
     /// </summary>
@@ -125,10 +125,7 @@ public class SoundManager : MonoBehaviour
     }
     private void Start()
     {
-        _audiotimer = AudioSettings.dspTime;
-        _firsttime = true;
-        _scene = SceneManager.GetActiveScene();
-        PlayLevelMusic();
+        
     }
     #endregion
 
@@ -286,6 +283,19 @@ public class SoundManager : MonoBehaviour
             MUSIC_WiiDessertIntro.volume = 0;
         }
     }
+    public void ResumeLevelMusic()
+    {
+        if (MUSIC_WiiDessertIntro.isPlaying || MUSIC_WiiDessertLoop.isPlaying)
+        {
+            MUSIC_WiiDessertLoop.volume = _volumenActualMusic;
+            MUSIC_WiiDessertIntro.volume = _volumenActualMusic;
+        }
+        else if (MUSIC_WildWestIntro.isPlaying || MUSIC_WildWestLoop.isPlaying)
+        {
+            MUSIC_WildWestLoop.volume = _volumenActualMusic;
+            MUSIC_WiiDessertIntro.volume = _volumenActualMusic;
+        }
+    }
 
     /// <summary>
     /// Método que pausa la música del QTE
@@ -440,7 +450,10 @@ public class SoundManager : MonoBehaviour
     }
     private void Init()
     {
-
+        _audiotimer = AudioSettings.dspTime;
+        _firsttime = true;
+        _scene = SceneManager.GetActiveScene();
+        PlayLevelMusic();
     }
     #endregion
 
