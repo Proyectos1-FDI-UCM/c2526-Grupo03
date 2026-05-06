@@ -186,6 +186,7 @@ public class LevelManager : MonoBehaviour
         EventSystem.SetSelectedGameObject(DeadFirstSelectedButton);
         //Activamos la Lose Screen
         LoseScreen.SetActive(true);
+        SoundManager.Instance.StopMusicQTE();
         SoundManager.Instance.PauseLevelMusic();
         _rnd = Random.Range(0, ChanceForSpecialSound);
         if (_rnd == ChanceForSpecialSound - 1) SoundManager.Instance.PlayMusicWaaWaaWaaa();
