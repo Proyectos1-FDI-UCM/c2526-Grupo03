@@ -255,7 +255,7 @@ public class Jump : MonoBehaviour
                 // ====== Quitamos animacion de caida ======
                 if (_animator && _movement_Player != null)
                 {
-                    _animator.SetBool("IsFalling", false);
+                    //_animator.SetBool("IsFalling", false);
                     _animator.SetBool("IsWalkingAnim", true);
                     _animator.SetBool("Landed", true);
                     _animator.SetBool("IsJumpingAnim", false);
@@ -380,6 +380,7 @@ public class Jump : MonoBehaviour
             //Animacion de salto empieza
             if (_animator && _movement_Player != null)
             {
+                if(InputManager.Instance.JumpWasPressedThisFrame())
                 _animator.SetBool("IsJumpingAnim", true);
                 _animator.SetBool("IsFalling", false);
                 _animator.SetBool("IsWalkingAnim", false);

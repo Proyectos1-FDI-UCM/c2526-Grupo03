@@ -157,6 +157,10 @@ public class Shoot : MonoBehaviour
             }
             if (i == NumBulletsPool) return; // No se puede disparar porque todas las balas estan en uso
            
+            if(_animator)
+            {
+                ResetAttackTriggers();
+            }
 
             // -- Si hay balas usables --
             _rnd = Random.Range(0, 3);
@@ -252,6 +256,17 @@ public class Shoot : MonoBehaviour
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
+
+    /// <summary>
+    /// Resetea todas las animaciones de disparo
+    /// </summary>
+    private void ResetAttackTriggers()
+    {
+        _animator.ResetTrigger("JumpingAndAttacking");
+        _animator.ResetTrigger("WalkingAndAttacking");
+        _animator.ResetTrigger("ShootingAnim");
+        _animator.ResetTrigger("ReverseShootingAnim");
+    }
 
     #endregion
 
