@@ -84,6 +84,10 @@ public class Movement_Player : MonoBehaviour
     /// </summary>
     private float _velEmpuje = 0.0f;
     /// <summary>
+    /// Aceleración del empuje del extra army
+    /// </summary>
+    private float _aclEmpuje = 0.0f;
+    /// <summary>
     /// Contiene la información del componente Animator.
     /// </summary>
     private Animator _animator;
@@ -292,7 +296,7 @@ public class Movement_Player : MonoBehaviour
                 // Aplicamos aceleración a la velocidad de empuje
                 if (_velEmpuje > 0.0f)
                 {
-                    _velEmpuje -= Acceleration;
+                    _velEmpuje -= _aclEmpuje * time;
                 }
                 else _velEmpuje = 0.0f;
 
@@ -328,12 +332,13 @@ public class Movement_Player : MonoBehaviour
     /// <summary>
     /// Método que inicia el empuje de CactusMAN
     /// </summary>
-    public void Empuja(float emp, Vector3 dir)
+    public void Empuja(float emp, Vector3 dir, float AceleracionEmpuje)
     {
         _dirEmpuje = dir;
         if ((dir.x > 0.0f && !RightDetector.Detected()) || (dir.x < 0.0f && !LeftDetector.Detected()))
         {
             _velEmpuje = emp;
+            _aclEmpuje = AceleracionEmpuje;
             _empujado = true;
         }
     }

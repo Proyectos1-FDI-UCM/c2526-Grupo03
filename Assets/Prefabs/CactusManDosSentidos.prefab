@@ -91,7 +91,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6f0443f5b4d33b42be5209ff486e67e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Empuje: 45
+  Empuje: 10
+  AceleracionEmpuje: 20
   DirEmpuje: {x: 1, y: 0, z: 0}
 --- !u!1 &5071201427618489144
 GameObject:
@@ -320,5 +321,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6f0443f5b4d33b42be5209ff486e67e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Empuje: 45
+  Empuje: 10
+  AceleracionEmpuje: 20
   DirEmpuje: {x: -1, y: 0, z: 0}

@@ -29,7 +29,7 @@ public class CactusMan : MonoBehaviour
     /// Variable que determina el empuje que va a sufrir el jugador a causa de CactusMan.
     /// </summary>
     [SerializeField] private float Empuje = 20f;
-
+    [SerializeField] private float AceleracionEmpuje;
     /// <summary>
     /// Dirección de empuje del CactusMan.
     /// </summary>
@@ -78,7 +78,7 @@ public class CactusMan : MonoBehaviour
         Movement_Player choque = collision.GetComponent<Movement_Player>(); //Guardamos el componente en una variable
         if (choque)
         {
-            choque.Empuja(Empuje, DirEmpuje); //Si lo detecta llama a la función Empuja del MovementPlayer con el valor que tenga Empuje
+            choque.Empuja(Empuje, DirEmpuje, AceleracionEmpuje); //Si lo detecta llama a la función Empuja del MovementPlayer con el valor que tenga Empuje
         }
     }
 
