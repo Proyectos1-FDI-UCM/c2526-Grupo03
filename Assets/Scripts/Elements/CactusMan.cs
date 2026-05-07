@@ -29,6 +29,9 @@ public class CactusMan : MonoBehaviour
     /// Variable que determina el empuje que va a sufrir el jugador a causa de CactusMan.
     /// </summary>
     [SerializeField] private float Empuje = 20f;
+    /// <summary>
+    /// Aceleracion del empuje
+    /// </summary>
     [SerializeField] private float AceleracionEmpuje;
     /// <summary>
     /// Dirección de empuje del CactusMan.

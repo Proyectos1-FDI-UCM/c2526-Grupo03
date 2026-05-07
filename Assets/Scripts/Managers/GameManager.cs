@@ -158,6 +158,10 @@ public class GameManager : MonoBehaviour
     {
         _FinalRating = rating;
     }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     public float GetFinalRating()
     {
         return _FinalRating;
@@ -253,7 +257,9 @@ public class GameManager : MonoBehaviour
         // Debug.Log("Menú");
         UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
     }
-
+    /// <summary>
+    /// Cambiar a escena de menu de prueba 
+    /// </summary>
     public void ChangeMenuTestScene()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("MenuPruebas");
@@ -366,13 +372,17 @@ public class GameManager : MonoBehaviour
     // ---- MÉTODOS PRIVADOS ----
 
     #region Métodos Privados 
-
+    /// <summary>
+    /// Metodo que transfiere el setup
+    /// </summary>
     private void TransferManagerSetup()
     {
         // De momento no hay que transferir ningún setup
         // a otro manager
     }
-
+    /// <summary>
+    /// Metodo que inicializa las variables
+    /// </summary>
     private void Init()
     {
         // De momento no hay nada que inicializar
