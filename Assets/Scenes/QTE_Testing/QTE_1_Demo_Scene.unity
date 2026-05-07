@@ -134,7 +134,7 @@ PrefabInstance:
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: SpamQTE
       value: 
-      objectReference: {fileID: 1844442307}
+      objectReference: {fileID: 0}
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: ForceQTE
       value: 1
@@ -146,14 +146,34 @@ PrefabInstance:
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: TeclasQTE
       value: 
-      objectReference: {fileID: 930676792}
+      objectReference: {fileID: 0}
     - target: {fileID: 413155140336329087, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: ManivelaQTE
       value: 
-      objectReference: {fileID: 703641890}
+      objectReference: {fileID: 0}
+    - target: {fileID: 2949762868699962798, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2975639880203098413, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: m_Name
       value: Broken_Cactus
+      objectReference: {fileID: 0}
+    - target: {fileID: 4042433954737255968, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4561860154400578355, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5407099401254423750, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5814772742752369542, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5970668542827576001, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: m_LocalPosition.x
@@ -193,6 +213,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5970668542827576001, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271680240244622701, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6868769685970764751, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426631371736418946, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -394,11 +426,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e518f3f91021964490aa4c6a5d8d0d8, type: 3}
---- !u!1 &703641890 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6290379841019181947, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
-  m_PrefabInstance: {fileID: 126813000}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &777663163
 GameObject:
   m_ObjectHideFlags: 0
@@ -533,11 +560,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &930676792 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1269227182867427392, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
-  m_PrefabInstance: {fileID: 126813000}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1293796125 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7674669691530021310, guid: 8e518f3f91021964490aa4c6a5d8d0d8, type: 3}
@@ -657,11 +679,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3eeeaccf46f684f6da400b898bbc2f73, type: 3}
---- !u!1 &1844442307 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1825485709791816537, guid: ca1f2f00a427bb549b09693edde38684, type: 3}
-  m_PrefabInstance: {fileID: 126813000}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2125958768
 GameObject:
   m_ObjectHideFlags: 0
