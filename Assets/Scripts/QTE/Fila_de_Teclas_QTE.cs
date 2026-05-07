@@ -224,9 +224,6 @@ public class Fila_de_Teclas_QTE : MonoBehaviour
     {
         if (_comp.IsRepairing() && InputManager.Instance.RepairWasPressedThisFrame() && Time.time >= _comp.RepairIniTime() + _comp.ExitTime())
         {
-            // Reproducción de soundtrack
-            SoundManager.Instance.PauseLevelMusic();
-            SoundManager.Instance.PlayMusicWarioWareOne();
             _componenteBarra.value = 0;
             _failedQTE = false;
             int i = 0;
@@ -344,9 +341,6 @@ public class Fila_de_Teclas_QTE : MonoBehaviour
         // Si el valor del slider es el máximo
         if (_componenteBarra.value >= _componenteBarra.maxValue)
         {
-            // Se reanuda el soundtrack original del nivel
-            SoundManager.Instance.PauseLevelMusic();
-            SoundManager.Instance.PlayLevelMusic();
             // Desactivamos el panel
             transform.parent.gameObject.SetActive(false);
             // Marcamos el objeto como reparado

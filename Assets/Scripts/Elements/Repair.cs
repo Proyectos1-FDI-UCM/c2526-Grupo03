@@ -219,7 +219,12 @@ public class Repair : MonoBehaviour
             else
             {
                 // Se pausa la música el nivel y se reproduce una canción de QTE al azar
-                SoundManager.Instance.PauseLevelMusic();
+                SoundManager.Instance.StopLevelMusic();
+                //Elecion aleatoria de musica dentro de QTE
+                _rnd = Random.Range(0, 2);
+                if (_rnd == 0) SoundManager.Instance.PlayMusicWarioWareOne();
+                else SoundManager.Instance.PlayMusicWarioWare2();
+
                 //Se activa el QTE que ha salido random y se desactiva el icono del input de encima del objeto reparable.
                 ActivateChosenQTE();
 
@@ -380,10 +385,6 @@ public class Repair : MonoBehaviour
             case 2: TeclasQTE.SetActive(true); break;
             case 3: TimingQTE.SetActive(true); break;
         }
-        //Elecion aleatoria de musica dentro de QTE
-        _rnd = Random.Range(0, 2);
-        if (_rnd == 0) SoundManager.Instance.PlayMusicWarioWareOne();
-        else SoundManager.Instance.PlayMusicWarioWare2();
     }
 
     /// <summary>

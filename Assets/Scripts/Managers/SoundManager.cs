@@ -345,21 +345,52 @@ public class SoundManager : MonoBehaviour
         else return false;
     }
     #endregion
-
     /// <summary>
-    /// Método que pausa la música de nivel
+    /// Método que baja la música del nivel a 0 cuando mueres, ganas o entras a reparar
     /// </summary>
-    public void PauseLevelMusic()
+    public void StopLevelMusic()
     {
-        if (MUSIC_WiiDessertIntro.isPlaying || MUSIC_WiiDessertLoop.isPlaying)
+        if (MUSIC_WarioWareOne.isPlaying)
         {
-            MUSIC_WiiDessertLoop.volume = 0;
-            MUSIC_WiiDessertIntro.volume = 0;
+            MUSIC_WarioWareOne.volume = 0;
+        }
+        else if (MUSIC_WaroWareTwo.isPlaying)
+        {
+            MUSIC_WaroWareTwo.volume = 0;
         }
         else if (MUSIC_WildWestIntro.isPlaying || MUSIC_WildWestLoop.isPlaying)
         {
-            MUSIC_WildWestLoop.volume = 0;
             MUSIC_WildWestIntro.volume = 0;
+            MUSIC_WildWestLoop.volume = 0;
+        }
+        else if (MUSIC_WiiDessertIntro.isPlaying || MUSIC_WiiDessertLoop.isPlaying)
+        {
+            MUSIC_WiiDessertIntro.volume = 0;
+            MUSIC_WiiDessertLoop.volume = 0;
+        }
+    }
+    /// <summary>
+    /// Método que baja la música a la mitad cuando estas en la pausa
+    /// </summary>
+    public void PauseLevelMusic()
+    {
+        if (MUSIC_WarioWareOne.isPlaying)
+        {
+            MUSIC_WarioWareOne.volume = _volumenActualMusic / 2;
+        }
+        else if (MUSIC_WaroWareTwo.isPlaying)
+        {
+            MUSIC_WaroWareTwo.volume = _volumenActualMusic / 2;
+        }
+        else if (MUSIC_WildWestIntro.isPlaying || MUSIC_WildWestLoop.isPlaying)
+        {
+            MUSIC_WildWestIntro.volume = _volumenActualMusic / 2;
+            MUSIC_WildWestLoop.volume = _volumenActualMusic / 2;
+        }
+        else if (MUSIC_WiiDessertIntro.isPlaying || MUSIC_WiiDessertLoop.isPlaying)
+        {
+            MUSIC_WiiDessertIntro.volume = _volumenActualMusic / 2;
+            MUSIC_WiiDessertLoop.volume = _volumenActualMusic / 2;
         }
     }
     /// <summary>
@@ -448,17 +479,19 @@ public class SoundManager : MonoBehaviour
     /// <param name="vol">volumen</param>
     private void ChangeMusicVolume(float vol)
     {
-        MUSIC_WiiDessertIntro.volume = vol;
-        MUSIC_WiiDessertLoop.volume = vol;
-        MUSIC_WildWestLoop.volume = vol;
-        MUSIC_WildWestIntro.volume = vol;
-        MUSIC_WarioWareOne.volume = vol;
-        MUSIC_WaroWareTwo.volume = vol;
-        MUSIC_Duel.volume = vol;
-        MUSIC_WiiCourseClear.volume = vol;
-        MUSIC_WaaWaaaWaaa.volume = vol;
+        // Cambiamos el volumen actual de todas para la siguiente vez que suenen
         _volumenActualMusic = vol;
 
+        // Cambiamos el volumen de la que esta sonando para escuchar como va cambiando
+        if (MUSIC_WarioWareOne.isPlaying) MUSIC_WarioWareOne.volume = vol;
+        else if (MUSIC_WaroWareTwo.isPlaying) MUSIC_WaroWareTwo.volume = vol;
+        else if (MUSIC_WiiDessertIntro.isPlaying) MUSIC_WiiDessertIntro.volume = vol;
+        else if (MUSIC_WiiDessertLoop.isPlaying) MUSIC_WiiDessertLoop.volume = vol;
+        else if (MUSIC_WildWestLoop.isPlaying) MUSIC_WildWestLoop.volume = vol;
+        else if (MUSIC_WildWestIntro.isPlaying) MUSIC_WildWestIntro.volume = vol;
+        else if (MUSIC_Duel.isPlaying) MUSIC_Duel.volume = vol;
+        else if (MUSIC_WiiCourseClear.isPlaying) MUSIC_WiiCourseClear.volume = vol;
+        else if (MUSIC_WaaWaaaWaaa.isPlaying) MUSIC_WaaWaaaWaaa.volume = vol;
     }
     /// <summary>
     /// Reproducción de música dependiente de escena

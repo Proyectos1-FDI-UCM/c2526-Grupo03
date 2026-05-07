@@ -171,7 +171,7 @@ public class LevelManager : MonoBehaviour
         //Activamos el panel de victoria 
         VictoryScreen.SetActive(true);
         _panelVictoria.PonEstrellas();
-        SoundManager.Instance.PauseLevelMusic();
+        SoundManager.Instance.StopLevelMusic();
         SoundManager.Instance.PlayMusicCourseClear();
 
     }
@@ -187,7 +187,7 @@ public class LevelManager : MonoBehaviour
         //Activamos la Lose Screen
         LoseScreen.SetActive(true);
         SoundManager.Instance.StopMusicQTE();
-        SoundManager.Instance.PauseLevelMusic();
+        SoundManager.Instance.StopLevelMusic();
         _rnd = Random.Range(0, ChanceForSpecialSound);
         if (_rnd == ChanceForSpecialSound - 1) SoundManager.Instance.PlayMusicWaaWaaWaaa();
         else SoundManager.Instance.PlaySFXHasPerdiido();
