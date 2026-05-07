@@ -88,6 +88,14 @@ public class GameManager : MonoBehaviour
     /// Guarda el volumen de efectos entre escenas
     /// </summary>
     private float _volumenActEfects = 1f;
+    /// <summary>
+    /// Indica si el nivel 1 deberia estar blockeado por no completar el tutorial
+    /// </summary>
+    private bool _level1Locked = true ;
+    /// <summary>
+    /// Indica si el nivel 2 debería estar blockeado por no completar el nivel 1
+    /// </summary>
+    private bool _level2Locked = true;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -231,7 +239,22 @@ public class GameManager : MonoBehaviour
         ChangeScene(_levelIndex);
     }
     #endregion
-
+    public void UnlockLevel1()
+    {
+        _level1Locked = false;
+    }
+    public void UnlockLevel2()
+    {
+        _level2Locked = false;
+    }
+    public bool Level1Locked()
+    {
+        return _level1Locked;
+    }
+    public bool Level2Locked()
+    {
+        return _level2Locked;
+    }
     /// <summary>
     /// Cierra la build
     /// </summary>
