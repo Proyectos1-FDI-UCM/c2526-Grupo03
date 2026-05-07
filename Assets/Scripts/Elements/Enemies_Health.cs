@@ -149,7 +149,7 @@ public class Enemies_Health : MonoBehaviour
             SoundManager.Instance.PlaySFXDamage();
             
             // Si el objeto de barra de vida tiene el componente le modificamos el valor para mostrar la vida
-            if (BarraVida.GetComponent<Slider>() != null)
+            if (_componenteBarraVida != null)
             {
                 // Si es el primer golpe activamos el objeto
                 if (_componenteBarraVida.value == _componenteBarraVida.maxValue)
@@ -163,6 +163,7 @@ public class Enemies_Health : MonoBehaviour
             if (Health < 1)
             {
                 _dead = true;
+                BarraVida.SetActive(false);
                 _detectableObject.enabled = false;
                 _boxCollider.enabled = false;
                 _spriteRenderer.enabled = false;
