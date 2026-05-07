@@ -284,6 +284,7 @@ public class SoundManager : MonoBehaviour
     public void PlayMusicWarioWareOne()
     {
         MUSIC_WarioWareOne.Play();
+        MUSIC_WarioWareOne.volume = _volumenActualMusic;
     }
     /// <summary>
     /// Efectos del qte 2
@@ -291,6 +292,7 @@ public class SoundManager : MonoBehaviour
     public void PlayMusicWarioWare2()
     {
         MUSIC_WaroWareTwo.Play();
+        MUSIC_WaroWareTwo.volume = _volumenActualMusic;
     }
     /// <summary>
     /// Musica de derrota
