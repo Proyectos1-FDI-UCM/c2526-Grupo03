@@ -374,23 +374,24 @@ public class SoundManager : MonoBehaviour
     /// </summary>
     public void PauseLevelMusic()
     {
+        //Dividimos entre tres el volumen para que no moleste a los jugadores
         if (MUSIC_WarioWareOne.isPlaying)
         {
-            MUSIC_WarioWareOne.volume = _volumenActualMusic / 2;
+            MUSIC_WarioWareOne.volume = _volumenActualMusic / 3;
         }
         else if (MUSIC_WaroWareTwo.isPlaying)
         {
-            MUSIC_WaroWareTwo.volume = _volumenActualMusic / 2;
+            MUSIC_WaroWareTwo.volume = _volumenActualMusic / 3;
         }
         else if (MUSIC_WildWestIntro.isPlaying || MUSIC_WildWestLoop.isPlaying)
         {
-            MUSIC_WildWestIntro.volume = _volumenActualMusic / 2;
-            MUSIC_WildWestLoop.volume = _volumenActualMusic / 2;
+            MUSIC_WildWestIntro.volume = _volumenActualMusic / 3;
+            MUSIC_WildWestLoop.volume = _volumenActualMusic / 3;
         }
         else if (MUSIC_WiiDessertIntro.isPlaying || MUSIC_WiiDessertLoop.isPlaying)
         {
-            MUSIC_WiiDessertIntro.volume = _volumenActualMusic / 2;
-            MUSIC_WiiDessertLoop.volume = _volumenActualMusic / 2;
+            MUSIC_WiiDessertIntro.volume = _volumenActualMusic / 3;
+            MUSIC_WiiDessertLoop.volume = _volumenActualMusic / 3;
         }
     }
     /// <summary>
