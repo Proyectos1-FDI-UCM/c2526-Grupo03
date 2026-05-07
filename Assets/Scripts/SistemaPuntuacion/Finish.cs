@@ -7,6 +7,7 @@
 //---------------------------------------------------------
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 // Añadir aquí el resto de directivas using
 
 
@@ -164,9 +165,21 @@ public class Finish : MonoBehaviour
         }
         else
         {
+            // Si estas en el tutorial
+            if (SceneManager.GetActiveScene().buildIndex == 4)
+            {
+                // Desbloqueamos el nivel 1
+                GameManager.Instance.UnlockLevel1();
+            }
+            // Si estas en el nivel 1
+            else if (SceneManager.GetActiveScene().buildIndex == 1)
+            {
+                // Desblockeamos el nivel 2
+                GameManager.Instance.UnlockLevel2();
+            }
             //Cambiamos el botton para podernos mover por el menu de victoria
             LevelManager.Instance.ChangeButtonToVictory();
-        }  
+        }
     }
     /// <summary>
     /// Convierte a diferencia dos numeros 
@@ -192,7 +205,7 @@ public class Finish : MonoBehaviour
         bool victoria = false;
         if (puntuacion >= PorcentajeVictoria)
         {
-            victoria = true;   
+            victoria = true;
         }
         return victoria;
     }
