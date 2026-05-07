@@ -10,6 +10,8 @@
 
 - ### Controles  
 
+- ### Known Issues
+
 - ### Desarrolladores
 
 <h2 align="center"> Descripción </h2>
@@ -65,6 +67,10 @@ Que controles se usan en cada QTE:
 - QTE Manivela: Joystick dcho
 - QTE Spam: A
 - QTE Timing: A
+
+<h2 align="center"> Known Issues </h2>
+
+- Huelga de extras se queda saltando cuando se chocan con un techo
 
 <h2 align="center"> Desarrolladores </h2>
 

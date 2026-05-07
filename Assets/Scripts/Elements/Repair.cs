@@ -380,6 +380,7 @@ public class Repair : MonoBehaviour
             case 2: TeclasQTE.SetActive(true); break;
             case 3: TimingQTE.SetActive(true); break;
         }
+        //Elecion aleatoria de musica dentro de QTE
         _rnd = Random.Range(0, 2);
         if (_rnd == 0) SoundManager.Instance.PlayMusicWarioWareOne();
         else SoundManager.Instance.PlayMusicWarioWare2();

@@ -1,6 +1,7 @@
 //---------------------------------------------------------
 // Breve descripción del contenido del archivo
-// Sergio Higuera
+// Sergio Higuera && Colaboradores: 
+//      Tristan Sanchez 
 // Rodaje Rodante
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
@@ -142,16 +143,6 @@ public class SoundManager : MonoBehaviour
     /// Variable que guarda la longitud del clip de audio
     /// </summary>
     private double _cliplength;
-
-    /// <summary>
-    /// Variable de volumen máximo
-    /// </summary>
-    private float _maxvolume = 1f;
-
-    /// <summary>
-    /// Variable que inicia la secuencia (se usará para evitar errores al reiniciar la escena)
-    /// </summary>
-    private bool _start = true;
     /// <summary>
     /// Volumen actual de la music
     /// </summary>
@@ -225,7 +216,6 @@ public class SoundManager : MonoBehaviour
     /// <summary>
     /// Efectos de sonido de Daño
     /// </summary>
-
     public void PlaySFXDamage()
     {
         SFX_Damage.Play();
