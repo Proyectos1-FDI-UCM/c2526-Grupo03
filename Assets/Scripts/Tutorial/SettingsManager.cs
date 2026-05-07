@@ -48,6 +48,10 @@ public class SettingsManager : MonoBehaviour
     /// Toggle que nos indica si esta activo la NoCalidad
     /// </summary>
     [SerializeField] private Toggle NoCalidad;
+    /// <summary>
+    /// Toggle que nos indica si esta activo el cheat de desbloquear niveles
+    /// </summary>
+    [SerializeField] private Toggle DesbloquearNiveles;
 
     #endregion
 
@@ -73,7 +77,10 @@ public class SettingsManager : MonoBehaviour
     /// Bool que lleva si esta activo la NoCalidad
     /// </summary>
     private bool _noCalidadBool;
-
+    /// <summary>
+    /// Bool que lleva si esta activo el cheat de niveles desbloqueados
+    /// </summary>
+    private bool _nivelesDesbloqueados;
 
     #endregion
 
@@ -94,6 +101,7 @@ public class SettingsManager : MonoBehaviour
         _autoRepairBool = GameManager.Instance.GetAutoRepair();
         _noCalidadBool = GameManager.Instance.GetNoCalidad();
         _noMuerteBool = GameManager.Instance.GetNoMuerte();
+        _nivelesDesbloqueados = GameManager.Instance.GetLevelsCheat();
         //Guardamos el volumen que usa el jugador
         Music.value = GameManager.Instance.GetCurrentMusicVolume();
         Efects.value = GameManager.Instance.GetCurrentEfectsVolume();
@@ -113,7 +121,11 @@ public class SettingsManager : MonoBehaviour
             //actualizamos
             ActualizaNoMuerte();
         }
-
+        if (DesbloquearNiveles != null)
+        {
+            //actualizamos
+            ActualizaDesbloquearNiveles();
+        }
 
     }
     #endregion
@@ -152,6 +164,15 @@ public class SettingsManager : MonoBehaviour
         _noMuerteBool = !_noMuerteBool;
         GameManager.Instance.SetNoMuerte(_noMuerteBool);
         ActualizaNoMuerte();
+    }
+    /// <summary>
+    /// Cambia entre si usas o no el cheat de desbloquear niveles
+    /// </summary>
+    public void CambiaDesbloquearNiveles()
+    {
+        _nivelesDesbloqueados = !_nivelesDesbloqueados;
+        GameManager.Instance.SetLevelCheats(_nivelesDesbloqueados);
+        ActualizaDesbloquearNiveles();
     }
     /// <summary>
     /// MEtodo que cambia el volumen de la musica
@@ -206,6 +227,14 @@ public class SettingsManager : MonoBehaviour
     {
         //Cambiamos el boton del toggle del noCalidad
         NoCalidad.SetIsOnWithoutNotify(_noCalidadBool);
+    }
+    /// <summary>
+    /// actualiza el boton para si se esta usando el cheat de desbloquear niveles
+    /// </summary>
+    private void ActualizaDesbloquearNiveles()
+    {
+        //Cambiamos el boton del toggle del noCalidad
+        DesbloquearNiveles.SetIsOnWithoutNotify(_nivelesDesbloqueados);
     }
 
     #endregion

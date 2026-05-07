@@ -81,6 +81,10 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private bool _noCalidad = false;
     /// <summary>
+    /// bool que indica si estamos usando el cheat de niveles desbloqueados
+    /// </summary>
+    private bool _levelsCheat = false;
+    /// <summary>
     /// Guarda el volumen de Musica entre escenas
     /// </summary>
     private float _volumenActMusica = 0.15f;
@@ -96,6 +100,14 @@ public class GameManager : MonoBehaviour
     /// Indica si el nivel 2 debería estar blockeado por no completar el nivel 1
     /// </summary>
     private bool _level2Locked = true;
+    /// <summary>
+    /// Indica si el nivel 1 deberia estar blockeado por no completar el tutorial
+    /// </summary>
+    private bool _level1UnLockedByCheats = false;
+    /// <summary>
+    /// Indica si el nivel 2 debería estar blockeado por no completar el nivel 1
+    /// </summary>
+    private bool _level2UnLockedByCheats = false;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -238,19 +250,73 @@ public class GameManager : MonoBehaviour
         //Restablece el nivel al inicio
         ChangeScene(_levelIndex);
     }
-    #endregion
+    /// <summary>
+    /// Solo se llama a este metodo cuando desbloqueas limpiamente el nivel
+    /// </summary>
     public void UnlockLevel1()
     {
+        _level1UnLockedByCheats = false;
         _level1Locked = false;
     }
+    /// <summary>
+    /// Solo se llama a este metodo cuando desbloqueas limpiamente el nivel
+    /// </summary>
     public void UnlockLevel2()
     {
+        _level2UnLockedByCheats = false;
         _level2Locked = false;
     }
+    /// <summary>
+    /// Metodo que bloquea o desbloquea los niveles con los cheats
+    /// </summary>
+    public void SetLevelCheats(bool set)
+    {
+        // Si queremos desbloquear los niveles y estaban bloqueados
+        if (set && _level1Locked)
+        {
+            // Desbloqueamos el nivel
+            _level1Locked = false;
+            // Indicamos que se ha desbloqueado por cheats
+            _level1UnLockedByCheats = set;
+        }
+        if (set && _level2Locked)
+        {
+            // Desbloqueamos el nivel
+            _level2Locked = false;
+            // Indicamos que se ha desbloqueado por cheats
+            _level2UnLockedByCheats = set;
+        }
+        // Si queremos bloquearlos, solo los bloqueamos si se desbloquearon por cheats
+        if (!set && _level1UnLockedByCheats)
+        {
+            // Bloqueamos el nivel
+            _level1Locked = true;
+        }
+        if (!set && _level2UnLockedByCheats)
+        {
+            // Bloqueamos el nivel
+            _level2Locked = true;
+        }
+        // Cambiamos el booleano de los cheats
+        _levelsCheat = set;
+    }
+    /// <summary>
+    /// Devuelve el booleano actual de los cheats
+    /// </summary>
+    public bool GetLevelsCheat()
+    {
+        return _levelsCheat;
+    }
+    /// <summary>
+    /// Devuelve el booleano actual de nivel 1 bloqueado
+    /// </summary>
     public bool Level1Locked()
     {
         return _level1Locked;
     }
+    /// <summary>
+    /// Devuelve el booleano actual de nivel 2s bloqueado
+    /// </summary>
     public bool Level2Locked()
     {
         return _level2Locked;
@@ -391,6 +457,7 @@ public class GameManager : MonoBehaviour
     {
         return _volumenActEfects;
     }
+    #endregion
 
     // ---- MÉTODOS PRIVADOS ----
 

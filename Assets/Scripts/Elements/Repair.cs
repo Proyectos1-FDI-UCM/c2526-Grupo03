@@ -244,7 +244,7 @@ public class Repair : MonoBehaviour
         {
             // Se pausa la música del QTE y se continua la música del nivel
             SoundManager.Instance.StopMusicQTE();
-            SoundManager.Instance.PlayLevelMusic();
+            SoundManager.Instance.ResumeMusic();
             //Al terminar de reparar se vuelven a activar todas las acciones que se habían desactivado
             _movementPlayerComponent.ActivatePlayer();
             // mejor desactivarlo que destruirlo
@@ -261,7 +261,7 @@ public class Repair : MonoBehaviour
             _movementPlayerComponent.ActivatePlayer();
             // Se pausa la música del QTE y se continua la música del nivel
             SoundManager.Instance.StopMusicQTE();
-            SoundManager.Instance.PlayLevelMusic();
+            SoundManager.Instance.ResumeMusic();
             DisableChosenQTE();
             Keybind.SetActive(true);
             _isRepairing = false;
