@@ -319,6 +319,7 @@ public class SoundManager : MonoBehaviour
             case 3: PlayMusicDuel(); break;
             case 4: PlayMusicWildWest(); break;
             case 5: PlayMusicDuel(); break;
+            case 6: PlayMusicDuel(); break;
         }
         SetVolumeToCurrent();
     }
