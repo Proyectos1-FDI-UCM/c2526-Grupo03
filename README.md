@@ -2,7 +2,7 @@
 
 <p align="center"> <img src="Assets/Sprites/UI/Icono_Hito3.png" width="500"> </p>
 
-<h1 align="center"> Indice </h1>
+<h1 align="center"> Índice </h1>
 
 - ### Descripción
 
@@ -71,6 +71,18 @@ Que controles se usan en cada QTE:
 <h2 align="center"> Known Issues </h2>
 
 - Huelga de extras se queda saltando cuando se chocan con un techo
+
+- Sonido dentro de QTE's pausa y despausa
+
+- Manivela spameo con izq y dcha
+
+- Sonidos que no se bajan y suenan muy alto
+
+- Tps raros (pueden pasar)
+
+- En algunos frames puedes activar QTE’s fuera de rango
+
+- Puede perderse el loop de la música
 
 <h2 align="center"> Desarrolladores </h2>
 
