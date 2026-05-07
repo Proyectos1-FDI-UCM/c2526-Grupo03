@@ -425,7 +425,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FloorDetector: {fileID: 2192584468404971339}
   RoofDetector: {fileID: 1263764809930382340}
-  JumpHeight: 2
+  JumpHeight: 3
   TimeToReachMaxHeight: 0.5
   MaxFallSpeed: 5
   CoyoteTime: 0.075

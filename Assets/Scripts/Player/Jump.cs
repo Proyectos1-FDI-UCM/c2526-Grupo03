@@ -338,6 +338,10 @@ public class Jump : MonoBehaviour
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
+    public float GetJumpHeight()
+    {
+        return JumpHeight;
+    }
     /// <summary>
     /// Método que impide el salto
     /// </summary>
