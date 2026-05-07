@@ -384,20 +384,14 @@ public class SoundManager : MonoBehaviour
         {
             MUSIC_WaroWareTwo.volume = _volumenActualMusic;
         }
-        else if (MUSIC_WildWestIntro.isPlaying)
+        else if (MUSIC_WildWestIntro.isPlaying|| MUSIC_WildWestLoop.isPlaying)
         {
-            MUSIC_WiiDessertIntro.volume = _volumenActualMusic;
-        }
-        else if (MUSIC_WildWestLoop.isPlaying)
-        {
+            MUSIC_WildWestIntro.volume = _volumenActualMusic;
             MUSIC_WildWestLoop.volume = _volumenActualMusic;
         }
-        else if (MUSIC_WiiDessertIntro.isPlaying) 
+        else if (MUSIC_WiiDessertIntro.isPlaying || MUSIC_WiiDessertLoop.isPlaying) 
         {
             MUSIC_WiiDessertIntro.volume = _volumenActualMusic;
-        }
-        else  if( MUSIC_WiiDessertLoop.isPlaying)
-        {
             MUSIC_WiiDessertLoop.volume = _volumenActualMusic;
         }
 
