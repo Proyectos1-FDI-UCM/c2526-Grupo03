@@ -6,6 +6,7 @@
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
 
+using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 // Añadir aquí el resto de directivas using
@@ -69,6 +70,8 @@ public class Extra_Army : MonoBehaviour
     /// Componente del salto del extra army
     /// </summary>
     private Jump _jumpComponent;
+    private float _extraHeight;
+    private float _extraJump;
 
     #endregion
 
@@ -90,6 +93,8 @@ public class Extra_Army : MonoBehaviour
         _warning = GetComponentInChildren<Warning>();
         _playerMovement = Player.GetComponent<Movement_Player>();
         _jumpComponent = this.gameObject.GetComponent<Jump>();
+        _extraJump = _jumpComponent.GetJumpHeight();
+        _extraHeight = this.gameObject.GetComponent<BoxCollider2D>().bounds.size.y;
     }
 
     /// <summary>
@@ -125,7 +130,17 @@ public class Extra_Army : MonoBehaviour
                 // Saltamos si tiene el componente
                 if (_jumpComponent != null)
                 {
-                    _jumpComponent.TryStartJump();
+                    float obstacleTopPositionY = FrontDetector.GetCollisionedObjectPosition().y + (FrontDetector.GetCollisionedObjectSize().y / 2);
+                    float extraPositionBellow = this.gameObject.transform.position.y - (_extraHeight/2);
+                    float jumpNeeded = obstacleTopPositionY - extraPositionBellow;
+                    if (jumpNeeded >= _extraJump)
+                    {
+                        this.enabled = false;
+                    }
+                    else
+                    {
+                        _jumpComponent.TryStartJump();
+                    }
                 }
                 // Impedimos el movimiento horizontal del enemigo
                 _obstacleSorted = false;
