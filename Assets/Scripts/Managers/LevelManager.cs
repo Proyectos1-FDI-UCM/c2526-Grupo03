@@ -285,7 +285,6 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     public void Pausa()
     {
-        SoundManager.Instance.PauseQTEMusic();
         /*Se manda un mensaje a todos los objetos que sean hijos de este para
         que activen el metodo "UnPause" */
         PausaSinPanel();

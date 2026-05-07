@@ -284,7 +284,6 @@ public class SoundManager : MonoBehaviour
     public void PlayMusicWarioWareOne()
     {
         MUSIC_WarioWareOne.Play();
-        MUSIC_WarioWareOne.volume = _volumenActualMusic;
     }
     /// <summary>
     /// Efectos del qte 2
@@ -292,7 +291,6 @@ public class SoundManager : MonoBehaviour
     public void PlayMusicWarioWare2()
     {
         MUSIC_WaroWareTwo.Play();
-        MUSIC_WaroWareTwo.volume = _volumenActualMusic;
     }
     /// <summary>
     /// Musica de derrota
@@ -423,14 +421,6 @@ public class SoundManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Método que pausa la música del QTE
-    /// </summary>
-    public void PauseQTEMusic()
-    {
-        if (MUSIC_WarioWareOne.isPlaying) MUSIC_WarioWareOne.volume = 0;
-        else if (MUSIC_WaroWareTwo.isPlaying) MUSIC_WaroWareTwo.volume = 0;
-    }
-    /// <summary>
     /// Metodo que para parar la musica 
     /// </summary>
     public void StopMusicQTE()
@@ -465,6 +455,7 @@ public class SoundManager : MonoBehaviour
     public void SetVolumeToCurrent()
     {
         ChangeMusicVolume(_volumenActualMusic);
+        ChangeEfectsVolume(_volumenActualEfects);
     }
     #endregion
 
@@ -485,15 +476,15 @@ public class SoundManager : MonoBehaviour
         _volumenActualMusic = vol;
 
         // Cambiamos el volumen de la que esta sonando para escuchar como va cambiando
-        if (MUSIC_WarioWareOne.isPlaying) MUSIC_WarioWareOne.volume = vol;
-        else if (MUSIC_WaroWareTwo.isPlaying) MUSIC_WaroWareTwo.volume = vol;
-        else if (MUSIC_WiiDessertIntro.isPlaying) MUSIC_WiiDessertIntro.volume = vol;
-        else if (MUSIC_WiiDessertLoop.isPlaying) MUSIC_WiiDessertLoop.volume = vol;
-        else if (MUSIC_WildWestLoop.isPlaying) MUSIC_WildWestLoop.volume = vol;
-        else if (MUSIC_WildWestIntro.isPlaying) MUSIC_WildWestIntro.volume = vol;
-        else if (MUSIC_Duel.isPlaying) MUSIC_Duel.volume = vol;
-        else if (MUSIC_WiiCourseClear.isPlaying) MUSIC_WiiCourseClear.volume = vol;
-        else if (MUSIC_WaaWaaaWaaa.isPlaying) MUSIC_WaaWaaaWaaa.volume = vol;
+        MUSIC_WarioWareOne.volume = vol;
+        MUSIC_WaroWareTwo.volume = vol;
+        MUSIC_WiiDessertIntro.volume = vol;
+        MUSIC_WiiDessertLoop.volume = vol;
+        MUSIC_WildWestLoop.volume = vol;
+        MUSIC_WildWestIntro.volume = vol;
+        MUSIC_Duel.volume = vol;
+        MUSIC_WiiCourseClear.volume = vol;
+        MUSIC_WaaWaaaWaaa.volume = vol;
     }
     /// <summary>
     /// Reproducción de música dependiente de escena
@@ -528,7 +519,6 @@ public class SoundManager : MonoBehaviour
     /// </summary>
     private void PlayMusicDuel()
     {
-
         MUSIC_Duel.Play();
     }
     /// <summary>
@@ -560,8 +550,7 @@ public class SoundManager : MonoBehaviour
         //Miramos la escena
         _scene = SceneManager.GetActiveScene();
         //Cambiamos volumen 
-        ChangeMusicVolume(_volumenActualMusic);
-        ChangeEfectsVolume(_volumenActualMusic);
+        SetVolumeToCurrent();
         //Lo ponemos Play
         PlayLevelMusic();
     }
